@@ -5,7 +5,8 @@ using System.Web;
 
 namespace CitizenScience_UIPrototype
 {
-    public class CVSProcessor
+    public static class CVSProcessor
     {
+
     }
 }

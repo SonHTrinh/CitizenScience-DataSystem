@@ -122,6 +122,8 @@
     <Compile Include="CitizenScience.Master.designer.cs">
       <DependentUpon>CitizenScience.Master</DependentUpon>
     </Compile>
+    <Compile Include="CSVProcessor.cs" />
+    <Compile Include="DataPoint.cs" />
     <Compile Include="gallery.aspx.cs">
       <DependentUpon>gallery.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
