@@ -77,6 +77,7 @@ namespace CitizenScience_UIPrototype
                     divEditGallery.Visible = false;
                     divEditAbout.Visible = false;
                     divVolunteers.Visible = false;
+                    LoadDownloadPageData();
                     break;
                 case "admins":
                     lblPanelTitle.Text = "Manage Administrators:";
@@ -138,13 +139,20 @@ namespace CitizenScience_UIPrototype
             
         }
 
-        ////////////////////////////////////////////////////////////////////////////////////////      DOWNLOAD WATERSHED DATA FUNCTIONS
+        ////////////////////////////////////////////////////////////////////////////////////////      DOWNLOAD TEMPERATURE DATA FUNCTIONS
         protected void ddlSensorDownloadWatersheds_Change(object sender, EventArgs e)
         {
+
+        }
+        protected void LoadDownloadPageData()
+        {
+            //  Populate ddlSensorDownloadWatersheds with all watersheds in the database
+
+            //  Populate Location table body
         }
 
 
-////////////////////////////////////////////////////////////////////////////////////////      UPLOAD WATERSHED DATA FUNCTIONS
+        ////////////////////////////////////////////////////////////////////////////////////////      UPLOAD TEMPERATURE DATA FUNCTIONS
         protected void btnUploadSensorData_Click(object sender, EventArgs e)
         {
             //  Show error div
