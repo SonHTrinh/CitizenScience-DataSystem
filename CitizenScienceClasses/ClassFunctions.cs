@@ -35,5 +35,13 @@ namespace CitizenScienceClasses
         /////////////////////////////////   TEMPERATURE FUNCTIONS
 
         /////////////////////////////////   WATERSHED FUNCTIONS
+        public static DataSet GetWatersheds()
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAllWatersheds";
+            return conn.GetDataSetUsingCmdObj(comm);
+        }
     }
 }
