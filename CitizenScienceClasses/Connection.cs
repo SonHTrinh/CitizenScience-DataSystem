@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CityFunctions
+namespace CitizenScienceClasses
 {
     public class DBConnect
     {
@@ -16,7 +16,7 @@ namespace CityFunctions
         //String SqlConnectString = "server=cis-mssql1.temple.edu;Database=sp19_3342_tuf67637;User id=tuf67637;Password=EiM7uuCh";
 
         //FOR HOME
-        String SqlConnectString = "server=127.0.0.1,5555;Database=sp19_3342_tuf67637;User id=tuf67637;Password=EiM7uuCh";
+        String SqlConnectString = "server=67.205.188.98;Database=mike1;User id=mike;Password=CIS_TEMPLE_citizen-science!123";
 
 
 
