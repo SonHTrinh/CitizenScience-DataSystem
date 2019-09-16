@@ -34,3 +34,32 @@ CREATE TABLE [dbo].[Watershed] (
 [LastUpdated] DATE NOT NULL, 
 PRIMARY KEY CLUSTERED ([WatershedID] ASC)
 ); 
+
+
+/////////////	STORED PROCEDURES
+
+CREATE PROCEDURE [dbo].[GetAllLocations]
+AS
+	SELECT * FROM Location
+    
+
+CREATE PROCEDURE [dbo].[GetLocationsByWatershed]
+	@watershedID int
+AS
+	SELECT * FROM Location
+    WHERE WatershedID = @watershedID
+    
+
+CREATE PROCEDURE [dbo].[GetAllTemperatures]
+AS
+	SELECT * FROM Temperature
+
+
+CREATE PROCEDURE [dbo].[GetAllWatersheds]
+AS
+	SELECT * FROM Watershed
+    
+    
+CREATE PROCEDURE [dbo].[GetAllBulkUploads]
+AS
+	SELECT * FROM BulkUploads
