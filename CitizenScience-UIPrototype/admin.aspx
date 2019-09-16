@@ -64,14 +64,18 @@
                                     <div class="col-md-6">
                                         <span style="color:red">*</span><asp:Label AssociatedControlID="ddlAddLocationWatershed" runat="server">Location Watershed:</asp:Label>
                                         <asp:DropDownList CssClass="form-control" ID="ddlAddLocationWatershed" runat="server">
-                                            <asp:ListItem Value="">Watershed...</asp:ListItem>
-                                            <asp:ListItem Value="w1">Darby & Cobbs Creeks</asp:ListItem>
-                                            <asp:ListItem Value="w2">Delaware River</asp:ListItem>
-                                            <asp:ListItem Value="w3">Lower Schuylkill River</asp:ListItem>                                             
-                                            <asp:ListItem Value="w3">Pennypack Creek</asp:ListItem>                                             
-                                            <asp:ListItem Value="w3">Poquessing Creek</asp:ListItem>                                             
-                                            <asp:ListItem Value="w3">Tacony & Frankford Creeks</asp:ListItem>                                             
-                                            <asp:ListItem Value="w3">Wissahickon Creek</asp:ListItem>                                             
+                                            <asp:Repeater>
+                                                <ItemTemplate>
+                                                    <asp:ListItem Value="">Watershed...</asp:ListItem>
+                                                    <asp:ListItem Value="w1">Darby & Cobbs Creeks</asp:ListItem>
+                                                    <asp:ListItem Value="w2">Delaware River</asp:ListItem>
+                                                    <asp:ListItem Value="w3">Lower Schuylkill River</asp:ListItem>                                             
+                                                    <asp:ListItem Value="w3">Pennypack Creek</asp:ListItem>                                             
+                                                    <asp:ListItem Value="w3">Poquessing Creek</asp:ListItem>                                             
+                                                    <asp:ListItem Value="w3">Tacony & Frankford Creeks</asp:ListItem>                                             
+                                                    <asp:ListItem Value="w3">Wissahickon Creek</asp:ListItem>     
+                                                    </ItemTemplate>
+                                            </asp:Repeater>
                                         </asp:DropDownList>
                                     </div>
                                 </div>
@@ -232,10 +236,10 @@
                                         <tr>
                                             <th scope="col" class="w-75">
                                                 <asp:DropDownList CssClass="form-control" ID="ddlSensorDownloadWatersheds" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSensorDownloadWatersheds_Change">
-                                                    <asp:ListItem Value="">All Watersheds...</asp:ListItem>
+                                                   <%-- <asp:ListItem Value="">All Watersheds...</asp:ListItem>
                                                     <asp:ListItem Value="w1">Pennypack Creek</asp:ListItem>
                                                     <asp:ListItem Value="w2">Lower Schuylkill River</asp:ListItem>
-                                                    <asp:ListItem Value="w3">Delaware River</asp:ListItem>                                             
+                                                    <asp:ListItem Value="w3">Delaware River</asp:ListItem>  --%>                                           
                                                 </asp:DropDownList>
 
                                             </th>
@@ -243,6 +247,14 @@
                                         </tr>                                       
                                     </thead>
                                     <tbody>
+                                        <asp:Repeater ID="rptDownloadSensorLocations" runat="server">
+                                            <ItemTemplate>
+                                                <tr>
+                                                    <th scope="row"><asp:Checkbox runat="server"/></th>
+                                                    <asp:Label ID="lblDownloadSensorLocation" runat="server" Text="<%# DataBinder.Eval(Container.DataItem, "SensorName") %>""></asp:Label>
+                                                </tr>
+                                            </ItemTemplate>
+                                        </asp:Repeater>
                                         <tr>
                                             <th scope="row"><asp:Checkbox runat="server"/></th>
                                             <td>Tacony Creek Park</td>
