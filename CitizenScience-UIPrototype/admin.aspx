@@ -255,7 +255,8 @@
                                                 </tr>
                                             </ItemTemplate>
                                         </asp:Repeater>
-                                        <tr>
+
+                                       <%-- <tr>
                                             <th scope="row"><asp:Checkbox runat="server"/></th>
                                             <td>Tacony Creek Park</td>
                                         </tr>
@@ -278,7 +279,8 @@
                                         <tr>
                                             <th scope="row"><asp:Checkbox runat="server"/></th>
                                             <td>Fairmount Park</td>
-                                        </tr>                                       
+                                        </tr> --%> 
+                                        
                                     </tbody>
                                 </table>
                             </div>

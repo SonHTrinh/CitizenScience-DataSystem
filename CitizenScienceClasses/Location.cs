@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CitizenScienceClasses
 {
-    class Location
-    {
+    public class Location
+    {        
         private int locationID;
         private int watershedID;
         private double latitude;
@@ -69,6 +69,6 @@ namespace CitizenScienceClasses
         {
             get { return lastUpdated; }
             set { lastUpdated = value; }
-        }
+        }       
     }
 }

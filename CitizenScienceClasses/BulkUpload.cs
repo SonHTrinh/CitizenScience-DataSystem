@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CitizenScienceClasses
 {
-    class BulkUpload
+    public class BulkUpload
     {
         private int uploadID;
         private string adminAccessnet;
