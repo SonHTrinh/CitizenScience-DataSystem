@@ -6,11 +6,12 @@ PRIMARY KEY CLUSTERED ([UploadID] ASC)
 ); 
 CREATE TABLE [dbo].[Location](
 [LocationID] INT IDENTITY (1,1) NOT NULL, 
-[Watershed ID] INT NOT NULL, 
+[WatershedID] INT NOT NULL, 
 [Longitude] FLOAT(53) NOT NULL, 
 [Latitude] FLOAT (53) NOT NULL, 
 [SensorName] VARCHAR(MAX) NOT NULL, 
-[SerialNumber] VARCHAR(MAX) NULL. 
+[SerialNumber] VARCHAR(MAX) NULL,
+[Description] 
 [ProfileImage] VARCHAR(MAX) NULL, 
 [LastUpdated] DATE NOT NULL, 
 PRIMARY KEY CLUSTERED ([LocationID] ASC) ,
