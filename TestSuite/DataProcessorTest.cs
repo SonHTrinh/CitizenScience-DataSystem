@@ -4,11 +4,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace TestSuite
 {
     [TestClass]
-    public class UnitTest1
+    public class DataProcessorTest
     {
         [TestMethod]
         public void TestMethod1()
         {
+
         }
     }
 }
