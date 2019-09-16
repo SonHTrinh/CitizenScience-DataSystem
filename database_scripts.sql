@@ -1,3 +1,10 @@
+CREATE TABLE [dbo].[Watershed] (
+[WatershedID] INT IDENTITY (1,1) NOT NULL, 
+[WatershedName] VARCHAR (MAX) NOT NULL, 
+[LastUpdated] DATE NOT NULL, 
+PRIMARY KEY CLUSTERED ([WatershedID] ASC)
+);
+
 CREATE TABLE [dbo].[BulkUpload](
 [UploadID] INT IDENTITY(1,1) NOT NULL, 
 [AdminAccessnet] VARCHAR(MAX) NOT NULL, 
@@ -27,12 +34,6 @@ CREATE TABLE [dbo].[Temperature](
 PRIMARY KEY CLUSTERED ([TempID] ASC) , 
 CONSTRAINT [FK_Temperature_ToTable1] FOREIGN KEY ([UploadID]) REFERENCES [dbo].[BulkUpload] ([UploadID]),
 CONSTRAINT [FK_Temperature_ToTable] FOREIGN KEY ([LocationID]) REFERENCES [dbo].[Location] ([LocationID]) 
-); 
-CREATE TABLE [dbo].[Watershed] (
-[WatershedID] INT IDENTITY (1,1) NOT NULL, 
-[WatershedName] VARCHAR (MAX) NOT NULL, 
-[LastUpdated] DATE NOT NULL, 
-PRIMARY KEY CLUSTERED ([WatershedID] ASC)
 ); 
 
 
