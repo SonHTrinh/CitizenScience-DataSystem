@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using CitizenScienceClasses;
 
 namespace CitizenScience_UIPrototype
 {
@@ -149,6 +150,17 @@ namespace CitizenScience_UIPrototype
             //  Populate ddlSensorDownloadWatersheds with all watersheds in the database
 
             //  Populate Location table body
+            DBConnect objDB = new DBConnect();
+
+            String strSQL = "SELECT * FROM Product";
+
+
+
+            // Set the datasource of the Repeater and bind the data
+
+            rptDownloadSensorLocations.DataSource = objDB.GetDataSet(strSQL);
+
+            rptDownloadSensorLocations.DataBind();
         }
 
 
