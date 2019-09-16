@@ -150,16 +150,7 @@ namespace CitizenScience_UIPrototype
             //  Populate ddlSensorDownloadWatersheds with all watersheds in the database
 
             //  Populate Location table body
-            DBConnect objDB = new DBConnect();
-
-            String strSQL = "SELECT * FROM Product";
-
-
-
-            // Set the datasource of the Repeater and bind the data
-
-            rptDownloadSensorLocations.DataSource = objDB.GetDataSet(strSQL);
-
+            rptDownloadSensorLocations.DataSource = ClassFunctions.GetLocations();
             rptDownloadSensorLocations.DataBind();
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CitizenScienceClasses
 {
-    class Temperature
+    public class Temperature
     {
         private int temperatureID;
         private int locationID;
