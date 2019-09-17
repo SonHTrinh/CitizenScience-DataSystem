@@ -12,7 +12,6 @@ namespace CitizenScienceClasses
     {
         //CONNECTION STRING
         String SqlConnectString = "server=67.205.188.98;Database=mike0;User id=SA;Password=H5$5L7!Ajn4ef#3iYH";
-        
 
         SqlConnection myConnectionSql;
         SqlCommand objCmd;
