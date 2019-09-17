@@ -17,7 +17,6 @@ namespace CitizenScience_UIPrototype
                 set { _timestamp = value; }
             }
 
-            
             public float Celsius
             {
                 get { return _celsius; }
