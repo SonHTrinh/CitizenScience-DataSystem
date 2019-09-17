@@ -10,7 +10,14 @@ namespace CitizenScienceClasses
 {
     public class DBConnect
     {
-        //CONNECTION STRING
+        //CONNECTION STRINGS:
+
+        //FOR SCHOOL
+        //String SqlConnectString = "server=np-stem.temple.edu;Database=CIS4396F06;User id=usrCIS4396F06;Password=PattingGiraffe30";
+
+        //FOR HOME
+        //String SqlConnectString = "server=67.205.188.98;Database=mike1;User id=mike;Password=CIS_TEMPLE_citizen-science!123";
+
         String SqlConnectString = "server=67.205.188.98;Database=mike0;User id=SA;Password=H5$5L7!Ajn4ef#3iYH";
 
         SqlConnection myConnectionSql;
