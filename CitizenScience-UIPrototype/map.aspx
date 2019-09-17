@@ -36,6 +36,7 @@
                     </ul>
                 </li>
             </ul>
+            <br /><br />
             <!--Modal-->
             <div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="max-width: 200%;">
                 <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -76,6 +77,12 @@
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="container">
+        <asp:DropDownList ID="ddlWaterShed" class="form-control" runat="server" DataTextField="WatershedName" AutoPostBack="true" OnSelectedIndexChanged="ddlWaterShed_SelectedIndexChanged"></asp:DropDownList>
+        <div id="LocationList" runat="server" visible="false">
+            <asp:DropDownList ID="ddlLocation" class="form-control" runat="server" DataTextField="Sensorname" AutoPostBack="true"></asp:DropDownList>
         </div>
     </div>
     <!--Map API Javascript-->
