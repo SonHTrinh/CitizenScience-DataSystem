@@ -37,8 +37,6 @@ namespace CitizenScience_UIPrototype
 
                     result.Add(record);
                 }
-
-                //records.ForEach(x => result = result + $"{x.Fahrenheit} , ");
             }
 
             return result;

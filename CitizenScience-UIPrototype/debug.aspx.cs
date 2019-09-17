@@ -12,19 +12,8 @@ namespace CitizenScience_UIPrototype
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (IsPostBack)
-            {
 
-            }
         }
-
-        protected void btnReadCsv_Click(object sender, EventArgs e)
-        {
-//            string values = CSVProcessor.Read("");
-            //pReadCsv.InnerText = values;
-        }
-
-        StringBuilder sb = new StringBuilder();
 
         protected void btnsave_Click(object sender, EventArgs e)
         {
