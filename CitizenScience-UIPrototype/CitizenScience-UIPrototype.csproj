@@ -43,7 +43,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CsvHelper, Version=12.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
+      <HintPath>..\packages\CsvHelper.12.1.2\lib\net45\CsvHelper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -69,6 +75,7 @@
   <ItemGroup>
     <Content Include="about.aspx" />
     <Content Include="admin.aspx" />
+    <Content Include="debug.aspx" />
     <Content Include="gallery.aspx" />
     <Content Include="galleryAPI-style.css" />
     <Content Include="Global.asax" />
@@ -122,6 +129,15 @@
     <Compile Include="CitizenScience.Master.designer.cs">
       <DependentUpon>CitizenScience.Master</DependentUpon>
     </Compile>
+    <Compile Include="DataPoint.cs" />
+    <Compile Include="DataProcessor.cs" />
+    <Compile Include="debug.aspx.cs">
+      <DependentUpon>debug.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="debug.aspx.designer.cs">
+      <DependentUpon>debug.aspx</DependentUpon>
+    </Compile>
     <Compile Include="gallery.aspx.cs">
       <DependentUpon>gallery.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -144,6 +160,7 @@
   <ItemGroup>
     <Content Include="CitizenScience.Master" />
     <None Include="packages.config" />
+    <Content Include="sample_data\PennypackCircle_D-190606.csv" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
