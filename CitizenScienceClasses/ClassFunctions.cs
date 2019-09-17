@@ -10,10 +10,18 @@ namespace CitizenScienceClasses
 {
     public static class ClassFunctions
     {
-        /////////////////////////////////   BULKUPLOAD FUNCTIONS        
+        /////////////////////////////////   BULKUPLOAD FUNCTIONS    
+        public static DataSet GetBulkUploads()
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAllBulkUploads";
+            return conn.GetDataSetUsingCmdObj(comm);
+        }
 
-        /////////////////////////////////   LOCATION FUNCTIONS
-        public static DataSet GetLocations()
+    /////////////////////////////////   LOCATION FUNCTIONS
+    public static DataSet GetLocations()
         {
             DBConnect conn = new DBConnect();
             SqlCommand comm = new SqlCommand();
@@ -33,7 +41,23 @@ namespace CitizenScienceClasses
         }
 
         /////////////////////////////////   TEMPERATURE FUNCTIONS
+        public static DataSet GetAllTemperatures()
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAllTemperatures";
+            return conn.GetDataSetUsingCmdObj(comm);
+        }
 
-        /////////////////////////////////   WATERSHED FUNCTIONS
+    /////////////////////////////////   WATERSHED FUNCTIONS
+    public static DataSet GetWatersheds()
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAllWatersheds";
+            return conn.GetDataSetUsingCmdObj(comm);
+        }
     }
 }
