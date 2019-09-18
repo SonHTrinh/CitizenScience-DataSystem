@@ -21,7 +21,7 @@ namespace CitizenScience_UIPrototype
             if (!IsPostBack)
             {
                 objCommand.CommandType = CommandType.StoredProcedure;
-                objCommand.CommandText = "GetAllWatershed";
+                objCommand.CommandText = "GetAllWatersheds";
                 DataSet WatershedDS = objDB.GetDataSetUsingCmdObj(objCommand);
                 ddlWaterShed.DataSource = WatershedDS;
                 ddlWaterShed.DataBind();

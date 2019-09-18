@@ -167,7 +167,7 @@ namespace CitizenScience_UIPrototype
         {
             //  Download data from selected database
         }
-        protected void btnDownloadAllSensorData(object sender, EventArgs e)
+        protected void btnDownloadAllSensorData_Click(object sender, EventArgs e)
         {
             //  Download all data from the database
             DataSet allTempData = ClassFunctions.GetAllTemperatures();
