@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using CitizenScienceClasses;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace CitizenScience_UIPrototype
 {
@@ -142,17 +144,33 @@ namespace CitizenScience_UIPrototype
 
         ////////////////////////////////////////////////////////////////////////////////////////      DOWNLOAD TEMPERATURE DATA FUNCTIONS
         protected void ddlSensorDownloadWatersheds_Change(object sender, EventArgs e)
-        {
-
+        {            
+            int selectedWatershedID = Convert.ToInt32(ddlSensorDownloadWatersheds.SelectedValue);
+            rptDownloadSensorLocations.DataSource = ClassFunctions.GetLocationsByWatershed(selectedWatershedID);            
+            rptDownloadSensorLocations.DataBind();            
         }
         protected void LoadDownloadPageData()
         {
-            //  Populate ddlSensorDownloadWatersheds with all watersheds in the database
+            //  Populate ddlSensorDownloadWatersheds with all watersheds in the database  
+            ddlSensorDownloadWatersheds.DataSource = ClassFunctions.GetWatersheds();
+            ddlSensorDownloadWatersheds.DataTextField = "WatershedName";
+            ddlSensorDownloadWatersheds.DataValueField = "WatershedID";
+            ddlSensorDownloadWatersheds.DataBind();
+            ddlSensorDownloadWatersheds.Items.Insert(0, "-- Filter by Watershed --");            
 
             //  Populate Location table body
             rptDownloadSensorLocations.DataSource = ClassFunctions.GetLocations();
             rptDownloadSensorLocations.DataBind();
         }
+        protected void btnDownloadSelectedSensorData_Click(object sender, EventArgs e)
+        {
+            //  Download data from selected database
+        }
+        protected void btnDownloadAllSensorData_Click(object sender, EventArgs e)
+        {
+            //  Download all data from the database
+            DataSet allTempData = ClassFunctions.GetAllTemperatures();
+        }        
 
 
         ////////////////////////////////////////////////////////////////////////////////////////      UPLOAD TEMPERATURE DATA FUNCTIONS
