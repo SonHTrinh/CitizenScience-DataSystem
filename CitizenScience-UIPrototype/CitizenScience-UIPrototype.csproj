@@ -46,6 +46,9 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -69,6 +72,7 @@
   <ItemGroup>
     <Content Include="about.aspx" />
     <Content Include="admin.aspx" />
+    <Content Include="debug.aspx" />
     <Content Include="gallery.aspx" />
     <Content Include="galleryAPI-style.css" />
     <Content Include="Global.asax" />
@@ -121,6 +125,13 @@
     </Compile>
     <Compile Include="CitizenScience.Master.designer.cs">
       <DependentUpon>CitizenScience.Master</DependentUpon>
+    </Compile>
+    <Compile Include="debug.aspx.cs">
+      <DependentUpon>debug.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="debug.aspx.designer.cs">
+      <DependentUpon>debug.aspx</DependentUpon>
     </Compile>
     <Compile Include="gallery.aspx.cs">
       <DependentUpon>gallery.aspx</DependentUpon>
