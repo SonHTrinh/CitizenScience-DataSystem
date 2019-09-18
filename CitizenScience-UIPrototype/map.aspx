@@ -11,32 +11,11 @@
     <!--Location Dropdown-->
     <div id="watershed">
         <div class="btn-group dropright">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Select Watershed
-            </button>
-            <ul class="dropdown-menu">
-                <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">North Watershed</a>
-                    <ul>
-                        <li class="dropdown-item"><a class="dropdown-item" href="#" data-toggle="modal" data-target="#locationModal">Tacony Creek Park</a></li>
-                        <li class="dropdown-item"><a class="dropdown-item" href="#">Pennypack Creek</a></li>
-                        <li class="dropdown-item"><a class="dropdown-item" href="#">Poquessing Creek</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">South Watershed</a>
-                    <ul>
-                        <li class="dropdown-item"><a class="dropdown-item" href="#">Schuylkill River Park</a></li>
-                        <li class="dropdown-item"><a class="dropdown-item" href="#">Ramona Gateway</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">West Philly Watershed</a>
-                    <ul>
-                        <li class="dropdown-item"><a class="dropdown-item" href="#">Whitaker Gateway</a></li>
-                        <li class="dropdown-item"><a class="dropdown-item" href="#">Cobbs Creek Park</a></li>
-                        <li class="dropdown-item"><a class="dropdown-item" href="#">Fairmount Park</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <br /><br />
+            <asp:DropDownList ID="ddlWaterShed" runat="server" class="form-control" DataTextField="WatershedName" AutoPostBack="true" Width="220px" OnSelectedIndexChanged="ddlWaterShed_SelectedIndexChanged"></asp:DropDownList>
+            <div id="LocationList" runat="server" visible="false">
+                <asp:DropDownList ID="ddlLocation" runat="server" class="form-control" DataTextField="SensorName" AutoPostBack="false" Width="220px"></asp:DropDownList>
+            </div>
+            <asp:Button ID="btnGoTo" runat="server" class="btn btn-secondary" Text="Go To" />
             <!--Modal-->
             <div class="modal fade" id="locationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="max-width: 200%;">
                 <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
@@ -77,12 +56,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <div class="container">
-        <asp:DropDownList ID="ddlWaterShed" class="form-control" runat="server" DataTextField="WatershedName" AutoPostBack="true" OnSelectedIndexChanged="ddlWaterShed_SelectedIndexChanged"></asp:DropDownList>
-        <div id="LocationList" runat="server" visible="false">
-            <asp:DropDownList ID="ddlLocation" class="form-control" runat="server" DataTextField="Sensorname" AutoPostBack="true"></asp:DropDownList>
         </div>
     </div>
     <!--Map API Javascript-->

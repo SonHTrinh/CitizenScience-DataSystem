@@ -20,10 +20,9 @@ namespace CitizenScience_UIPrototype
         {
             if (!IsPostBack)
             {
-                objCommand.CommandType = CommandType.StoredProcedure;
-                objCommand.CommandText = "GetAllWatersheds";
-                DataSet WatershedDS = objDB.GetDataSetUsingCmdObj(objCommand);
-                ddlWaterShed.DataSource = WatershedDS;
+                ddlWaterShed.DataSource = ClassFunctions.GetWatersheds();
+                ddlWaterShed.DataTextField = "WatershedName";
+                ddlWaterShed.DataValueField = "WatershedID";
                 ddlWaterShed.DataBind();
             }
         }
@@ -36,7 +35,10 @@ namespace CitizenScience_UIPrototype
         protected void DisplayByWatershed(String watershed)
         {
             LocationList.Visible = true;
-
+            
+            int selectedWatershedID = Convert.ToInt32(ddlWaterShed.SelectedValue);
+            ddlLocation.DataSource = ClassFunctions.GetLocationsByWatershed(selectedWatershedID);
+            ddlLocation.DataBind();
         }
     }
 }
