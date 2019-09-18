@@ -147,8 +147,7 @@ namespace CitizenScience_UIPrototype
         {            
             int selectedWatershedID = Convert.ToInt32(ddlSensorDownloadWatersheds.SelectedValue);
             rptDownloadSensorLocations.DataSource = ClassFunctions.GetLocationsByWatershed(selectedWatershedID);            
-            rptDownloadSensorLocations.DataBind();
-            lblPanelTitle.Text = selectedWatershedID.ToString();
+            rptDownloadSensorLocations.DataBind();            
         }
         protected void LoadDownloadPageData()
         {
