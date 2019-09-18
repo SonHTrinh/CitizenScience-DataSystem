@@ -239,15 +239,18 @@
                                         </tr>                                       
                                     </thead>
                                     <tbody>
-                                        <asp:Repeater ID="rptDownloadSensorLocations" runat="server">
-                                            <ItemTemplate>
-                                                <tr>
-                                                    <th scope="row"><asp:Checkbox runat="server"/></th>
-                                                    <asp:Label ID="lblDownloadSensorLocationName" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "SensorName") %>'></asp:Label>
-                                                </tr>
-                                            </ItemTemplate>
-                                        </asp:Repeater>
-
+                                        <div style="height:100px; overflow-y:scroll;">
+                                        <asp:Repeater ID="rptDownloadSensorLocations" runat="server">                                                      
+                                            <ItemTemplate>                                                
+                                                    <tr>
+                                                        <th scope="row"><asp:Checkbox runat="server"/></th>
+                                                        <td>
+                                                            <asp:Label ID="lblDownloadSensorLocationName" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "SensorName") %>'></asp:Label>
+                                                        </td>
+                                                    </tr>                                                
+                                            </ItemTemplate>                                                       
+                                        </asp:Repeater>      
+                                            </div>
                                        <%-- <tr>
                                             <th scope="row"><asp:Checkbox runat="server"/></th>
                                             <td>Tacony Creek Park</td>
