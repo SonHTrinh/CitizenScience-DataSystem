@@ -1,67 +1,43 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using CsvHelper.Configuration.Attributes;
+using System;
 
 namespace CitizenScienceClasses
 {
     public class Temperature
     {
-        private int temperatureID;
-        private int locationID;
-        private int uploadID;
-        private DateTime dateRecorded;
-        private DateTime timeRecorded;
-        private double tempC;
-        private double tempF;
+        [Ignore]
+        public int Id { get; set; }
 
-        public Temperature() { }
-        public Temperature(int tempID, int locID, int upId, DateTime date, DateTime time, double tempc, double tempf)
-        {
-            temperatureID = tempID;
-            locationID = locID;
-            uploadID = upId;
-            dateRecorded = date;
-            timeRecorded = time;
-            tempC = tempc;
-            tempF = tempf;
-        }
+        [Name("Date")]
+        [Format("M/d/yyyy H:mm")]
+        public DateTime Timestamp { get; set; }
 
-        public int TemperatureID
-        {
-            get { return temperatureID; }
-            set { temperatureID = value; }
-        }
-        public int LocationID
-        {
-            get { return locationID; }
-            set { locationID = value; }
-        }
-        public int UploadID
-        {
-            get { return uploadID; }
-            set { uploadID = value; }
-        }
-        public DateTime DateRecorded
-        {
-            get { return dateRecorded; }
-            set { dateRecorded = value; }
-        }
-        public DateTime TimeRecorded
-        {
-            get { return timeRecorded; }
-            set { timeRecorded = value; }
-        }
-        public double TempC
-        {
-            get { return tempC; }
-            set { tempC = value; }
-        }
-        public double TempF
-        {
-            get { return tempF; }
-            set { tempF = value; }
-        }
+        [Name("Temperature_C")]
+        public double Celsius { get; set; }
+
+        [Name("Temperature_F")]
+        public double Fahrenheit { get; set; }
+
+        /*
+             WARNING: Do not make a constructor for this class, it will break CSV mapping,
+             to avoid having to make a custom configuration mapper, dynamically make a Temperature object.
+
+             Temperature temp = new Temperature
+             {
+                 Id = 9,
+                 Timestamp = DateTime.Now,
+                 Celsius = 1.1,
+                 Fahrenheit = 2.22
+              }
+
+              OR
+
+              Temperature temp = new Temperature();
+              temp.Id = 9;
+              temp.Timestamp = DateTime.Now;
+              temp.Celsius = 1.1;
+              temp.Fahrenheit = 2.22;
+
+        */
     }
 }

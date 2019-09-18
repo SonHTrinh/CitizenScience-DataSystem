@@ -13,6 +13,12 @@
     <asp:Label ID="lblmessage" runat="server" />
     <br />
 
+    <asp:Button ID="btnDownload" runat="server" OnClick="btnDownload_Click" Text="Download Dummy CSV File" UseSubmitBehavior="false" />
+    <br />
+
+    <asp:Button ID="btnClearTable" runat="server" OnClick="btnClear_Click" Text="Clear Table" UseSubmitBehavior="false"/>
+    <br />
+
     <asp:Repeater ID="rptCSV" runat="server">
 
         <HeaderTemplate>

@@ -44,9 +44,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CsvHelper, Version=12.0.0.0, Culture=neutral, PublicKeyToken=8c4959082be5c823, processorArchitecture=MSIL">
-      <HintPath>..\packages\CsvHelper.12.1.2\lib\net45\CsvHelper.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -129,8 +126,6 @@
     <Compile Include="CitizenScience.Master.designer.cs">
       <DependentUpon>CitizenScience.Master</DependentUpon>
     </Compile>
-    <Compile Include="DataPoint.cs" />
-    <Compile Include="DataProcessor.cs" />
     <Compile Include="debug.aspx.cs">
       <DependentUpon>debug.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -160,7 +155,6 @@
   <ItemGroup>
     <Content Include="CitizenScience.Master" />
     <None Include="packages.config" />
-    <Content Include="sample_data\PennypackCircle_D-190606.csv" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
