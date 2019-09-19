@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CitizenScience.Master" AutoEventWireup="true" CodeBehind="admin.aspx.cs" Inherits="CitizenScience_UIPrototype.admin" ClientIDMode="Static" %>
+﻿    <%@ Page Title="" Language="C#" MasterPageFile="~/CitizenScience.Master" AutoEventWireup="true" CodeBehind="admin.aspx.cs" Inherits="CitizenScience_UIPrototype.admin" ClientIDMode="Static" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
     Admin   |   Citizen Science
@@ -225,59 +225,32 @@
                                 <asp:Button CssClass="btn btn-primary" ID="btnDownloadSelectedSensorData" runat="server" text="Download Selected Data" OnClick="btnDownloadSelectedSensorData_Click"/>
                             </div>
                         </div>
-                        <div class="row  pt-1">
-                            <div class="col-md-6">
-                                <table class="table table-primary rounded w-75">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col" class="w-75">
-                                                <asp:DropDownList CssClass="form-control" ID="ddlSensorDownloadWatersheds" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSensorDownloadWatersheds_Change">                                                                                         
-                                                </asp:DropDownList>
-
-                                            </th>
-                                            <th scope="col">Location</th>
-                                        </tr>                                       
-                                    </thead>
-                                    <tbody>
-                                        <div style="height:100px; overflow-y:scroll;">
-                                        <asp:Repeater ID="rptDownloadSensorLocations" runat="server">                                                      
-                                            <ItemTemplate>                                                
+                        <div class="row pt-1">
+                            <div class="col-md-7">             
+                                <div class=" alert-primary p-4">
+                                    <table id="tblDownloadSelect" class="table table-primary rounded w-75">                                    
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col" class="w-75">
+                                                    <asp:DropDownList CssClass="form-control" ID="ddlSensorDownloadWatersheds" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSensorDownloadWatersheds_Change"></asp:DropDownList>                                                                                                                                         
+                                                </th>
+                                                <th scope="col">Location</th>
+                                            </tr>                                       
+                                        </thead>
+                                        <tbody>                                                                                   
+                                            <asp:Repeater ID="rptDownloadSensorLocations" runat="server">                                             
+                                                <ItemTemplate>                                                
                                                     <tr>
                                                         <th scope="row"><asp:Checkbox runat="server"/></th>
                                                         <td>
                                                             <asp:Label ID="lblDownloadSensorLocationName" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "SensorName") %>'></asp:Label>
                                                         </td>
                                                     </tr>                                                
-                                            </ItemTemplate>                                                       
-                                        </asp:Repeater>      
-                                            </div>
-                                       <%-- <tr>
-                                            <th scope="row"><asp:Checkbox runat="server"/></th>
-                                            <td>Tacony Creek Park</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><asp:Checkbox runat="server"/></th>
-                                            <td>Schuylkill River Park</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><asp:Checkbox runat="server"/></th>
-                                            <td>Ramona Gateway</td>
-                                        </tr>
-                                         <tr>
-                                            <th scope="row"><asp:Checkbox runat="server"/></th>
-                                            <td>Whitaker Gateway</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><asp:Checkbox runat="server"/></th>
-                                            <td>Cobbs Creek Park</td>
-                                        </tr>
-                                        <tr>
-                                            <th scope="row"><asp:Checkbox runat="server"/></th>
-                                            <td>Fairmount Park</td>
-                                        </tr> --%> 
-                                        
-                                    </tbody>
-                                </table>
+                                                </ItemTemplate>                                              
+                                            </asp:Repeater>                                                                                                                                                   
+                                        </tbody>
+                                    </table>    
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -617,5 +590,10 @@
                 </div>                               
             </div>
         </div>
-    </div>   
+    </div> 
+    <script>
+         $(document).ready( function () {
+            $('#tblDownloadSelect').DataTable();
+        } );
+    </script>  
 </asp:Content>
