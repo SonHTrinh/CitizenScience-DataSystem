@@ -49,6 +49,13 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllTemperatures";
             return conn.GetDataSetUsingCmdObj(comm);
         }
+        public static DataSet GetSelectedTemperatures(List<int> selectedLocations)
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            return conn.GetDataSetUsingCmdObj(comm);
+        }
 
     /////////////////////////////////   WATERSHED FUNCTIONS
     public static DataSet GetWatersheds()

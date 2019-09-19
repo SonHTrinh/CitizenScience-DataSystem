@@ -147,7 +147,7 @@ namespace CitizenScience_UIPrototype
         {            
             int selectedWatershedID = Convert.ToInt32(ddlSensorDownloadWatersheds.SelectedValue);
             rptDownloadSensorLocations.DataSource = ClassFunctions.GetLocationsByWatershed(selectedWatershedID);            
-            rptDownloadSensorLocations.DataBind();            
+            rptDownloadSensorLocations.DataBind();
         }
         protected void LoadDownloadPageData()
         {
@@ -156,20 +156,47 @@ namespace CitizenScience_UIPrototype
             ddlSensorDownloadWatersheds.DataTextField = "WatershedName";
             ddlSensorDownloadWatersheds.DataValueField = "WatershedID";
             ddlSensorDownloadWatersheds.DataBind();
-            ddlSensorDownloadWatersheds.Items.Insert(0, "-- Filter by Watershed --");            
-
+            ddlSensorDownloadWatersheds.Items.Insert(0, "-- Filter by Watershed --");
+       
             //  Populate Location table body
             rptDownloadSensorLocations.DataSource = ClassFunctions.GetLocations();
             rptDownloadSensorLocations.DataBind();
         }
         protected void btnDownloadSelectedSensorData_Click(object sender, EventArgs e)
         {
-            //  Download data from selected database
+            //  Create list to hold selected LocationIDs
+            List<int> selectedLocations = new List<int>();
+            CheckBox cbox;
+            HiddenField hid;
+            //  Loop through all Repeater Items
+            for(int i = 0; i < rptDownloadSensorLocations.Items.Count; i++)
+            {
+                cbox = (CheckBox)rptDownloadSensorLocations.Items[i].FindControl("cbxDownloadSensorLocation");
+                hid = (HiddenField)rptDownloadSensorLocations.Items[i].FindControl("hdnDownloadSensorLocationID");
+                //  If the Repeater item's checkbox is checked
+                if (cbox.Checked)
+                {
+                    //  Add its LocationID to the list
+                    selectedLocations.Add(Convert.ToInt32(hid.Value));
+                }
+            }
+            //  Get data of selected Locations from database
+            DataSet selectedTempDataSet = ClassFunctions.GetSelectedTemperatures(selectedLocations);
         }
         protected void btnDownloadAllSensorData_Click(object sender, EventArgs e)
         {
             //  Download all data from the database
-            DataSet allTempData = ClassFunctions.GetAllTemperatures();
+            DataSet allTempDataSet = ClassFunctions.GetAllTemperatures();
+            List<Temperature> tempList = new List<Temperature>();
+            for(int i = 0; i < allTempDataSet.Tables[0].Rows.Count; i++)
+            {
+                Temperature t = new Temperature();
+                t.Timestamp = Convert.ToDateTime(allTempDataSet.Tables[0].Rows[i]["TimeRecorded"]);
+                t.Celsius = Convert.ToDouble(allTempDataSet.Tables[0].Rows[i]["TempC"]);
+                t.Fahrenheit = Convert.ToDouble(allTempDataSet.Tables[0].Rows[i]["TempF"]);
+                tempList.Add(t);
+            }
+            byte[] allTempDataBytes = DataProcessor.CreateCsvAsBytes(tempList);  
         }        
 
 
