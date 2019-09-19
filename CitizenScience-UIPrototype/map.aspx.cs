@@ -24,6 +24,10 @@ namespace CitizenScience_UIPrototype
                 ddlWaterShed.DataTextField = "WatershedName";
                 ddlWaterShed.DataValueField = "WatershedID";
                 ddlWaterShed.DataBind();
+                ddlWaterShed.Items.Insert(0, "- Select Watershed -");
+
+                ddlLocation.DataSource = ClassFunctions.GetLocations();
+                ddlLocation.DataBind();
             }
         }
 
@@ -34,11 +38,14 @@ namespace CitizenScience_UIPrototype
 
         protected void DisplayByWatershed(String watershed)
         {
-            LocationList.Visible = true;
-            
             int selectedWatershedID = Convert.ToInt32(ddlWaterShed.SelectedValue);
             ddlLocation.DataSource = ClassFunctions.GetLocationsByWatershed(selectedWatershedID);
             ddlLocation.DataBind();
+        }
+
+        protected void btnGoTo_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
