@@ -64,3 +64,18 @@ AS
 CREATE PROCEDURE [dbo].[GetAllBulkUploads]
 AS
 	SELECT * FROM BulkUploads
+
+
+CREATE PROCEDURE [dbo].[GetLocationsByWatershed]
+	@locationID int
+AS
+	SELECT * FROM Temperature
+    WHERE LocationID = @locationID
+
+
+CREATE PROCEDURE [dbo].[GetAllTemperaturesByMultipleLocationIds]
+	@listOflocationID varchar(max)
+AS
+	SELECT * FROM Temperature
+    JOIN STRING_SPLIT(@listOflocationID, ',')
+    ON value = LocationID

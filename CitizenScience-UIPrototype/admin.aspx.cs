@@ -164,6 +164,8 @@ namespace CitizenScience_UIPrototype
         }
         protected void btnDownloadSelectedSensorData_Click(object sender, EventArgs e)
         {
+            string csvFileName = $"Temps-{DateTime.Now.ToString("M/d/yy-H:mm")}.csv";
+
             //  Create list to hold selected LocationIDs
             List<int> selectedLocations = new List<int>();
             CheckBox cbox;
@@ -180,8 +182,27 @@ namespace CitizenScience_UIPrototype
                     selectedLocations.Add(Convert.ToInt32(hid.Value));
                 }
             }
+
             //  Get data of selected Locations from database
-            DataSet selectedTempDataSet = ClassFunctions.GetSelectedTemperatures(selectedLocations);
+            DataSet allTempDataSet = ClassFunctions.GetAllTemperaturesByMultipleLocationIds(selectedLocations);
+
+            List<Temperature> tempList = new List<Temperature>();
+            for (int i = 0; i < allTempDataSet.Tables[0].Rows.Count; i++)
+            {
+                Temperature t = new Temperature();
+                t.Timestamp = Convert.ToDateTime(allTempDataSet.Tables[0].Rows[i]["TimeRecorded"].ToString());
+                t.Celsius = Convert.ToDouble(allTempDataSet.Tables[0].Rows[i]["TempC"]);
+                t.Fahrenheit = Convert.ToDouble(allTempDataSet.Tables[0].Rows[i]["TempF"]);
+                tempList.Add(t);
+            }
+
+            byte[] allTempDataBytes = DataProcessor.CreateCsvAsBytes(tempList);
+
+            Response.Clear();
+            Response.ContentType = "application/force-download";
+            Response.AddHeader("content-disposition", "attachment; filename=" + csvFileName);
+            Response.BinaryWrite(allTempDataBytes);
+            Response.End();
         }
         protected void btnDownloadAllSensorData_Click(object sender, EventArgs e)
         {
