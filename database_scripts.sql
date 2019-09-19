@@ -66,7 +66,7 @@ AS
 	SELECT * FROM BulkUploads
 
 
-CREATE PROCEDURE [dbo].[GetLocationsByWatershed]
+CREATE PROCEDURE [dbo].[GetAllTemperaturesByLocationId]
 	@locationID int
 AS
 	SELECT * FROM Temperature
