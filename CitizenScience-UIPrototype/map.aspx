@@ -139,7 +139,7 @@
             var infoWindow = new google.maps.InfoWindow;
 
             // Change this depending on the name of your PHP or XML file
-            downloadUrl('hhttp://localhost:58983/api/Watershed', function (data) {
+            downloadUrl('http://cis-iis2.temple.edu/Spring2019/CIS3342_tug13955/WebAPI/api/Watershed', function (data) {
                 var xml = data.responseXML;
                 var markers = xml.documentElement.getElementsByTagName('Location');
                 Array.prototype.forEach.call(markers, function (markerElem) {
