@@ -228,7 +228,7 @@
                             </div>
                         </div>
                         <div class="row pt-1">           
-                                <div class=" alert-primary p-4">                                  
+                                <div class="alert-primary p-4">                                  
                                     <table id="tblDownloadSelect" class="table table-primary rounded w-75">                                    
                                         <thead class="thead-light">
                                             <tr>
