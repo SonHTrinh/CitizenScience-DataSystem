@@ -7,8 +7,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <h1>Welcome to Citizen Science</h1>
-                <p>Hover on a location on the map or select a watershed location from the list to see more details</p>
+                <h1 style="text-align: center">Welcome to Citizen Science</h1>
             </div>
         </div>
         <div class="row my-4">
@@ -83,7 +82,7 @@
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 center: new google.maps.LatLng(40.0319, -75.1134),
-                zoom: 10
+                zoom: 11
             });
 
             $.ajax({
