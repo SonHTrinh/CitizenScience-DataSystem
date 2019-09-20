@@ -48,9 +48,26 @@
                                         <asp:TextBox CssClass="form-control" ID="txtNewLocationName" runat="server" required="true" />
                                     </div>
                                     <div class="col-md-6">
+                                        <span style="color:red">*</span><asp:Label AssociatedControlID="ddlAddLocationWatershed" runat="server">Location Watershed:</asp:Label>
+                                        <asp:DropDownList CssClass="form-control" ID="DropDownList2" runat="server">                                         
+                                            <asp:ListItem Value="">Watershed...</asp:ListItem>
+                                            <asp:ListItem Value="w1">Darby & Cobbs Creeks</asp:ListItem>
+                                            <asp:ListItem Value="w2">Delaware River</asp:ListItem>
+                                            <asp:ListItem Value="w3">Lower Schuylkill River</asp:ListItem>                                             
+                                            <asp:ListItem Value="w3">Pennypack Creek</asp:ListItem>                                             
+                                            <asp:ListItem Value="w3">Poquessing Creek</asp:ListItem>                                             
+                                            <asp:ListItem Value="w3">Tacony & Frankford Creeks</asp:ListItem>                                             
+                                            <asp:ListItem Value="w3">Wissahickon Creek</asp:ListItem>                                                         
+                                        </asp:DropDownList>
+                                    </div>
+
+                                    <!--
+                                    <div class="col-md-6">
                                         <span style="color:red">*</span><asp:Label AssociatedControlID="txtNewLocationSerialNumber" runat="server">Sensor Serial Number:</asp:Label>
                                         <asp:TextBox CssClass="form-control" ID="txtNewLocationSerialNumber" runat="server" required="true"/>   
-                                    </div>                                                       
+                                    </div>   
+                                    -->
+
                                 </div>  
                                 <div class="row my-3">
                                     <div class="col-md-6">
@@ -62,6 +79,8 @@
                                         <asp:TextBox CssClass="form-control" ID="txtNewLocationLatitude" runat="server" required="true"/>
                                     </div>
                                 </div>  
+
+                                <!--
                                 <div class="row my-3">
                                     <div class="col-md-6">
                                         <span style="color:red">*</span><asp:Label AssociatedControlID="ddlAddLocationWatershed" runat="server">Location Watershed:</asp:Label>
@@ -77,6 +96,8 @@
                                         </asp:DropDownList>
                                     </div>
                                 </div>
+                                -->
+
                                 <div class="row my-3">       
                                     <span style="color:red">*</span><asp:Label AssociatedControlID="fulNewImg" CssClass="w-75" runat="server">Profile Image:</asp:Label>
                                     <div class="input-group w-50" id="fulNewImg" runat="server">            
@@ -86,10 +107,13 @@
                                         </div>
                                     </div>    
                                 </div>
+
+                                <!--
                                 <div class="row my-3">
                                     <span style="color:red">*</span><asp:Label AssociatedControlID="txtNewLocationDescription" CssClass="w-75" runat="server">Location Description:</asp:Label>
                                     <asp:TextBox CssClass="form-control w-75" TextMode="MultiLine" Rows="6" ID="txtNewLocationDescription" runat="server" required="true"/>
                                 </div>  
+                                -->
                         
                                 <%-- ADD LOCATION BUTTON --%>        
                                 <div class="row"><asp:Button CssClass="btn btn-primary" ID="btnAddLocation" runat="server" text="Add Location" OnClick="btnAddLocation_Click" UseSubmitBehavior="false" /></div>           
