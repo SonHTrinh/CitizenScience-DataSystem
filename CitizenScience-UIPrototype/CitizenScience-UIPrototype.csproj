@@ -72,6 +72,7 @@
   <ItemGroup>
     <Content Include="about.aspx" />
     <Content Include="admin.aspx" />
+    <Content Include="api.asmx" />
     <Content Include="debug.aspx" />
     <Content Include="gallery.aspx" />
     <Content Include="galleryAPI-style.css" />
@@ -125,6 +126,10 @@
     </Compile>
     <Compile Include="CitizenScience.Master.designer.cs">
       <DependentUpon>CitizenScience.Master</DependentUpon>
+    </Compile>
+    <Compile Include="api.asmx.cs">
+      <DependentUpon>api.asmx</DependentUpon>
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="debug.aspx.cs">
       <DependentUpon>debug.aspx</DependentUpon>

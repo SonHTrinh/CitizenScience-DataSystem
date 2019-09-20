@@ -20,27 +20,18 @@ namespace CitizenScience_UIPrototype
         {
             if (!IsPostBack)
             {
-                ddlWaterShed.DataSource = ClassFunctions.GetWatersheds();
-                ddlWaterShed.DataTextField = "WatershedName";
-                ddlWaterShed.DataValueField = "WatershedID";
-                ddlWaterShed.DataBind();
-                ddlWaterShed.Items.Insert(0, "- Select Watershed -");
 
-                ddlLocation.DataSource = ClassFunctions.GetLocations();
-                ddlLocation.DataBind();
             }
         }
 
         protected void ddlWaterShed_SelectedIndexChanged(object sender, EventArgs e)
         {
-            DisplayByWatershed(ddlWaterShed.SelectedValue);
+
         }
 
         protected void DisplayByWatershed(String watershed)
         {
-            int selectedWatershedID = Convert.ToInt32(ddlWaterShed.SelectedValue);
-            ddlLocation.DataSource = ClassFunctions.GetLocationsByWatershed(selectedWatershedID);
-            ddlLocation.DataBind();
+
         }
 
         protected void btnGoTo_Click(object sender, EventArgs e)
