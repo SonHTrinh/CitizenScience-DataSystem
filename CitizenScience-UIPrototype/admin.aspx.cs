@@ -144,10 +144,18 @@ namespace CitizenScience_UIPrototype
 
         ////////////////////////////////////////////////////////////////////////////////////////      DOWNLOAD TEMPERATURE DATA FUNCTIONS
         protected void ddlSensorDownloadWatersheds_Change(object sender, EventArgs e)
-        {            
-            int selectedWatershedID = Convert.ToInt32(ddlSensorDownloadWatersheds.SelectedValue);
-            rptDownloadSensorLocations.DataSource = ClassFunctions.GetLocationsByWatershed(selectedWatershedID);            
-            rptDownloadSensorLocations.DataBind();
+        {
+            try
+            {
+                int selectedWatershedID = Convert.ToInt32(ddlSensorDownloadWatersheds.SelectedValue);
+                rptDownloadSensorLocations.DataSource = ClassFunctions.GetLocationsByWatershed(selectedWatershedID);
+                rptDownloadSensorLocations.DataBind();
+            }
+            catch
+            {
+                rptDownloadSensorLocations.DataSource = ClassFunctions.GetLocations();
+                rptDownloadSensorLocations.DataBind();
+            }
         }
         protected void LoadDownloadPageData()
         {
