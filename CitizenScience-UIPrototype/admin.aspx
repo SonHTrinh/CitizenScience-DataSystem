@@ -227,31 +227,32 @@
                                 <asp:Button CssClass="btn btn-primary" ID="btnDownloadSelectedSensorData" runat="server" text="Download Selected Data" OnClick="btnDownloadSelectedSensorData_Click" UseSubmitBehavior="false"/>
                             </div>
                         </div>
-                        <div class="row pt-1">
-                            <div class=" alert-primary p-4">
-                                <table id="tblDownloadSelect">
-                                    <thead class="thead-light">
-                                        <tr>
-                                            <th scope="col">
-                                                <asp:DropDownList CssClass="form-control" ID="ddlSensorDownloadWatersheds" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSensorDownloadWatersheds_Change"></asp:DropDownList>                                                                                                                                         
-                                            </th>
-                                            <th scope="col">Location</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>  
-                                        <asp:Repeater ID="rptDownloadSensorLocations" runat="server"> 
-                                            <ItemTemplate> 
-                                                <tr>
-                                                    <th scope="row"><asp:Checkbox ID="cbxDownloadSensorLocation" runat="server"/></th>
-                                                    <td>
-                                                        <asp:Label ID="lblDownloadSensorLocationName" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "SensorName") %>'></asp:Label>
-                                                        <asp:HiddenField id="hdnDownloadSensorLocationID" runat="server" value='<%# DataBinder.Eval(Container.DataItem, "LocationID") %>'></asp:HiddenField>
-                                                    </td>
-                                                </tr>
-                                            </ItemTemplate>
-                                        </asp:Repeater> 
-                                    </tbody>
-                                </table>
+                        <div class="row pt-1">           
+                                <div class=" alert-primary p-4">                                  
+                                    <table id="tblDownloadSelect" class="table table-primary rounded w-75">                                    
+                                        <thead class="thead-light">
+                                            <tr>
+                                                <th scope="col">
+                                                    <asp:DropDownList CssClass="form-control" ID="ddlSensorDownloadWatersheds" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlSensorDownloadWatersheds_Change"></asp:DropDownList>                                                                                                                                         
+                                                </th>
+                                                <th scope="col">Location</th>
+                                            </tr>                                       
+                                        </thead>
+                                        <tbody>               
+                                            <asp:Repeater ID="rptDownloadSensorLocations" runat="server">     
+                                                <ItemTemplate>                                                
+                                                    <tr>
+                                                        <th scope="row"><asp:Checkbox ID="cbxDownloadSensorLocation" runat="server"/></th>
+                                                        <td>
+                                                            <asp:Label ID="lblDownloadSensorLocationName" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "SensorName") %>'></asp:Label>
+                                                            <asp:HiddenField id="hdnDownloadSensorLocationID" runat="server" value='<%# DataBinder.Eval(Container.DataItem, "LocationID") %>'></asp:HiddenField>
+                                                        </td>
+                                                    </tr>                                                
+                                                </ItemTemplate>  
+                                            </asp:Repeater>   
+                                        </tbody>
+                                    </table>    
+                                </div>
                             </div>
                         </div>
                     </div>
