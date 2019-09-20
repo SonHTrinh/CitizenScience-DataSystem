@@ -71,6 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="about.aspx" />
+    <Content Include="admin-style.css" />
     <Content Include="admin.aspx" />
     <Content Include="api.asmx" />
     <Content Include="debug.aspx" />
