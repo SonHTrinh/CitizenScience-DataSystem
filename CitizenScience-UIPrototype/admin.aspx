@@ -226,7 +226,7 @@
                             </div>
                         </div>
                         <div class="row pt-1">
-                            <div class="col-md-7">             
+                            <div class="col-md-7" style="height: 250px;overflow-y: scroll !important;">             
                                 <div class=" alert-primary p-4">                                  
                                     <table id="tblDownloadSelect" class="table table-primary rounded w-75">                                    
                                         <thead class="thead-light">
