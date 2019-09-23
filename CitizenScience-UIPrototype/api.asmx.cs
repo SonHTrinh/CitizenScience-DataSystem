@@ -1,4 +1,5 @@
 ﻿using CitizenScienceClasses;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -13,8 +14,22 @@ namespace CitizenScience_UIPrototype
     [WebService(Namespace = "http://localhost")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
+    [ScriptService]
     public class Api : WebService
     {
+
+        private void BuildResponse(int httpStatus, Object obj)
+        {
+            string response = JsonConvert.SerializeObject(obj);
+            Context.Response.AddHeader("content-length", response.Length.ToString());
+            Context.Response.Clear();
+            Context.Response.StatusCode = httpStatus;
+            Context.Response.ContentType = "application/json";
+            Context.Response.BufferOutput = true;
+            Context.Response.Write(response);
+            Context.Response.Flush();
+            Context.Response.End();
+        }
 
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
@@ -97,5 +112,73 @@ namespace CitizenScience_UIPrototype
             Context.Response.ContentType = "application/json";
             Context.Response.Write(js.Serialize(locationList));
         }
+
+        //////////////////////////// CRUD Watershed \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void CreateWatershed(string name)
+        {
+            Watershed result = ClassFunctions.CreateWatershed(name);
+
+            if(result != null)
+            {
+                BuildResponse(200, result);
+            } else
+            {
+                BuildResponse(500, null);
+            }
+
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void ReadWatershed(int id)
+        {
+            Watershed result = ClassFunctions.ReadWatershed(id);
+
+            if (result != null)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, null);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void UpdateWatershed(int id, string name)
+        {
+            Watershed result = ClassFunctions.UpdateWatershed(id, name);
+
+            if (result != null)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, null);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void DeleteWatershed(int id)
+        {
+            bool result = ClassFunctions.DeleteWatershed(id);
+
+            if (result != null)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, null);
+            }
+        }
+
     }
 }

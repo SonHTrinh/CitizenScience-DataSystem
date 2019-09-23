@@ -37,7 +37,6 @@ CONSTRAINT [FK_Temperature_ToTable] FOREIGN KEY ([LocationID]) REFERENCES [dbo].
 ); 
 
 
-/////////////	STORED PROCEDURES
 
 CREATE PROCEDURE [dbo].[GetAllLocations]
 AS
@@ -79,3 +78,25 @@ AS
 	SELECT * FROM Temperature
     JOIN STRING_SPLIT(@listOflocationID, ',')
     ON value = LocationID
+
+-- CRUD Watershed
+CREATE PROCEDURE [dbo].[CreateWatershed]
+    @name varchar(255)
+AS
+    INSERT INTO Watershed (WatershedName, LastUpdated)
+    VALUES (@name, GETDATE())
+    SELECT * FROM Watershed WHERE WatershedID = SCOPE_IDENTITY()
+
+CREATE PROCEDURE [dbo].[UpdateWatershed]
+	@id int
+	@name varchar(255)
+AS
+	UPDATE Watershed
+	SET WatershedName = @name, LastUpdated = GETDATE()
+	WHERE WatershedID = @id
+	SELECT * FROM Watershed where WatershedID = @id
+
+CREATE PROCEDURE [dbo].[Watershed]
+	@id int
+AS
+	DELETE FROM Watershed WHERE watershedID = @id

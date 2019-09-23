@@ -45,7 +45,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -73,6 +78,7 @@
     <Content Include="about.aspx" />
     <Content Include="admin-style.css" />
     <Content Include="admin.aspx" />
+    <Content Include="administration\watershed.aspx" />
     <Content Include="api.asmx" />
     <Content Include="debug.aspx" />
     <Content Include="gallery.aspx" />
@@ -105,6 +111,7 @@
     <Content Include="mapAPI-style.css" />
     <Content Include="template-style.css" />
     <Content Include="Web.config" />
+    <Content Include="WebService1.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="about.aspx.cs">
@@ -120,6 +127,13 @@
     </Compile>
     <Compile Include="admin.aspx.designer.cs">
       <DependentUpon>admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\watershed.aspx.cs">
+      <DependentUpon>watershed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\watershed.aspx.designer.cs">
+      <DependentUpon>watershed.aspx</DependentUpon>
     </Compile>
     <Compile Include="CitizenScience.Master.cs">
       <DependentUpon>CitizenScience.Master</DependentUpon>
@@ -157,6 +171,10 @@
       <DependentUpon>map.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebService1.asmx.cs">
+      <DependentUpon>WebService1.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="CitizenScience.Master" />
@@ -173,6 +191,9 @@
       <Project>{2b9efc13-bc75-48fd-9ea9-1f8c511cdea8}</Project>
       <Name>CitizenScienceClasses</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
