@@ -89,11 +89,20 @@
                 url: "api.asmx/AllLocations",
                 success: function (data) {
                     for (var i = 0; i < data.length; i++) {
+
+                        var locationInfowindow = new google.maps.InfoWindow({
+                            content: data[i].SensorName + "<br/>" + "<br/>"  + "......Description......"
+                        });
+
                         var marker = new google.maps.Marker({
                             position: { lat: data[i].Latitude, lng: data[i].Longitude },
                             animation: google.maps.Animation.DROP,
                             map: map,
-                            title: data[i].SensorName
+                            title: data[i].SensorName,
+                            infowindow: locationInfowindow
+                        });
+                        google.maps.event.addListener(marker, 'click', function () {
+                            this.infowindow.open(map, this);
                         });
                     }
                 }
