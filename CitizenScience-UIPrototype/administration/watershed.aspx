@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CitizenScience.Master" AutoEventWireup="true" CodeBehind="watershed.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.watershed" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/administration/administration.master" AutoEventWireup="true" CodeBehind="watershed.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.watershed" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">

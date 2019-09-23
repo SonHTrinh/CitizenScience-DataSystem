@@ -78,6 +78,7 @@
     <Content Include="about.aspx" />
     <Content Include="admin-style.css" />
     <Content Include="admin.aspx" />
+    <Content Include="admin.css" />
     <Content Include="administration\watershed.aspx" />
     <Content Include="api.asmx" />
     <Content Include="debug.aspx" />
@@ -127,6 +128,13 @@
     </Compile>
     <Compile Include="admin.aspx.designer.cs">
       <DependentUpon>admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\administration.master.cs">
+      <DependentUpon>administration.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\administration.master.designer.cs">
+      <DependentUpon>administration.master</DependentUpon>
     </Compile>
     <Compile Include="administration\watershed.aspx.cs">
       <DependentUpon>watershed.aspx</DependentUpon>
@@ -178,6 +186,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CitizenScience.Master" />
+    <Content Include="administration\administration.master" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
