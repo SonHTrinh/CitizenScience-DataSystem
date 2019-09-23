@@ -8,6 +8,10 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
+using System.Data;
+using System.Data.SqlClient;
+
+
 namespace CitizenScience_UIPrototype
 {
     public partial class debug : System.Web.UI.Page
@@ -26,11 +30,11 @@ namespace CitizenScience_UIPrototype
                 try
                 {
                     Stream fileStream = FileUpload1.PostedFile.InputStream;
+                    //turns it into a list here called temperatureList and is bound. need to save in database instead. 
                     List<Temperature> temperatureList = DataProcessor.ReadCsvFile(fileStream);
 
-                    rptCSV.DataSource = temperatureList;
-                    rptCSV.DataBind();
-                }
+                    ClassFunctions.AddTempsToDatabase(temperatureList);
+;                 }
                 catch (Exception ex)
                 {
                     sb.AppendFormat("Unable to save file <br/> {0}", ex.Message);

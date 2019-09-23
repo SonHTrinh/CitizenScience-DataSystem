@@ -161,6 +161,7 @@
   <ItemGroup>
     <Content Include="CitizenScience.Master" />
     <None Include="packages.config" />
+    <Content Include="sample_data\sample.csv" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
