@@ -1,72 +1,57 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/CitizenScience.Master" AutoEventWireup="true" CodeBehind="administration.master.cs" Inherits="CitizenScience_UIPrototype.administration.administration" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
+    <asp:ContentPlaceHolder ID="titleName" runat="server">
+
+    </asp:ContentPlaceHolder>
 </asp:Content>
-<asp:Content ID="NavBar" ContentPlaceHolderID="navContent" runat="server">
-<div class="wrapper">
-    <!-- Sidebar  -->
-    <nav id="sidebar">
-        <div class="sidebar-header">
-            <h3>Bootstrap Sidebar</h3>
-            <strong>BS</strong>
-        </div>
+<asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Citizen Science</h3>
+                <strong>CS</strong>
+            </div>
 
-        <ul class="list-unstyled components">
-            <li class="active">
-                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <i class="fas fa-home"></i>
-                    Home
-                </a>
-                <ul class="collapse list-unstyled" id="homeSubmenu">
-                    <li>
-                        <a href="#">Home 1</a>
-                    </li>
-                    <li>
-                        <a href="#">Home 2</a>
-                    </li>
-                    <li>
-                        <a href="#">Home 3</a>
-                    </li>
-                </ul>
-            </li>
-            <li>
-                <a href="#">
-                    <i class="fas fa-briefcase"></i>
-                    About
-                </a>
-                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
-                    <i class="fas fa-copy"></i>
-                    Pages
-                </a>
-                <ul class="collapse list-unstyled" id="pageSubmenu">
-                    <li>
-                        <a href="#">Page 1</a>
-                    </li>
-                    <li>
-                        <a href="#">Page 2</a>
-                    </li>
-                    <li>
-                        <a href="#">Page 3</a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-
-    </nav>
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="#">
+                        <i class="fas fa-water"></i>
+                        <span class="menuItemName">Watersheds</span> 
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-map-marked-alt"></i>
+                        <span class="menuItemName">Locations</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
 
     <!-- Page Content  -->
     <div id="content">
-
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
+                <div class="row">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                        <span>Toggle Sidebar</span>
+                    </button>
+                </div>
+                <div class="row">
+                    <asp:ContentPlaceHolder ID="main_content" runat="server">
 
-                <button type="button" id="sidebarCollapse" class="btn btn-info">
-                    <i class="fas fa-align-left"></i>
-                    <span>Toggle Sidebar</span>
-                </button>
+                    </asp:ContentPlaceHolder>
+                </div>
+
             </div>
         </nav>
     </div>
 </div>
+
+
+
     <script>
         $(document).ready(function () {
 
@@ -75,6 +60,8 @@
             });
 
         });
-</script>
+    </script>
+
 </asp:Content>
+
 
