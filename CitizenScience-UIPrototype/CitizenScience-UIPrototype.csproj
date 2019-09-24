@@ -78,7 +78,6 @@
     <Content Include="about.aspx" />
     <Content Include="admin-style.css" />
     <Content Include="admin.aspx" />
-    <Content Include="admin.css" />
     <Content Include="administration\location.aspx" />
     <Content Include="administration\watershed.aspx" />
     <Content Include="api.asmx" />
@@ -111,6 +110,9 @@
     <Content Include="img\Watershed\Watershed6.jpg" />
     <Content Include="map.aspx" />
     <Content Include="mapAPI-style.css" />
+    <Content Include="style\custom\datatable.css" />
+    <Content Include="style\custom\sidenav.css" />
+    <Content Include="style\custom\topnav.css" />
     <Content Include="template-style.css" />
     <Content Include="Web.config" />
     <Content Include="WebService1.asmx" />
@@ -196,6 +198,7 @@
     <Content Include="CitizenScience.Master" />
     <Content Include="administration\administration.master" />
     <None Include="packages.config" />
+    <Content Include="style\custom\TEMPLE_BRANDING.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

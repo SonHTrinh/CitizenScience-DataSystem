@@ -2,30 +2,27 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
-    <div class="container-fluid">
-        <div class="row my-3">
-            <div class="col-1">
-            </div>
-            <div class="col-10">
-                <button id="createWatershed" class="btn btn-success float-left">
-                    <i class="fa fa-plus">&nbsp; Create New Watershed</i>
-                </button>
-            </div>
-        </div>
-        <div class="row mt-2">
-            <div class="col-1"></div>
-            <div class="col-10">
-                <table class="table table-striped table-hover table-bordered" style="width: 100%;" id="DataTable">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col"></th>
-                        </tr>
-                    </thead>
-                </table>
-            </div>
+
+    <div class="row mb-4">
+        <div class="col-12">
+            <button type="button" id="createWatershed" class="btn btn-success float-left">
+                <i class="fa fa-plus">&nbsp; Create New Watershed</i>
+            </button>
         </div>
     </div>
+    <div class="row mt-2">
+        <div class="col-12">
+            <table class="table table-striped table-hover table-bordered" style="width: 100%;" id="DataTable">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
 
     <!-- Create Modal -->
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
@@ -114,7 +111,7 @@
 
                 // Create columns to place buttons inside
                 var buttonLeftColumn = $(document.createElement('div'))
-                    .addClass('col-6')
+                    .addClass('col-12')
                     .append(buttonEdit);
 
                 var buttonRightColumn = $(document.createElement('div'))
@@ -123,7 +120,7 @@
 
                 // Add the 2 button columns to the row
                 buttonRow.append(buttonLeftColumn);
-                buttonRow.append(buttonRightColumn);
+                //buttonRow.append(buttonRightColumn);
 
                 // Return the HTML that makes up the row > (column > button > icon)*2
                 return buttonRow.prop('outerHTML');
@@ -139,6 +136,7 @@
 
                 button.addClass('btn')
                     .attr('id', 'btnWatershedEdit' + id)
+                    .attr('type', 'button')
                     .addClass('editButton')
                     .addClass('btn-info')
                     .addClass('btn-block')
@@ -157,6 +155,7 @@
 
                 button.addClass('btn')
                     .attr('id', 'btnWatershedArchive' + id)
+                    .attr('type', 'button')
                     .addClass('archiveButton')
                     .addClass('btn-warning')
                     .addClass('btn-block')
@@ -194,7 +193,7 @@
                     {
                         data: null,
                         orderable: false,
-                        width: '20%',
+                        width: '10%',
                         render: RenderWatershedActions
                     }
                 ]
@@ -206,7 +205,7 @@
                 PopulateCreateModal();
 
                 //Display the modal
-                $('#createModal').modal('show');
+                $('#createModal').modal();
             });
 
             // The function when the any 'Edit' button in the DataTable gets clicked
@@ -264,6 +263,7 @@
                 var name = $('#inputCreateName').val();
 
                 var requestData = { name: name }
+                
 
                 $.ajax({
                     type: 'POST',

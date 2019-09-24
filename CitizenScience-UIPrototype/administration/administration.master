@@ -8,11 +8,16 @@
     <div class="wrapper">
         <!-- Sidebar  -->
         <nav id="sidebar">
-            <div class="sidebar-header">
-                <h4>Citizen Science</h4>
-                <strong>CS</strong>
+            <div  id="sidebarCollapse">
+                <ul class="list-unstyled components">
+                    <li >
+                        <a href="#" >
+                            <i class="fas fa-angle-double-right"></i>
+                            <span class="menuItemName">Toggle Sidebar</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
-
             <ul class="list-unstyled components">
                 <li>
                     <a href="#">
@@ -64,40 +69,22 @@
                 </li>
 
             </ul>
-            <div  id="sidebarCollapse">
-                <ul class="list-unstyled components">
-                    <li >
-                        <a href="#" >
-                            <i class="fas fa-angle-double-left"></i>
-                            <span class="menuItemName">Toggle Sidebar</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
 
         </nav>
 
-    <!-- Page Content  -->
-    <div id="content">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <!-- Page Content  -->
+        <div id="content" >
+
             <div class="container-fluid">
+                <!-- Top Navbar -->
                 <div class="row">
-
+                    
                 </div>
-                <div class="row">
-                    <asp:ContentPlaceHolder ID="main_content" runat="server">
-
-                    </asp:ContentPlaceHolder>
-                </div>
-
-            </div>
-        </nav>
+                <!-- Actual Content -->
+                <asp:ContentPlaceHolder ID="main_content" runat="server" />
+            </div> 
+        </div>
     </div>
-</div>
-
-
-
     <script>
         $(document).ready(function () {
 
@@ -107,7 +94,6 @@
 
         });
     </script>
-
 </asp:Content>
 
 

@@ -1,0 +1,13 @@
+﻿.navbar {
+    background-color: #a41e34;
+    box-shadow: unset;
+}
+
+#branding-logo {
+    width: 15em;
+    height: 5em;
+}
+
+.nav-link {
+    color: #fff;
+}

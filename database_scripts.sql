@@ -96,7 +96,12 @@ AS
 	WHERE WatershedID = @id
 	SELECT * FROM Watershed where WatershedID = @id
 
-CREATE PROCEDURE [dbo].[Watershed]
+CREATE PROCEDURE [dbo].[DeleteWatershed]
 	@id int
 AS
 	DELETE FROM Watershed WHERE watershedID = @id
+
+CREATE PROCEDURE [dbo].[ReadWatershed]
+	@id int
+AS
+	SELECT * FROM Watershed WHERE watershedID = @id
