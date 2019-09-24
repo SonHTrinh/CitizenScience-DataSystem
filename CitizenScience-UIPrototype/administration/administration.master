@@ -9,7 +9,7 @@
         <!-- Sidebar  -->
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>Citizen Science</h3>
+                <h4>Citizen Science</h4>
                 <strong>CS</strong>
             </div>
 
@@ -26,7 +26,56 @@
                         <span class="menuItemName">Locations</span>
                     </a>
                 </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-upload"></i>
+                        <span class="menuItemName">Upload Data</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-download"></i>
+                        <span class="menuItemName">Download Data</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-users"></i>
+                        <span class="menuItemName">Manage Admins</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-images"></i>
+                        <span class="menuItemName">Gallery</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-question"></i>
+                        <span class="menuItemName">About</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="fas fa-clipboard"></i>
+                        <span class="menuItemName">Volunteers</span>
+                    </a>
+                </li>
+
             </ul>
+            <div  id="sidebarCollapse">
+                <ul class="list-unstyled components">
+                    <li >
+                        <a href="#" >
+                            <i class="fas fa-angle-double-left"></i>
+                            <span class="menuItemName">Toggle Sidebar</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+
         </nav>
 
     <!-- Page Content  -->
@@ -34,10 +83,7 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <div class="row">
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span>Toggle Sidebar</span>
-                    </button>
+
                 </div>
                 <div class="row">
                     <asp:ContentPlaceHolder ID="main_content" runat="server">
