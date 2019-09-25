@@ -20,13 +20,13 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="#">
+                    <a href="/administration/watershed.aspx">
                         <i class="fas fa-water"></i>
                         <span class="menuItemName">Watersheds</span> 
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/administration/location.aspx">
                         <i class="fas fa-map-marked-alt"></i>
                         <span class="menuItemName">Locations</span>
                     </a>

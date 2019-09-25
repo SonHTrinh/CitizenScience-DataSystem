@@ -68,17 +68,15 @@
                                 <i class="fas fa-sign-in-alt"></i>
                             </a>
                         </div>
-
                     </div>
-                    
                 </div>
             </nav>
         </div>
             
-
         <asp:ContentPlaceHolder ID="main_content" runat="server" />
 
-        <div id="footerPage"></div>
+        <div id="footerPage">
+        </div>
     </form>
 </body>
 </html>
