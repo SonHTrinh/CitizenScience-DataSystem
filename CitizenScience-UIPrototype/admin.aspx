@@ -246,11 +246,17 @@
                         <div class="row pt-3">
                             <div class="col-md-3">
                                 <asp:Button CssClass="btn btn-primary" ID="btnDownloadAllSensorData" runat="server" text="Download All Data" OnClick="btnDownloadAllSensorData_Click" UseSubmitBehavior="false"/>
+                                
                             </div>
                             <div class="col-md-3">
                                 <asp:Button CssClass="btn btn-primary" ID="btnDownloadSelectedSensorData" runat="server" text="Download Selected Data" OnClick="btnDownloadSelectedSensorData_Click" UseSubmitBehavior="false"/>
+
+                            </div>
+                            <div class="col-md-3">
+                                <asp:Label ID="lblMessage" runat="server"> </asp:Label>
                             </div>
                         </div>
+                       
                         <div class="row pt-1">           
                                 <div class="alert-primary p-4">                                  
                                     <table id="tblDownloadSelect" class="table table-primary rounded w-75">                                    

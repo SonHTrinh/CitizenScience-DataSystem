@@ -178,6 +178,7 @@ namespace CitizenScience_UIPrototype
             List<int> selectedLocations = new List<int>();
             CheckBox cbox;
             HiddenField hid;
+            
             //  Loop through all Repeater Items
             for(int i = 0; i < rptDownloadSensorLocations.Items.Count; i++)
             {
@@ -194,23 +195,29 @@ namespace CitizenScience_UIPrototype
             //  Get data of selected Locations from database
             DataSet selectedTempDataSet = ClassFunctions.GetAllTemperaturesByMultipleLocationIds(selectedLocations);
 
-            List<Temperature> tempList = new List<Temperature>();
-            for (int i = 0; i < selectedTempDataSet.Tables[0].Rows.Count; i++)
-            {
-                Temperature t = new Temperature();
-                t.Timestamp = Convert.ToDateTime(selectedTempDataSet.Tables[0].Rows[i]["DateRecorded"].ToString());
-                t.Celsius = Convert.ToDouble(selectedTempDataSet.Tables[0].Rows[i]["TempC"]);
-                t.Fahrenheit = Convert.ToDouble(selectedTempDataSet.Tables[0].Rows[i]["TempF"]);
-                tempList.Add(t);
+            if(selectedTempDataSet.Tables[0].Rows.Count == 0){
+                lblMessage.Text = "You must select specific watersheds to download!"; 
             }
+            else{
+                List<Temperature> tempList = new List<Temperature>();
+                for (int i = 0; i < selectedTempDataSet.Tables[0].Rows.Count; i++)
+                {
+                    Temperature t = new Temperature();
+                    t.Timestamp = Convert.ToDateTime(selectedTempDataSet.Tables[0].Rows[i]["DateRecorded"].ToString());
+                    t.Celsius = Convert.ToDouble(selectedTempDataSet.Tables[0].Rows[i]["TempC"]);
+                    t.Fahrenheit = Convert.ToDouble(selectedTempDataSet.Tables[0].Rows[i]["TempF"]);
+                    tempList.Add(t);
+                }
 
-            byte[] allTempDataBytes = DataProcessor.CreateCsvAsBytes(tempList);
+                byte[] allTempDataBytes = DataProcessor.CreateCsvAsBytes(tempList);
 
-            Response.Clear();
-            Response.ContentType = "application/force-download";
-            Response.AddHeader("content-disposition", "attachment; filename=" + csvFileName);
-            Response.BinaryWrite(allTempDataBytes);
-            Response.End();
+                Response.Clear();
+                Response.ContentType = "application/force-download";
+                Response.AddHeader("content-disposition", "attachment; filename=" + csvFileName);
+                Response.BinaryWrite(allTempDataBytes);
+                Response.End();
+            }
+           
         }
         protected void btnDownloadAllSensorData_Click(object sender, EventArgs e)
         {

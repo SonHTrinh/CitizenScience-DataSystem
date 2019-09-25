@@ -89,11 +89,23 @@
                 url: "api.asmx/AllLocations",
                 success: function (data) {
                     for (var i = 0; i < data.length; i++) {
+
+                        var locationInfowindow = new google.maps.InfoWindow({
+                            content: "<h6><b>" + data[i].SensorName + "</b></h6>"
+                                    + "<img src='/img/Watershed/Watershed01.jpg' width='300' height='200' />" + "<br /><br />"
+                                    + "<p>......Description......</p>"
+                                    //Dummy profile picture 
+                        });
+
                         var marker = new google.maps.Marker({
                             position: { lat: data[i].Latitude, lng: data[i].Longitude },
                             animation: google.maps.Animation.DROP,
                             map: map,
-                            title: data[i].SensorName
+                            title: data[i].SensorName,
+                            infowindow: locationInfowindow
+                        });
+                        google.maps.event.addListener(marker, 'click', function () {
+                            this.infowindow.open(map, this);
                         });
                     }
                 }

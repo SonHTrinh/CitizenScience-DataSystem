@@ -208,13 +208,32 @@ namespace CitizenScienceClasses
         public static DataSet GetAllTemperaturesByMultipleLocationIds(List<int> locationIdList)
         {
             string commaList = string.Join(", ", locationIdList.Select(id => id));
-            
+
             DBConnect conn = new DBConnect();
             SqlCommand comm = new SqlCommand();
             comm.CommandType = CommandType.StoredProcedure;
             comm.CommandText = "GetAllTemperaturesByMultipleLocationIds";
             comm.Parameters.AddWithValue("@listOfLocationID", commaList);
             return conn.GetDataSetUsingCmdObj(comm);
+        }
+        
+        public static int AddTempsToDatabase(List<Temperature> temperatureList)
+        {
+            int k = 0;
+            DBConnect objDb = new DBConnect();
+            foreach (Temperature t in temperatureList)
+            {
+                SqlCommand comm = new SqlCommand();
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = "AddTemperatures";
+                //need position here 
+                comm.Parameters.AddWithValue("@TimeStamp", t.Timestamp);
+                comm.Parameters.AddWithValue("@Temp_C", t.Celsius);
+                comm.Parameters.AddWithValue("@Temp_F", t.Fahrenheit);
+
+                k = objDb.DoUpdateUsingCmdObj(comm);
+            }
+            return k;
         }
 
         /////////////////////////////////   WATERSHED FUNCTIONS
@@ -226,6 +245,8 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllWatersheds";
             return conn.GetDataSetUsingCmdObj(comm);
         }
+
+
 
         public static Watershed CreateWatershed(string name)
         {
@@ -322,3 +343,4 @@ namespace CitizenScienceClasses
         }
     }
 }
+

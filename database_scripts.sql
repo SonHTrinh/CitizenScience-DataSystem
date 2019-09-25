@@ -31,7 +31,7 @@ CREATE TABLE [dbo].[Location](
 	CONSTRAINT  [FK_Location_ToTable] FOREIGN KEY ([WatershedID]) REFERENCES [dbo].[Watershed] ([WatershedID]) 
 );
 
-GO 
+GO
 
 CREATE TABLE [dbo].[Temperature]( 
 	[TempID] INT IDENTITY(1,1) NOT NULL, 
@@ -48,6 +48,65 @@ CREATE TABLE [dbo].[Temperature](
 
 GO
 
+CREATE TABLE [dbo].[Admin] (
+    [AdminID]     INT            IDENTITY (1, 1) NOT NULL,
+    [Accessnet]   NVARCHAR (MAX) NOT NULL,
+    [AddedBy]     NVARCHAR (MAX) NOT NULL,
+    [ProgramLead] BIT            NOT NULL,
+    PRIMARY KEY CLUSTERED ([AdminID] ASC)
+);
+
+GO
+
+CREATE TABLE [dbo].[About] (
+    [AboutID]            INT            IDENTITY (1, 1) NOT NULL,
+    [ProgramDescription] NVARCHAR (MAX) NOT NULL,
+    [Question1]          NVARCHAR (MAX) NOT NULL,
+    [Question2]          NVARCHAR (MAX) NOT NULL,
+    [Question3]          NVARCHAR (MAX) NOT NULL,
+    [Answer1]            NVARCHAR (MAX) NOT NULL,
+    [Answer2]            NVARCHAR (MAX) NOT NULL,
+    [Answer3]            NVARCHAR (MAX) NOT NULL,
+    PRIMARY KEY CLUSTERED ([AboutID] ASC)
+);
+
+GO
+
+CREATE TABLE [dbo].[Album] (
+    [AlbumID]     INT            IDENTITY (1, 1) NOT NULL,
+    [LocationID]  INT            NOT NULL,
+    [Category]    NVARCHAR (MAX) NOT NULL,
+    [Description] NVARCHAR (MAX) NOT NULL,
+    PRIMARY KEY CLUSTERED ([AlbumID] ASC),
+    CONSTRAINT [FK_Album_ToTable] FOREIGN KEY ([LocationID]) REFERENCES [dbo].[Location] ([LocationID])
+);
+
+GO
+
+CREATE TABLE [dbo].[Error] (
+    [ErrorID]      INT            IDENTITY (1, 1) NOT NULL,
+    [UploadID]     INT            NOT NULL,
+    [AdminID]      INT            NOT NULL,
+    [ErrorMessage] NVARCHAR (MAX) NOT NULL,
+    PRIMARY KEY CLUSTERED ([ErrorID] ASC),
+    CONSTRAINT [FK_Error_ToTable] FOREIGN KEY ([UploadID]) REFERENCES [dbo].[BulkUpload] ([UploadID]),
+    CONSTRAINT [FK_Error_ToTable_1] FOREIGN KEY ([AdminID]) REFERENCES [dbo].[Admin] ([AdminID])
+);
+
+GO
+
+CREATE TABLE [dbo].[Image] (
+    [ImageID]          INT            IDENTITY (1, 1) NOT NULL,
+    [AlbumID]          INT            NOT NULL,
+    [ImageURL]         NVARCHAR (MAX) NOT NULL,
+    [ImageAlternative] NVARCHAR (MAX) NOT NULL,
+    [ProfileImage]     BIT            NOT NULL,
+    [LastUpdated]      DATE           NOT NULL,
+    PRIMARY KEY CLUSTERED ([ImageID] ASC),
+    CONSTRAINT [FK_Image_ToTable] FOREIGN KEY ([AlbumID]) REFERENCES [dbo].[Album] ([AlbumID])
+);
+
+GO
 
 
 ----- Stored Procedures
@@ -129,6 +188,7 @@ AS
 	SELECT * FROM Watershed where WatershedID = @id
 
 GO
+
 /*
 CREATE PROCEDURE [dbo].[DeleteWatershed]
 	@id int
