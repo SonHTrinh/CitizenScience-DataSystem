@@ -78,7 +78,13 @@
     <Content Include="about.aspx" />
     <Content Include="admin-style.css" />
     <Content Include="admin.aspx" />
+    <Content Include="administration\about.aspx" />
+    <Content Include="administration\download.aspx" />
+    <Content Include="administration\gallery.aspx" />
     <Content Include="administration\location.aspx" />
+    <Content Include="administration\upload.aspx" />
+    <Content Include="administration\usermanage.aspx" />
+    <Content Include="administration\volunteer.aspx" />
     <Content Include="administration\watershed.aspx" />
     <Content Include="api.asmx" />
     <Content Include="debug.aspx" />
@@ -132,6 +138,13 @@
     <Compile Include="admin.aspx.designer.cs">
       <DependentUpon>admin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="administration\about.aspx.cs">
+      <DependentUpon>about.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\about.aspx.designer.cs">
+      <DependentUpon>about.aspx</DependentUpon>
+    </Compile>
     <Compile Include="administration\administration.master.cs">
       <DependentUpon>administration.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -139,12 +152,47 @@
     <Compile Include="administration\administration.master.designer.cs">
       <DependentUpon>administration.master</DependentUpon>
     </Compile>
+    <Compile Include="administration\download.aspx.cs">
+      <DependentUpon>download.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\download.aspx.designer.cs">
+      <DependentUpon>download.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\gallery.aspx.cs">
+      <DependentUpon>gallery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\gallery.aspx.designer.cs">
+      <DependentUpon>gallery.aspx</DependentUpon>
+    </Compile>
     <Compile Include="administration\location.aspx.cs">
       <DependentUpon>location.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="administration\location.aspx.designer.cs">
       <DependentUpon>location.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\upload.aspx.cs">
+      <DependentUpon>upload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\upload.aspx.designer.cs">
+      <DependentUpon>upload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\usermanage.aspx.cs">
+      <DependentUpon>usermanage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\usermanage.aspx.designer.cs">
+      <DependentUpon>usermanage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\volunteer.aspx.cs">
+      <DependentUpon>volunteer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\volunteer.aspx.designer.cs">
+      <DependentUpon>volunteer.aspx</DependentUpon>
     </Compile>
     <Compile Include="administration\watershed.aspx.cs">
       <DependentUpon>watershed.aspx</DependentUpon>
