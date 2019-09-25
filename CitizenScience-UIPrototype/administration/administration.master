@@ -32,37 +32,37 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/administration/upload.aspx">
                         <i class="fas fa-upload"></i>
                         <span class="menuItemName">Upload Data</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/administration/download.aspx">
                         <i class="fas fa-download"></i>
                         <span class="menuItemName">Download Data</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/administration/usermanage.aspx">
                         <i class="fas fa-users"></i>
                         <span class="menuItemName">Manage Admins</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/administration/gallery.aspx">
                         <i class="fas fa-images"></i>
                         <span class="menuItemName">Gallery</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/administration/about.aspx">
                         <i class="fas fa-question"></i>
                         <span class="menuItemName">About</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="/administration/volunteer.aspx">
                         <i class="fas fa-clipboard"></i>
                         <span class="menuItemName">Volunteers</span>
                     </a>
