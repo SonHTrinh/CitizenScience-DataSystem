@@ -17,6 +17,7 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Watershed</th>
+                        <th scope="col">Serial</th>
                         <th scope="col">Latitude</th>
                         <th scope="col">Longitude</th>
                         <th scope="col"></th>
@@ -39,15 +40,22 @@
           </div>
           <div class="modal-body">
               <div class="form-row">
-                  <div class="form-group col-6">
+                  <div class="form-group col-12">
                         <label for="inputCreateName">Name</label>
-                        <input type="text" class="form-control" id="inputCreateName" aria-describedby="nameCreateHelp">
-                        <small id="nameCreateHelp" class="form-text text-muted">The name you would like to give to this Location</small>
+                        <input type="text" class="form-control" id="inputCreateName">
                   </div>
-                  <div class="form-group col-6">
-                        <select id="selectCreateWatershed"class="form-control">
-                    
-                        </select>
+              </div>
+              <div class="form-row">
+                  <div class="form-group col-12">
+                    <label for="selectCreateWatershed">Watershed</label>
+                    <select id="selectCreateWatershed" class="form-control">
+                    </select>
+                  </div>
+              </div>
+              <div class="form-row">
+                  <div class="form-group col-12">
+                        <label for="inputCreateSerial">Serial Number</label>
+                        <input type="text" class="form-control" id="inputCreateSerial">
                   </div>
               </div>
               <div class="form-row">
@@ -86,6 +94,7 @@
                         <input type="text" class="form-control" id="inputEditName">
                   </div>
                   <div class="form-group col-6">
+                      <label for="selectEditeWatershed">Watershed</label>
                         <select id="selectEditWatershed"class="form-control">
                         </select>
                   </div>
@@ -134,6 +143,52 @@
     <script>
         $(document).ready(function () {
 
+            // This variable holds the Datatable
+            var table = $('#DataTable').DataTable({
+                ajax: {
+                    // The location to HTTP GET the data for the table
+                    url: 'http://localhost:63073/api.asmx/ReadAllLocation',
+                    dataSrc: ''
+                },
+                columns: [
+                    // The 'Name' column of the table's data
+                    { data: 'SensorName' },
+                    {
+                        data: 'WatershedID',
+                        render: RenderWatershed
+                    },
+                    { data: 'SerialNumber' },
+                    { data: 'Latitude' },
+                    { data: 'Longitude' },
+                    // The 'Action' column of the table
+                    {
+                        data: null,
+                        orderable: false,
+                        width: '10%',
+                        render: RenderActions
+                    }
+                ]
+            });
+
+            // TODO: Fix mulitple 'GET' calls from datatable
+            // This function is used to get and display the 'WatershedName' in the table. Because locations only store watershed ID, it must be looked up
+            function RenderWatershed(data, type, row, meta) {
+                var currentCell = $('#DataTable').DataTable().cells({ "row": meta.row, "column": meta.col }).nodes(0);
+                var requestData = { id: data };
+
+                $.ajax({
+                    type: 'GET',
+                    contentType: 'application/json; charset=utf-8',
+                    url: 'http://localhost:63073/api.asmx/ReadWatershed',
+                    data: requestData,
+                    dataType: 'JSON'
+                }).done(function (responseData) {
+                    $(currentCell).text(responseData.WatershedName);
+                });
+
+                return null;
+            }
+
             // This function returns the HTML for the 'Action' buttons for each row in the DataTable
             function RenderActions(data, type, row, meta) {
                 // Create a div to hold the buttons
@@ -142,20 +197,13 @@
 
                 // Create the 'Edit' and 'Archive' buttons using the data from the row
                 var buttonEdit = EditBtn(row.LocationID);
-                var buttonArchive = ArchiveBtn(row.LocationID);
 
-                // Create columns to place buttons inside
-                var buttonLeftColumn = $(document.createElement('div'))
+                // Create div wrapper to place buttons inside
+                var wrapper = $(document.createElement('div'))
                     .addClass('col-12')
                     .append(buttonEdit);
 
-                //var buttonRightColumn = $(document.createElement('div'))
-                //    .addClass('col-6')
-                //    .append(buttonArchive);
-
-                // Add the 2 button columns to the row
-                buttonRow.append(buttonLeftColumn);
-                //buttonRow.append(buttonRightColumn);
+                buttonRow.append(wrapper);
 
                 // Return the HTML that makes up the row > (column > button > icon)*2
                 return buttonRow.prop('outerHTML');
@@ -180,6 +228,9 @@
                 return button;
             }
 
+            /*
+             * TODO: figure out if we want to add delete/archive
+             * 
             // This function takes an ID and returns a 'Archive' button; The ID is used to make the id attribute
             function ArchiveBtn(id) {
                 var button = $(document.createElement('button'));
@@ -198,53 +249,99 @@
 
                 return button;
             }
+            */
+
+            // This function fills out the select element in the Create modal
+            function PopulateCreateWatershedSelect() {
+                $('#selectCreateWatershed').empty();
+
+                $.ajax({
+                    type: 'GET',
+                    contentType: 'application/json; charset=utf-8',
+                    url: 'http://localhost:63073/api.asmx/ReadAllWatersheds',
+                    dataType: 'JSON',
+                    success: function (responseData) {
+
+                        responseData.forEach(function (watershed) {
+                            var id = watershed.WatershedID;
+                            var name = watershed.WatershedName;
+                            var option = $(document.createElement('option'));
+
+                            option.attr('value', id).text(name);
+
+                            $('#selectCreateWatershed').append(option);
+                        });
+
+                    },
+                    error: function (errorData) {
+                        console.log('ERROR');
+                        console.log(errorData);
+                    }
+                });
+            }
+
+            // This function fills out the select element in the Edit modal and auto selects the correct watershed from the dropdown
+            function PopulateEditWatershedSelect(watershedId) {
+                $('#selectEditWatershed').empty();
+
+                $.ajax({
+                    type: 'GET',
+                    contentType: 'application/json; charset=utf-8',
+                    url: 'http://localhost:63073/api.asmx/ReadAllWatersheds',
+                    dataType: 'JSON',
+                    success: function (responseData) {
+
+                        responseData.forEach(function (watershed) {
+                            var id = watershed.WatershedID;
+                            var name = watershed.WatershedName;
+                            var option = $(document.createElement('option'));
+
+                            option.attr('value', id).text(name);
+
+                            if (id == watershedId) {
+                                option.attr('selected', 'selected');
+                            }
+
+                            $('#selectEditWatershed').append(option);
+                        });
+
+                    },
+                    error: function (errorData) {
+                        console.log('ERROR');
+                        console.log(errorData);
+                    }
+                });
+            }
 
             // This function fills out the data in the 'Create Modal' before displaying it
             function PopulateCreateModal() {
                 $('#inputCreateName').val('');
+                $('#inputCreateSerial').val('');
                 $('#inputCreateLatitude').val('');
                 $('#inputCreateLongitude').val('');
 
-                //$('#selectCreateWatershed').val('');
+                PopulateCreateWatershedSelect();
             }
 
             // This function fills out the fields in the 'Edit Modal' before displaying it
             function PopulateEditModal(data) {
-                $('#inputEditName').val(data.sensorName);
-                $('#inputEditLatitude').val(data.latitude);
-                $('#inputEditLongitude').val(data.longitude);
+                $('#inputEditName').val(data.SensorName);
+                $('#inputEditLatitude').val(data.Latitude);
+                $('#inputEditSerial').val(data.SerialNumber);
+                $('#inputEditLongitude').val(data.Longitude);
 
-                //$('#select').val('');
+                PopulateEditWatershedSelect(data.WatershedID);
             }
 
+            /*
+             * TODO: figure out if we want to add delete/archive
+             * 
             // This function fills out the fields in the 'Archive Modal' before displaying it
             function PopulateArchiveModal(data) {
                 $('#archiveLocationName').text(data.sensorName);
             }
+            */
             
-            // This variable holds the Datatable
-            var table = $('#DataTable').DataTable({
-                ajax: {
-                    // The location to HTTP GET the data for the table
-                    url: 'http://localhost:63073/api.asmx/Locations',
-                    dataSrc: ''
-                },
-                columns: [
-                    // The 'Name' column of the table's data
-                    { data: 'SensorName' },
-                    { data: 'WatershedID' },
-                    { data: 'Latitude' },
-                    { data: 'Longitude' },
-                    // The 'Action' column of the table
-                    {
-                        data: null,
-                        orderable: false,
-                        width: '10%',
-                        render: RenderActions
-                    }
-                ]
-            });
-
             // The function when the 'Create New Watershed' button gets clicked
             $('#createLocation').click(function () {
                 //Populate the Create Modal
@@ -266,13 +363,16 @@
                 $('#editModal').modal('show');
                 $('#editSubmit').click(function () {
                     var name = $('#inputEditName').val();
-                    //var watershedId = 
+                    var watershedId = $('#selectEditWatershed').val();
+                    var serial = $('#inputEditSerial').val();
                     var latitude = $('#inputEditLatitude').val();
                     var longitude = $('#inputEditLongitude').val();
 
                     var requestData = {
                         id: data.LocationID,
                         name: name,
+                        watershedId: watershedId,
+                        serial: serial,
                         latitude: latitude,
                         longitude: longitude
                     }
@@ -284,7 +384,7 @@
                         data: JSON.stringify(requestData),
                         dataType: 'JSON',
                         success: function (responseData) {
-                            console.log('SUCCESS');
+                            console.log('Edit Successful')
                             console.log(responseData);
 
                             $('#editModal').modal('hide');
@@ -313,12 +413,15 @@
             // This function runs when the 'Create Modal' gets submitted
             $('#createSubmit').click(function () {
                 var name = $('#inputCreateName').val();
-                //var watershedId = 
+                var watershedId = $('#selectCreateWatershed').val();
+                var serial = $('#inputCreateSerial').val();
                 var latitude = $('#inputCreateLatitude').val();
                 var longitude = $('#inputCreateLongitude').val();
 
                 var requestData = {
                     name: name,
+                    watershedId: watershedId,
+                    serial: serial,
                     latitude: latitude,
                     longitude: longitude
                 };
@@ -331,8 +434,8 @@
                     data: JSON.stringify(requestData),
                     dataType: 'JSON',
                     success: function (responseData) {
-                        console.log('SUCCESS');
-                        console.log(responseData);
+                        console.log('Creation Sucessful');
+                        console.log(requestData);
 
                         $('#createModal').modal('hide');
                         table.ajax.reload();

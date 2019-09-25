@@ -63,7 +63,7 @@ namespace CitizenScienceClasses
                 {
                     LocationID = Convert.ToInt32(dataRow["LocationID"]),
                     WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
-                    SensorName = Convert.ToString(dataRow["WatershedName"]),
+                    SensorName = Convert.ToString(dataRow["SensorName"]),
                     SerialNumber = Convert.ToString(dataRow["SerialNumber"]),
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),
@@ -93,12 +93,44 @@ namespace CitizenScienceClasses
                 {
                     LocationID = Convert.ToInt32(dataRow["LocationID"]),
                     WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
-                    SensorName = Convert.ToString(dataRow["WatershedName"]),
+                    SensorName = Convert.ToString(dataRow["SensorName"]),
                     SerialNumber = Convert.ToString(dataRow["SerialNumber"]),
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),
                     LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
                 };
+            }
+
+            return result;
+        }
+
+        public static List<Location> ReadAllLocation()
+        {
+            List<Location> result = new List<Location>();
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAllLocations";
+
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            for (int i = 0; i < dataSet.Tables[0].Rows.Count; i++)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[i];
+
+                Location location = new Location
+                {
+                    LocationID = Convert.ToInt32(dataRow["LocationID"]),
+                    WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
+                    SensorName = Convert.ToString(dataRow["SensorName"]),
+                    SerialNumber = Convert.ToString(dataRow["SerialNumber"]),
+                    Latitude = Convert.ToDouble(dataRow["Latitude"]),
+                    Longitude = Convert.ToDouble(dataRow["Longitude"]),
+                    LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
+                };
+
+                result.Add(location);
             }
 
             return result;
@@ -128,7 +160,7 @@ namespace CitizenScienceClasses
                 {
                     LocationID = Convert.ToInt32(dataRow["LocationID"]),
                     WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
-                    SensorName = Convert.ToString(dataRow["WatershedName"]),
+                    SensorName = Convert.ToString(dataRow["SensorName"]),
                     SerialNumber = Convert.ToString(dataRow["SerialNumber"]),
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),

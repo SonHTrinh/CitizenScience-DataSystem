@@ -149,6 +149,36 @@ namespace CitizenScience_UIPrototype
         }
 
         [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void ReadAllWatersheds()
+        {
+            DataSet watershedDataSet = ClassFunctions.GetWatersheds();
+            List<Watershed> result = new List<Watershed>();
+
+            for (int i = 0; i < watershedDataSet.Tables[0].Rows.Count; i++)
+            {
+                DataRow dataRow = watershedDataSet.Tables[0].Rows[i];
+
+                Watershed watershed = new Watershed
+                {
+                    WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
+                    WatershedName = Convert.ToString(dataRow["WatershedName"])
+                };
+
+                result.Add(watershed);
+            }
+
+            if (result != null)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, null);
+            }
+        }
+
+        [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void UpdateWatershed(int id, string name)
         {
@@ -206,6 +236,22 @@ namespace CitizenScience_UIPrototype
         public void ReadLocation(int id)
         {
             Location result = ClassFunctions.ReadLocation(id);
+
+            if (result != null)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, result);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void ReadAllLocation()
+        {
+            List<Location> result = ClassFunctions.ReadAllLocation();
 
             if (result != null)
             {
