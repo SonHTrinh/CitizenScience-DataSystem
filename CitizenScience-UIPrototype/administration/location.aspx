@@ -270,7 +270,12 @@
                     var latitude = $('#inputEditLatitude').val();
                     var longitude = $('#inputEditLongitude').val();
 
-                    var requestData = { id: data.LocationID, name: name }
+                    var requestData = {
+                        id: data.LocationID,
+                        name: name,
+                        latitude: latitude,
+                        longitude: longitude
+                    }
 
                     $.ajax({
                         type: 'POST',

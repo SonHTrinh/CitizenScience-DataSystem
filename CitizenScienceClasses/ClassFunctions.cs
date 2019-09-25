@@ -20,8 +20,8 @@ namespace CitizenScienceClasses
             return conn.GetDataSetUsingCmdObj(comm);
         }
 
-    /////////////////////////////////   LOCATION FUNCTIONS
-    public static DataSet GetLocations()
+        /////////////////////////////////   LOCATION FUNCTIONS
+        public static DataSet GetLocations()
         {
             DBConnect conn = new DBConnect();
             SqlCommand comm = new SqlCommand();
@@ -38,6 +38,38 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetLocationsByWatershed";
             comm.Parameters.AddWithValue("@watershedID", watershedID);
             return conn.GetDataSetUsingCmdObj(comm);
+        }
+
+        public static Location CreateLocation(int watershedId, string name, string serial, double latitude, double longitude)
+        {
+            Location result = null;
+
+
+            return result;
+        }
+
+        public static Location ReadLocation(int id)
+        {
+            Location result = null;
+
+
+            return result;
+        }
+
+        public static Location UpdateLocation(int id, int watershedId, string name, string serial, double latitude, double longitude)
+        {
+            Location result = null;
+
+
+            return result;
+        }
+
+        public static bool DeleteLocation(int id)
+        {
+            bool result = false;
+
+
+            return result;
         }
 
         /////////////////////////////////   TEMPERATURE FUNCTIONS
@@ -77,8 +109,8 @@ namespace CitizenScienceClasses
             return conn.GetDataSetUsingCmdObj(comm);
         }
 
-    /////////////////////////////////   WATERSHED FUNCTIONS
-    public static DataSet GetWatersheds()
+        /////////////////////////////////   WATERSHED FUNCTIONS
+        public static DataSet GetWatersheds()
         {
             DBConnect conn = new DBConnect();
             SqlCommand comm = new SqlCommand();

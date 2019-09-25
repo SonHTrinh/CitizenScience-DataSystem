@@ -168,9 +168,79 @@ namespace CitizenScience_UIPrototype
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void DeleteWatershed(int id)
         {
-            bool result = ClassFunctions.DeleteWatershed(id);
+            //bool result = ClassFunctions.DeleteWatershed(id);
+            bool result = false;
+
+            if (result)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, null);
+            }
+        }
+
+        //////////////////////////// CRUD Location \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void CreateLocation(string name)
+        {
+            Location result = ClassFunctions.CreateLocation(name);
 
             if (result != null)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, null);
+            }
+
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void ReadLocation(int id)
+        {
+            Location result = ClassFunctions.ReadLocation(id);
+
+            if (result != null)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, null);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void UpdateLocation(int id, string name)
+        {
+            Location result = ClassFunctions.UpdateLocation(id, name);
+
+            if (result != null)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, null);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void DeleteLocation(int id)
+        {
+            //bool result = ClassFunctions.DeleteLocation(id);
+            bool result = false;
+
+            if (result)
             {
                 BuildResponse(200, result);
             }
