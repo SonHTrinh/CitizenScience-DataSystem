@@ -44,6 +44,32 @@ namespace CitizenScienceClasses
         {
             Location result = null;
 
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "CreateLocation";
+            comm.Parameters.AddWithValue("@watershedid", watershedId);
+            comm.Parameters.AddWithValue("@name", name);
+            comm.Parameters.AddWithValue("@serialnumber", serial);
+            comm.Parameters.AddWithValue("@latitude", latitude);
+            comm.Parameters.AddWithValue("@longitude", longitude);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                result = new Location
+                {
+                    LocationID = Convert.ToInt32(dataRow["LocationID"]),
+                    WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
+                    SensorName = Convert.ToString(dataRow["WatershedName"]),
+                    SerialNumber = Convert.ToString(dataRow["SerialNumber"]),
+                    Latitude = Convert.ToDouble(dataRow["Latitude"]),
+                    Longitude = Convert.ToDouble(dataRow["Longitude"]),
+                    LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
+                };
+            }
 
             return result;
         }
@@ -52,6 +78,28 @@ namespace CitizenScienceClasses
         {
             Location result = null;
 
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "ReadLocation";
+            comm.Parameters.AddWithValue("@id", id);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                result = new Location
+                {
+                    LocationID = Convert.ToInt32(dataRow["LocationID"]),
+                    WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
+                    SensorName = Convert.ToString(dataRow["WatershedName"]),
+                    SerialNumber = Convert.ToString(dataRow["SerialNumber"]),
+                    Latitude = Convert.ToDouble(dataRow["Latitude"]),
+                    Longitude = Convert.ToDouble(dataRow["Longitude"]),
+                    LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
+                };
+            }
 
             return result;
         }
@@ -60,6 +108,33 @@ namespace CitizenScienceClasses
         {
             Location result = null;
 
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "UpdateLocation";
+            comm.Parameters.AddWithValue("@id", id);
+            comm.Parameters.AddWithValue("@watershedid", watershedId);
+            comm.Parameters.AddWithValue("@name", name);
+            comm.Parameters.AddWithValue("@serialnumber", serial);
+            comm.Parameters.AddWithValue("@latitude", latitude);
+            comm.Parameters.AddWithValue("@longitude", longitude);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                result = new Location
+                {
+                    LocationID = Convert.ToInt32(dataRow["LocationID"]),
+                    WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
+                    SensorName = Convert.ToString(dataRow["WatershedName"]),
+                    SerialNumber = Convert.ToString(dataRow["SerialNumber"]),
+                    Latitude = Convert.ToDouble(dataRow["Latitude"]),
+                    Longitude = Convert.ToDouble(dataRow["Longitude"]),
+                    LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
+                };
+            }
 
             return result;
         }
@@ -68,6 +143,7 @@ namespace CitizenScienceClasses
         {
             bool result = false;
 
+            //TODO: handle deletion/archiving
 
             return result;
         }
