@@ -89,14 +89,22 @@
           </div>
           <div class="modal-body">
               <div class="form-row">
-                  <div class="form-group col-6">
+                  <div class="form-group col-12">
                         <label for="inputEditName">Name</label>
                         <input type="text" class="form-control" id="inputEditName">
                   </div>
-                  <div class="form-group col-6">
-                      <label for="selectEditeWatershed">Watershed</label>
-                        <select id="selectEditWatershed"class="form-control">
-                        </select>
+              </div>
+              <div class="form-row">
+                  <div class="form-group col-12">
+                    <label for="selectEditWatershed">Watershed</label>
+                    <select id="selectEditWatershed" class="form-control">
+                    </select>
+                  </div>
+              </div>
+              <div class="form-row">
+                  <div class="form-group col-12">
+                        <label for="inputEditSerial">Serial Number</label>
+                        <input type="text" class="form-control" id="inputEditSerial">
                   </div>
               </div>
               <div class="form-row">
@@ -118,76 +126,62 @@
       </div>
     </div>
 
-    <!-- Archive Modal -->
-    <div class="modal fade" id="archiveModal" tabindex="-1" role="dialog" aria-labelledby="archiveModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="archiveModalLabel">Archive Location</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-              <p>Would you like to archive the data for location '<span id="archiveLocationName" style="font-weight: bold;"></span>'?</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="archiveClose">Close</button>
-            <button type="button" class="btn btn-warning" id="archiveSubmit">Archive</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
     <script>
         $(document).ready(function () {
+            var table;
+            
+            // This fuction builds the DataTable. Because locations only store watershedIDs we must make a mapping of the watershed IDs to Names
+            function initDataTable() {
 
-            // This variable holds the Datatable
-            var table = $('#DataTable').DataTable({
-                ajax: {
-                    // The location to HTTP GET the data for the table
-                    url: 'http://localhost:63073/api.asmx/ReadAllLocation',
-                    dataSrc: ''
-                },
-                columns: [
-                    // The 'Name' column of the table's data
-                    { data: 'SensorName' },
-                    {
-                        data: 'WatershedID',
-                        render: RenderWatershed
-                    },
-                    { data: 'SerialNumber' },
-                    { data: 'Latitude' },
-                    { data: 'Longitude' },
-                    // The 'Action' column of the table
-                    {
-                        data: null,
-                        orderable: false,
-                        width: '10%',
-                        render: RenderActions
-                    }
-                ]
-            });
+                var watershedMap = new Map();
 
-            // TODO: Fix mulitple 'GET' calls from datatable
-            // This function is used to get and display the 'WatershedName' in the table. Because locations only store watershed ID, it must be looked up
-            function RenderWatershed(data, type, row, meta) {
-                var currentCell = $('#DataTable').DataTable().cells({ "row": meta.row, "column": meta.col }).nodes(0);
-                var requestData = { id: data };
-
+                // Get all the watershed names and map them with thier IDs THEN build the datatable
                 $.ajax({
                     type: 'GET',
                     contentType: 'application/json; charset=utf-8',
-                    url: 'http://localhost:63073/api.asmx/ReadWatershed',
-                    data: requestData,
+                    url: 'http://localhost:63073/api.asmx/ReadAllWatersheds',
                     dataType: 'JSON'
                 }).done(function (responseData) {
-                    $(currentCell).text(responseData.WatershedName);
-                });
 
-                return null;
+                    responseData.forEach(function (watershed) {
+                        watershedMap.set(watershed.WatershedID, watershed.WatershedName);
+                    });
+
+                    // Build the DataTable
+                    table = $('#DataTable').DataTable({
+                        ajax: {
+                            // The location to HTTP GET the data for the table
+                            url: 'http://localhost:63073/api.asmx/ReadAllLocation',
+                            dataSrc: ''
+                        },
+                        columns: [
+                            // The 'Name' column of the table's data
+                            { data: 'SensorName' },
+                            // This function is used to get and display the 'WatershedName' in the table. Because locations only store watershed ID, it must be looked up
+                            {
+                                data: null,
+                                render: function(data, type, row, meta) {
+                                    return watershedMap.get(data.WatershedID);
+                                }
+                            },
+                            { data: 'SerialNumber' },
+                            { data: 'Latitude' },
+                            { data: 'Longitude' },
+                            // The 'Action' column of the table
+                            {
+                                data: null,
+                                orderable: false,
+                                width: '10%',
+                                render: RenderActions
+                            }
+                        ]
+                    });
+
+                });
             }
+
+            // initialize the DataTable
+            initDataTable();
 
             // This function returns the HTML for the 'Action' buttons for each row in the DataTable
             function RenderActions(data, type, row, meta) {
@@ -227,29 +221,6 @@
                     
                 return button;
             }
-
-            /*
-             * TODO: figure out if we want to add delete/archive
-             * 
-            // This function takes an ID and returns a 'Archive' button; The ID is used to make the id attribute
-            function ArchiveBtn(id) {
-                var button = $(document.createElement('button'));
-                var icon = $(document.createElement('i'));
-
-                icon.addClass('fas')
-                    .addClass('fa-archive');
-
-                button.addClass('btn')
-                    .attr('id', 'btnLocationArchive' + id)
-                    .attr('type', 'button')
-                    .addClass('archiveButton')
-                    .addClass('btn-warning')
-                    .addClass('btn-block')
-                    .append(icon);
-
-                return button;
-            }
-            */
 
             // This function fills out the select element in the Create modal
             function PopulateCreateWatershedSelect() {
@@ -333,15 +304,6 @@
                 PopulateEditWatershedSelect(data.WatershedID);
             }
 
-            /*
-             * TODO: figure out if we want to add delete/archive
-             * 
-            // This function fills out the fields in the 'Archive Modal' before displaying it
-            function PopulateArchiveModal(data) {
-                $('#archiveLocationName').text(data.sensorName);
-            }
-            */
-            
             // The function when the 'Create New Watershed' button gets clicked
             $('#createLocation').click(function () {
                 //Populate the Create Modal
@@ -445,14 +407,6 @@
                         console.log(errorData);
                     }
                 });
-
-            });
-
-            // This function runs when the 'Edit Modal' gets submitted
-
-
-            // This function runs when the 'Archive Modal' gets submitted
-            $('#archiveSubmit').click(function () {
 
             });
 

@@ -74,28 +74,6 @@
       </div>
     </div>
 
-    <!-- Archive Modal -->
-    <div class="modal fade" id="archiveModal" tabindex="-1" role="dialog" aria-labelledby="archiveModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="archiveModalLabel">Archive Watershed</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-              <p>Would you like to archive the data for watershed '<span id="archiveWatershedName" style="font-weight: bold;"></span>'?</p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="archiveClose">Close</button>
-            <button type="button" class="btn btn-warning" id="archiveSubmit">Archive</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-
     <script>
         $(document).ready(function () {
 
@@ -107,20 +85,14 @@
 
                 // Create the 'Edit' and 'Archive' buttons using the data from the row
                 var buttonEdit = EditWatershedBtn(row.WatershedID);
-                var buttonArchive = ArchiveWatershedBtn(row.WatershedID);
 
                 // Create columns to place buttons inside
                 var buttonLeftColumn = $(document.createElement('div'))
                     .addClass('col-12')
                     .append(buttonEdit);
 
-                var buttonRightColumn = $(document.createElement('div'))
-                    .addClass('col-6')
-                    .append(buttonArchive);
-
                 // Add the 2 button columns to the row
                 buttonRow.append(buttonLeftColumn);
-                //buttonRow.append(buttonRightColumn);
 
                 // Return the HTML that makes up the row > (column > button > icon)*2
                 return buttonRow.prop('outerHTML');
@@ -145,25 +117,6 @@
                 return button;
             }
 
-            // This function takes an ID and returns a 'Archive' button; The ID is used to make the id attribute
-            function ArchiveWatershedBtn(id) {
-                var button = $(document.createElement('button'));
-                var icon = $(document.createElement('i'));
-
-                icon.addClass('fas')
-                    .addClass('fa-archive');
-
-                button.addClass('btn')
-                    .attr('id', 'btnWatershedArchive' + id)
-                    .attr('type', 'button')
-                    .addClass('archiveButton')
-                    .addClass('btn-warning')
-                    .addClass('btn-block')
-                    .append(icon);
-
-                return button;
-            }
-
             // This function fills out the data in the 'Create Modal' before displaying it
             function PopulateCreateModal() {
                 $('#inputCreateName').val('');
@@ -172,11 +125,6 @@
             // This function fills out the fields in the 'Edit Modal' before displaying it
             function PopulateEditModal(data) {
                 $('#inputEditName').val(data.WatershedName);
-            }
-
-            // This function fills out the fields in the 'Archive Modal' before displaying it
-            function PopulateArchiveModal(data) {
-                $('#archiveWatershedName').text(data.WatershedName);
             }
             
             // This variable holds the Datatable
@@ -244,27 +192,12 @@
                 });
             });
 
-            // The function when any 'Archive' button in the DataTable gets clicked
-            $('#DataTable').on('click', '.archiveButton', function () {
-                //Get Data for the the row
-                var data = table.row($(this).parents('tr')).data();
-
-                //Put the data in the Edit Modal
-                PopulateArchiveModal(data);
-
-                //Display the modal
-                $('#archiveModal').modal('show');
-
-
-            });
-
             // This function runs when the 'Create Modal' gets submitted
             $('#createSubmit').click(function () {
                 var name = $('#inputCreateName').val();
 
                 var requestData = { name: name }
                 
-
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
@@ -283,14 +216,6 @@
                         console.log(errorData);
                     }
                 });
-
-            });
-
-            // This function runs when the 'Edit Modal' gets submitted
-
-
-            // This function runs when the 'Archive Modal' gets submitted
-            $('#archiveSubmit').click(function () {
 
             });
 
