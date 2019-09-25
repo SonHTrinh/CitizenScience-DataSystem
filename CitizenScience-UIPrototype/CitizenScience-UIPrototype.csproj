@@ -45,7 +45,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.ValueTuple, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.4.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
@@ -71,12 +76,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="about.aspx" />
-    <Content Include="admin-style.css" />
+    <Content Include="style\custom\admin-style.css" />
     <Content Include="admin.aspx" />
+    <Content Include="administration\about.aspx" />
+    <Content Include="administration\download.aspx" />
+    <Content Include="administration\gallery.aspx" />
+    <Content Include="administration\location.aspx" />
+    <Content Include="administration\upload.aspx" />
+    <Content Include="administration\usermanage.aspx" />
+    <Content Include="administration\volunteer.aspx" />
+    <Content Include="administration\watershed.aspx" />
     <Content Include="api.asmx" />
     <Content Include="debug.aspx" />
     <Content Include="gallery.aspx" />
-    <Content Include="galleryAPI-style.css" />
+    <Content Include="style\custom\galleryAPI-style.css" />
     <Content Include="Global.asax" />
     <Content Include="img\bell-tower.jpg" />
     <Content Include="img\graph.png" />
@@ -102,9 +115,13 @@
     <Content Include="img\Watershed\Watershed5.jpg" />
     <Content Include="img\Watershed\Watershed6.jpg" />
     <Content Include="map.aspx" />
-    <Content Include="mapAPI-style.css" />
-    <Content Include="template-style.css" />
+    <Content Include="style\custom\mapAPI-style.css" />
+    <Content Include="style\custom\datatable.css" />
+    <Content Include="style\custom\sidenav.css" />
+    <Content Include="style\custom\topnav.css" />
+    <Content Include="style\custom\template-style.css" />
     <Content Include="Web.config" />
+    <Content Include="WebService1.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="about.aspx.cs">
@@ -120,6 +137,69 @@
     </Compile>
     <Compile Include="admin.aspx.designer.cs">
       <DependentUpon>admin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\about.aspx.cs">
+      <DependentUpon>about.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\about.aspx.designer.cs">
+      <DependentUpon>about.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\administration.master.cs">
+      <DependentUpon>administration.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\administration.master.designer.cs">
+      <DependentUpon>administration.master</DependentUpon>
+    </Compile>
+    <Compile Include="administration\download.aspx.cs">
+      <DependentUpon>download.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\download.aspx.designer.cs">
+      <DependentUpon>download.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\gallery.aspx.cs">
+      <DependentUpon>gallery.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\gallery.aspx.designer.cs">
+      <DependentUpon>gallery.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\location.aspx.cs">
+      <DependentUpon>location.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\location.aspx.designer.cs">
+      <DependentUpon>location.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\upload.aspx.cs">
+      <DependentUpon>upload.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\upload.aspx.designer.cs">
+      <DependentUpon>upload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\usermanage.aspx.cs">
+      <DependentUpon>usermanage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\usermanage.aspx.designer.cs">
+      <DependentUpon>usermanage.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\volunteer.aspx.cs">
+      <DependentUpon>volunteer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\volunteer.aspx.designer.cs">
+      <DependentUpon>volunteer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="administration\watershed.aspx.cs">
+      <DependentUpon>watershed.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="administration\watershed.aspx.designer.cs">
+      <DependentUpon>watershed.aspx</DependentUpon>
     </Compile>
     <Compile Include="CitizenScience.Master.cs">
       <DependentUpon>CitizenScience.Master</DependentUpon>
@@ -157,11 +237,16 @@
       <DependentUpon>map.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WebService1.asmx.cs">
+      <DependentUpon>WebService1.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="CitizenScience.Master" />
+    <Content Include="administration\administration.master" />
     <None Include="packages.config" />
-    <Content Include="sample_data\sample.csv" />
+    <Content Include="style\custom\TEMPLE_BRANDING.md" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -174,6 +259,9 @@
       <Project>{2b9efc13-bc75-48fd-9ea9-1f8c511cdea8}</Project>
       <Name>CitizenScienceClasses</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

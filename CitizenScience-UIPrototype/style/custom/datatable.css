@@ -1,0 +1,52 @@
+﻿table {
+    border-top: 0;
+    border-collapse: unset;
+}
+thead {
+    background-color: #a41e34;
+}
+
+th {
+    color: #ffffff;
+}
+
+.dataTables_wrapper.no-footer .dataTables_scrollBody {
+    border-bottom: 1px solid #a41e34;
+}
+
+table thead td {
+    padding: 10px 18px;
+    border-bottom: 1px solid #a41e34;
+}
+
+table tfoot td {
+    padding: 10px 18px 6px 18px;
+    border-top: 1px solid #a41e34;
+}
+
+.table-bordered {
+    border-left-color: #a41e34;
+    border-right-color: #a41e34;
+}
+
+table.no-footer {
+    border-bottom: 1px solid #a41e34;
+}
+
+.paginate_button.current, .paginate_button.current:hover, .page-item.active .page-link {
+    color: #ffffff !important;
+    border: 1px solid #30090f;
+    background-color: #e46d80;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e46d80), color-stop(100%, #a41e34));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #e46d80 0%, #a41e34 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -moz-linear-gradient(top, #e46d80 0%, #a41e34 100%);
+    /* FF3.6+ */
+    background: -ms-linear-gradient(top, #e46d80 0%, #a41e34 100%);
+    /* IE10+ */
+    background: -o-linear-gradient(top, #e46d80 0%, #a41e34 100%);
+    /* Opera 11.10+ */
+    background: linear-gradient(to bottom, #e46d80 0%, #a41e34 100%);
+    /* W3C */
+}
