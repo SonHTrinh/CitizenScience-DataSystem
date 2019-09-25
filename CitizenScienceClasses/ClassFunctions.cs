@@ -40,7 +40,7 @@ namespace CitizenScienceClasses
             return conn.GetDataSetUsingCmdObj(comm);
         }
 
-        public static Location CreateLocation(int watershedId, string name, string serial, double latitude, double longitude)
+        public static Location CreateLocation(int watershedId, string name, double latitude, double longitude)
         {
             Location result = null;
 
@@ -50,7 +50,6 @@ namespace CitizenScienceClasses
             comm.CommandText = "CreateLocation";
             comm.Parameters.AddWithValue("@watershedid", watershedId);
             comm.Parameters.AddWithValue("@name", name);
-            comm.Parameters.AddWithValue("@serialnumber", serial);
             comm.Parameters.AddWithValue("@latitude", latitude);
             comm.Parameters.AddWithValue("@longitude", longitude);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
@@ -63,8 +62,7 @@ namespace CitizenScienceClasses
                 {
                     LocationID = Convert.ToInt32(dataRow["LocationID"]),
                     WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
-                    SensorName = Convert.ToString(dataRow["SensorName"]),
-                    SerialNumber = Convert.ToString(dataRow["SerialNumber"]),
+                    SensorName = Convert.ToString(dataRow["SensorName"]),                    
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),
                     LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
@@ -93,8 +91,7 @@ namespace CitizenScienceClasses
                 {
                     LocationID = Convert.ToInt32(dataRow["LocationID"]),
                     WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
-                    SensorName = Convert.ToString(dataRow["SensorName"]),
-                    SerialNumber = Convert.ToString(dataRow["SerialNumber"]),
+                    SensorName = Convert.ToString(dataRow["SensorName"]),                    
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),
                     LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
@@ -123,8 +120,7 @@ namespace CitizenScienceClasses
                 {
                     LocationID = Convert.ToInt32(dataRow["LocationID"]),
                     WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
-                    SensorName = Convert.ToString(dataRow["SensorName"]),
-                    SerialNumber = Convert.ToString(dataRow["SerialNumber"]),
+                    SensorName = Convert.ToString(dataRow["SensorName"]),                    
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),
                     LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
@@ -136,7 +132,7 @@ namespace CitizenScienceClasses
             return result;
         }
 
-        public static Location UpdateLocation(int id, int watershedId, string name, string serial, double latitude, double longitude)
+        public static Location UpdateLocation(int id, int watershedId, string name, double latitude, double longitude)
         {
             Location result = null;
 
@@ -146,8 +142,7 @@ namespace CitizenScienceClasses
             comm.CommandText = "UpdateLocation";
             comm.Parameters.AddWithValue("@id", id);
             comm.Parameters.AddWithValue("@watershedid", watershedId);
-            comm.Parameters.AddWithValue("@name", name);
-            comm.Parameters.AddWithValue("@serialnumber", serial);
+            comm.Parameters.AddWithValue("@name", name);            
             comm.Parameters.AddWithValue("@latitude", latitude);
             comm.Parameters.AddWithValue("@longitude", longitude);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
@@ -160,8 +155,7 @@ namespace CitizenScienceClasses
                 {
                     LocationID = Convert.ToInt32(dataRow["LocationID"]),
                     WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
-                    SensorName = Convert.ToString(dataRow["SensorName"]),
-                    SerialNumber = Convert.ToString(dataRow["SerialNumber"]),
+                    SensorName = Convert.ToString(dataRow["SensorName"]),                    
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),
                     LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])

@@ -216,9 +216,9 @@ namespace CitizenScience_UIPrototype
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void CreateLocation(int watershedId, string name, string serial, double latitude, double longitude)
+        public void CreateLocation(int watershedId, string name, double latitude, double longitude)
         {
-            Location result = ClassFunctions.CreateLocation(watershedId, name, serial, latitude, longitude);
+            Location result = ClassFunctions.CreateLocation(watershedId, name, latitude, longitude);
 
             if (result != null)
             {
@@ -265,9 +265,9 @@ namespace CitizenScience_UIPrototype
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void UpdateLocation(int id, int watershedId, string name, string serial, double latitude, double longitude)
+        public void UpdateLocation(int id, int watershedId, string name, double latitude, double longitude)
         {
-            Location result = ClassFunctions.UpdateLocation(id, watershedId, name, serial, latitude, longitude);
+            Location result = ClassFunctions.UpdateLocation(id, watershedId, name, latitude, longitude);
 
             if (result != null)
             {

@@ -16,8 +16,7 @@
                 <thead>
                     <tr>
                         <th scope="col">Name</th>
-                        <th scope="col">Watershed</th>
-                        <th scope="col">Serial</th>
+                        <th scope="col">Watershed</th>                        
                         <th scope="col">Latitude</th>
                         <th scope="col">Longitude</th>
                         <th scope="col"></th>
@@ -50,12 +49,6 @@
                     <label for="selectCreateWatershed">Watershed</label>
                     <select id="selectCreateWatershed" class="form-control">
                     </select>
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="form-group col-12">
-                        <label for="inputCreateSerial">Serial Number</label>
-                        <input type="text" class="form-control" id="inputCreateSerial">
                   </div>
               </div>
               <div class="form-row">
@@ -99,12 +92,6 @@
                     <label for="selectEditWatershed">Watershed</label>
                     <select id="selectEditWatershed" class="form-control">
                     </select>
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="form-group col-12">
-                        <label for="inputEditSerial">Serial Number</label>
-                        <input type="text" class="form-control" id="inputEditSerial">
                   </div>
               </div>
               <div class="form-row">
@@ -164,7 +151,6 @@
                                     return watershedMap.get(data.WatershedID);
                                 }
                             },
-                            { data: 'SerialNumber' },
                             { data: 'Latitude' },
                             { data: 'Longitude' },
                             // The 'Action' column of the table
@@ -287,7 +273,6 @@
             // This function fills out the data in the 'Create Modal' before displaying it
             function PopulateCreateModal() {
                 $('#inputCreateName').val('');
-                $('#inputCreateSerial').val('');
                 $('#inputCreateLatitude').val('');
                 $('#inputCreateLongitude').val('');
 
@@ -297,8 +282,7 @@
             // This function fills out the fields in the 'Edit Modal' before displaying it
             function PopulateEditModal(data) {
                 $('#inputEditName').val(data.SensorName);
-                $('#inputEditLatitude').val(data.Latitude);
-                $('#inputEditSerial').val(data.SerialNumber);
+                $('#inputEditLatitude').val(data.Latitude);                
                 $('#inputEditLongitude').val(data.Longitude);
 
                 PopulateEditWatershedSelect(data.WatershedID);
@@ -326,7 +310,6 @@
                 $('#editSubmit').click(function () {
                     var name = $('#inputEditName').val();
                     var watershedId = $('#selectEditWatershed').val();
-                    var serial = $('#inputEditSerial').val();
                     var latitude = $('#inputEditLatitude').val();
                     var longitude = $('#inputEditLongitude').val();
 
@@ -334,7 +317,6 @@
                         id: data.LocationID,
                         name: name,
                         watershedId: watershedId,
-                        serial: serial,
                         latitude: latitude,
                         longitude: longitude
                     }
@@ -376,14 +358,12 @@
             $('#createSubmit').click(function () {
                 var name = $('#inputCreateName').val();
                 var watershedId = $('#selectCreateWatershed').val();
-                var serial = $('#inputCreateSerial').val();
                 var latitude = $('#inputCreateLatitude').val();
                 var longitude = $('#inputCreateLongitude').val();
 
                 var requestData = {
                     name: name,
                     watershedId: watershedId,
-                    serial: serial,
                     latitude: latitude,
                     longitude: longitude
                 };

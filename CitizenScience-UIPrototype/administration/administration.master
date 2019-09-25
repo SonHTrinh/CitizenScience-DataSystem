@@ -22,13 +22,13 @@
                 <li>
                     <a href="/administration/watershed.aspx">
                         <i class="fas fa-water"></i>
-                        <span class="menuItemName">Watersheds</span> 
+                        <span class="menuItemName">Manage Watersheds</span> 
                     </a>
                 </li>
                 <li>
                     <a href="/administration/location.aspx">
                         <i class="fas fa-map-marked-alt"></i>
-                        <span class="menuItemName">Locations</span>
+                        <span class="menuItemName">Manage Locations</span>
                     </a>
                 </li>
                 <li>
@@ -52,13 +52,13 @@
                 <li>
                     <a href="/administration/gallery.aspx">
                         <i class="fas fa-images"></i>
-                        <span class="menuItemName">Gallery</span>
+                        <span class="menuItemName">Manage Gallery</span>
                     </a>
                 </li>
                 <li>
                     <a href="/administration/about.aspx">
                         <i class="fas fa-question"></i>
-                        <span class="menuItemName">About</span>
+                        <span class="menuItemName">Manage About</span>
                     </a>
                 </li>
                 <li>

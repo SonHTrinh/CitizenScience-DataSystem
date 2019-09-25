@@ -24,7 +24,6 @@ CREATE TABLE [dbo].[Location](
 	[Longitude] FLOAT(53) NOT NULL, 
 	[Latitude] FLOAT (53) NOT NULL, 
 	[SensorName] VARCHAR(MAX) NOT NULL, 
-	[SerialNumber] VARCHAR(MAX) NULL,
 	[ProfileImage] VARCHAR(MAX) NULL, 
 	[LastUpdated] DATE NOT NULL, 
 	PRIMARY KEY CLUSTERED ([LocationID] ASC) ,
@@ -203,12 +202,11 @@ GO
 CREATE PROCEDURE [dbo].[CreateLocation]
 	@watershedid int,
     @name varchar(255),
-    @serialnumber varchar(255),
     @latitude float,
     @longitude float
 AS
-    INSERT INTO Location (WatershedID, SensorName, SerialNumber, Latitude, Longitude, LastUpdated)
-    VALUES (@watershedid, @name, @serialnumber, @latitude, @longitude, GETDATE())
+    INSERT INTO Location (WatershedID, SensorName, Latitude, Longitude, LastUpdated)
+    VALUES (@watershedid, @name, @latitude, @longitude, GETDATE())
     SELECT * FROM Location WHERE locationID = SCOPE_IDENTITY()
 
 GO
@@ -224,14 +222,12 @@ CREATE PROCEDURE [dbo].[UpdateLocation]
 	@id int,
 	@watershedid int,
     @name varchar(255),
-    @serialnumber varchar(255),
     @latitude float,
     @longitude float
 AS
 	UPDATE Location
 	SET WatershedID = @watershedid,
 		SensorName = @name,
-		SerialNumber = @serialnumber,
 		Latitude = @latitude,
 		Longitude = @longitude,
 		LastUpdated = GETDATE()
