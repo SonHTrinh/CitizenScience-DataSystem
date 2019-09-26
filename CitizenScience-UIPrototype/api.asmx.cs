@@ -296,5 +296,64 @@ namespace CitizenScience_UIPrototype
             }
         }
 
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true)]
+        public void LocationTemperaturesCsv(int[] locationId)
+        {
+            string csvFileName = $"Temperatures-{DateTime.Now.ToString("M/d/yy-H:mm")}.csv";
+
+            DataSet temperatureDataset = ClassFunctions.GetAllTemperaturesByMultipleLocationIds(new List<int>(locationId));
+
+            List<Temperature> temperatureList = new List<Temperature>();
+            for (int i = 0; i < temperatureDataset.Tables[0].Rows.Count; i++)
+            {
+                DataRow dataRow = temperatureDataset.Tables[0].Rows[i];
+
+                Temperature t = new Temperature();
+                t.Timestamp = Convert.ToDateTime(dataRow["Timestamp"].ToString());
+                t.Celsius = Convert.ToDouble(dataRow["TempC"]);
+                t.Fahrenheit = Convert.ToDouble(dataRow["TempF"]);
+                temperatureList.Add(t);
+            }
+
+            byte[] allTempDataBytes = DataProcessor.CreateCsvAsBytes(temperatureList);
+
+            Context.Response.Clear();
+            Context.Response.ContentType = "application/force-download";
+            Context.Response.AddHeader("content-disposition", "attachment; filename=" + csvFileName);
+            Context.Response.BinaryWrite(allTempDataBytes);
+            Context.Response.End();
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true)]
+        public void AllLocationTemperaturesCsv()
+        {
+            string csvFileName = $"Temperatures-{DateTime.Now.ToString("M/d/yy-H:mm")}.csv";
+
+            DataSet temperatureDataset = ClassFunctions.GetAllTemperatures();
+
+            List<Temperature> temperatureList = new List<Temperature>();
+            for (int i = 0; i < temperatureDataset.Tables[0].Rows.Count; i++)
+            {
+                DataRow dataRow = temperatureDataset.Tables[0].Rows[i];
+
+                Temperature t = new Temperature();
+                t.Timestamp = Convert.ToDateTime(dataRow["Timestamp"].ToString());
+                t.Celsius = Convert.ToDouble(dataRow["TempC"]);
+                t.Fahrenheit = Convert.ToDouble(dataRow["TempF"]);
+                temperatureList.Add(t);
+            }
+
+            byte[] allTempDataBytes = DataProcessor.CreateCsvAsBytes(temperatureList);
+
+            Context.Response.Clear();
+            Context.Response.ContentType = "application/force-download";
+            Context.Response.AddHeader("content-disposition", "attachment; filename=" + csvFileName);
+            Context.Response.BinaryWrite(allTempDataBytes);
+            Context.Response.End();
+        }
+
     }
 }
