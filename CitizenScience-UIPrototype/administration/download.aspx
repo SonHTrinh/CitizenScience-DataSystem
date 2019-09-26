@@ -3,18 +3,23 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
 
-    <div class="row mb-2">
-        <div class="col-12">
+    <div class="row mb-3">
+        <div class="col-3">
             <button type="button" id="downloadCSV" class="btn btn-primary float-left">
                 <i class="fa fa-file-csv">&nbsp; Download CSV File</i>
             </button>
         </div>
+        <div class="col-6">
+            <div id="feedbackDownloadSelect"  class="alert alert-warning text-center invisible mb-0" role="alert">
+              You must either select <strong>1 or more Locations</strong> from the Table or choose <strong>All</strong>!
+            </div>
+        </div>
     </div>
-    <div class="row mb-4">
+    <div class="row mb-4 mt-1">
         <div class="col-12">
             <div class="custom-control custom-radio custom-control-inline">
-              <input type="radio" id="radioSelect" name="radioSelect" class="custom-control-input">
-              <label class="custom-control-label" for="radioSelect">Selected</label>
+              <input type="radio" id="radioSelect" checked="" name="radioSelect" class="custom-control-input">
+              <label class="custom-control-label active" for="radioSelect">Selected</label>
             </div>
             <div class="custom-control custom-radio custom-control-inline">
               <input type="radio" id="radioAll" name="radioSelect" class="custom-control-input">
@@ -92,28 +97,37 @@
 
             $('#downloadCSV').click(function () {
                 var selectedLocations = [];
-                var isDownloadAll = false;
+                var isDownloadAll = $('#radioAll').is(':checked');
 
                 table.rows({ selected: true }).every(function () {
                     selectedLocations.push(this.data().LocationID);
                 });
 
                 if (selectedLocations.length == 0 && !isDownloadAll) {
+                    $('#feedbackDownloadSelect').removeClass('invisible');
                     return;
                 }
 
-                var idParameters = '?';
+                $('#feedbackDownloadSelect').addClass('invisible');
 
-                selectedLocations.forEach(function (location) {
-                    idParameters = idParameters + 'ids=' + location + '&';
-                });
+                if (isDownloadAll) {
+                    window.location.href = 'http://localhost:63073/api.asmx/AllLocationTemperaturesCsv';
+                } else {
+                    var idParameters = '?';
 
-                idParameters = idParameters.substring(0, idParameters.length - 1);
+                    selectedLocations.forEach(function (location) {
+                        idParameters = idParameters + 'locationId=' + location + '&';
+                    });
 
-                window.location.href = 'http://localhost:63073/api.asmx/LocationTemperaturesCsv' + idParameters;
-                table.rows('.important').deselect();             
+                    idParameters = idParameters.substring(0, idParameters.length - 1);
+
+                    window.location.href = 'http://localhost:63073/api.asmx/LocationTemperaturesCsv' + idParameters;
+                }
+
+                table.rows('.selected').deselect();             
             });
 
+          
         });
     </script>
 
