@@ -296,5 +296,42 @@ namespace CitizenScience_UIPrototype
             }
         }
 
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true)]
+        public void LocationTemperaturesCsv(int[] locationId)
+        {
+            string csvFileName = $"Temperatures-{DateTime.Now.ToString("M/d/yy-H:mm")}.csv";
+
+            DataSet temperatureDataset;
+
+            if (locationId.Length > 0)
+            {
+                temperatureDataset = ClassFunctions.GetAllTemperaturesByMultipleLocationIds(new List<int>(locationId));
+            }
+            else
+            {
+                temperatureDataset = ClassFunctions.GetAllTemperatures();
+            }
+
+            List<Temperature> tempList = new List<Temperature>();
+            for (int i = 0; i < temperatureDataset.Tables[0].Rows.Count; i++)
+            {
+                Temperature t = new Temperature();
+                t.Timestamp = Convert.ToDateTime(selectedTempDataSet.Tables[0].Rows[i]["DateRecorded"].ToString());
+                t.Celsius = Convert.ToDouble(selectedTempDataSet.Tables[0].Rows[i]["TempC"]);
+                t.Fahrenheit = Convert.ToDouble(selectedTempDataSet.Tables[0].Rows[i]["TempF"]);
+                tempList.Add(t);
+            }
+
+            byte[] allTempDataBytes = DataProcessor.CreateCsvAsBytes(tempList);
+
+            Context.Response.Clear();
+            Context.Response.ContentType = "application/force-download";
+            Context.Response.AddHeader("content-disposition", "attachment; filename=" + csvFileName);
+            Context.Response.BinaryWrite(allTempDataBytes);
+            Context.Response.End();
+        }
+
     }
 }

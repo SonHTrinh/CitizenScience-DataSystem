@@ -29,9 +29,6 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Watershed</th>
-                        <th scope="col">Latitude</th>
-                        <th scope="col">Longitude</th>
-                        <th scope="col"></th>
                     </tr>
                 </thead>
             </table>
@@ -78,15 +75,6 @@
                                 render: function(data, type, row, meta) {
                                     return watershedMap.get(data.WatershedID);
                                 }
-                            },
-                            { data: 'Latitude' },
-                            { data: 'Longitude' },
-                            // The 'Action' column of the table
-                            {
-                                data: null,
-                                orderable: false,
-                                width: '10%',
-                                render: RenderActions
                             }
                         ]
                     });
@@ -104,13 +92,26 @@
 
             $('#downloadCSV').click(function () {
                 var selectedLocations = [];
+                var isDownloadAll = false;
 
                 table.rows({ selected: true }).every(function () {
-                    selectedLocations.push(this.data());
+                    selectedLocations.push(this.data().LocationID);
                 });
-                
 
-                //console.log(selected);
+                if (selectedLocations.length == 0 && !isDownloadAll) {
+                    return;
+                }
+
+                var idParameters = '?';
+
+                selectedLocations.forEach(function (location) {
+                    idParameters = idParameters + 'ids=' + location + '&';
+                });
+
+                idParameters = idParameters.substring(0, idParameters.length - 1);
+
+                window.location.href = 'http://localhost:63073/api.asmx/LocationTemperaturesCsv' + idParameters;
+                table.rows('.important').deselect();             
             });
 
         });
