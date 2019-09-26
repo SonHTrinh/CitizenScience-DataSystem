@@ -11,18 +11,17 @@
             </div>
         </div>
         <div class="row my-4">
-            <div class="col-6">
-                <div class="dropdown float-right">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="ddBtnWatershed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="col-3 offset-3">
+                <div class="dropdown float-left">
+                  <button class="btn btn-primary dropdown-toggle px-5 py-2" type="button" id="ddBtnWatershed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Watersheds
                   </button>
                   <div class="dropdown-menu" id="ddMenuWatershed" aria-labelledby="dropdownMenuButton"></div>
                 </div>
             </div>
-            <div class="col-6">
+            <div class="col-3">
                 <div class="dropdown float-left invisible" id="locationdiv">
-                  <button class="btn btn-secondary dropdown-toggle" type="button" id="ddBtnLocation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  </button>
+                  <button class="btn btn-primary dropdown-toggle px-5 py-2" type="button" id="ddBtnLocation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                   <div class="dropdown-menu" id="ddMenuLocation" aria-labelledby="dropdownMenuButton"></div>
                 </div>
             </div>
@@ -129,7 +128,7 @@
 
             function populateLocations(watershedId) {
                 $('#ddMenuLocation').empty();
-                $('#ddBtnLocation').text('');
+                $('#ddBtnLocation').text('Locations');
 
                 $.ajax({
                     url: "api.asmx/Location?watershedId=" + watershedId,
