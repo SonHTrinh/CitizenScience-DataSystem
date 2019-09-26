@@ -1,11 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/administration/administration.master" AutoEventWireup="true" CodeBehind="download.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.download" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
+    Download Data   |   Citizen Science
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
 
     <div class="row mb-3">
         <div class="col-3">
-            <button type="button" id="downloadCSV" class="btn btn-primary float-left">
+            <button type="button" id="downloadCSV" class="btn btn-success float-left">
                 <i class="fa fa-file-csv">&nbsp; Download CSV File</i>
             </button>
         </div>

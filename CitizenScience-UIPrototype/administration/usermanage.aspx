@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/administration/administration.master" AutoEventWireup="true" CodeBehind="usermanage.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.usermanage" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
+    Manage Admins   |   Citizen Science
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
     <!-- Add Content. everything in here is already in a .container-fluid div by default from the masterpage 'administration.master' -->
