@@ -90,11 +90,6 @@
             // initialize the DataTable
             initDataTable();
 
-            // This function returns the HTML for the 'Action' buttons for each row in the DataTable
-            function RenderActions(data, type, row, meta) {
-                return null;
-            }
-
             $('#downloadCSV').click(function () {
                 var selectedLocations = [];
                 var isDownloadAll = $('#radioAll').is(':checked');
