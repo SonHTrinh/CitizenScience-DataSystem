@@ -124,7 +124,6 @@ namespace CitizenScienceClasses
                     LocationID = Convert.ToInt32(dataRow["LocationID"]),
                     WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
                     SensorName = Convert.ToString(dataRow["SensorName"]),
-                    SerialNumber = Convert.ToString(dataRow["SerialNumber"]),
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),
                     LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
