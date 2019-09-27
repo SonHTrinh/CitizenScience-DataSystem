@@ -33,7 +33,7 @@ namespace CitizenScience_UIPrototype
                     //turns it into a list here called temperatureList and is bound. need to save in database instead. 
                     List<Temperature> temperatureList = DataProcessor.ReadCsvFile(fileStream);
 
-                    ClassFunctions.AddTempsToDatabase(temperatureList);
+                    //ClassFunctions.AddTempsToDatabase(temperatureList);
 ;                 }
                 catch (Exception ex)
                 {

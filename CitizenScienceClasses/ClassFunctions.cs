@@ -211,7 +211,7 @@ namespace CitizenScienceClasses
             return conn.GetDataSetUsingCmdObj(comm);
         }
         
-        public static int AddTempsToDatabase(List<Temperature> temperatureList)
+        public static int AddTempsToDatabase(List<Temperature> temperatureList, int locationid, int uploadid)
         {
             int k = 0;
             DBConnect objDb = new DBConnect();
@@ -220,10 +220,11 @@ namespace CitizenScienceClasses
                 SqlCommand comm = new SqlCommand();
                 comm.CommandType = CommandType.StoredProcedure;
                 comm.CommandText = "AddTemperatures";
-                //need position here 
-                comm.Parameters.AddWithValue("@TimeStamp", t.Timestamp);
-                comm.Parameters.AddWithValue("@Temp_C", t.Celsius);
-                comm.Parameters.AddWithValue("@Temp_F", t.Fahrenheit);
+                comm.Parameters.AddWithValue("@locationid", locationid);
+                comm.Parameters.AddWithValue("@uploadid", uploadid);
+                comm.Parameters.AddWithValue("@ts", t.Timestamp);
+                comm.Parameters.AddWithValue("@temp_c", t.Celsius);
+                comm.Parameters.AddWithValue("@temp_f", t.Fahrenheit);
 
                 k = objDb.DoUpdateUsingCmdObj(comm);
             }

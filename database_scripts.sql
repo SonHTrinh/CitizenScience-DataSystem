@@ -160,6 +160,17 @@ AS
 
 GO
 
+CREATE PROCEDURE [dbo].[AddTemperatures]
+	@locationid int,
+	@uploadid int,
+	@ts datetime,
+	@temp_c float, 
+	@temp_f float 
+AS
+	INSERT INTO Temperature (LocationID, UploadID, [Timestamp], TempC, TempF) 
+	VALUES (@locationid, @uploadid, @ts, @temp_c, @temp_f)
+
+GO
 
 ------------------- CRUD Watershed
 CREATE PROCEDURE [dbo].[CreateWatershed]
