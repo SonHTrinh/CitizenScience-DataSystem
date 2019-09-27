@@ -41,8 +41,7 @@ CREATE TABLE [dbo].[Temperature](
 	[TempID] INT IDENTITY(1,1) NOT NULL, 
 	[LocationID] INT NOT NULL, 
 	[UploadID] INT NOT NULL, 
-	[DateRecorded] DATE NOT NULL, 
-	[TimeRecorded] TIME(7)  NOT NULL, 
+	[Timestamp] DateTime  NOT NULL, 
 	[TempC] FLOAT(53) NOT NULL, 
 	[TempF] FLOAT(53) NOT NULL, 
 	PRIMARY KEY CLUSTERED ([TempID] ASC) , 
@@ -117,7 +116,7 @@ GO
 CREATE TYPE [dbo].[TEMPERATUREDATA] AS TABLE(
 	[LocationID] INT NOT NULL,
 	[UploadID] INT NOT NULL,
-	[TimeStamp] TIME(7)  NOT NULL,
+	[TimeStamp] DateTime  NOT NULL,
 	[TempC] FLOAT(53) NOT NULL,
 	[TempF] FLOAT(53) NOT NULL
 );
