@@ -5,7 +5,12 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
     <!-- Add Content. everything in here is already in a .container-fluid div by default from the masterpage 'administration.master' -->
     <div class="row justify-content-center my-4">
-        <asp:Label Text="text" ID="lblFeedback" runat="server" />
+        <div class="alert alert-success" role="alert" runat="server" ID="feedbackSuccess" visible="false">
+            You have added <strong ID="txtRowcount" runat="server"></strong> rows of Temperature data to <strong ID="txtLocation" runat="server">.</strong>
+        </div>
+        <div class="alert alert-danger" role="alert" runat="server" ID="feedbackDanger" visible="false">
+            <span ID="txtFail" runat="server"></span>
+        </div>
     </div>
     <div class="row justify-content-center  my-4">
         <div class="col-4">
@@ -18,7 +23,7 @@
     </div>
     <div class="row justify-content-center my-4">
         <div class="col-3">
-            <asp:Button ID="btnsave" runat="server" onclick="btnsave_Click"  Text="Save" CssClass="btn btn-primary btn-block"  UseSubmitBehavior="false"/>
+            <asp:Button ID="btnsave" runat="server" onclick="btnsave_Click"  Text="Upload File" CssClass="btn btn-primary btn-block"  UseSubmitBehavior="false"/>
         </div>
     </div>
 </asp:Content>

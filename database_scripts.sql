@@ -1,4 +1,8 @@
------ Tables
+----- Citizen Science Database Creation Script
+
+-- Run this script against a new database
+
+-------------------- Tables --------------------
 
 CREATE TABLE [dbo].[Watershed] (
 	[WatershedID] INT IDENTITY (1,1) NOT NULL, 
@@ -108,8 +112,19 @@ CREATE TABLE [dbo].[Image] (
 
 GO
 
+-------------------- Custom Types --------------------
 
------ Stored Procedures
+CREATE TYPE [dbo].[TEMPERATUREDATA] AS TABLE(
+	[LocationID] INT NOT NULL,
+	[UploadID] INT NOT NULL,
+	[TimeStamp] TIME(7)  NOT NULL,
+	[TempC] FLOAT(53) NOT NULL,
+	[TempF] FLOAT(53) NOT NULL
+);
+
+GO
+
+-------------------- Stored Procedures --------------------
 
 CREATE PROCEDURE [dbo].[GetAllLocations]
 AS
@@ -172,7 +187,14 @@ AS
 
 GO
 
-------------------- CRUD Watershed
+CREATE PROCEDURE [dbo].[BulkTemperatureDataInsert]
+	@temperaturetable TEMPERATUREDATA readonly
+AS
+	INSERT INTO Temperature select  LocationID, UploadID, [Timestamp], TempC, TempF from @temperaturetable
+
+GO
+
+----- CRUD Watershed
 CREATE PROCEDURE [dbo].[CreateWatershed]
     @name varchar(255)
 AS
@@ -200,17 +222,7 @@ AS
 
 GO
 
-/*
-CREATE PROCEDURE [dbo].[DeleteWatershed]
-	@id int
-AS
-	DELETE FROM Watershed WHERE watershedID = @id
-
-GO
-*/
-
-
-------------------- CRUD Location
+----- CRUD Location
 CREATE PROCEDURE [dbo].[CreateLocation]
 	@watershedid int,
     @name varchar(255),
@@ -251,11 +263,3 @@ AS
 
 GO
 
-/*
-CREATE PROCEDURE [dbo].[DeleteWatershed]
-	@id int
-AS
-	DELETE FROM Location WHERE LocationID = @id
-
-GO
-*/

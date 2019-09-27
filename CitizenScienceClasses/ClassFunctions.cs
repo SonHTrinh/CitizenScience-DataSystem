@@ -231,6 +231,35 @@ namespace CitizenScienceClasses
             return k;
         }
 
+        public static int BulkTemperatureDataInsert(List<Temperature> temperatureList, int locationid, int uploadid)
+        {
+            int result = 0;
+
+            DataTable dataTable = new DataTable();
+
+            dataTable.Columns.Add(new DataColumn("LocationID", typeof(string)));
+            dataTable.Columns.Add(new DataColumn("UploadID", typeof(int)));
+            dataTable.Columns.Add(new DataColumn("Timestamp", typeof(DateTime)));
+            dataTable.Columns.Add(new DataColumn("TempC", typeof(double)));
+            dataTable.Columns.Add(new DataColumn("TempF", typeof(double)));
+
+            foreach(Temperature temperature in temperatureList)
+            {
+                dataTable.Rows.Add(locationid, uploadid, temperature.Timestamp, temperature.Celsius, temperature.Fahrenheit);
+            }
+
+            DBConnect objDb = new DBConnect();
+
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "BulkTemperatureDataInsert";
+            comm.Parameters.AddWithValue("@temperaturetable", dataTable);
+
+            result = objDb.DoUpdateUsingCmdObj(comm);
+
+            return result;
+        }
+
         /////////////////////////////////   WATERSHED FUNCTIONS
         public static DataSet GetWatersheds()
         {
