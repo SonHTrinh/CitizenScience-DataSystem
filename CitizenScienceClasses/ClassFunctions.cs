@@ -211,7 +211,7 @@ namespace CitizenScienceClasses
             return conn.GetDataSetUsingCmdObj(comm);
         }
         
-        public static int AddTempsToDatabase(List<Temperature> temperatureList)
+        public static int AddTempsToDatabase(List<Temperature> temperatureList, int locationid, int uploadid)
         {
             int k = 0;
             DBConnect objDb = new DBConnect();
@@ -220,14 +220,44 @@ namespace CitizenScienceClasses
                 SqlCommand comm = new SqlCommand();
                 comm.CommandType = CommandType.StoredProcedure;
                 comm.CommandText = "AddTemperatures";
-                //need position here 
-                comm.Parameters.AddWithValue("@TimeStamp", t.Timestamp);
-                comm.Parameters.AddWithValue("@Temp_C", t.Celsius);
-                comm.Parameters.AddWithValue("@Temp_F", t.Fahrenheit);
+                comm.Parameters.AddWithValue("@locationid", locationid);
+                comm.Parameters.AddWithValue("@uploadid", uploadid);
+                comm.Parameters.AddWithValue("@ts", t.Timestamp);
+                comm.Parameters.AddWithValue("@temp_c", t.Celsius);
+                comm.Parameters.AddWithValue("@temp_f", t.Fahrenheit);
 
                 k = objDb.DoUpdateUsingCmdObj(comm);
             }
             return k;
+        }
+
+        public static int BulkTemperatureDataInsert(List<Temperature> temperatureList, int locationid, int uploadid)
+        {
+            int result = 0;
+
+            DataTable dataTable = new DataTable();
+
+            dataTable.Columns.Add(new DataColumn("LocationID", typeof(string)));
+            dataTable.Columns.Add(new DataColumn("UploadID", typeof(int)));
+            dataTable.Columns.Add(new DataColumn("Timestamp", typeof(DateTime)));
+            dataTable.Columns.Add(new DataColumn("TempC", typeof(double)));
+            dataTable.Columns.Add(new DataColumn("TempF", typeof(double)));
+
+            foreach(Temperature temperature in temperatureList)
+            {
+                dataTable.Rows.Add(locationid, uploadid, temperature.Timestamp, temperature.Celsius, temperature.Fahrenheit);
+            }
+
+            DBConnect objDb = new DBConnect();
+
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "BulkTemperatureDataInsert";
+            comm.Parameters.AddWithValue("@temperaturetable", dataTable);
+
+            result = objDb.DoUpdateUsingCmdObj(comm);
+
+            return result;
         }
 
         /////////////////////////////////   WATERSHED FUNCTIONS
