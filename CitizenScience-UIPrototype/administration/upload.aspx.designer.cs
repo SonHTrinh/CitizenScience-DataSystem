@@ -82,6 +82,6 @@ namespace CitizenScience_UIPrototype.administration {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnsave;
+        protected global::System.Web.UI.HtmlControls.HtmlButton btnsave;
     }
 }

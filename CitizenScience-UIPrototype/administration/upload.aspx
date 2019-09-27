@@ -23,7 +23,9 @@
     </div>
     <div class="row justify-content-center my-4">
         <div class="col-3">
-            <asp:Button ID="btnsave" runat="server" onclick="btnsave_Click"  Text="Upload File" CssClass="btn btn-primary btn-block"  UseSubmitBehavior="false"/>
+            <button ID="btnsave" runat="server" onserverclick="btnsave_Click"  class="btn btn-primary btn-block"  title="Upload CSV File" UseSubmitBehavior="false">
+                <i class="fa fa-file-upload"></i>&nbsp;Upload CSV File
+            </button>
         </div>
     </div>
 </asp:Content>
