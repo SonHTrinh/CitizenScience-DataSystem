@@ -46,6 +46,7 @@ namespace CitizenScience_UIPrototype
                 {
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),
+                    WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
                     SensorName = Convert.ToString(dataRow["SensorName"]),
                     LocationID = Convert.ToInt32(dataRow["LocationID"])
                 };

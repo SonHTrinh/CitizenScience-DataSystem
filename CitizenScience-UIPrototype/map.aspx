@@ -77,31 +77,42 @@
     <div id="map" class="shadow-lg p-3 mb-5 bg-white rounded"></div>
 
     <script>
-        var map;
-        function initMap() {
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: new google.maps.LatLng(40.0319, -75.1134),
-                zoom: 11
-            });
+        
 
-            $.ajax({
-                url: "api.asmx/AllLocations",
-                success: function (data) {
-                    for (var i = 0; i < data.length; i++) {
+
+        
+
+        $(function () {
+            var map = initMap();
+
+            function buildMarker(location) {
+                
+
+                $.ajax({
+                    url: "api.asmx/Watersheds",
+                    success: function (responseData) {
+                        var locationWatershedMapping = new Map();
+
+                        responseData.forEach(function (watershed) {
+                            locationWatershedMapping.set(watershed.WatershedID, watershed.WatershedName);
+                        });
 
                         var locationInfowindow = new google.maps.InfoWindow({
-                            content: "<h6><b>" + data[i].SensorName + "</b></h6>"
+                            content: "<h6><b>" + location.SensorName + "</b></h6>"
                                 + "<img src='/img/Watershed/Watershed01.jpg' width='300' height='200' />" + "<br /><br />"
-                                + "<b>Latitude: </b>" + data[i].Latitude
-                                + "<b>Longitude: </b>" + data[i].Longitude
-                                    //Dummy profile picture 
+                                + "<h6><b>Watershed:</b> " + locationWatershedMapping.get(location.WatershedID) + "</h6>"
+                                + "<br/>"
+                                + "<b>Latitude: </b>" + location.Latitude
+                                + "<br/>"
+                                + " <b>Longitude: </b>" + location.Longitude
+                            //Dummy profile picture 
                         });
 
                         var marker = new google.maps.Marker({
-                            position: { lat: data[i].Latitude, lng: data[i].Longitude },
+                            position: { lat: location.Latitude, lng: location.Longitude },
                             animation: google.maps.Animation.DROP,
-                            map: map,
-                            title: data[i].SensorName,
+                            map: theMap,
+                            title: location.SensorName,
                             infowindow: locationInfowindow
                         });
 
@@ -109,13 +120,13 @@
                         var isAnySelected = false;
 
                         google.maps.event.addListener(marker, 'mouseover', function () {
-                            if (!isAnySelected) { 
+                            if (!isAnySelected) {
                                 this.infowindow.open(map, this);
                             }
                         });
 
-                        google.maps.event.addListener(marker,'mouseout', function () {
-                            
+                        google.maps.event.addListener(marker, 'mouseout', function () {
+
                             if (!isSelected) {
                                 this.infowindow.close();
                             }
@@ -128,10 +139,8 @@
                             isAnySelected = false;
                         });
 
-
-                        // TODO: figure out why this function does not work when the mouse hover features work
                         google.maps.event.addListener(marker, 'click', function () {
-                            
+
                             if (isAnySelected = true) {
                                 isAnySelected = false;
                                 isSelected = true;
@@ -140,14 +149,35 @@
                                 isSelected = true;
                                 this.infowindow.open(map, this);
                             }
-                          
                         });
                     }
-                }
-            });
-        }
+                });
 
-        $(function () {
+                
+
+            }
+            
+
+
+            function initMap() {
+                theMap = new google.maps.Map(document.getElementById('map'), {
+                    center: new google.maps.LatLng(40.0319, -75.1134),
+                    zoom: 11
+                });
+
+                $.ajax({
+                    url: "api.asmx/AllLocations",
+                    success: function (data) {
+                        for (var i = 0; i < data.length; i++) {
+                            var locationObj = data[i];
+
+                            buildMarker(locationObj);
+                        }
+                    }
+                });
+
+                return theMap;
+            }
             //todo: handle failure
 
             $.ajax({
