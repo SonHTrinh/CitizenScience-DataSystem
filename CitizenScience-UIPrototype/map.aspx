@@ -91,8 +91,9 @@
 
                         var locationInfowindow = new google.maps.InfoWindow({
                             content: "<h6><b>" + data[i].SensorName + "</b></h6>"
-                                    + "<img src='/img/Watershed/Watershed01.jpg' width='300' height='200' />" + "<br /><br />"
-                                    + "<p>......Description......</p>"
+                                + "<img src='/img/Watershed/Watershed01.jpg' width='300' height='200' />" + "<br /><br />"
+                                + "<b>Latitude: </b>" + data[i].Latitude
+                                + "<b>Longitude: </b>" + data[i].Longitude
                                     //Dummy profile picture 
                         });
 
@@ -104,18 +105,42 @@
                             infowindow: locationInfowindow
                         });
 
+                        let isSelected = false;
+                        var isAnySelected = false;
+
                         google.maps.event.addListener(marker, 'mouseover', function () {
-                            this.infowindow.open(map, this);
+                            if (!isAnySelected) { 
+                                this.infowindow.open(map, this);
+                            }
                         });
 
                         google.maps.event.addListener(marker,'mouseout', function () {
+                            
+                            if (!isSelected) {
+                                this.infowindow.close();
+                            }
+
+                        });
+
+                        google.maps.event.addListener(marker, 'closeclick', function () {
                             this.infowindow.close();
+                            isSelected = false;
+                            isAnySelected = false;
                         });
 
 
                         // TODO: figure out why this function does not work when the mouse hover features work
                         google.maps.event.addListener(marker, 'click', function () {
-                            this.infowindow.open(map, this);
+                            
+                            if (isAnySelected = true) {
+                                isAnySelected = false;
+                                isSelected = true;
+                            } else {
+                                isAnySelected = true;
+                                isSelected = true;
+                                this.infowindow.open(map, this);
+                            }
+                          
                         });
                     }
                 }
