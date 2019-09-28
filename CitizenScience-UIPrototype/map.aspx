@@ -103,6 +103,17 @@
                             title: data[i].SensorName,
                             infowindow: locationInfowindow
                         });
+
+                        google.maps.event.addListener(marker, 'mouseover', function () {
+                            this.infowindow.open(map, this);
+                        });
+
+                        google.maps.event.addListener(marker,'mouseout', function () {
+                            this.infowindow.close();
+                        });
+
+
+                        // TODO: figure out why this function does not work when the mouse hover features work
                         google.maps.event.addListener(marker, 'click', function () {
                             this.infowindow.open(map, this);
                         });
