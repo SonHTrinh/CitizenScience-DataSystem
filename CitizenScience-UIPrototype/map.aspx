@@ -86,8 +86,8 @@
             var map = initMap();
 
             function buildMarker(location) {
-                
 
+                // TODO: find a better way to do this than call and map all locations to thier watersheds
                 $.ajax({
                     url: "api.asmx/Watersheds",
                     success: function (responseData) {
@@ -115,40 +115,30 @@
                             title: location.SensorName,
                             infowindow: locationInfowindow
                         });
-
-                        let isSelected = false;
-                        var isAnySelected = false;
+                        
 
                         google.maps.event.addListener(marker, 'mouseover', function () {
-                            if (!isAnySelected) {
-                                this.infowindow.open(map, this);
-                            }
+
+                            this.infowindow.open(map, this);
+
                         });
 
                         google.maps.event.addListener(marker, 'mouseout', function () {
 
-                            if (!isSelected) {
-                                this.infowindow.close();
-                            }
+                            this.infowindow.close();
 
                         });
 
                         google.maps.event.addListener(marker, 'closeclick', function () {
+
                             this.infowindow.close();
-                            isSelected = false;
-                            isAnySelected = false;
+
                         });
 
                         google.maps.event.addListener(marker, 'click', function () {
 
-                            if (isAnySelected = true) {
-                                isAnySelected = false;
-                                isSelected = true;
-                            } else {
-                                isAnySelected = true;
-                                isSelected = true;
-                                this.infowindow.open(map, this);
-                            }
+                            this.infowindow.open(map, this);
+        
                         });
                     }
                 });
@@ -178,6 +168,7 @@
 
                 return theMap;
             }
+
             //todo: handle failure
 
             $.ajax({
