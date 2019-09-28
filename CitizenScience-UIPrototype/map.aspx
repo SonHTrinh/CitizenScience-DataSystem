@@ -104,7 +104,7 @@
                                 + "<br/>"
                                 + "<b>Latitude: </b>" + location.Latitude
                                 + "<br/>"
-                                + " <b>Longitude: </b>" + location.Longitude
+                                + "<b>Longitude: </b>" + location.Longitude
                             //Dummy profile picture 
                         });
 
@@ -123,11 +123,11 @@
 
                         });
 
-                        google.maps.event.addListener(marker, 'mouseout', function () {
+                        /*google.maps.event.addListener(marker, 'mouseout', function () {
 
                             this.infowindow.close();
 
-                        });
+                        });*/
 
                         google.maps.event.addListener(marker, 'closeclick', function () {
 
