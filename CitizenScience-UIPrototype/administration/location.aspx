@@ -58,7 +58,7 @@
               <div class="form-row">
                   <div class="form-group col-6">
                       <label for="inputCreateLatitude">Latitude</label>
-                      <input type="text" class="form-control inputtlatitude" id="inputCreateLatitude">
+                      <input type="text" class="form-control inputlatitude" id="inputCreateLatitude">
                     <div class="invalid-feedback">
                         Latitude must be ...
                     </div>
@@ -258,8 +258,8 @@
                 var regexGPS = /^-?\d+\.\d+\,\s?-?\d+\.\d+$/;
 
                 hasValidName = regexName.test(dataRequest.name);
-                hasValidLatitude = (!isNaN(dataRequest.latitude) && dataRequest.latitude <= 90 && dataRequest.latitude >= -90);
-                hasValidLongitude = (!isNaN(dataRequest.longitude) && dataRequest.longitude <= 90 && dataRequest.longitude >= -90);
+                hasValidLatitude = (!isNaN(dataRequest.latitude) && dataRequest.latitude <= 90 && dataRequest.latitude >= -90 && dataRequest.latitude != "");
+                hasValidLongitude = (!isNaN(dataRequest.longitude) && dataRequest.longitude <= 90 && dataRequest.longitude >= -90 && dataRequest.longitude != "");
 
                 console.log("Valid Name: " + hasValidName);
                 console.log("Valid Latitude: " + hasValidLatitude);
@@ -444,7 +444,7 @@
 
                 var requestData = BuildEditLocation(editData.LocationID);
 
-                var isValidRequest = ValidateLocationEditRequest(requestData);
+                var isValidRequest = ValidateLocationRequest(requestData);
                 console.log('Is Edit Form Submission Valid?: ' + isValidRequest);
 
                 if (isValidRequest) {
@@ -471,19 +471,9 @@
 
             // This function runs when the 'Create Modal' gets submitted
             $('#createSubmit').click(function () {
-                var name = $('#inputCreateName').val();
-                var watershedId = $('#selectCreateWatershed').val();
-                var latitude = $('#inputCreateLatitude').val();
-                var longitude = $('#inputCreateLongitude').val();
                 var requestData = BuildCreateLocation();
-                //var requestData = {
-                  //  name: name,
-//                    watershedId: watershedId,
-                    //latitude: latitude,
-                    //longitude: longitude
-                //};
-                var isValidRequest = ValidateLocationEditRequest(requestData);
-                console.log('Is Edit Form Submission Valid?: ' + isValidRequest);
+                var isValidRequest = ValidateLocationRequest(requestData);
+                console.log('Is Create Form Submission Valid?: ' + isValidRequest);
 
                 $.ajax({
                     type: 'POST',
