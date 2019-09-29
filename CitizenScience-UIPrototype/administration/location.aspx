@@ -117,6 +117,7 @@
     <script>
         $(document).ready(function () {
             var table;
+            var editData;
             
             // This fuction builds the DataTable. Because locations only store watershedIDs we must make a mapping of the watershed IDs to Names
             function initDataTable() {
@@ -167,6 +168,55 @@
                 });
             }
 
+
+            function BuildCreateLocation() {
+                var Name = $('#inputCreateName').val();
+                var WatershedId = $('#selectCreateWatershedId').val();
+                var Latitude = $('#inputCreateLatitude').val();
+                var Longitude = $('#inputCreateLongitude').val();
+
+                return {
+                    name: Name,
+                    watershedId: WatershedId,
+                    latitude: Latitude,
+                    longitude: Longitude
+                }
+            }
+
+            function BuildEditLocation(id) {
+                var LocationId = id;
+                var Name = $('#inputEditName').val();
+                var WatershedId = $('#selectEditWatershed').val();
+                var Latitude = $('#inputEditLatitude').val();
+                var Longitude = $('#inputEditLongitude').val();
+
+                return {
+                    id: LocationId,
+                    name: Name,
+                    watershedId: WatershedId,
+                    latitude: Latitude,
+                    longitude: Longitude
+                }
+            }
+
+
+            function ValidateLocationEditRequest(dataRequest){
+                var feedback;
+
+                var regexName = /^[\w ]+$/;
+                var regexGPS = /^-?\d+\.\d+\,\s?-?\d+\.\d+$/;
+
+                hasValidName = regexName.test(dataRequest.name);
+                hasValidLatitude = (!isNaN(dataRequest.latitude) && dataRequest.latitude <= 90 && dataRequest.latitude >= -90);
+                hasValidLongitude = (!isNaN(dataRequest.longitude) && dataRequest.longitude <= 90 && dataRequest.longitude >= -90);
+
+                console.log("Valid Name: " + hasValidName);
+                console.log("Valid Latitude: " + hasValidLatitude);
+                console.log("Valid Longitude: " + hasValidLongitude);
+
+                return (hasValidName && hasValidLatitude && hasValidLongitude);
+            }
+
             // initialize the DataTable
             initDataTable();
 
@@ -205,7 +255,7 @@
                     .addClass('btn-info')
                     .addClass('btn-block')
                     .append(icon);
-                    
+
                 return button;
             }
 
@@ -280,6 +330,7 @@
                 PopulateCreateWatershedSelect();
             }
 
+
             // This function fills out the fields in the 'Edit Modal' before displaying it
             function PopulateEditModal(data) {
                 $('#inputEditName').val(data.SensorName);
@@ -298,30 +349,33 @@
                 $('#createModal').modal('show');
             });
 
+
+            
             // The function when the any 'Edit' button in the DataTable gets clicked
             $('#DataTable').on('click', '.editButton', function () {
                 //Get Data for the the row
-                var data = table.row($(this).parents('tr')).data();
+                editData = table.row($(this).parents('tr')).data();
 
                 //Put the data in the Edit Modal
-                PopulateEditModal(data);
+                PopulateEditModal(editData);
 
                 //Display the modal
                 $('#editModal').modal('show');
-                $('#editSubmit').click(function () {
-                    var name = $('#inputEditName').val();
-                    var watershedId = $('#selectEditWatershed').val();
-                    var latitude = $('#inputEditLatitude').val();
-                    var longitude = $('#inputEditLongitude').val();
 
-                    var requestData = {
-                        id: data.LocationID,
-                        name: name,
-                        watershedId: watershedId,
-                        latitude: latitude,
-                        longitude: longitude
-                    }
+                $('#editSubmit').prop("onclick", null);
 
+                
+            });
+
+            $('#editSubmit').click(function () {
+               
+
+                var requestData = BuildEditLocation(editData.LocationID);
+
+                var isValidRequest = ValidateLocationEditRequest(requestData);
+                console.log('Is Edit Form Submission Valid?: ' + isValidRequest);
+
+                if (isValidRequest) {
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
@@ -340,19 +394,7 @@
                             console.log(errorData);
                         }
                     });
-                });
-            });
-
-            // The function when any 'Archive' button in the DataTable gets clicked
-            $('#DataTable').on('click', '.archiveButton', function () {
-                //Get Data for the the row
-                var data = table.row($(this).parents('tr')).data();
-
-                //Put the data in the Edit Modal
-                PopulateArchiveModal(data);
-
-                //Display the modal
-                $('#archiveModal').modal('show');
+                }
             });
 
             // This function runs when the 'Create Modal' gets submitted
