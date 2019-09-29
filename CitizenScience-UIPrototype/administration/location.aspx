@@ -42,24 +42,33 @@
               <div class="form-row">
                   <div class="form-group col-12">
                         <label for="inputCreateName">Name</label>
-                        <input type="text" class="form-control" id="inputCreateName">
+                        <input type="text" class="form-control inputname" id="inputCreateName">
+                        <div class="invalid-feedback">
+                            Location Name must be ...
+                        </div>
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col-12">
                     <label for="selectCreateWatershed">Watershed</label>
-                    <select id="selectCreateWatershed" class="form-control">
+                    <select id="selectCreateWatershed" class="form-control selectwatershed">
                     </select>
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col-6">
                       <label for="inputCreateLatitude">Latitude</label>
-                      <input type="text" class="form-control" id="inputCreateLatitude">
+                      <input type="text" class="form-control inputtlatitude" id="inputCreateLatitude">
+                    <div class="invalid-feedback">
+                        Latitude must be ...
+                    </div>
                   </div>
                   <div class="form-group col-6">
                       <label for="inputCreateLongitude">Longitude</label>
-                      <input type="text" class="form-control" id="inputCreateLongitude">
+                      <input type="text" class="form-control inputlongitude" id="inputCreateLongitude">
+                    <div class="invalid-feedback">
+                        Longitude must be ...
+                    </div>
                   </div>
               </div>
           </div>
@@ -85,24 +94,33 @@
               <div class="form-row">
                   <div class="form-group col-12">
                         <label for="inputEditName">Name</label>
-                        <input type="text" class="form-control" id="inputEditName">
+                        <input type="text" class="form-control inputname" id="inputEditName" required>
+                        <div class="invalid-feedback">
+                            Location Name must be ...
+                        </div>
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col-12">
                     <label for="selectEditWatershed">Watershed</label>
-                    <select id="selectEditWatershed" class="form-control">
+                    <select id="selectEditWatershed" class="form-control selectwatershed" required>
                     </select>
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col-6">
                       <label for="inputEditLatitude">Latitude</label>
-                      <input type="text" class="form-control" id="inputEditLatitude">
+                      <input type="text" class="form-control inputlatitude" id="inputEditLatitude" required>
+                    <div class="invalid-feedback">
+                        Latitude must be ...
+                    </div>
                   </div>
                   <div class="form-group col-6">
                       <label for="inputEditLongitude">Longitude</label>
-                      <input type="text" class="form-control" id="inputEditLongitude">
+                      <input type="text" class="form-control inputlongitude" id="inputEditLongitude" required>
+                    <div class="invalid-feedback">
+                        Longitude must be ...
+                    </div>
                   </div>
               </div>
           </div>
@@ -199,9 +217,42 @@
                 }
             }
 
+            $('#createModal').on('hidden.bs.modal', function (e) {
+                $('.inputname').removeClass('is-invalid');
+                $('.inputname').removeClass('is-valid');
+
+                $('.inputlatitude').removeClass('is-invalid');
+                $('.inputlatitude').removeClass('is-valid');
+
+                $('.inputlongitude').removeClass('is-invalid');
+                $('.inputlongitude').removeClass('is-valid');
+
+                $('.selectwatershed').removeClass('is-invalid');
+                $('.selectwatershed').removeClass('is-valid');
+
+            });
+
+            $('#editModal').on('hidden.bs.modal', function (e) {
+                $('.inputname').removeClass('is-invalid');
+                $('.inputname').removeClass('is-valid');
+
+                $('.inputlatitude').removeClass('is-invalid');
+                $('.inputlatitude').removeClass('is-valid');
+
+                $('.inputlongitude').removeClass('is-invalid');
+                $('.inputlongitude').removeClass('is-valid');
+
+                $('.selectwatershed').removeClass('is-invalid');
+                $('.selectwatershed').removeClass('is-valid');
+
+            });
 
             function ValidateLocationEditRequest(dataRequest){
                 var feedback;
+
+                $('.inputname').removeClass('is-invalid');
+                $('.inputlatitude').removeClass('is-invalid');
+                $('.inputlongitude').removeClass('is-invalid');
 
                 var regexName = /^[\w ]+$/;
                 var regexGPS = /^-?\d+\.\d+\,\s?-?\d+\.\d+$/;
@@ -213,6 +264,27 @@
                 console.log("Valid Name: " + hasValidName);
                 console.log("Valid Latitude: " + hasValidLatitude);
                 console.log("Valid Longitude: " + hasValidLongitude);
+
+                if (hasValidName) {
+                    $('.inputname').addClass('is-valid');
+                } else {
+                    $('.inputname').addClass('is-invalid');
+                }
+
+                if (hasValidLatitude) {
+                    $('.inputlatitude').addClass('is-valid');
+                } else {
+                    $('.inputlatitude').addClass('is-invalid');
+                }
+
+                if (hasValidLongitude) {
+                    $('.inputlongitude').addClass('is-valid');
+                } else {
+                    $('.inputlongitude').addClass('is-invalid');
+                }
+
+                $('.selectwatershed').addClass('is-valid');
+
 
                 return (hasValidName && hasValidLatitude && hasValidLongitude);
             }
@@ -403,14 +475,15 @@
                 var watershedId = $('#selectCreateWatershed').val();
                 var latitude = $('#inputCreateLatitude').val();
                 var longitude = $('#inputCreateLongitude').val();
-
-                var requestData = {
-                    name: name,
-                    watershedId: watershedId,
-                    latitude: latitude,
-                    longitude: longitude
-                };
-                
+                var requestData = BuildCreateLocation();
+                //var requestData = {
+                  //  name: name,
+//                    watershedId: watershedId,
+                    //latitude: latitude,
+                    //longitude: longitude
+                //};
+                var isValidRequest = ValidateLocationEditRequest(requestData);
+                console.log('Is Edit Form Submission Valid?: ' + isValidRequest);
 
                 $.ajax({
                     type: 'POST',
