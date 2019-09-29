@@ -3,7 +3,13 @@
     Map   |   Citizen Science
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
-    
+    <!--Style for remove close icon from the google map info window!-->
+    <style >
+        .gm-ui-hover-effect {
+            display: none !important;
+        }
+    </style>
+
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
@@ -115,7 +121,6 @@
                             title: location.SensorName,
                             infowindow: locationInfowindow
                         });
-                        
 
                         google.maps.event.addListener(marker, 'mouseover', function () {
 
@@ -139,6 +144,9 @@
 
                             this.infowindow.open(map, this);
         
+                        });
+                        google.maps.event.addListener(marker, 'mouseout', function () {
+                            this.infowindow.close(map, this);
                         });
                     }
                 });
