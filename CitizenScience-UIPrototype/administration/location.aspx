@@ -247,7 +247,7 @@
 
             });
 
-            function ValidateLocationEditRequest(dataRequest){
+            function ValidateLocationRequest(dataRequest){
                 var feedback;
 
                 $('.inputname').removeClass('is-invalid');

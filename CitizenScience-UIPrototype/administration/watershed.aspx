@@ -38,8 +38,10 @@
           <div class="modal-body">
               <div class="form-group">
                 <label for="inputCreateName">Name</label>
-                <input type="text" class="form-control" id="inputCreateName" aria-describedby="nameCreateHelp">
-                <small id="nameCreateHelp" class="form-text text-muted">The name you would like to give to this Watershed</small>
+                <input type="text" class="form-control inputname" id="inputCreateName" aria-describedby="nameCreateHelp">
+                <div class="invalid-feedback">
+                    Watershed Name must be ...
+                </div>
               </div>
           </div>
           <div class="modal-footer">
@@ -63,8 +65,10 @@
           <div class="modal-body">
               <div class="form-group">
                 <label for="inputName">Name</label>
-                <input type="text" class="form-control" id="inputEditName" aria-describedby="nameEditHelp">
-                <small id="nameEditHelp" class="form-text text-muted">The name you would like to give to this Watershed</small>
+                <input type="text" class="form-control inputname" id="inputEditName" aria-describedby="nameEditHelp">
+                <div class="invalid-feedback">
+                    Watershed Name must be ...
+                </div>
               </div>
           </div>
           <div class="modal-footer">
@@ -77,6 +81,9 @@
 
     <script>
         $(document).ready(function () {
+
+            var table;
+            var editData;
 
             // This function returns the HTML for the 'Action' buttons for each row in the DataTable
             function RenderWatershedActions(data, type, row, meta) {
@@ -92,7 +99,7 @@
                     .addClass('col-12')
                     .append(buttonEdit);
 
-                // Add the 2 button columns to the row
+                // Add the button columns to the row
                 buttonRow.append(buttonLeftColumn);
 
                 // Return the HTML that makes up the row > (column > button > icon)*2
@@ -154,7 +161,7 @@
                 PopulateCreateModal();
 
                 //Display the modal
-                $('#createModal').modal();
+                $('#createModal').modal('show');
             });
 
             // The function when the any 'Edit' button in the DataTable gets clicked
@@ -162,16 +169,62 @@
                 //Get Data for the the row
                 var data = table.row($(this).parents('tr')).data();
 
+                editData = data;
+                console.log(data);
+
                 //Put the data in the Edit Modal
                 PopulateEditModal(data);
 
                 //Display the modal
                 $('#editModal').modal('show');
-                $('#editSubmit').click(function () {
-                    var name = $('#inputEditName').val();
+                
+            });
 
-                    var requestData = { id: data.WatershedID, name: name }
+            function BuildCreateWatershed() {
+                var Name = $('#inputCreateName').val();
 
+                return {
+                    name: Name
+                };
+            }
+
+            function BuildEditWatershed(data) {
+                var Name = $('#inputEditName').val();
+                
+
+                return {
+                    id: data.WatershedID,
+                    name: Name
+                };
+            }
+
+            function ValidateWatershedRequest(requestData) {
+                $('.inputname').removeClass('is-invalid');
+
+                var regexName = /^[\w ]+$/;
+
+                hasValidName = regexName.test(requestData.name);
+
+                console.log("Valid Name: " + hasValidName);
+
+                if (hasValidName) {
+                    $('.inputname').addClass('is-valid');
+                } else {
+                    $('.inputname').addClass('is-invalid');
+                }
+
+                return (hasValidName);
+            }
+
+            $('#editSubmit').click(function () {
+               
+
+                var requestData = BuildEditWatershed(editData)
+                var isValidRequest = ValidateWatershedRequest(requestData);
+                console.log('Is Edit Form Submission Valid?: ' + isValidRequest);
+                console.log(requestData)
+
+                if (isValidRequest) {
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
@@ -190,36 +243,48 @@
                             console.log(errorData);
                         }
                     });
-                });
+                }
+
             });
 
             // This function runs when the 'Create Modal' gets submitted
             $('#createSubmit').click(function () {
-                var name = $('#inputCreateName').val();
 
-                var requestData = { name: name }
-                
-                $.ajax({
-                    type: 'POST',
-                    contentType: 'application/json; charset=utf-8',
-                    url: 'http://localhost:63073/api.asmx/CreateWatershed',
-                    data: JSON.stringify(requestData),
-                    dataType: 'JSON',
-                    success: function (responseData) {
-                        console.log('SUCCESS');
-                        console.log(responseData);
+                var requestData = BuildCreateWatershed()
+                var isValidRequest = ValidateWatershedRequest(requestData);
+                console.log('Is Creation Form Submission Valid?: ' + isValidRequest);
 
-                        $('#createModal').modal('hide');
-                        table.ajax.reload();
-                    },
-                    error: function (errorData) {
-                        console.log('ERROR');
-                        console.log(errorData);
-                    }
-                });
+                if (isValidRequest) {
+                    $.ajax({
+                        type: 'POST',
+                        contentType: 'application/json; charset=utf-8',
+                        url: 'http://localhost:63073/api.asmx/CreateWatershed',
+                        data: JSON.stringify(requestData),
+                        dataType: 'JSON',
+                        success: function (responseData) {
+                            console.log('SUCCESS');
+                            console.log(responseData);
 
+                            $('#createModal').modal('hide');
+                            table.ajax.reload();
+                        },
+                        error: function (errorData) {
+                            console.log('ERROR');
+                            console.log(errorData);
+                        }
+                    });
+                }
             });
 
+            $('#createModal').on('hidden.bs.modal', function (e) {
+                $('.inputname').removeClass('is-invalid');
+                $('.inputname').removeClass('is-valid');
+            });
+
+            $('#editModal').on('hidden.bs.modal', function (e) {
+                $('.inputname').removeClass('is-invalid');
+                $('.inputname').removeClass('is-valid');
+            });
         });
     </script>
 </asp:Content>
