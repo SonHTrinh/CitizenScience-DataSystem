@@ -247,6 +247,7 @@
     <Content Include="administration\administration.master" />
     <None Include="packages.config" />
     <Content Include="style\custom\TEMPLE_BRANDING.md" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

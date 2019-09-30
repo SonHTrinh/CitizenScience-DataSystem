@@ -146,7 +146,7 @@
                 $.ajax({
                     type: 'GET',
                     contentType: 'application/json; charset=utf-8',
-                    url: 'http://localhost:63073/api.asmx/ReadAllWatersheds',
+                    url: 'https://np-stem.temple.edu/CIS4396-F06/api.asmx/ReadAllWatersheds',
                     dataType: 'JSON'
                 }).done(function (responseData) {
 
@@ -158,7 +158,7 @@
                     table = $('#DataTable').DataTable({
                         ajax: {
                             // The location to HTTP GET the data for the table
-                            url: 'http://localhost:63073/api.asmx/ReadAllLocation',
+                            url: 'https://np-stem.temple.edu/CIS4396-F06/api.asmx/ReadAllLocation',
                             dataSrc: ''
                         },
                         columns: [
@@ -338,7 +338,7 @@
                 $.ajax({
                     type: 'GET',
                     contentType: 'application/json; charset=utf-8',
-                    url: 'http://localhost:63073/api.asmx/ReadAllWatersheds',
+                    url: 'https://np-stem.temple.edu/CIS4396-F06/api.asmx/ReadAllWatersheds',
                     dataType: 'JSON',
                     success: function (responseData) {
 
@@ -367,7 +367,7 @@
                 $.ajax({
                     type: 'GET',
                     contentType: 'application/json; charset=utf-8',
-                    url: 'http://localhost:63073/api.asmx/ReadAllWatersheds',
+                    url: 'https://np-stem.temple.edu/CIS4396-F06/api.asmx/ReadAllWatersheds',
                     dataType: 'JSON',
                     success: function (responseData) {
 
@@ -451,7 +451,7 @@
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: 'http://localhost:63073/api.asmx/UpdateLocation',
+                        url: 'https://np-stem.temple.edu/CIS4396-F06/api.asmx/UpdateLocation',
                         data: JSON.stringify(requestData),
                         dataType: 'JSON',
                         success: function (responseData) {
@@ -479,7 +479,7 @@
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
-                    url: 'http://localhost:63073/api.asmx/CreateLocation',
+                    url: 'https://np-stem.temple.edu/CIS4396-F06/api.asmx/CreateLocation',
                     data: JSON.stringify(requestData),
                     dataType: 'JSON',
                     success: function (responseData) {
