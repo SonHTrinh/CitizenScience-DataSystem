@@ -18,7 +18,6 @@
                     <tr>
                         <th scope="col">Name</th>
                         <th scope="col">Watershed</th>
-                        <th scope="col">Serial</th>
                         <th scope="col">Latitude</th>
                         <th scope="col">Longitude</th>
                         <th scope="col"></th>
@@ -43,30 +42,33 @@
               <div class="form-row">
                   <div class="form-group col-12">
                         <label for="inputCreateName">Name</label>
-                        <input type="text" class="form-control" id="inputCreateName">
+                        <input type="text" class="form-control inputname" id="inputCreateName">
+                        <div class="invalid-feedback">
+                            Location Name must be ...
+                        </div>
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col-12">
                     <label for="selectCreateWatershed">Watershed</label>
-                    <select id="selectCreateWatershed" class="form-control">
+                    <select id="selectCreateWatershed" class="form-control selectwatershed">
                     </select>
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="form-group col-12">
-                        <label for="inputCreateSerial">Serial Number</label>
-                        <input type="text" class="form-control" id="inputCreateSerial">
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col-6">
                       <label for="inputCreateLatitude">Latitude</label>
-                      <input type="text" class="form-control" id="inputCreateLatitude">
+                      <input type="text" class="form-control inputlatitude" id="inputCreateLatitude">
+                    <div class="invalid-feedback">
+                        Latitude must be ...
+                    </div>
                   </div>
                   <div class="form-group col-6">
                       <label for="inputCreateLongitude">Longitude</label>
-                      <input type="text" class="form-control" id="inputCreateLongitude">
+                      <input type="text" class="form-control inputlongitude" id="inputCreateLongitude">
+                    <div class="invalid-feedback">
+                        Longitude must be ...
+                    </div>
                   </div>
               </div>
           </div>
@@ -92,30 +94,33 @@
               <div class="form-row">
                   <div class="form-group col-12">
                         <label for="inputEditName">Name</label>
-                        <input type="text" class="form-control" id="inputEditName">
+                        <input type="text" class="form-control inputname" id="inputEditName" required>
+                        <div class="invalid-feedback">
+                            Location Name must be ...
+                        </div>
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col-12">
                     <label for="selectEditWatershed">Watershed</label>
-                    <select id="selectEditWatershed" class="form-control">
+                    <select id="selectEditWatershed" class="form-control selectwatershed" required>
                     </select>
-                  </div>
-              </div>
-              <div class="form-row">
-                  <div class="form-group col-12">
-                        <label for="inputEditSerial">Serial Number</label>
-                        <input type="text" class="form-control" id="inputEditSerial">
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col-6">
                       <label for="inputEditLatitude">Latitude</label>
-                      <input type="text" class="form-control" id="inputEditLatitude">
+                      <input type="text" class="form-control inputlatitude" id="inputEditLatitude" required>
+                    <div class="invalid-feedback">
+                        Latitude must be ...
+                    </div>
                   </div>
                   <div class="form-group col-6">
                       <label for="inputEditLongitude">Longitude</label>
-                      <input type="text" class="form-control" id="inputEditLongitude">
+                      <input type="text" class="form-control inputlongitude" id="inputEditLongitude" required>
+                    <div class="invalid-feedback">
+                        Longitude must be ...
+                    </div>
                   </div>
               </div>
           </div>
@@ -130,6 +135,7 @@
     <script>
         $(document).ready(function () {
             var table;
+            var editData;
             
             // This fuction builds the DataTable. Because locations only store watershedIDs we must make a mapping of the watershed IDs to Names
             function initDataTable() {
@@ -165,7 +171,6 @@
                                     return watershedMap.get(data.WatershedID);
                                 }
                             },
-                            { data: 'SerialNumber' },
                             { data: 'Latitude' },
                             { data: 'Longitude' },
                             // The 'Action' column of the table
@@ -179,6 +184,109 @@
                     });
 
                 });
+            }
+
+
+            function BuildCreateLocation() {
+                var Name = $('#inputCreateName').val();
+                var WatershedId = $('#selectCreateWatershedId').val();
+                var Latitude = $('#inputCreateLatitude').val();
+                var Longitude = $('#inputCreateLongitude').val();
+
+                return {
+                    name: Name,
+                    watershedId: WatershedId,
+                    latitude: Latitude,
+                    longitude: Longitude
+                }
+            }
+
+            function BuildEditLocation(id) {
+                var LocationId = id;
+                var Name = $('#inputEditName').val();
+                var WatershedId = $('#selectEditWatershed').val();
+                var Latitude = $('#inputEditLatitude').val();
+                var Longitude = $('#inputEditLongitude').val();
+
+                return {
+                    id: LocationId,
+                    name: Name,
+                    watershedId: WatershedId,
+                    latitude: Latitude,
+                    longitude: Longitude
+                }
+            }
+
+            $('#createModal').on('hidden.bs.modal', function (e) {
+                $('.inputname').removeClass('is-invalid');
+                $('.inputname').removeClass('is-valid');
+
+                $('.inputlatitude').removeClass('is-invalid');
+                $('.inputlatitude').removeClass('is-valid');
+
+                $('.inputlongitude').removeClass('is-invalid');
+                $('.inputlongitude').removeClass('is-valid');
+
+                $('.selectwatershed').removeClass('is-invalid');
+                $('.selectwatershed').removeClass('is-valid');
+
+            });
+
+            $('#editModal').on('hidden.bs.modal', function (e) {
+                $('.inputname').removeClass('is-invalid');
+                $('.inputname').removeClass('is-valid');
+
+                $('.inputlatitude').removeClass('is-invalid');
+                $('.inputlatitude').removeClass('is-valid');
+
+                $('.inputlongitude').removeClass('is-invalid');
+                $('.inputlongitude').removeClass('is-valid');
+
+                $('.selectwatershed').removeClass('is-invalid');
+                $('.selectwatershed').removeClass('is-valid');
+
+            });
+
+            function ValidateLocationRequest(dataRequest){
+                var feedback;
+
+                $('.inputname').removeClass('is-invalid');
+                $('.inputlatitude').removeClass('is-invalid');
+                $('.inputlongitude').removeClass('is-invalid');
+
+                var regexName = /^[\w ]+$/;
+                var regexGPS = /^-?\d+\.\d+\,\s?-?\d+\.\d+$/;
+
+                hasValidName = regexName.test(dataRequest.name);
+                hasValidLatitude = (!isNaN(dataRequest.latitude) && dataRequest.latitude <= 90 && dataRequest.latitude >= -90 && dataRequest.latitude != "");
+                hasValidLongitude = (!isNaN(dataRequest.longitude) && dataRequest.longitude <= 90 && dataRequest.longitude >= -90 && dataRequest.longitude != "");
+
+                console.log("Valid Name: " + hasValidName);
+                console.log("Valid Latitude: " + hasValidLatitude);
+                console.log("Valid Longitude: " + hasValidLongitude);
+
+                if (hasValidName) {
+                    $('.inputname').addClass('is-valid');
+                } else {
+                    $('.inputname').addClass('is-invalid');
+                }
+
+                if (hasValidLatitude) {
+                    $('.inputlatitude').addClass('is-valid');
+                } else {
+                    $('.inputlatitude').addClass('is-invalid');
+                }
+
+                if (hasValidLongitude) {
+                    $('.inputlongitude').addClass('is-valid');
+                } else {
+                    $('.inputlongitude').addClass('is-invalid');
+                }
+
+                $('.selectwatershed').addClass('is-valid');
+
+
+                return (hasValidName && hasValidLatitude && hasValidLongitude);
             }
 
             // initialize the DataTable
@@ -219,7 +327,7 @@
                     .addClass('btn-info')
                     .addClass('btn-block')
                     .append(icon);
-                    
+
                 return button;
             }
 
@@ -288,18 +396,17 @@
             // This function fills out the data in the 'Create Modal' before displaying it
             function PopulateCreateModal() {
                 $('#inputCreateName').val('');
-                $('#inputCreateSerial').val('');
                 $('#inputCreateLatitude').val('');
                 $('#inputCreateLongitude').val('');
 
                 PopulateCreateWatershedSelect();
             }
 
+
             // This function fills out the fields in the 'Edit Modal' before displaying it
             function PopulateEditModal(data) {
                 $('#inputEditName').val(data.SensorName);
                 $('#inputEditLatitude').val(data.Latitude);
-                $('#inputEditSerial').val(data.SerialNumber);
                 $('#inputEditLongitude').val(data.Longitude);
 
                 PopulateEditWatershedSelect(data.WatershedID);
@@ -314,32 +421,33 @@
                 $('#createModal').modal('show');
             });
 
+
+            
             // The function when the any 'Edit' button in the DataTable gets clicked
             $('#DataTable').on('click', '.editButton', function () {
                 //Get Data for the the row
-                var data = table.row($(this).parents('tr')).data();
+                editData = table.row($(this).parents('tr')).data();
 
                 //Put the data in the Edit Modal
-                PopulateEditModal(data);
+                PopulateEditModal(editData);
 
                 //Display the modal
                 $('#editModal').modal('show');
-                $('#editSubmit').click(function () {
-                    var name = $('#inputEditName').val();
-                    var watershedId = $('#selectEditWatershed').val();
-                    var serial = $('#inputEditSerial').val();
-                    var latitude = $('#inputEditLatitude').val();
-                    var longitude = $('#inputEditLongitude').val();
 
-                    var requestData = {
-                        id: data.LocationID,
-                        name: name,
-                        watershedId: watershedId,
-                        serial: serial,
-                        latitude: latitude,
-                        longitude: longitude
-                    }
+                $('#editSubmit').prop("onclick", null);
 
+                
+            });
+
+            $('#editSubmit').click(function () {
+               
+
+                var requestData = BuildEditLocation(editData.LocationID);
+
+                var isValidRequest = ValidateLocationRequest(requestData);
+                console.log('Is Edit Form Submission Valid?: ' + isValidRequest);
+
+                if (isValidRequest) {
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
@@ -358,37 +466,14 @@
                             console.log(errorData);
                         }
                     });
-                });
-            });
-
-            // The function when any 'Archive' button in the DataTable gets clicked
-            $('#DataTable').on('click', '.archiveButton', function () {
-                //Get Data for the the row
-                var data = table.row($(this).parents('tr')).data();
-
-                //Put the data in the Edit Modal
-                PopulateArchiveModal(data);
-
-                //Display the modal
-                $('#archiveModal').modal('show');
+                }
             });
 
             // This function runs when the 'Create Modal' gets submitted
             $('#createSubmit').click(function () {
-                var name = $('#inputCreateName').val();
-                var watershedId = $('#selectCreateWatershed').val();
-                var serial = $('#inputCreateSerial').val();
-                var latitude = $('#inputCreateLatitude').val();
-                var longitude = $('#inputCreateLongitude').val();
-
-                var requestData = {
-                    name: name,
-                    watershedId: watershedId,
-                    serial: serial,
-                    latitude: latitude,
-                    longitude: longitude
-                };
-                
+                var requestData = BuildCreateLocation();
+                var isValidRequest = ValidateLocationRequest(requestData);
+                console.log('Is Create Form Submission Valid?: ' + isValidRequest);
 
                 $.ajax({
                     type: 'POST',
