@@ -75,11 +75,6 @@
     <div id="map" class="shadow-lg p-3 mb-5 bg-white rounded"></div>
 
     <script>
-        
-
-
-        
-
         $(function () {
             var map = initMap();
 
@@ -103,6 +98,8 @@
                                 + "<b>Latitude: </b>" + location.Latitude
                                 + "<br/>"
                                 + "<b>Longitude: </b>" + location.Longitude
+                                + "<br/> <br/>"
+                                + "<a href='#' data-toggle='modal' data-target='#locationModal'>more details >></a>"
                             //Dummy profile picture 
                         });
 
@@ -138,17 +135,14 @@
         
                         });
                         /*google.maps.event.addListener(marker, 'mouseout', function () {
+                         
                             this.infowindow.close(map, this);
+
                         });*/
                     }
                 });
-
-                
-
             }
-            
-
-
+          
             function initMap() {
                 theMap = new google.maps.Map(document.getElementById('map'), {
                     center: new google.maps.LatLng(40.0319, -75.1134),
