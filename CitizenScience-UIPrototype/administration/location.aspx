@@ -189,10 +189,10 @@
 
             function BuildCreateLocation() {
                 var Name = $('#inputCreateName').val();
-                var WatershedId = $('#selectCreateWatershedId').val();
+                var WatershedId = $('#selectCreateWatershed').val();
                 var Latitude = $('#inputCreateLatitude').val();
                 var Longitude = $('#inputCreateLongitude').val();
-
+                console.log('WATERSHEDID: ' + WatershedId);
                 return {
                     name: Name,
                     watershedId: WatershedId,
@@ -472,6 +472,7 @@
             // This function runs when the 'Create Modal' gets submitted
             $('#createSubmit').click(function () {
                 var requestData = BuildCreateLocation();
+                console.log(requestData);
                 var isValidRequest = ValidateLocationRequest(requestData);
                 console.log('Is Create Form Submission Valid?: ' + isValidRequest);
 
