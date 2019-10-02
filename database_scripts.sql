@@ -110,6 +110,17 @@ CREATE TABLE [dbo].[Image] (
 
 GO
 
+CREATE TABLE [dbo].[Volunteer] (
+    [VolunteerID]       INT            IDENTITY (1, 1) NOT NULL,
+    [FirstName]         NVARCHAR (MAX) NOT NULL,
+    [LastName]          NVARCHAR (MAX) NOT NULL,
+    [Email]             NVARCHAR (MAX) NOT NULL,
+    [Message]           NVARCHAR (MAX) NULL,    
+    PRIMARY KEY CLUSTERED ([VolunteerID] ASC)
+);
+
+GO
+
 -------------------- Custom Types --------------------
 
 CREATE TYPE [dbo].[TEMPERATUREDATA] AS TABLE(
