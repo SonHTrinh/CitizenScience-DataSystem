@@ -150,7 +150,7 @@
                 });
 
                 $.ajax({
-                    url: "api.asmx/AllLocations",
+                    url: "/api.asmx/AllLocations",
                     success: function (data) {
                         for (var i = 0; i < data.length; i++) {
                             var locationObj = data[i];
@@ -166,7 +166,7 @@
             //todo: handle failure
 
             $.ajax({
-                url: "api.asmx/Watersheds",
+                url: "/api.asmx/Watersheds",
                 success: populateWatersheds
             });
 
@@ -182,7 +182,7 @@
                 $('#ddBtnLocation').text('Locations');
 
                 $.ajax({
-                    url: "api.asmx/Location?watershedId=" + watershedId,
+                    url: "/api.asmx/Location?watershedId=" + watershedId,
                     success: function (data) {
                         console.log(data);
                         $('#locationdiv').removeClass('invisible');

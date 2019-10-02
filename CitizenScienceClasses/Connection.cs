@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
 namespace CitizenScienceClasses
 {
@@ -18,7 +19,10 @@ namespace CitizenScienceClasses
         //FOR HOME
         //String SqlConnectString = "server=67.205.188.98;Database=mike1;User id=mike;Password=CIS_TEMPLE_citizen-science!123";
 
-        String SqlConnectString = "server=67.205.188.98;Database=brian0;User id=SA;Password=H5$5L7!Ajn4ef#3iYH";
+        //FOR PUBLIC INTERNET
+        //String SqlConnectString = "server=67.205.188.98;Database=brian0;User id=SA;Password=H5$5L7!Ajn4ef#3iYH";
+
+        String SqlConnectString = ConfigurationManager.ConnectionStrings["Database"].ConnectionString; 
 
         SqlConnection myConnectionSql;
         SqlCommand objCmd;

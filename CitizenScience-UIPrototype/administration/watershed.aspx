@@ -139,7 +139,7 @@
             var table = $('#DataTable').DataTable({
                 ajax: {
                     // The location to HTTP GET the data for the table
-                    url: 'http://localhost:63073/api.asmx/Watersheds',
+                    url: '/api.asmx/Watersheds',
                     dataSrc: ''
                 },
                 columns: [
@@ -228,7 +228,7 @@
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: 'http://localhost:63073/api.asmx/UpdateWatershed',
+                        url: '/api.asmx/UpdateWatershed',
                         data: JSON.stringify(requestData),
                         dataType: 'JSON',
                         success: function (responseData) {
@@ -258,7 +258,7 @@
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: 'http://localhost:63073/api.asmx/CreateWatershed',
+                        url: '~/api.asmx/CreateWatershed',
                         data: JSON.stringify(requestData),
                         dataType: 'JSON',
                         success: function (responseData) {
