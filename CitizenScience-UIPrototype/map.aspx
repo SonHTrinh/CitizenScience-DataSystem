@@ -77,6 +77,7 @@
     <script>
         $(function () {
             var map = initMap();
+            var prevInfo = false;
 
             function buildMarker(location) {
 
@@ -112,9 +113,11 @@
                         });
 
                         google.maps.event.addListener(marker, 'mouseover', function () {
-
+                            if (prevInfo) {
+                                prevInfo.close();
+                            }
                             this.infowindow.open(map, this);
-
+                            prevInfo = this.infowindow;
                         });
 
                         /*google.maps.event.addListener(marker, 'mouseout', function () {
