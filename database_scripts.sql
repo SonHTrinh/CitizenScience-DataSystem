@@ -110,6 +110,18 @@ CREATE TABLE [dbo].[Image] (
 
 GO
 
+CREATE TABLE [dbo].[Volunteer] (
+    [VolunteerID]      INT            IDENTITY (1, 1) NOT NULL,
+    [FirstName]        NVARCHAR (MAX) NOT NULL,
+    [LastName]         NVARCHAR (MAX) NOT NULL,
+    [Email]            NVARCHAR (MAX) NOT NULL,
+    [Message]          NVARCHAR (MAX) NULL,
+    [DateSubmitted]    DATE           NOT NULL,
+    PRIMARY KEY CLUSTERED ([VolunteerID] ASC)
+);
+
+GO
+
 -------------------- Custom Types --------------------
 
 CREATE TYPE [dbo].[TEMPERATUREDATA] AS TABLE(
@@ -124,6 +136,7 @@ GO
 
 -------------------- Stored Procedures --------------------
 
+----- GET Procedures
 CREATE PROCEDURE [dbo].[GetAllLocations]
 AS
 	SELECT * FROM Location
@@ -173,6 +186,13 @@ AS
 
 GO
 
+CREATE PROCEDURE [dbo].[GetAllVolunteers]
+AS
+	SELECT * FROM Volunteer
+
+GO
+
+----- CRUD Temperature
 CREATE PROCEDURE [dbo].[AddTemperatures]
 	@locationid int,
 	@uploadid int,

@@ -88,6 +88,36 @@ namespace CitizenScience_UIPrototype
 
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void Volunteers()
+        {
+            DataSet volunteerDataSet = ClassFunctions.GetVolunteers();
+            List<Volunteer> volunteerList = new List<Volunteer>();
+
+            for (int i = 0; i < volunteerDataSet.Tables[0].Rows.Count; i++)
+            {
+                DataRow dataRow = volunteerDataSet.Tables[0].Rows[i];
+
+                Volunteer volunteer = new Volunteer
+                {
+                    VolunteerID = Convert.ToInt32(dataRow["VolunteerID"]),
+                    FirstName = Convert.ToString(dataRow["FirstName"]),
+                    LastName = Convert.ToString(dataRow["LastName"]),
+                    Email = Convert.ToString(dataRow["Email"]),
+                    Message = Convert.ToString(dataRow["Message"]),
+                    DateSubmitted = Convert.ToDateTime(dataRow["DateSubmitted"]),
+                };
+
+                volunteerList.Add(volunteer);
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Clear();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(volunteerList));
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void Location(int watershedId)
         {
             DataSet locationDataSet = ClassFunctions.GetLocationsByWatershed(watershedId);

@@ -20,6 +20,8 @@ namespace CitizenScienceClasses
             return conn.GetDataSetUsingCmdObj(comm);
         }
 
+
+
         /////////////////////////////////   LOCATION FUNCTIONS
         public static DataSet GetLocations()
         {
@@ -29,7 +31,6 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllLocations";
             return conn.GetDataSetUsingCmdObj(comm);
         }
-
         public static DataSet GetLocationsByWatershed(int watershedID)
         {
             DBConnect conn = new DBConnect();
@@ -39,7 +40,6 @@ namespace CitizenScienceClasses
             comm.Parameters.AddWithValue("@watershedID", watershedID);
             return conn.GetDataSetUsingCmdObj(comm);
         }
-
         public static Location CreateLocation(int watershedId, string name, double latitude, double longitude)
         {
             Location result = null;
@@ -71,7 +71,6 @@ namespace CitizenScienceClasses
 
             return result;
         }
-
         public static Location ReadLocation(int id)
         {
             Location result = null;
@@ -100,7 +99,6 @@ namespace CitizenScienceClasses
 
             return result;
         }
-
         public static List<Location> ReadAllLocation()
         {
             List<Location> result = new List<Location>();
@@ -131,7 +129,6 @@ namespace CitizenScienceClasses
 
             return result;
         }
-
         public static Location UpdateLocation(int id, int watershedId, string name, double latitude, double longitude)
         {
             Location result = null;
@@ -164,7 +161,6 @@ namespace CitizenScienceClasses
 
             return result;
         }
-
         public static bool DeleteLocation(int id)
         {
             bool result = false;
@@ -173,6 +169,8 @@ namespace CitizenScienceClasses
 
             return result;
         }
+
+
 
         /////////////////////////////////   TEMPERATURE FUNCTIONS
         public static DataSet GetAllTemperatures()
@@ -209,8 +207,7 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllTemperaturesByMultipleLocationIds";
             comm.Parameters.AddWithValue("@listOfLocationID", commaList);
             return conn.GetDataSetUsingCmdObj(comm);
-        }
-        
+        }        
         public static int AddTempsToDatabase(List<Temperature> temperatureList, int locationid, int uploadid)
         {
             int k = 0;
@@ -230,7 +227,6 @@ namespace CitizenScienceClasses
             }
             return k;
         }
-
         public static int BulkTemperatureDataInsert(List<Temperature> temperatureList, int locationid, int uploadid)
         {
             int result = 0;
@@ -260,6 +256,8 @@ namespace CitizenScienceClasses
             return result;
         }
 
+
+
         /////////////////////////////////   WATERSHED FUNCTIONS
         public static DataSet GetWatersheds()
         {
@@ -269,9 +267,6 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllWatersheds";
             return conn.GetDataSetUsingCmdObj(comm);
         }
-
-
-
         public static Watershed CreateWatershed(string name)
         {
             Watershed watershed = null;
@@ -297,7 +292,6 @@ namespace CitizenScienceClasses
 
             return watershed;
         }
-
         public static Watershed ReadWatershed(int id)
         {
             Watershed watershed = null;
@@ -323,7 +317,6 @@ namespace CitizenScienceClasses
             
             return watershed;
         }
-
         public static Watershed UpdateWatershed(int id, string name)
         {
             Watershed watershed = null;
@@ -350,7 +343,6 @@ namespace CitizenScienceClasses
 
             return watershed;
         }
-
         public static bool DeleteWatershed(int id)
         {
             bool result = false;
@@ -365,6 +357,18 @@ namespace CitizenScienceClasses
 
             return result;
         }
-    }
+
+
+
+        /////////////////////////////////   VOLUNTEER FUNCTIONS
+        public static DataSet GetVolunteers()
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAllVolunteers";
+            return conn.GetDataSetUsingCmdObj(comm);
+        }
+}
 }
 
