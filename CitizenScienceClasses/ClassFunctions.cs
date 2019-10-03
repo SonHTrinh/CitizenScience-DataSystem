@@ -365,6 +365,44 @@ namespace CitizenScienceClasses
 
             return result;
         }
+
+        ///////////////////////////////// IMAGE Functions
+        
+        public static bool SetLocationImage(int locationId, byte[] bytes)
+        {
+            bool result = false;
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "SetLocationImage";
+            comm.Parameters.AddWithValue("@locationId", locationId);
+            comm.Parameters.AddWithValue("@bytes", bytes);
+            result = (conn.DoUpdateUsingCmdObj(comm) == 1);
+
+            return result;
+        }
+
+        public static byte[] GetLocationImage(int locationId)
+        {
+            byte[] result = null;
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetLocationImage";
+            comm.Parameters.AddWithValue("@locationId", locationId);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                result = Encoding.UTF8.GetBytes(dataRow["ProfileImage"].ToString());
+            }
+
+            return result;
+        }
     }
 }
 
