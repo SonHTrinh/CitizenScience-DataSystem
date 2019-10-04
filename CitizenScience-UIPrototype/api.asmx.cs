@@ -118,6 +118,32 @@ namespace CitizenScience_UIPrototype
 
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void Admins()
+        {
+            DataSet adminDataSet = ClassFunctions.GetAdmins();
+            List<Admin> adminList = new List<Admin>();
+
+            for (int i = 0; i < adminDataSet.Tables[0].Rows.Count; i++)
+            {
+                DataRow dataRow = adminDataSet.Tables[0].Rows[i];
+
+                Admin admin = new Admin
+                {
+                    AdminID = Convert.ToInt32(dataRow["AdminID"]),
+                    Accessnet = Convert.ToString(dataRow["Accessnet"])                
+                };
+
+                adminList.Add(admin);
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Clear();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(adminList));
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void Location(int watershedId)
         {
             DataSet locationDataSet = ClassFunctions.GetLocationsByWatershed(watershedId);
@@ -386,5 +412,39 @@ namespace CitizenScience_UIPrototype
             Context.Response.End();
         }
 
+        //////////////////////////// CRUD Admin \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void CreateAdmin(string accessnet)
+        {
+            Admin result = ClassFunctions.CreateAdmin(accessnet);
+
+            if (result != null)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, result);
+            }
+
+        }
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void UpdateAdmin(int id, string accessnet)
+        {
+            Admin result = ClassFunctions.UpdateAdmin(id, accessnet);
+
+            if (result != null)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, result);
+            }
+
+        }
     }
 }

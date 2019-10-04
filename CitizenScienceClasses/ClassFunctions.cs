@@ -369,6 +369,67 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllVolunteers";
             return conn.GetDataSetUsingCmdObj(comm);
         }
-}
+
+
+
+        /////////////////////////////////   ADMIN FUNCTIONS
+        public static DataSet GetAdmins()
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAllAdmins";
+            return conn.GetDataSetUsingCmdObj(comm);
+        }
+        public static Admin CreateAdmin(string accessnet)
+        {
+            Admin admin = null;
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "CreateAdmin";
+            comm.Parameters.AddWithValue("@accessnet", accessnet);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                admin = new Admin
+                {
+                    AdminID = Convert.ToInt32(dataRow["AdminID"]),
+                    Accessnet = Convert.ToString(dataRow["Accessnet"])
+                };
+            }
+
+            return admin;
+        }
+        public static Admin UpdateAdmin(int id, string accessnet)
+        {
+            Admin admin = null;
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "UpdateAdmin";
+            comm.Parameters.AddWithValue("@id", id);
+            comm.Parameters.AddWithValue("@accessnet", accessnet);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                admin = new Admin
+                {
+                    AdminID = Convert.ToInt32(dataRow["AdminID"]),
+                    Accessnet = Convert.ToString(dataRow["Accessnet"])
+                };
+            }
+
+            return admin;
+        }
+    }
 }
 
