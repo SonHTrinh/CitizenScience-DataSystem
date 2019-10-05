@@ -256,6 +256,35 @@ namespace CitizenScienceClasses
             return result;
         }
 
+        public static List<Temperature> GetLocationTemperaturesByDateRange(int locationId, DateTime startDate, DateTime endDate)
+        {
+            List<Temperature> result = new List<Temperature>();
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetLocationTemperatureByDateRange";
+            comm.Parameters.AddWithValue("@locationid", locationId);
+            comm.Parameters.AddWithValue("@startdate", startDate);
+            comm.Parameters.AddWithValue("@enddate", endDate);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                result.Add(new Temperature
+                {
+                    Id = Convert.ToInt32(dataRow["TempID"]),
+                    Timestamp = Convert.ToDateTime(dataRow["Timestamp"]),
+                    Celsius = Convert.ToDouble(dataRow["TempC"]),
+                    Fahrenheit = Convert.ToDouble(dataRow["TempF"])
+                });
+            }
+
+            return result;
+        }
+
 
 
         /////////////////////////////////   WATERSHED FUNCTIONS
@@ -369,6 +398,6 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllVolunteers";
             return conn.GetDataSetUsingCmdObj(comm);
         }
-}
+    }
 }
 

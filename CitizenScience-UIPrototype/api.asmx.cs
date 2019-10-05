@@ -386,5 +386,25 @@ namespace CitizenScience_UIPrototype
             Context.Response.End();
         }
 
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true)]
+        public void GetLocationTemperaturesByDateRange(int locationId, string start, string end)
+        {
+            DateTime startDate = DateTime.Parse(start);
+            DateTime endDate = DateTime.Parse(end);
+
+            List<Temperature> result = ClassFunctions.GetLocationTemperaturesByDateRange(locationId, startDate, endDate);
+
+            if (result != null)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, result);
+            }
+
+        }
+
     }
 }

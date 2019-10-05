@@ -192,6 +192,16 @@ AS
 
 GO
 
+CREATE PROCEDURE [dbo].[GetLocationTemperaturesByDateRange]
+	@locationid int,
+	@startdate datetime,
+	@enddate datetime
+AS
+	SELECT * FROM Temperature
+	WHERE LocationID = @locationid AND [Timestamp] >= @startdate AND [Timestamp] <= @enddate
+
+GO
+
 ----- CRUD Temperature
 CREATE PROCEDURE [dbo].[AddTemperatures]
 	@locationid int,
