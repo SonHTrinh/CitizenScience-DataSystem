@@ -49,7 +49,6 @@ namespace CitizenScience_UIPrototype.administration
                     List<Temperature> temperatureList = DataProcessor.ReadCsvFile(fileStream);
 
                     int locationId = int.Parse(ddlLocations.SelectedValue);
-                    int uploadId = 1;
 
                     ClassFunctions.BulkTemperatureDataInsert(temperatureList, locationId);
 

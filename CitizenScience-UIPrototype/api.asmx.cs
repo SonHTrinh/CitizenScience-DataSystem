@@ -388,6 +388,7 @@ namespace CitizenScience_UIPrototype
 
         [WebMethod]
         [ScriptMethod(UseHttpGet = true)]
+        // start and end are strings that will get parsed for datetime ex: "MM-DD-YYYY" and "YYYY-MM-DD"
         public void GetLocationTemperaturesByDateRange(int locationId, string start, string end)
         {
             DateTime startDate = DateTime.Parse(start);
