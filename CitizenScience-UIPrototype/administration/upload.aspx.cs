@@ -51,7 +51,7 @@ namespace CitizenScience_UIPrototype.administration
                     int locationId = int.Parse(ddlLocations.SelectedValue);
                     int uploadId = 1;
 
-                    ClassFunctions.BulkTemperatureDataInsert(temperatureList, locationId, uploadId);
+                    ClassFunctions.BulkTemperatureDataInsert(temperatureList, locationId);
 
                     txtLocation.InnerText = ddlLocations.SelectedItem.Text;
                     txtRowcount.InnerText = temperatureList.Count.ToString();

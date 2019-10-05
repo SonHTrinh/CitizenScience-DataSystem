@@ -208,7 +208,7 @@ namespace CitizenScienceClasses
             comm.Parameters.AddWithValue("@listOfLocationID", commaList);
             return conn.GetDataSetUsingCmdObj(comm);
         }        
-        public static int AddTempsToDatabase(List<Temperature> temperatureList, int locationid, int uploadid)
+        public static int AddTempsToDatabase(List<Temperature> temperatureList, int locationid)
         {
             int k = 0;
             DBConnect objDb = new DBConnect();
@@ -218,7 +218,6 @@ namespace CitizenScienceClasses
                 comm.CommandType = CommandType.StoredProcedure;
                 comm.CommandText = "AddTemperatures";
                 comm.Parameters.AddWithValue("@locationid", locationid);
-                comm.Parameters.AddWithValue("@uploadid", uploadid);
                 comm.Parameters.AddWithValue("@ts", t.Timestamp);
                 comm.Parameters.AddWithValue("@temp_c", t.Celsius);
                 comm.Parameters.AddWithValue("@temp_f", t.Fahrenheit);
@@ -227,21 +226,20 @@ namespace CitizenScienceClasses
             }
             return k;
         }
-        public static int BulkTemperatureDataInsert(List<Temperature> temperatureList, int locationid, int uploadid)
+        public static int BulkTemperatureDataInsert(List<Temperature> temperatureList, int locationid)
         {
             int result = 0;
 
             DataTable dataTable = new DataTable();
 
             dataTable.Columns.Add(new DataColumn("LocationID", typeof(string)));
-            dataTable.Columns.Add(new DataColumn("UploadID", typeof(int)));
             dataTable.Columns.Add(new DataColumn("Timestamp", typeof(DateTime)));
             dataTable.Columns.Add(new DataColumn("TempC", typeof(double)));
             dataTable.Columns.Add(new DataColumn("TempF", typeof(double)));
 
             foreach(Temperature temperature in temperatureList)
             {
-                dataTable.Rows.Add(locationid, uploadid, temperature.Timestamp, temperature.Celsius, temperature.Fahrenheit);
+                dataTable.Rows.Add(locationid, temperature.Timestamp, temperature.Celsius, temperature.Fahrenheit);
             }
 
             DBConnect objDb = new DBConnect();
@@ -263,16 +261,14 @@ namespace CitizenScienceClasses
             DBConnect conn = new DBConnect();
             SqlCommand comm = new SqlCommand();
             comm.CommandType = CommandType.StoredProcedure;
-            comm.CommandText = "GetLocationTemperatureByDateRange";
+            comm.CommandText = "GetLocationTemperaturesByDateRange";
             comm.Parameters.AddWithValue("@locationid", locationId);
             comm.Parameters.AddWithValue("@startdate", startDate);
             comm.Parameters.AddWithValue("@enddate", endDate);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
 
-            if (dataSet.Tables[0].Rows.Count == 1)
+            foreach(DataRow dataRow in dataSet.Tables[0].Rows)
             {
-                DataRow dataRow = dataSet.Tables[0].Rows[0];
-
                 result.Add(new Temperature
                 {
                     Id = Convert.ToInt32(dataRow["TempID"]),

@@ -13,15 +13,6 @@ CREATE TABLE [dbo].[Watershed] (
 
 GO
 
-CREATE TABLE [dbo].[BulkUpload](
-	[UploadID] INT IDENTITY(1,1) NOT NULL, 
-	[AdminAccessnet] VARCHAR(MAX) NOT NULL, 
-	[DateUploaded] DATE NOT NULL, 
-	PRIMARY KEY CLUSTERED ([UploadID] ASC) 
-);
-
-GO
-
 CREATE TABLE [dbo].[Location](
 	[LocationID] INT IDENTITY (1,1) NOT NULL, 
 	[WatershedID] INT NOT NULL, 
@@ -39,12 +30,10 @@ GO
 CREATE TABLE [dbo].[Temperature]( 
 	[TempID] INT IDENTITY(1,1) NOT NULL, 
 	[LocationID] INT NOT NULL, 
-	[UploadID] INT NOT NULL, 
 	[Timestamp] DateTime  NOT NULL, 
 	[TempC] FLOAT(53) NOT NULL, 
 	[TempF] FLOAT(53) NOT NULL, 
 	PRIMARY KEY CLUSTERED ([TempID] ASC) , 
-	CONSTRAINT [FK_Temperature_ToTable1] FOREIGN KEY ([UploadID]) REFERENCES [dbo].[BulkUpload] ([UploadID]),
 	CONSTRAINT [FK_Temperature_ToTable] FOREIGN KEY ([LocationID]) REFERENCES [dbo].[Location] ([LocationID]) 
 ); 
 
@@ -85,18 +74,6 @@ CREATE TABLE [dbo].[Album] (
 
 GO
 
-CREATE TABLE [dbo].[Error] (
-    [ErrorID]      INT            IDENTITY (1, 1) NOT NULL,
-    [UploadID]     INT            NOT NULL,
-    [AdminID]      INT            NOT NULL,
-    [ErrorMessage] NVARCHAR (MAX) NOT NULL,
-    PRIMARY KEY CLUSTERED ([ErrorID] ASC),
-    CONSTRAINT [FK_Error_ToTable] FOREIGN KEY ([UploadID]) REFERENCES [dbo].[BulkUpload] ([UploadID]),
-    CONSTRAINT [FK_Error_ToTable_1] FOREIGN KEY ([AdminID]) REFERENCES [dbo].[Admin] ([AdminID])
-);
-
-GO
-
 CREATE TABLE [dbo].[Image] (
     [ImageID]          INT            IDENTITY (1, 1) NOT NULL,
     [AlbumID]          INT            NOT NULL,
@@ -126,7 +103,6 @@ GO
 
 CREATE TYPE [dbo].[TEMPERATUREDATA] AS TABLE(
 	[LocationID] INT NOT NULL,
-	[UploadID] INT NOT NULL,
 	[TimeStamp] DateTime  NOT NULL,
 	[TempC] FLOAT(53) NOT NULL,
 	[TempF] FLOAT(53) NOT NULL
@@ -198,27 +174,26 @@ CREATE PROCEDURE [dbo].[GetLocationTemperaturesByDateRange]
 	@enddate datetime
 AS
 	SELECT * FROM Temperature
-	WHERE LocationID = @locationid AND [Timestamp] >= @startdate AND [Timestamp] <= @enddate
+	WHERE LocationID = @locationid AND [Timestamp] BETWEEN @startdate AND @enddate
 
 GO
 
 ----- CRUD Temperature
 CREATE PROCEDURE [dbo].[AddTemperatures]
 	@locationid int,
-	@uploadid int,
 	@ts datetime,
 	@temp_c float, 
 	@temp_f float 
 AS
-	INSERT INTO Temperature (LocationID, UploadID, [Timestamp], TempC, TempF) 
-	VALUES (@locationid, @uploadid, @ts, @temp_c, @temp_f)
+	INSERT INTO Temperature (LocationID, [Timestamp], TempC, TempF) 
+	VALUES (@locationid, @ts, @temp_c, @temp_f)
 
 GO
 
 CREATE PROCEDURE [dbo].[BulkTemperatureDataInsert]
 	@temperaturetable TEMPERATUREDATA readonly
 AS
-	INSERT INTO Temperature select  LocationID, UploadID, [Timestamp], TempC, TempF from @temperaturetable
+	INSERT INTO Temperature select  LocationID, [Timestamp], TempC, TempF from @temperaturetable
 
 GO
 
