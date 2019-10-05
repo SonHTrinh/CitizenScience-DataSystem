@@ -5,9 +5,16 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
     <div class="container-fluid">
         <div class="row">
+             <section class="jumbotron text-center w-100" >
+                <div class="container">
+                    <h1 class="jumbotron-heading">Welcome to Citizen Science</h1>            
+                </div>
+            </section>  
+            <!--
             <div class="col-12">
                 <h1 style="text-align: center">Welcome to Citizen Science</h1>
             </div>
+            -->
         </div>
         <div class="row my-4">
             <div class="col-3 offset-3">

@@ -369,6 +369,17 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllVolunteers";
             return conn.GetDataSetUsingCmdObj(comm);
         }
+        public static bool CreateVolunteer(Volunteer v)
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAllVolunteers";
+            int results = conn.DoUpdateUsingCmdObj(comm);
+            if (results == 1)
+                return true;
+            return false;
+        }
 
 
 
@@ -430,6 +441,35 @@ namespace CitizenScienceClasses
 
             return admin;
         }
-    }
+
+
+
+        /////////////////////////////////   ABOUT FUNCTIONS
+         public static About GetAbout()
+        {
+            About a = null;
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetLatestAbout";
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+            if(dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                a = new About
+                {
+                    Description = Convert.ToString(dataRow["Description"]),
+                    Question1 = Convert.ToString(dataRow["Question1"]),
+                    Question2 = Convert.ToString(dataRow["Question2"]),
+                    Question3 = Convert.ToString(dataRow["Question3"]),
+                    Answer1 = Convert.ToString(dataRow["Answer1"]),
+                    Answer2 = Convert.ToString(dataRow["Answer2"]),
+                    Answer3 = Convert.ToString(dataRow["Answer3"])
+                };
+            }
+            return a;
+        }
+}
 }
 
