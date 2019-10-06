@@ -42,8 +42,6 @@ GO
 CREATE TABLE [dbo].[Admin] (
     [AdminID]     INT            IDENTITY (1, 1) NOT NULL,
     [Accessnet]   NVARCHAR (MAX) NOT NULL,
-    [AddedBy]     NVARCHAR (MAX) NOT NULL,
-    [ProgramLead] BIT            NOT NULL,
     PRIMARY KEY CLUSTERED ([AdminID] ASC)
 );
 
@@ -112,7 +110,9 @@ GO
 
 -------------------- Stored Procedures --------------------
 
------ GET Procedures
+------------------------------------------------------------------ 
+------------------------------------------------- GET Procedures
+------------------------------------------------------------------
 CREATE PROCEDURE [dbo].[GetAllLocations]
 AS
 	SELECT * FROM Location
@@ -168,6 +168,13 @@ AS
 
 GO
 
+
+------------------------------------------------------------------ 
+------------------------------------------------- CRUD Procedures
+------------------------------------------------------------------
+
+------------------------------------------------- CRUD Temperature
+
 CREATE PROCEDURE [dbo].[GetLocationTemperaturesByDateRange]
 	@locationid int,
 	@startdate datetime,
@@ -179,6 +186,7 @@ AS
 GO
 
 ----- CRUD Temperature
+
 CREATE PROCEDURE [dbo].[AddTemperatures]
 	@locationid int,
 	@ts datetime,
@@ -197,7 +205,7 @@ AS
 
 GO
 
------ CRUD Watershed
+------------------------------------------------- CRUD Watershed
 CREATE PROCEDURE [dbo].[CreateWatershed]
     @name varchar(255)
 AS
@@ -225,7 +233,7 @@ AS
 
 GO
 
------ CRUD Location
+------------------------------------------------- CRUD Location
 CREATE PROCEDURE [dbo].[CreateLocation]
 	@watershedid int,
     @name varchar(255),
