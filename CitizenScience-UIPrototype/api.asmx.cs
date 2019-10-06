@@ -170,6 +170,18 @@ namespace CitizenScience_UIPrototype
             Context.Response.Write(js.Serialize(locationList));
         }
 
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void About()
+        {
+            About about = ClassFunctions.GetAbout();
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Clear();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(about));
+        }
+
         //////////////////////////// CRUD Watershed \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
@@ -457,6 +469,20 @@ namespace CitizenScience_UIPrototype
                 BuildResponse(500, result);
             }
 
+        }
+
+        //////////////////////////// CRUD About \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void UpdateAbout(string description, string question1, string question2, string question3, string answer1, string answer2, string answer3)
+        {
+            About result = ClassFunctions.UpdateAbout(description, question1, question2, question3, answer1, answer2, answer3);
+            if (result != null)
+                BuildResponse(200, result);
+            else
+                BuildResponse(500, result);
         }
     }
 }

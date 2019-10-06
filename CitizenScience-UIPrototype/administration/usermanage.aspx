@@ -63,8 +63,8 @@
           </div>
           <div class="modal-body">
                <div class="form-group">
-                <label for="inputUpdateAccessnet">Accessnet</label>
-                <input type="text" class="form-control inputaccessnet" id="inputUpdateAccessnet" aria-describedby="nameCreateHelp">
+                <label for="inputEditAccessnet">Accessnet</label>
+                <input type="text" class="form-control inputaccessnet" id="inputEditAccessnet" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
                     Accessnet must be ...
                 </div>
@@ -219,8 +219,6 @@
             }
 
             $('#editSubmit').click(function () {
-
-
                 var requestData = BuildEditAdmin(editData)
                 var isValidRequest = ValidateAdminRequest(requestData);
                 console.log('Is Edit Form Submission Valid?: ' + isValidRequest);

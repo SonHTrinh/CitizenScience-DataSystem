@@ -489,7 +489,7 @@ namespace CitizenScienceClasses
 
 
         /////////////////////////////////   ABOUT FUNCTIONS
-         public static About GetAbout()
+        public static About GetAbout()
         {
             About a = null;
             DBConnect conn = new DBConnect();
@@ -503,7 +503,33 @@ namespace CitizenScienceClasses
 
                 a = new About
                 {
-                    Description = Convert.ToString(dataRow["Description"]),
+                    Description = Convert.ToString(dataRow["ProgramDescription"]),
+                    Question1 = Convert.ToString(dataRow["Question1"]),
+                    Question2 = Convert.ToString(dataRow["Question2"]),
+                    Question3 = Convert.ToString(dataRow["Question3"]),
+                    Answer1 = Convert.ToString(dataRow["Answer1"]),
+                    Answer2 = Convert.ToString(dataRow["Answer2"]),
+                    Answer3 = Convert.ToString(dataRow["Answer3"])
+                };
+            }
+            return a;
+        }
+        public static About UpdateAbout(string description, string question1, string question2, string question3, string answer1, string answer2, string answer3)
+        {
+            //  Update About bahaves like a CREATE function (to keep record of what each iteration of the About page looked like)
+            About a = null;
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "NewAbout";
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+            if(dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                a = new About
+                {
+                    Description = Convert.ToString(dataRow["ProgramDescription"]),
                     Question1 = Convert.ToString(dataRow["Question1"]),
                     Question2 = Convert.ToString(dataRow["Question2"]),
                     Question3 = Convert.ToString(dataRow["Question3"]),
