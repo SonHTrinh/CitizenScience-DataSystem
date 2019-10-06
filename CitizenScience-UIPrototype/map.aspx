@@ -100,7 +100,7 @@
                                 + "<br/>"
                                 + "<b>Longitude: </b>" + location.Longitude
                                 + "<br/><br/>"
-                                + "'Click on the marker to see more details'"
+                                + "<b>**Click on the marker to see more details**</b>"
                                 //+ "<br/> <br/>"
                                 //+ "<a href='#' data-toggle='modal' data-target='#locationModal'>more details >></a>"
                             //Dummy profile picture 
@@ -140,11 +140,11 @@
                         //Modal
                         function initModal() {
                             //title
-                            var title = locationWatershedMapping.get(location.WatershedID) + "(" + location.Latitude + ", " + location.Longitude + ")";
+                            var title = location.SensorName + " - " + locationWatershedMapping.get(location.WatershedID);
                             $(".modal-title").text(title);
 
                             //desc
-                            var description = "Here will be some description about the watershed " + "'" + locationWatershedMapping.get(location.WatershedID)+ "(" + location.Latitude + ", " + location.Longitude + ")'";
+                            var description = "Description about the watershed: " + location.SensorName + " - " + locationWatershedMapping.get(location.WatershedID)+ " (" + location.Latitude + ", " + location.Longitude + ")";
                             $(".modalDesc").text(description);
 
                             //image
