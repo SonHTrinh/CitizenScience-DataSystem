@@ -385,9 +385,9 @@ namespace CitizenScienceClasses
 
         ///////////////////////////////// IMAGE Functions
         
-        public static bool SetLocationImage(int locationId, byte[] bytes)
+        public static Location SetLocationImage(int locationId, byte[] bytes)
         {
-            bool result = false;
+            Location result = null;
 
             DBConnect conn = new DBConnect();
             SqlCommand comm = new SqlCommand();
@@ -395,7 +395,22 @@ namespace CitizenScienceClasses
             comm.CommandText = "SetLocationImage";
             comm.Parameters.AddWithValue("@locationid", locationId);
             comm.Parameters.AddWithValue("@bytes", bytes);
-            result = (conn.DoUpdateUsingCmdObj(comm) == 1);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                result = new Location
+                {
+                    LocationID = Convert.ToInt32(dataRow["LocationID"]),
+                    WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
+                    Latitude = Convert.ToDouble(dataRow["Latitude"]),
+                    Longitude = Convert.ToDouble(dataRow["Longitude"]),
+                    SensorName = Convert.ToString(dataRow["SensorName"]),
+                    ProfileImageID = Convert.ToInt32(dataRow["ProfileImageID"])
+                };
+            }
 
             return result;
         }

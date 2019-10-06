@@ -179,12 +179,16 @@ CREATE PROCEDURE [dbo].[SetLocationImage]
 	@bytes VARBINARY(MAX)
 AS
 	DECLARE @imageId int;
-	INSERT INTO [Image] ([bytes]) VALUES (@bytes);
+	INSERT INTO [Image] ([Bytes], [LastUpdated]) VALUES (@bytes, GETDATE());
 
 	SELECT @imageId = (SELECT SCOPE_IDENTITY());
 
 	UPDATE Location
-	SET [ProfileImageID] = @imageId
+	SET [ProfileImageID] = @imageId,
+	[LastUpdated] = GETDATE()
+	WHERE LocationID = @locationid;
+
+	SELECT * FROM [Location]
 	WHERE LocationID = @locationid;
 
 GO

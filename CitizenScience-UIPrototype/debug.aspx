@@ -101,7 +101,7 @@
 
                 $.ajax({
                     type: "POST",
-                    url: "/getimage.ashx?locationid=3",
+                    url: "/setlocationimage.ashx?locationid=3",
                     contentType: false,
                     processData: false,
                     data: imag,

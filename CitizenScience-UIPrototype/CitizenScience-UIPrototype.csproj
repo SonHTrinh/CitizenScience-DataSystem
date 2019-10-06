@@ -1841,6 +1841,9 @@
       <DependentUpon>map.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="setlocationimage.ashx.cs">
+      <DependentUpon>setlocationimage.ashx</DependentUpon>
+    </Compile>
     <Compile Include="WebService1.asmx.cs">
       <DependentUpon>WebService1.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -1906,6 +1909,7 @@
     <Content Include="style\fontawesome\webfonts\fa-solid-900.ttf" />
     <Content Include="style\fontawesome\webfonts\fa-solid-900.woff" />
     <Content Include="style\fontawesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="setlocationimage.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
