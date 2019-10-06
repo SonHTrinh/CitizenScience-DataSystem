@@ -15,32 +15,16 @@ namespace CitizenScience_UIPrototype
 
         public void ProcessRequest(HttpContext context)
         {
-            //context.Response.ContentType = "text/plain";
-            //context.Response.Write("Hello World");
-
-            try
-            {
-                HttpPostedFile postedFile = context.Request.Files[0];
-                if (postedFile.ContentLength == 0)
-                    throw new Exception("Empty file received");
-
+            try {
                 byte[] bytes;
-
-                using (Stream stream = postedFile.InputStream)
-                {
-                    using (BinaryReader binaryReader = new BinaryReader(stream))
-                    {
-                        bytes = binaryReader.ReadBytes((int)stream.Length);
-                    }
-
-                    int locationId = int.Parse(context.Request["locationid"]);
+                int locationId = int.Parse(context.Request["locationid"]);
 
 
-                    bytes = ClassFunctions.GetLocationImage(3);
+                bytes = ClassFunctions.GetLocationImage(locationId);
 
-                    context.Response.ContentType = postedFile.ContentType;
-                    context.Response.BinaryWrite(bytes);  //
-                }
+                context.Response.ContentType = "image/jpeg";
+                context.Response.BinaryWrite(bytes);  //
+                
             }
             catch (Exception ex)
             {

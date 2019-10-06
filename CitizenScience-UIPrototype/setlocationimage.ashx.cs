@@ -15,12 +15,6 @@ namespace CitizenScience_UIPrototype
 
         public void ProcessRequest(HttpContext context)
         {
-            //context.Response.ContentType = "text/plain";
-            //context.Response.Write("Hello World");
-
-            //context.Response.ContentType = "text/plain";
-            //context.Response.Write("Hello World");
-
             try
             {
                 HttpPostedFile postedFile = context.Request.Files[0];
@@ -42,7 +36,7 @@ namespace CitizenScience_UIPrototype
                     Location result = ClassFunctions.SetLocationImage(locationId, bytes);
 
                     context.Response.ContentType = postedFile.ContentType;
-                    context.Response.Write(result.ToString());  
+                    context.Response.Write(result.ToString());
                 }
             }
             catch (Exception ex)

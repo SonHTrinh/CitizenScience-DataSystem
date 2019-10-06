@@ -430,7 +430,7 @@ namespace CitizenScienceClasses
             {
                 DataRow dataRow = dataSet.Tables[0].Rows[0];
 
-                result = Encoding.UTF8.GetBytes(dataRow["ProfileImage"].ToString());
+                result = dataRow["Bytes"] as byte[];
             }
 
             return result;
