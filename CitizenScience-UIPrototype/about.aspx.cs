@@ -12,9 +12,6 @@ namespace CitizenScience_UIPrototype
 {
     public partial class about : System.Web.UI.Page
     {
-        DBConnect objconn = new DBConnect();
-        SqlCommand objcommand = new SqlCommand();
-
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -39,15 +36,6 @@ namespace CitizenScience_UIPrototype
 
                 try
                 {
-                    /*objcommand.CommandType = CommandType.StoredProcedure;
-                    objcommand.CommandText = "CreateVolunteer";
-
-                    objcommand.Parameters.AddWithValue("@firstname", firstName);
-                    objcommand.Parameters.AddWithValue("@lastname", lastName);
-                    objcommand.Parameters.AddWithValue("@email", email);
-                    objcommand.Parameters.AddWithValue("@message", message);
-
-                    objconn.DoUpdateUsingCmdObj(objcommand);*/
                     ClassFunctions.CreateVolunteer(firstName, lastName, email, message);
                 }
                 catch (Exception ex)

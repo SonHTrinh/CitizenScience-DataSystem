@@ -419,7 +419,7 @@ namespace CitizenScienceClasses
                     LastName = Convert.ToString(dataRow["LastName"]),
                     Email = Convert.ToString(dataRow["Email"]),
                     Message = Convert.ToString(dataRow["Message"]),
-                    DateSubmitted = Convert.ToDateTime(dataRow["DataSubmitted"])
+                    DateSubmitted = Convert.ToDateTime(dataRow["DateSubmitted"])
                 };
             }
 
