@@ -394,7 +394,7 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllVolunteers";
             return conn.GetDataSetUsingCmdObj(comm);
         }
-        public static Volunteer CreateVolunteer(int volunteerID, string firstName, string lastName, string email, string message)
+        public static Volunteer CreateVolunteer(string firstName, string lastName, string email, string message)
         {
             Volunteer result = null;
 
@@ -402,7 +402,6 @@ namespace CitizenScienceClasses
             SqlCommand comm = new SqlCommand();
             comm.CommandType = CommandType.StoredProcedure;
             comm.CommandText = "CreateVolunteer";
-            comm.Parameters.AddWithValue("@volunteerID", volunteerID);
             comm.Parameters.AddWithValue("@firstname", firstName);
             comm.Parameters.AddWithValue("@lastname", lastName);
             comm.Parameters.AddWithValue("@email", email);
