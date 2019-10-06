@@ -44,7 +44,7 @@ namespace CitizenScience_UIPrototype
 
                     objcommand.Parameters.AddWithValue("@firstname", firstName);
                     objcommand.Parameters.AddWithValue("@lastname", lastName);
-                    objcommand.Parameters.AddWithValue("email", email);
+                    objcommand.Parameters.AddWithValue("@email", email);
                     objcommand.Parameters.AddWithValue("@message", message);
 
                     objconn.DoUpdateUsingCmdObj(objcommand);
