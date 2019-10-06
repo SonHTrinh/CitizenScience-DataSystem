@@ -8,7 +8,7 @@ GO
 DROP TABLE IF EXISTS [Admin]
 GO
 
-DROP TABLE IF EXISTS [Image]
+DROP TABLE IF EXISTS [AlbumImages]
 GO
 
 DROP TABLE IF EXISTS [Album]
@@ -27,6 +27,9 @@ DROP TABLE IF EXISTS [Watershed]
 GO
 
 DROP TABLE IF EXISTS [Volunteer]
+GO
+
+DROP TABLE IF EXISTS [Image]
 GO
 
 -- DROP Stored PROCEDURES
@@ -79,6 +82,12 @@ DROP PROCEDURE IF EXISTS [GetAllVolunteers]
 GO
 
 DROP PROCEDURE IF EXISTS [GetLocationTemperaturesByDateRange]
+GO
+
+DROP PROCEDURE IF EXISTS [GetLocationImage]
+GO
+
+DROP PROCEDURE IF EXISTS [SetLocationImage]
 GO
 
 -- DROP Types

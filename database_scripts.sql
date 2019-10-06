@@ -13,16 +13,27 @@ CREATE TABLE [dbo].[Watershed] (
 
 GO
 
+CREATE TABLE [dbo].[Image] (
+    [ImageID]          INT            IDENTITY (1, 1) NOT NULL,
+    [Bytes]			   VARBINARY (MAX) NOT NULL,
+    [Description] NVARCHAR (MAX),
+    [LastUpdated]      DATE           NOT NULL,
+    PRIMARY KEY CLUSTERED ([ImageID] ASC)
+);
+
+GO
+
 CREATE TABLE [dbo].[Location](
 	[LocationID] INT IDENTITY (1,1) NOT NULL, 
 	[WatershedID] INT NOT NULL, 
 	[Longitude] FLOAT(53) NOT NULL, 
 	[Latitude] FLOAT (53) NOT NULL, 
 	[SensorName] VARCHAR(MAX) NOT NULL, 
-	[ProfileImage] VARCHAR(MAX) NULL, 
+	[ProfileImageID] INT, 
 	[LastUpdated] DATE NOT NULL, 
 	PRIMARY KEY CLUSTERED ([LocationID] ASC) ,
-	CONSTRAINT  [FK_Location_ToTable] FOREIGN KEY ([WatershedID]) REFERENCES [dbo].[Watershed] ([WatershedID]) 
+	CONSTRAINT  [FK_Location_ToTable] FOREIGN KEY ([WatershedID]) REFERENCES [dbo].[Watershed] ([WatershedID]),
+	CONSTRAINT  [FK_Image_ToTable] FOREIGN KEY ([ProfileImageID]) REFERENCES [dbo].[Image] ([ImageID])
 );
 
 GO
@@ -73,18 +84,8 @@ GO
 CREATE TABLE [dbo].[AlbumImages] (
 	[AlbumID] INT NOT NULL,
 	[ImageID] INT NOT NULL,
-	CONSTRAINT [FK_Image_ToTable] FOREIGN KEY ([ImageID]) REFERENCES [dbo].[Image] ([ImageID]),
+	CONSTRAINT [FK_ImageLink_ToTable] FOREIGN KEY ([ImageID]) REFERENCES [dbo].[Image] ([ImageID]),
 	CONSTRAINT [FK_Album_ToTable] FOREIGN KEY ([AlbumID]) REFERENCES [dbo].[Album] ([AlbumID])
-);
-
-GO
-
-CREATE TABLE [dbo].[Image] (
-    [ImageID]          INT            IDENTITY (1, 1) NOT NULL,
-    [Bytes]			   VARBINARY (MAX) NOT NULL,
-    [Description] NVARCHAR (MAX) NOT NULL,
-    [LastUpdated]      DATE           NOT NULL,
-    PRIMARY KEY CLUSTERED ([ImageID] ASC)
 );
 
 GO
@@ -169,6 +170,30 @@ GO
 CREATE PROCEDURE [dbo].[GetAllVolunteers]
 AS
 	SELECT * FROM Volunteer
+
+GO
+
+-------------------------------------------------  Image
+CREATE PROCEDURE [dbo].[SetLocationImage]
+	@locationid int,
+	@image VARBINARY(MAX)
+AS
+	DECLARE @imageId int;
+	INSERT INTO [Image] ([bytes]) VALUES (@image);
+
+	SELECT @imageId = (SELECT SCOPE_IDENTITY());
+
+	UPDATE Location
+	SET [ProfileImageID] = @imageId
+	WHERE LocationID = @locationid;
+
+GO
+
+CREATE PROCEDURE [dbo].[GetLocationImage]
+	@locationid int
+AS
+	SELECT * FROM [Image] 
+	WHERE ImageId = (SELECT [ProfileImageID] FROM Location WHERE LocationID = @locationid)
 
 GO
 
