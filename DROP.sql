@@ -26,6 +26,8 @@ GO
 DROP TABLE IF EXISTS [Watershed]
 GO
 
+DROP TABLE IF EXISTS [Volunteer]
+GO
 
 -- DROP Stored PROCEDURES
 DROP PROCEDURE IF EXISTS [AddTemperatures]
@@ -73,6 +75,11 @@ GO
 DROP PROCEDURE IF EXISTS [UpdateWatershed]
 GO
 
+DROP PROCEDURE IF EXISTS [GetAllVolunteers]
+GO
+
+DROP PROCEDURE IF EXISTS [GetLocationTemperaturesByDateRange]
+GO
 
 -- DROP Types
 
