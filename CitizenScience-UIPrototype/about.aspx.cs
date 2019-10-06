@@ -39,7 +39,7 @@ namespace CitizenScience_UIPrototype
 
                 try
                 {
-                    objcommand.CommandType = CommandType.StoredProcedure;
+                    /*objcommand.CommandType = CommandType.StoredProcedure;
                     objcommand.CommandText = "CreateVolunteer";
 
                     objcommand.Parameters.AddWithValue("@firstname", firstName);
@@ -47,7 +47,8 @@ namespace CitizenScience_UIPrototype
                     objcommand.Parameters.AddWithValue("@email", email);
                     objcommand.Parameters.AddWithValue("@message", message);
 
-                    objconn.DoUpdateUsingCmdObj(objcommand);
+                    objconn.DoUpdateUsingCmdObj(objcommand);*/
+                    ClassFunctions.CreateVolunteer(firstName, lastName, email, message);
                 }
                 catch (Exception ex)
                 {
@@ -60,6 +61,7 @@ namespace CitizenScience_UIPrototype
             }
 
             txtFirstName.Text = ""; txtLastName.Text = ""; txtEmail.Text = ""; txtMessage.Text = "";
+
         }
     }
 }
