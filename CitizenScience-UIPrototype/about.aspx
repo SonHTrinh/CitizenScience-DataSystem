@@ -133,8 +133,8 @@
                 <div class="container">
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="fname" style="color: red;">*</label>
-                            <input type="text" class="form-control" id="txtFname" placeholder="First Name" runat="server">                           
+                            <label for="fname">First Name:</label>
+                            <label for="fname" style="color: red;">*</label>                     
                             <asp:TextBox ID="txtFirstName" runat="server" class="form-control" placeholder="First Name" require="true"></asp:TextBox>
                         </div>
                         <div class="form-group col-md-6">

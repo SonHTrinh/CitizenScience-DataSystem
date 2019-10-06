@@ -280,7 +280,7 @@ CREATE PROCEDURE [dbo].[CreateVolunteer]
 AS
 	INSERT INTO Volunteer (FirstName, LastName, Email, Message, DateSubmitted)
 	VALUES (@firstname, @lastname, @email, @message, GETDATE())
-    SELECT * FROM Location WHERE locationID = SCOPE_IDENTITY()
+    SELECT * FROM Volunteer WHERE VolunteerID = SCOPE_IDENTITY()
 	
 GO
 
