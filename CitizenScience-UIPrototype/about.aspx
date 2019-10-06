@@ -40,7 +40,7 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="container">
-                <button class="btn btn-primary" style="width: 100%;" data-toggle="collapse" data-target="#who1"
+                <button class="btn btn-primary" style="width: 100%;" type="button" data-toggle="collapse" data-target="#who1"
                     aria-expanded="false" aria-controls="collapseExample">
                     Who are we? 
                 </button>
@@ -132,26 +132,28 @@
                 <div class="container">
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="fname">First Name</label>
+                            <label for="fname">First Name:</label>
                             <label for="fname" style="color: red;">*</label>
-                            <input type="text" class="form-control" id="fname" placeholder="First Name">
+                            <asp:TextBox ID="txtFirstName" runat="server" class="form-control" placeholder="First Name" require="true"></asp:TextBox>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="lname">Last Name</label>
+                            <label for="lname">Last Name:</label>
                             <label for="lname" style="color: red;">*</label>
-                            <input type="text" class="form-control" id="lname" placeholder="Last Name">
+                            <asp:TextBox ID="txtLastName" runat="server" class="form-control" placeholder="Last Name" require="true" ></asp:TextBox>
                         </div>
                     </div>
                     <div class="form-group ">
-                        <label for="email">Email</label>
+                        <label for="email">Email:</label>
                         <label for="email" style="color: red;">*</label>
-                        <input type="email" class="form-control" id="email" placeholder="sample@email.com">
+                        <asp:TextBox ID="txtEmail" runat="server" type="email" class="form-control" placeholder="sample@email.com" require="true"></asp:TextBox>
                     </div>
                     <div class="form-group">
-                        <label for="comments">Message</label>
-                        <textarea rows="5" class="form-control" id="comments" placeholder="Leave a message (Optional)"></textarea>
+                        <label for="comments">Message:</label>
+                        <label for="message" style="color: red;">*</label>
+                        <asp:TextBox ID="txtMessage" runat="server" class="form-control" placeholder="Leave a message" TextMode="MultiLine" Rows="5" require="true"></asp:TextBox>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <asp:Button ID="btnSubmit" runat="server" class="btn btn-primary" Text="Submit" OnClick="btnSubmit_Click" />
+                    &nbsp;<asp:Label ID="lblDisplay" runat="server" Text="" ForeColor="#CC3300"></asp:Label>
                 </div>
             </div>
         </div>

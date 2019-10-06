@@ -20,6 +20,7 @@
     </div>
     <script>
         $(document).ready(function () {
+
             // This variable holds the Datatable
             var table = $('#DataTable').DataTable({
                 ajax: {
@@ -39,7 +40,9 @@
                         data: null,
                         orderable: false,
                         width: '10%',
-                        render: RenderWatershedActions
+                        render: function(data, type, row, meta) {
+                            return
+                        }
                     }
                 ]
             });

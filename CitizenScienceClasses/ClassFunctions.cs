@@ -369,6 +369,38 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllVolunteers";
             return conn.GetDataSetUsingCmdObj(comm);
         }
-}
+        public static Volunteer CreateVolunteer(int volunteerID, string firstName, string lastName, string email, string message)
+        {
+            Volunteer result = null;
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "CreateVolunteer";
+            comm.Parameters.AddWithValue("@volunteerID", volunteerID);
+            comm.Parameters.AddWithValue("@firstname", firstName);
+            comm.Parameters.AddWithValue("@lastname", lastName);
+            comm.Parameters.AddWithValue("@email", email);
+            comm.Parameters.AddWithValue("@message", message);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                result = new Volunteer
+                {
+                    VolunteerID = Convert.ToInt32(dataRow["VolunteerID"]),
+                    FirstName = Convert.ToString(dataRow["FirstName"]),
+                    LastName = Convert.ToString(dataRow["LastName"]),
+                    Email = Convert.ToString(dataRow["Email"]),
+                    Message = Convert.ToString(dataRow["Message"]),
+                    DateSubmitted = Convert.ToDateTime(dataRow["DataSubmitted"])
+                };
+            }
+
+            return result;
+        }
+    }
 }
 
