@@ -385,7 +385,7 @@ namespace CitizenScienceClasses
 
         ///////////////////////////////// IMAGE Functions
         
-        public static Location SetLocationImage(int locationId, byte[] bytes)
+        public static Location SetLocationImage(int locationId, byte[] bytes, string contentType)
         {
             Location result = null;
 
@@ -395,6 +395,7 @@ namespace CitizenScienceClasses
             comm.CommandText = "SetLocationImage";
             comm.Parameters.AddWithValue("@locationid", locationId);
             comm.Parameters.AddWithValue("@bytes", bytes);
+            comm.Parameters.AddWithValue("@contenttype", contentType);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
 
             if (dataSet.Tables[0].Rows.Count == 1)
@@ -415,9 +416,9 @@ namespace CitizenScienceClasses
             return result;
         }
 
-        public static byte[] GetLocationImage(int locationId)
+        public static Image GetLocationImage(int locationId)
         {
-            byte[] result = null;
+            Image result = null;
 
             DBConnect conn = new DBConnect();
             SqlCommand comm = new SqlCommand();
@@ -430,7 +431,13 @@ namespace CitizenScienceClasses
             {
                 DataRow dataRow = dataSet.Tables[0].Rows[0];
 
-                result = dataRow["Bytes"] as byte[];
+                result = new Image
+                {
+                    ImageID = Convert.ToInt32(dataRow["ImageID"]),
+                    Bytes = dataRow["Bytes"] as byte[],
+                    Description = Convert.ToString(dataRow["Description"]),
+                    ContentType = Convert.ToString(dataRow["ContentType"])
+                };
             }
 
             return result;

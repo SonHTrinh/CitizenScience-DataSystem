@@ -17,6 +17,7 @@ CREATE TABLE [dbo].[Image] (
     [ImageID]          INT            IDENTITY (1, 1) NOT NULL,
     [Bytes]			   VARBINARY (MAX) NOT NULL,
     [Description] NVARCHAR (MAX),
+	[ContentType] NVARCHAR (MAX),
     [LastUpdated]      DATE           NOT NULL,
     PRIMARY KEY CLUSTERED ([ImageID] ASC)
 );
@@ -176,10 +177,11 @@ GO
 -------------------------------------------------  Image
 CREATE PROCEDURE [dbo].[SetLocationImage]
 	@locationid int,
-	@bytes VARBINARY(MAX)
+	@bytes VARBINARY(MAX),
+	@contenttype varchar(max)
 AS
 	DECLARE @imageId int;
-	INSERT INTO [Image] ([Bytes], [LastUpdated]) VALUES (@bytes, GETDATE());
+	INSERT INTO [Image] ([Bytes], [ContentType],  [LastUpdated]) VALUES (@bytes, @contenttype, GETDATE());
 
 	SELECT @imageId = (SELECT SCOPE_IDENTITY());
 
