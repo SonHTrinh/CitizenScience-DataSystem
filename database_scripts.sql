@@ -176,10 +176,10 @@ GO
 -------------------------------------------------  Image
 CREATE PROCEDURE [dbo].[SetLocationImage]
 	@locationid int,
-	@image VARBINARY(MAX)
+	@bytes VARBINARY(MAX)
 AS
 	DECLARE @imageId int;
-	INSERT INTO [Image] ([bytes]) VALUES (@image);
+	INSERT INTO [Image] ([bytes]) VALUES (@bytes);
 
 	SELECT @imageId = (SELECT SCOPE_IDENTITY());
 

@@ -393,7 +393,7 @@ namespace CitizenScienceClasses
             SqlCommand comm = new SqlCommand();
             comm.CommandType = CommandType.StoredProcedure;
             comm.CommandText = "SetLocationImage";
-            comm.Parameters.AddWithValue("@locationId", locationId);
+            comm.Parameters.AddWithValue("@locationid", locationId);
             comm.Parameters.AddWithValue("@bytes", bytes);
             result = (conn.DoUpdateUsingCmdObj(comm) == 1);
 
@@ -408,7 +408,7 @@ namespace CitizenScienceClasses
             SqlCommand comm = new SqlCommand();
             comm.CommandType = CommandType.StoredProcedure;
             comm.CommandText = "GetLocationImage";
-            comm.Parameters.AddWithValue("@locationId", locationId);
+            comm.Parameters.AddWithValue("@locationid", locationId);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
 
             if (dataSet.Tables[0].Rows.Count == 1)
