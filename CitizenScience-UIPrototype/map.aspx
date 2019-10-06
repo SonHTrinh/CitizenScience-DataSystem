@@ -30,7 +30,7 @@
                     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="location">Tacony Creek Park</h5>
+                                <h5 class="modal-title"></h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -39,28 +39,28 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <img src="img/Watershed/Watershed1.jpg" alt="bell-tower" style="width: 400px; height: 333px;" /><br />
-                                            <a href="gallery.aspx">more pictures >></a>
-                                            <p>On 302 acres, this narrow preserve offers creek views plus native trees & wildflowers.</p>
+                                            <p><img src="img" alt="Here should be a picture of the watershed" class="modalImage" style="width: 400px; height: 333px" /></p>
+                                            <p class="modalLink"></p>
+                                            <p class="modalDesc"></p>
                                         </div>
                                         <div class="col-md-1"></div>
                                         <div class="col-md-7 ml-auto">
-                                            <img src="img/graph.png" alt="graph" style="width: 570px; height: 340px;"/><br />
-                                            <br />
+                                            <canvas id="myChart" style="width: 570px; height: 340px;"></canvas>
+                                            <br /><input type="radio" id="radioC" name="temperature" checked="checked"/> Celsius
+                                            <br /><input type="radio" id="radioF" name="temperature" /> Fahrenheit
+                                            <br /><br />
                                             <label>From:</label>
-                                            <input type="date"/>
+                                            <input type="date" />
                                             <label>To:</label>
                                             <input type="date"/>
                                             <button>Reset</button>
-                                            <br /><input type="radio" name="temperature" checked="checked"/> Celsius
-                                            <br /><input type="radio" name="temperature" /> Fahrenheit
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <button type="button" class="btn btn-primary">Download Temperature File</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
@@ -99,8 +99,10 @@
                                 + "<b>Latitude: </b>" + location.Latitude
                                 + "<br/>"
                                 + "<b>Longitude: </b>" + location.Longitude
-                                + "<br/> <br/>"
-                                + "<a href='#' data-toggle='modal' data-target='#locationModal'>more details >></a>"
+                                + "<br/><br/>"
+                                + "'Click on the marker to see more details'"
+                                //+ "<br/> <br/>"
+                                //+ "<a href='#' data-toggle='modal' data-target='#locationModal'>more details >></a>"
                             //Dummy profile picture 
                         });
 
@@ -127,21 +129,47 @@
                         });*/
 
                         google.maps.event.addListener(marker, 'closeclick', function () {
-
                             this.infowindow.close();
-
                         });
 
                         google.maps.event.addListener(marker, 'click', function () {
-
-                            this.infowindow.open(map, this);
-        
+                            initModal();
+                            $('#locationModal').modal('show');
                         });
-                        /*google.maps.event.addListener(marker, 'mouseout', function () {
-                         
-                            this.infowindow.close(map, this);
 
-                        });*/
+                        //Modal
+                        function initModal() {
+                            //title
+                            var title = locationWatershedMapping.get(location.WatershedID) + "(" + location.Latitude + ", " + location.Longitude + ")";
+                            $(".modal-title").text(title);
+
+                            //desc
+                            var description = "Here will be some description about the watershed " + "'" + locationWatershedMapping.get(location.WatershedID)+ "(" + location.Latitude + ", " + location.Longitude + ")'";
+                            $(".modalDesc").text(description);
+
+                            //image
+                            var imageSrc = "img/Watershed/Watershed1.jpg";
+                            var imageAlt = "The Picture of the " + locationWatershedMapping.get(location.WatershedID);
+                            $(".modalImage").attr("src", imageSrc);
+                            $(".modalImage").attr("alt", imageAlt);
+
+                            //more pictures link
+                            $('.modalLink').html('<a href="gallery.aspx">more picture >></a>');
+
+                            //temperture format radio buttons
+                            if ($('#radioC').is(':checked')) {
+                                initCGraph();
+                            }
+                            else if($('#radioF').is(':checked')){
+                                initFGraph();
+                            }
+                            $('#radioC').click(function () {
+                                initCGraph();
+                            });
+                            $('#radioF').click(function () {
+                                initFGraph();
+                            });
+                        }
                     }
                 });
             }
@@ -227,9 +255,67 @@
                 }      
             }
 
+            function initCGraph() {
+                var ctx = document.getElementById("myChart").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        max: 50,
+                        min: 0,
+                        stepSize: 0,
+                        labels: ["4/21/2019", "4/22/2019", "4/23/2019", "4/24/2019"],
+                        datasets: [{
+                            label: 'Sample Data(Celsius)',
+                            data: [21, 14, 22, 16],
+                            fill: false,
+                            borderColor: '#F08080',
+                            backgroundColor: '#E9C9D1',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {}
+                });
+            }
+
+            function initFGraph() {
+                var ctx = document.getElementById("myChart").getContext('2d');
+                var myChart = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        max: 50,
+                        min: 0,
+                        stepSize: 0,
+                        labels: ["4/21/2019", "4/22/2019", "4/23/2019", "4/24/2019"],
+                        datasets: [{
+                            label: 'Sample Data(Fahrenheit)',
+                            data: [70, 57, 72, 61],
+                            fill: false,
+                            borderColor: '#008080',
+                            backgroundColor: '#D1E9C9',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        //scales: {
+                        //    xAxes: [{
+                        //        ticks: {
+                        //            min: '4/21/2019',
+                        //            max: '4/22/2019',
+                        //        },
+                        //        stacked: true,
+                        //        gridLines: {
+                        //            display: false,
+                        //        }
+                        //    }],
+                        //}
+                     }
+                });
+            }
+
         });
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp7tBTG5O-LXpXR7BL01PlEB63wBC0PSA&callback=initMap"
         async defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 
 </asp:Content>
