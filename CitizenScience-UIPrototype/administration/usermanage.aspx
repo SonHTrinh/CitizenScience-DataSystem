@@ -260,7 +260,7 @@
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: '~/api.asmx/CreateAdmin',
+                        url: '/api.asmx/CreateAdmin',
                         data: JSON.stringify(requestData),
                         dataType: 'JSON',
                         success: function (responseData) {
