@@ -146,7 +146,7 @@
                 $.ajax({
                     type: 'GET',
                     contentType: 'application/json; charset=utf-8',
-                    url: 'https://np-stem.temple.edu/cis4396-F06/api.asmx/ReadAllWatersheds',
+                    url: '/api.asmx/ReadAllWatersheds',
                     dataType: 'JSON'
                 }).done(function (responseData) {
 
@@ -158,7 +158,7 @@
                     table = $('#DataTable').DataTable({
                         ajax: {
                             // The location to HTTP GET the data for the table
-                            url: 'https://np-stem.temple.edu/cis4396-F06/api.asmx/ReadAllLocation',
+                            url: '/api.asmx/ReadAllLocation',
                             dataSrc: ''
                         },
                         columns: [
@@ -451,7 +451,7 @@
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: 'https://np-stem.temple.edu/cis4396-F06/api.asmx/UpdateLocation',
+                        url: '/api.asmx/UpdateLocation',
                         data: JSON.stringify(requestData),
                         dataType: 'JSON',
                         success: function (responseData) {
@@ -479,7 +479,7 @@
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
-                    url: 'https://np-stem.temple.edu/cis4396-F06/api.asmx/CreateLocation',
+                    url: '/api.asmx/CreateLocation',
                     data: JSON.stringify(requestData),
                     dataType: 'JSON',
                     success: function (responseData) {

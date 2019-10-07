@@ -25,7 +25,7 @@
             var table = $('#DataTable').DataTable({
                 ajax: {
                     // The location to HTTP GET the data for the table
-                    url: 'https://np-stem.temple.edu/cis4396-F06/api.asmx/Volunteers',
+                    url: '/api.asmx/Volunteers',
                     dataSrc: ''
                 },
                 columns: [
