@@ -90,7 +90,7 @@
 
                 // TODO: find a better way to do this than call and map all locations to thier watersheds
                 $.ajax({
-                    url: "api.asmx/Watersheds",
+                    url: "https://np-stem.temple.edu/cis4396-F06/api.asmx/Watersheds",
                     success: function (responseData) {
                         var locationWatershedMapping = new Map();
 
@@ -188,7 +188,7 @@
                 });
 
                 $.ajax({
-                    url: "/api.asmx/AllLocations",
+                    url: "https://np-stem.temple.edu/cis4396-F06/api.asmx/AllLocations",
                     success: function (data) {
                         for (var i = 0; i < data.length; i++) {
                             var locationObj = data[i];
@@ -204,7 +204,7 @@
             //todo: handle failure
 
             $.ajax({
-                url: "/api.asmx/Watersheds",
+                url: "https://np-stem.temple.edu/cis4396-F06/api.asmx/Watersheds",
                 success: populateWatersheds
             });
 
