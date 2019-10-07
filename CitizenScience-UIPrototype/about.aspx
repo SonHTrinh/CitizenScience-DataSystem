@@ -5,16 +5,17 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
     <!--About Citizen Science-->
-    <div class="row">
-        <div class="col-lg-4"></div>
-        <div id="about" class="col-lg-4">
-            <h1 style="text-align: center;">About Citizen Science </h1>
-        </div>
-        <div class="col-lg-4"></div>
+    <div class="row">     
+        <section class="jumbotron text-center w-100" >
+            <div class="container">
+                <h1 class="jumbotron-heading">About Citizen Science</h1>            
+            </div>
+        </section>        
     </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="container">
+                <asp:Label TextMode="MultiLine"  ID="txtAboutDescription" runat="server"></asp:Label>
                 <p>
                     Citizen Science Data System (CS) is a project headed by Dr. Laura Toran and Dr. Sarah Beganskas
                     who both work in the Earth and Environmental Science department in the College of Science and
@@ -24,8 +25,8 @@
                     provide accurate data reporting of the measured water temperature. The project will help 
                     visualize the data collected and allow for users that visit the application to view the 
                     various metrics. 
-                </p>
-                <a href="#volunteer_form" class=" btn btn-outline-primary" role="button" aria-pressed="true">Interested in Volunteering?</a>
+                </p>                
+                <a href="#volunteer_form" class=" btn btn-outline-primary" role="button" aria-pressed="true">Interested in Volunteering?</a>           
             </div>
         </div>
     </div>
@@ -33,15 +34,15 @@
     <div class="row">
         <div class="col-lg-4"></div>
         <div class="col-lg-4">
-            <h1 style="text-align: center;">Common Questions</h1>
+            <h1 style="text-align: center;">Frequently Asked Questions</h1>
         </div>
         <div class="col-lg-4"></div>
     </div>
     <div class="row">
         <div class="col-lg-12">
             <div class="container">
-                <button class="btn btn-primary" style="width: 100%;" data-toggle="collapse" data-target="#who1"
-                    aria-expanded="false" aria-controls="collapseExample">
+                <button class="btn btn-primary" style="width: 100%;" type="button" data-toggle="collapse" data-target="#who1"
+                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion1" runat="server">
                     Who are we? 
                 </button>
             </div>
@@ -51,7 +52,7 @@
         <div class="col-lg-12">
             <div class="container">
                 <div class="collapse" id="who1">
-                    <div class="card card-body">
+                    <div class="card card-body" id="divAnswer1" runat="server">
                         Citizen Science Data System (CS) is a project headed by Dr. Laura Toran 
                         and Dr. Sarah Beganskas who both work in the Earth and Environmental 
                         Science department in the College of Science and Technology.
@@ -72,7 +73,7 @@
         <div class="col-lg-12">
             <div class="container">
                 <button class="btn btn-primary" style="width: 100%;" type="button" data-toggle="collapse" data-target="#goals1"
-                    aria-expanded="false" aria-controls="collapseExample">
+                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion2" runat="server">
                     What are our goals? 
                 </button>
             </div>
@@ -82,7 +83,7 @@
         <div class="col-lg-12">
             <div class="container">
                 <div class="collapse" id="goals1">
-                    <div class="card card-body">
+                    <div class="card card-body" id="divAnswer2" runat="server">
                         The Citizen Science Data System will record water temperature information 
                         and organize it by location. This data will be displayed in the form of 
                         interactive graphs that can be accessed from a map-view user interface.
@@ -99,7 +100,7 @@
         <div class="col-lg-12">
             <div class="container">
                 <button class="btn btn-primary" style="width: 100%;" type="button" data-toggle="collapse" data-target="#temp1"
-                    aria-expanded="false" aria-controls="collapseExample">
+                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion3" runat="server">
                     Expected Benefits
                 </button>
             </div>
@@ -109,7 +110,7 @@
         <div class="col-lg-12">
             <div class="container">
                 <div class="collapse" id="temp1">
-                    <div class="card card-body">
+                    <div class="card card-body" id="divAnswer3" runat="server">
                         The main benefits to be gained through this new system will be a secure and organized data 
                         storage method for vital water temperature data as well as a way of involving Greater 
                         Philadelphia area residents in the conservation of local water ecosystems. 
@@ -122,44 +123,67 @@
     </div>
     <!--Volunteer Form-->
     <div id="volunteer_form">
-        <div class="container">
+        <div class="container mt-5">
             <hr />
         </div>
         <h1 style="text-align: center;">Citizen Science Volunteer Form </h1>
         <h4 style="text-align: center;">Please fill out the form below if you are interested in volunteering. </h4>
         <div class="row">
-            <div id="form1" class="col-lg-12">
+            <div id="frmVolunteer" class="col-lg-12">
                 <div class="container">
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="fname">First Name</label>
-                            <label for="fname" style="color: red;">*</label>
-                            <input type="text" class="form-control" id="fname" placeholder="First Name">
+                            <label for="fname">First Name:</label>
+                            <label for="fname" style="color: red;">*</label>                     
+                            <asp:TextBox ID="txtFirstName" runat="server" class="form-control" placeholder="First Name" require="true"></asp:TextBox>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="lname">Last Name</label>
+                            <label for="lname">Last Name:</label>
                             <label for="lname" style="color: red;">*</label>
-                            <input type="text" class="form-control" id="lname" placeholder="Last Name">
+                            <asp:TextBox ID="txtLastName" runat="server" class="form-control" placeholder="Last Name" require="true" ></asp:TextBox>
                         </div>
                     </div>
                     <div class="form-group ">
-                        <label for="email">Email</label>
+                        <label for="email">Email:</label>
                         <label for="email" style="color: red;">*</label>
-                        <input type="email" class="form-control" id="email" placeholder="sample@email.com">
+                        <asp:TextBox ID="txtEmail" runat="server" type="email" class="form-control" placeholder="sample@email.com" require="true"></asp:TextBox>
                     </div>
                     <div class="form-group">
-                        <label for="comments">Message</label>
-                        <textarea rows="5" class="form-control" id="comments" placeholder="Leave a message (Optional)"></textarea>
+                        <label for="comments">Message:</label>
+                        <label for="message" style="color: red;">*</label>
+                        <asp:TextBox ID="txtMessage" runat="server" class="form-control" placeholder="Leave a message" TextMode="MultiLine" Rows="5" require="true"></asp:TextBox>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <asp:Button ID="btnSubmit" runat="server" class="btn btn-primary" Text="Submit" OnClick="btnSubmit_Click" />
+                    &nbsp;<asp:Label ID="lblDisplay" runat="server" Text="" ForeColor="#CC3300"></asp:Label>
                 </div>
             </div>
         </div>
+
+
+        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <img src="..." class="rounded mr-2" alt="...">
+            <strong class="mr-auto">Form Submitted!</strong>
+            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="toast-body">
+            Thank you for your interest in our program! One of our Citizen Science Program
+              representatives will contact you at <asp:Label ID="lblSubmittedEmail" runat="server"></asp:Label>!
+          </div>
+        </div>
     </div>
-    <div class="container">
+    <div class="container mb-5">
         <hr />
     </div>
-    <!---->
+    <script>
+        $("#btnSubmit").click(function () {
+
+        });
+    </script>
+
+    <!--
     <div class="row">
         <div class="col-lg-2"></div>
         <div class="col-lg-2">
@@ -212,4 +236,5 @@
         </div>
     </div>
     <br />
+        -->
 </asp:Content>

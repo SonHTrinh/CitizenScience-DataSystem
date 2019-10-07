@@ -20,6 +20,8 @@ namespace CitizenScienceClasses
             return conn.GetDataSetUsingCmdObj(comm);
         }
 
+
+
         /////////////////////////////////   LOCATION FUNCTIONS
         public static DataSet GetLocations()
         {
@@ -29,7 +31,6 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllLocations";
             return conn.GetDataSetUsingCmdObj(comm);
         }
-
         public static DataSet GetLocationsByWatershed(int watershedID)
         {
             DBConnect conn = new DBConnect();
@@ -39,7 +40,6 @@ namespace CitizenScienceClasses
             comm.Parameters.AddWithValue("@watershedID", watershedID);
             return conn.GetDataSetUsingCmdObj(comm);
         }
-
         public static Location CreateLocation(int watershedId, string name, double latitude, double longitude)
         {
             Location result = null;
@@ -71,7 +71,6 @@ namespace CitizenScienceClasses
 
             return result;
         }
-
         public static Location ReadLocation(int id)
         {
             Location result = null;
@@ -100,7 +99,6 @@ namespace CitizenScienceClasses
 
             return result;
         }
-
         public static List<Location> ReadAllLocation()
         {
             List<Location> result = new List<Location>();
@@ -131,7 +129,6 @@ namespace CitizenScienceClasses
 
             return result;
         }
-
         public static Location UpdateLocation(int id, int watershedId, string name, double latitude, double longitude)
         {
             Location result = null;
@@ -164,7 +161,6 @@ namespace CitizenScienceClasses
 
             return result;
         }
-
         public static bool DeleteLocation(int id)
         {
             bool result = false;
@@ -173,6 +169,8 @@ namespace CitizenScienceClasses
 
             return result;
         }
+
+
 
         /////////////////////////////////   TEMPERATURE FUNCTIONS
         public static DataSet GetAllTemperatures()
@@ -209,9 +207,8 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllTemperaturesByMultipleLocationIds";
             comm.Parameters.AddWithValue("@listOfLocationID", commaList);
             return conn.GetDataSetUsingCmdObj(comm);
-        }
-        
-        public static int AddTempsToDatabase(List<Temperature> temperatureList, int locationid, int uploadid)
+        }        
+        public static int AddTempsToDatabase(List<Temperature> temperatureList, int locationid)
         {
             int k = 0;
             DBConnect objDb = new DBConnect();
@@ -221,7 +218,6 @@ namespace CitizenScienceClasses
                 comm.CommandType = CommandType.StoredProcedure;
                 comm.CommandText = "AddTemperatures";
                 comm.Parameters.AddWithValue("@locationid", locationid);
-                comm.Parameters.AddWithValue("@uploadid", uploadid);
                 comm.Parameters.AddWithValue("@ts", t.Timestamp);
                 comm.Parameters.AddWithValue("@temp_c", t.Celsius);
                 comm.Parameters.AddWithValue("@temp_f", t.Fahrenheit);
@@ -230,22 +226,20 @@ namespace CitizenScienceClasses
             }
             return k;
         }
-
-        public static int BulkTemperatureDataInsert(List<Temperature> temperatureList, int locationid, int uploadid)
+        public static int BulkTemperatureDataInsert(List<Temperature> temperatureList, int locationid)
         {
             int result = 0;
 
             DataTable dataTable = new DataTable();
 
             dataTable.Columns.Add(new DataColumn("LocationID", typeof(string)));
-            dataTable.Columns.Add(new DataColumn("UploadID", typeof(int)));
             dataTable.Columns.Add(new DataColumn("Timestamp", typeof(DateTime)));
             dataTable.Columns.Add(new DataColumn("TempC", typeof(double)));
             dataTable.Columns.Add(new DataColumn("TempF", typeof(double)));
 
             foreach(Temperature temperature in temperatureList)
             {
-                dataTable.Rows.Add(locationid, uploadid, temperature.Timestamp, temperature.Celsius, temperature.Fahrenheit);
+                dataTable.Rows.Add(locationid, temperature.Timestamp, temperature.Celsius, temperature.Fahrenheit);
             }
 
             DBConnect objDb = new DBConnect();
@@ -260,6 +254,35 @@ namespace CitizenScienceClasses
             return result;
         }
 
+        public static List<Temperature> GetLocationTemperaturesByDateRange(int locationId, DateTime startDate, DateTime endDate)
+        {
+            List<Temperature> result = new List<Temperature>();
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetLocationTemperaturesByDateRange";
+            comm.Parameters.AddWithValue("@locationid", locationId);
+            comm.Parameters.AddWithValue("@startdate", startDate);
+            comm.Parameters.AddWithValue("@enddate", endDate);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            foreach(DataRow dataRow in dataSet.Tables[0].Rows)
+            {
+                result.Add(new Temperature
+                {
+                    Id = Convert.ToInt32(dataRow["TempID"]),
+                    Timestamp = Convert.ToDateTime(dataRow["Timestamp"]),
+                    Celsius = Convert.ToDouble(dataRow["TempC"]),
+                    Fahrenheit = Convert.ToDouble(dataRow["TempF"])
+                });
+            }
+
+            return result;
+        }
+
+
+
         /////////////////////////////////   WATERSHED FUNCTIONS
         public static DataSet GetWatersheds()
         {
@@ -269,9 +292,6 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllWatersheds";
             return conn.GetDataSetUsingCmdObj(comm);
         }
-
-
-
         public static Watershed CreateWatershed(string name)
         {
             Watershed watershed = null;
@@ -297,7 +317,6 @@ namespace CitizenScienceClasses
 
             return watershed;
         }
-
         public static Watershed ReadWatershed(int id)
         {
             Watershed watershed = null;
@@ -323,7 +342,6 @@ namespace CitizenScienceClasses
             
             return watershed;
         }
-
         public static Watershed UpdateWatershed(int id, string name)
         {
             Watershed watershed = null;
@@ -350,7 +368,6 @@ namespace CitizenScienceClasses
 
             return watershed;
         }
-
         public static bool DeleteWatershed(int id)
         {
             bool result = false;
@@ -364,6 +381,138 @@ namespace CitizenScienceClasses
 
 
             return result;
+        }
+
+
+
+        /////////////////////////////////   VOLUNTEER FUNCTIONS
+        public static DataSet GetVolunteers()
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAllVolunteers";
+            return conn.GetDataSetUsingCmdObj(comm);
+        }
+        public static Volunteer CreateVolunteer(string firstName, string lastName, string email, string message)
+        {
+            Volunteer result = null;
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "CreateVolunteer";
+            comm.Parameters.AddWithValue("@firstname", firstName);
+            comm.Parameters.AddWithValue("@lastname", lastName);
+            comm.Parameters.AddWithValue("@email", email);
+            comm.Parameters.AddWithValue("@message", message);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                result = new Volunteer
+                {
+                    VolunteerID = Convert.ToInt32(dataRow["VolunteerID"]),
+                    FirstName = Convert.ToString(dataRow["FirstName"]),
+                    LastName = Convert.ToString(dataRow["LastName"]),
+                    Email = Convert.ToString(dataRow["Email"]),
+                    Message = Convert.ToString(dataRow["Message"]),
+                    DateSubmitted = Convert.ToDateTime(dataRow["DateSubmitted"])
+                };
+            }
+
+            return result;
+        }
+
+
+        /////////////////////////////////   ADMIN FUNCTIONS
+        public static DataSet GetAdmins()
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAllAdmins";
+            return conn.GetDataSetUsingCmdObj(comm);
+        }
+        public static Admin CreateAdmin(string accessnet)
+        {
+            Admin admin = null;
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "CreateAdmin";
+            comm.Parameters.AddWithValue("@accessnet", accessnet);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                admin = new Admin
+                {
+                    AdminID = Convert.ToInt32(dataRow["AdminID"]),
+                    Accessnet = Convert.ToString(dataRow["Accessnet"])
+                };
+            }
+
+            return admin;
+        }
+        public static Admin UpdateAdmin(int id, string accessnet)
+        {
+            Admin admin = null;
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "UpdateAdmin";
+            comm.Parameters.AddWithValue("@id", id);
+            comm.Parameters.AddWithValue("@accessnet", accessnet);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                admin = new Admin
+                {
+                    AdminID = Convert.ToInt32(dataRow["AdminID"]),
+                    Accessnet = Convert.ToString(dataRow["Accessnet"])
+                };
+            }
+
+            return admin;
+        }
+
+
+
+        /////////////////////////////////   ABOUT FUNCTIONS
+         public static About GetAbout()
+        {
+            About a = null;
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetLatestAbout";
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+            if(dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                a = new About
+                {
+                    Description = Convert.ToString(dataRow["Description"]),
+                    Question1 = Convert.ToString(dataRow["Question1"]),
+                    Question2 = Convert.ToString(dataRow["Question2"]),
+                    Question3 = Convert.ToString(dataRow["Question3"]),
+                    Answer1 = Convert.ToString(dataRow["Answer1"]),
+                    Answer2 = Convert.ToString(dataRow["Answer2"]),
+                    Answer3 = Convert.ToString(dataRow["Answer3"])
+                };
+            }
+            return a;
         }
     }
 }

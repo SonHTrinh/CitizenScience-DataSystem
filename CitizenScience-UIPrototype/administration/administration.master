@@ -20,49 +20,49 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="/administration/watershed.aspx">
+                    <a href="/cis4396-F06/administration/watershed.aspx">
                         <i class="fas fa-water"></i>
                         <span class="menuItemName">Manage Watersheds</span> 
                     </a>
                 </li>
                 <li>
-                    <a href="/administration/location.aspx">
+                    <a href="/cis4396-F06/administration/location.aspx">
                         <i class="fas fa-map-marked-alt"></i>
                         <span class="menuItemName">Manage Locations</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/administration/upload.aspx">
+                    <a href="/cis4396-F06/administration/upload.aspx">
                         <i class="fas fa-upload"></i>
                         <span class="menuItemName">Upload Data</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/administration/download.aspx">
+                    <a href="/cis4396-F06/administration/download.aspx">
                         <i class="fas fa-download"></i>
                         <span class="menuItemName">Download Data</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/administration/usermanage.aspx">
+                    <a href="/cis4396-F06/administration/usermanage.aspx">
                         <i class="fas fa-users"></i>
                         <span class="menuItemName">Manage Admins</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/administration/gallery.aspx">
+                    <a href="/cis4396-F06/administration/gallery.aspx">
                         <i class="fas fa-images"></i>
                         <span class="menuItemName">Manage Gallery</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/administration/about.aspx">
+                    <a href="/cis4396-F06/administration/about.aspx">
                         <i class="fas fa-question"></i>
                         <span class="menuItemName">Manage About</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/administration/volunteer.aspx">
+                    <a href="/cis4396-F06/administration/volunteer.aspx">
                         <i class="fas fa-clipboard"></i>
                         <span class="menuItemName">Volunteers</span>
                     </a>
