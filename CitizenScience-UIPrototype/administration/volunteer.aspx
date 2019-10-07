@@ -34,16 +34,7 @@
                     { data: 'LastName' },
                     { data: 'Email' },
                     { data: 'Message' },
-                    { data: 'DateSubmitted' },
-                    // The 'Action' column of the table
-                    {
-                        data: null,
-                        orderable: false,
-                        width: '10%',
-                        render: function(data, type, row, meta) {
-                            return
-                        }
-                    }
+                    { data: 'DateSubmitted' }
                 ]
             });
         });
