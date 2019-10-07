@@ -133,10 +133,12 @@
             {
                 $.ajax({
                     type: 'GET',
-                    contentType: 'application/json; charset=utf-8',
+                    contentType: 'application/json',
                     url: '/api.asmx/About',
                     dataType: 'JSON',
                     success: function (responseData) {
+
+                        console.log(responseData);
                         $("#divDescription") = responseData.Description;
                         $("#divQuestion1") = responseData.Question1;
                         $("#divQuestion2") = responseData.Question2;
@@ -146,7 +148,7 @@
                         $("#divAnswer3") = responseData.Answer3;                                   
                     },
                     error: function (errorData) {
-                        console.log('ERROR');
+                        console.log('getting ERROR');
                         console.log(errorData);
                     }
                 });

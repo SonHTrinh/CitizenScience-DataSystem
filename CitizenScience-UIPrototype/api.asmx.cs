@@ -176,10 +176,16 @@ namespace CitizenScience_UIPrototype
         {
             About about = ClassFunctions.GetAbout();
 
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            Context.Response.Clear();
-            Context.Response.ContentType = "application/json";
-            Context.Response.Write(js.Serialize(about));
+            if (about != null)
+            {
+                BuildResponse(200, about);
+            }
+            else
+            {
+                BuildResponse(500, about);
+            }
+            
+
         }
 
         //////////////////////////// CRUD Watershed \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
