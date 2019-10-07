@@ -118,6 +118,20 @@ namespace CitizenScience_UIPrototype
 
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void GetAlbumImageIds(int albumId)
+        {
+            List<int> result = new List<int>();
+
+            result = ClassFunctions.GetAlbumImageIDs(albumId);
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Clear();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(result));
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void Admins()
         {
             DataSet adminDataSet = ClassFunctions.GetAdmins();

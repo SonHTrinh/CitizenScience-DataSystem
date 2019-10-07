@@ -1833,6 +1833,16 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="images\album\ImageAlbumAPI.cs">
+      <DependentUpon>set.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="images\get.ashx.cs">
+      <DependentUpon>get.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="images\location\ImageLocationAPI.cs">
+      <DependentUpon>get.ashx</DependentUpon>
+      <DependentUpon>set.ashx</DependentUpon>
+    </Compile>
     <Compile Include="map.aspx.cs">
       <DependentUpon>map.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1853,6 +1863,10 @@
     <Content Include="CitizenScience.Master" />
     <Content Include="administration\administration.master" />
     <Content Include="getimage.ashx" />
+    <Content Include="images\location\get.ashx" />
+    <Content Include="images\location\set.ashx" />
+    <Content Include="images\album\set.ashx" />
+    <Content Include="images\get.ashx" />
     <None Include="packages.config" />
     <Content Include="style\custom\TEMPLE_BRANDING.md" />
     <Content Include="style\fontawesome\less\brands.less" />
@@ -1926,6 +1940,7 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

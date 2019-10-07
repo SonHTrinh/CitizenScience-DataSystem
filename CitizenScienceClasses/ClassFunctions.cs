@@ -384,7 +384,34 @@ namespace CitizenScienceClasses
         }
 
         ///////////////////////////////// IMAGE Functions
-        
+
+        public static Image GetImage(int imageId)
+        {
+            Image result = null;
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetImage";
+            comm.Parameters.AddWithValue("@imageid", imageId);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                result = new Image
+                {
+                    ImageID = Convert.ToInt32(dataRow["ImageID"]),
+                    Bytes = dataRow["Bytes"] as byte[],
+                    Description = Convert.ToString(dataRow["Description"]),
+                    ContentType = Convert.ToString(dataRow["ContentType"])
+                };
+            }
+
+            return result;
+        }
+
         public static Location SetLocationImage(int locationId, byte[] bytes, string contentType)
         {
             Location result = null;
@@ -443,6 +470,54 @@ namespace CitizenScienceClasses
             return result;
         }
 
+        public static List<int> GetAlbumImageIDs(int albumId)
+        {
+            List<int> result = new List<int>();
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAlbumImageIDs";
+            comm.Parameters.AddWithValue("@albumid", albumId);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            foreach (DataRow dataRow in dataSet.Tables[0].Rows)
+            {
+                result.Add(Convert.ToInt32(dataRow["ImageID"]));
+            }
+            
+
+            return result;
+        }
+
+        public static Image AddImageToAlbum(int albumId, byte[] bytes, string contentType)
+        {
+            Image result = null;
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "AddImageToAlbum";
+            comm.Parameters.AddWithValue("@albumid", albumId);
+            comm.Parameters.AddWithValue("@bytes", bytes);
+            comm.Parameters.AddWithValue("@contenttype", contentType);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                result = new Image
+                {
+                    ImageID = Convert.ToInt32(dataRow["ImageID"]),
+                    Bytes = dataRow["Bytes"] as byte[],
+                    Description = Convert.ToString(dataRow["Description"]),
+                    ContentType = Convert.ToString(dataRow["ContentType"])
+                };
+            }
+
+            return result;
+        }
 
 
         /////////////////////////////////   VOLUNTEER FUNCTIONS
@@ -556,6 +631,8 @@ namespace CitizenScienceClasses
             }
             return a;
         }
+
+
     }
 }
 

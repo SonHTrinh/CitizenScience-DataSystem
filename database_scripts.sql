@@ -5,9 +5,9 @@
 -------------------- Tables --------------------
 
 CREATE TABLE [dbo].[Watershed] (
-	[WatershedID] INT IDENTITY (1,1) NOT NULL, 
-	[WatershedName] VARCHAR (MAX) NOT NULL, 
-	[LastUpdated] DATE NOT NULL, 
+	[WatershedID] INT IDENTITY (1,1) NOT NULL,
+	[WatershedName] VARCHAR (MAX) NOT NULL,
+	[LastUpdated] DATE NOT NULL,
 	PRIMARY KEY CLUSTERED ([WatershedID] ASC)
 );
 
@@ -18,20 +18,20 @@ CREATE TABLE [dbo].[Image] (
     [Bytes]			   VARBINARY (MAX) NOT NULL,
     [Description] NVARCHAR (MAX),
 	[ContentType] NVARCHAR (MAX),
-    [LastUpdated]      DATE           NOT NULL,
+    [LastUpdated]      DATETIME           NOT NULL,
     PRIMARY KEY CLUSTERED ([ImageID] ASC)
 );
 
 GO
 
 CREATE TABLE [dbo].[Location](
-	[LocationID] INT IDENTITY (1,1) NOT NULL, 
-	[WatershedID] INT NOT NULL, 
-	[Longitude] FLOAT(53) NOT NULL, 
-	[Latitude] FLOAT (53) NOT NULL, 
-	[SensorName] VARCHAR(MAX) NOT NULL, 
-	[ProfileImageID] INT, 
-	[LastUpdated] DATE NOT NULL, 
+	[LocationID] INT IDENTITY (1,1) NOT NULL,
+	[WatershedID] INT NOT NULL,
+	[Longitude] FLOAT(53) NOT NULL,
+	[Latitude] FLOAT (53) NOT NULL,
+	[SensorName] VARCHAR(MAX) NOT NULL,
+	[ProfileImageID] INT,
+	[LastUpdated] DATE NOT NULL,
 	PRIMARY KEY CLUSTERED ([LocationID] ASC) ,
 	CONSTRAINT  [FK_Location_ToTable] FOREIGN KEY ([WatershedID]) REFERENCES [dbo].[Watershed] ([WatershedID]),
 	CONSTRAINT  [FK_Image_ToTable] FOREIGN KEY ([ProfileImageID]) REFERENCES [dbo].[Image] ([ImageID])
@@ -39,15 +39,15 @@ CREATE TABLE [dbo].[Location](
 
 GO
 
-CREATE TABLE [dbo].[Temperature]( 
-	[TempID] INT IDENTITY(1,1) NOT NULL, 
-	[LocationID] INT NOT NULL, 
-	[Timestamp] DateTime  NOT NULL, 
-	[TempC] FLOAT(53) NOT NULL, 
-	[TempF] FLOAT(53) NOT NULL, 
-	PRIMARY KEY CLUSTERED ([TempID] ASC) , 
-	CONSTRAINT [FK_Temperature_ToTable] FOREIGN KEY ([LocationID]) REFERENCES [dbo].[Location] ([LocationID]) 
-); 
+CREATE TABLE [dbo].[Temperature](
+	[TempID] INT IDENTITY(1,1) NOT NULL,
+	[LocationID] INT NOT NULL,
+	[Timestamp] DateTime  NOT NULL,
+	[TempC] FLOAT(53) NOT NULL,
+	[TempF] FLOAT(53) NOT NULL,
+	PRIMARY KEY CLUSTERED ([TempID] ASC) ,
+	CONSTRAINT [FK_Temperature_ToTable] FOREIGN KEY ([LocationID]) REFERENCES [dbo].[Location] ([LocationID])
+);
 
 GO
 
@@ -77,6 +77,7 @@ CREATE TABLE [dbo].[Album] (
     [AlbumID]     INT            IDENTITY (1, 1) NOT NULL,
     [Name]    NVARCHAR (MAX) NOT NULL,
     [Description] NVARCHAR (MAX) NOT NULL,
+	[LastUpdated] DATETIME,
     PRIMARY KEY CLUSTERED ([AlbumID] ASC)
 );
 
@@ -85,6 +86,7 @@ GO
 CREATE TABLE [dbo].[AlbumImages] (
 	[AlbumID] INT NOT NULL,
 	[ImageID] INT NOT NULL,
+	[LastUpdated] DATETIME,
 	CONSTRAINT [FK_ImageLink_ToTable] FOREIGN KEY ([ImageID]) REFERENCES [dbo].[Image] ([ImageID]),
 	CONSTRAINT [FK_Album_ToTable] FOREIGN KEY ([AlbumID]) REFERENCES [dbo].[Album] ([AlbumID])
 );
@@ -116,21 +118,21 @@ GO
 
 -------------------- Stored Procedures --------------------
 
------------------------------------------------------------------- 
+------------------------------------------------------------------
 ------------------------------------------------- GET Procedures
 ------------------------------------------------------------------
 CREATE PROCEDURE [dbo].[GetAllLocations]
 AS
 	SELECT * FROM Location
 
-GO  
+GO
 
 CREATE PROCEDURE [dbo].[GetLocationsByWatershed]
 	@watershedID int
 AS
 	SELECT * FROM Location
     WHERE WatershedID = @watershedID
-    
+
 GO
 
 CREATE PROCEDURE [dbo].[GetAllTemperatures]
@@ -142,12 +144,6 @@ GO
 CREATE PROCEDURE [dbo].[GetAllWatersheds]
 AS
 	SELECT * FROM Watershed
-    
-GO
-
-CREATE PROCEDURE [dbo].[GetAllBulkUploads]
-AS
-	SELECT * FROM BulkUploads
 
 GO
 
@@ -198,13 +194,49 @@ GO
 CREATE PROCEDURE [dbo].[GetLocationImage]
 	@locationid int
 AS
-	SELECT * FROM [Image] 
+	SELECT * FROM [Image]
 	WHERE ImageId = (SELECT [ProfileImageID] FROM Location WHERE LocationID = @locationid)
 
 GO
 
+CREATE PROCEDURE [dbo].[AddImageToAlbum]
+	@albumid int,
+	@bytes varbinary(MAX),
+	@contenttype nvarchar(MAX)
+AS
+	DECLARE @imageId int;
+	INSERT INTO [Image] ([Bytes], [ContentType],  [LastUpdated]) VALUES (@bytes, @contenttype, GETDATE());
 
------------------------------------------------------------------- 
+	SELECT @imageId = (SELECT SCOPE_IDENTITY());
+
+	INSERT INTO [AlbumImages] ([AlbumID], [ImageID], [LastUpdated]) VALUES (@albumid, @imageId, GETDATE())
+
+	UPDATE Album
+	SET [LastUpdated] = GETDATE()
+	WHERE AlbumID = @albumid;
+
+	SELECT * FROM [Image]
+	WHERE [ImageID] = @imageId;
+
+GO
+
+CREATE PROCEDURE [dbo].[GetAlbumImageIDs]
+	@albumid int
+AS
+	SELECT [ImageID] FROM [AlbumImages]
+	WHERE [AlbumID] = @albumid
+
+GO
+
+CREATE PROCEDURE [dbo].[GetImage]
+	@imageid int
+AS
+	SELECT * FROM [Image]
+	WHERE ImageId = @imageid
+
+GO
+
+------------------------------------------------------------------
 ------------------------------------------------- CRUD Procedures
 ------------------------------------------------------------------
 
@@ -225,10 +257,10 @@ GO
 CREATE PROCEDURE [dbo].[AddTemperatures]
 	@locationid int,
 	@ts datetime,
-	@temp_c float, 
-	@temp_f float 
+	@temp_c float,
+	@temp_f float
 AS
-	INSERT INTO Temperature (LocationID, [Timestamp], TempC, TempF) 
+	INSERT INTO Temperature (LocationID, [Timestamp], TempC, TempF)
 	VALUES (@locationid, @ts, @temp_c, @temp_f)
 
 GO
