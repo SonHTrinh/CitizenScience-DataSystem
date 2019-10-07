@@ -25,7 +25,7 @@
             var table = $('#DataTable').DataTable({
                 ajax: {
                     // The location to HTTP GET the data for the table
-                    url: '/api.asmx/Volunteers',
+                    url: '/cis4396-F06/api.asmx/Volunteers',
                     dataSrc: ''
                 },
                 columns: [
@@ -34,16 +34,7 @@
                     { data: 'LastName' },
                     { data: 'Email' },
                     { data: 'Message' },
-                    { data: 'DateSubmitted' },
-                    // The 'Action' column of the table
-                    {
-                        data: null,
-                        orderable: false,
-                        width: '10%',
-                        render: function(data, type, row, meta) {
-                            return
-                        }
-                    }
+                    { data: 'DateSubmitted' }
                 ]
             });
         });

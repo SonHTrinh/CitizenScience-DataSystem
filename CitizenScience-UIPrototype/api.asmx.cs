@@ -11,7 +11,8 @@ using System.Web.Services;
 namespace CitizenScience_UIPrototype
 {
 
-    [WebService(Namespace = "http://localhost")]
+    //[WebService(Namespace = "http://localhost")]
+    [WebService(Namespace = "https://np-stem.temple.edu/cis4396-F06")]
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     [ScriptService]

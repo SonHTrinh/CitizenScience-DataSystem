@@ -54,7 +54,7 @@
                 $.ajax({
                     type: 'GET',
                     contentType: 'application/json; charset=utf-8',
-                    url: '/api.asmx/ReadAllWatersheds',
+                    url: '/cis4396-F06/api.asmx/ReadAllWatersheds',
                     dataType: 'JSON'
                 }).done(function (responseData) {
 
@@ -69,7 +69,7 @@
                         },
                         ajax: {
                             // The location to HTTP GET the data for the table
-                            url: '/api.asmx/ReadAllLocation',
+                            url: '/cis4396-F06/api.asmx/ReadAllLocation',
                             dataSrc: ''
                         },
                         columns: [
@@ -107,7 +107,7 @@
                 $('#feedbackDownloadSelect').addClass('invisible');
 
                 if (isDownloadAll) {
-                    window.location.href = '/api.asmx/AllLocationTemperaturesCsv';
+                    window.location.href = '/cis4396-F06/api.asmx/AllLocationTemperaturesCsv';
                 } else {
                     var idParameters = '?';
 
@@ -117,7 +117,7 @@
 
                     idParameters = idParameters.substring(0, idParameters.length - 1);
 
-                    window.location.href = '/api.asmx/LocationTemperaturesCsv' + idParameters;
+                    window.location.href = '/cis4396-F06/api.asmx/LocationTemperaturesCsv' + idParameters;
                 }
 
                 table.rows('.selected').deselect();             
