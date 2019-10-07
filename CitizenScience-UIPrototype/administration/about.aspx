@@ -133,10 +133,11 @@
             {
                 $.ajax({
                     type: 'GET',
-                    contentType: 'application/json; charset=utf-8',
+                    contentType: 'application/json',
                     url: '/api.asmx/About',
                     dataType: 'JSON',
                     success: function (responseData) {
+<<<<<<< HEAD
                         console.log(responseData)
                         $("#divDescription").html(responseData.Description);// = responseData.Description;
                         $("#divQuestion1").html(responseData.Question1);// = responseData.Question1;
@@ -145,9 +146,20 @@
                         $("#divAnswer1").html(responseData.Answer1);// = responseData.Answer1;
                         $("#divAnswer2").html(responseData.Answer2);// = responseData.Answer2;
                         $("#divAnswer3").html(responseData.Answer3);// = responseData.Answer3;                                   
+=======
+
+                        console.log(responseData);
+                        $("#divDescription") = responseData.Description;
+                        $("#divQuestion1") = responseData.Question1;
+                        $("#divQuestion2") = responseData.Question2;
+                        $("#divQuestion3") = responseData.Question3;
+                        $("#divAnswer1") = responseData.Answer1;
+                        $("#divAnswer2") = responseData.Answer2;
+                        $("#divAnswer3") = responseData.Answer3;                                   
+>>>>>>> fb35ed13b5217a5900225965f4fdf3721d1ffd8f
                     },
                     error: function (errorData) {
-                        console.log('ERROR');
+                        console.log('getting ERROR');
                         console.log(errorData);
                     }
                 });
