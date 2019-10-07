@@ -13,15 +13,6 @@ namespace CitizenScience_UIPrototype {
     public partial class about {
         
         /// <summary>
-        /// txtAboutDescription control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label txtAboutDescription;
-        
-        /// <summary>
         /// btnQuestion1 control.
         /// </summary>
         /// <remarks>

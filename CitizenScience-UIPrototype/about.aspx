@@ -14,8 +14,8 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-            <div class="container">
-                <asp:Label TextMode="MultiLine"  ID="txtAboutDescription" runat="server"></asp:Label>
+            <div class="container">                
+                <div id="divDescription"></div>
                 <p>
                     Citizen Science Data System (CS) is a project headed by Dr. Laura Toran and Dr. Sarah Beganskas
                     who both work in the Earth and Environmental Science department in the College of Science and

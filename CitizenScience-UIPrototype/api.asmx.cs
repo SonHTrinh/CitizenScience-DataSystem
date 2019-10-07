@@ -130,7 +130,8 @@ namespace CitizenScience_UIPrototype
                 Admin admin = new Admin
                 {
                     AdminID = Convert.ToInt32(dataRow["AdminID"]),
-                    Accessnet = Convert.ToString(dataRow["Accessnet"])                
+                    TUID = Convert.ToString(dataRow["TUID"])  ,
+                    Active = Convert.ToBoolean(dataRow["Active"])
                 };
 
                 adminList.Add(admin);
@@ -175,11 +176,10 @@ namespace CitizenScience_UIPrototype
         public void About()
         {
             About about = ClassFunctions.GetAbout();
-
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            Context.Response.Clear();
-            Context.Response.ContentType = "application/json";
-            Context.Response.Write(js.Serialize(about));
+            if(about != null)
+                BuildResponse(200, about);
+            else
+                BuildResponse(500, about);          
         }
 
         //////////////////////////// CRUD Watershed \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -429,9 +429,9 @@ namespace CitizenScience_UIPrototype
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void CreateAdmin(string accessnet)
+        public void CreateAdmin(string tuid)
         {
-            Admin result = ClassFunctions.CreateAdmin(accessnet);
+            Admin result = ClassFunctions.CreateAdmin(tuid);
 
             if (result != null)
             {
@@ -445,9 +445,9 @@ namespace CitizenScience_UIPrototype
         }
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void UpdateAdmin(int id, string accessnet)
+        public void UpdateAdmin(int id, string tuid, bool active)
         {
-            Admin result = ClassFunctions.UpdateAdmin(id, accessnet);
+            Admin result = ClassFunctions.UpdateAdmin(id, tuid, active);
         }
         
         [WebMethod]

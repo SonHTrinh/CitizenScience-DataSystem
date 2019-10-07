@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
     <div class="row mb-4">
         <div class="col-12">
-            <button type="button" id="editAbout" class="btn btn-success float-left" runat="server">
+            <button type="button" id="editAbout" class="btn btn-success float-left">
                 <i class="fa fa-edit"> Edit About</i>
             </button>
         </div>
@@ -137,13 +137,14 @@
                     url: '/api.asmx/About',
                     dataType: 'JSON',
                     success: function (responseData) {
-                        $("#divDescription") = responseData.Description;
-                        $("#divQuestion1") = responseData.Question1;
-                        $("#divQuestion2") = responseData.Question2;
-                        $("#divQuestion3") = responseData.Question3;
-                        $("#divAnswer1") = responseData.Answer1;
-                        $("#divAnswer2") = responseData.Answer2;
-                        $("#divAnswer3") = responseData.Answer3;                                   
+                        console.log(responseData)
+                        $("#divDescription").html(responseData.Description);// = responseData.Description;
+                        $("#divQuestion1").html(responseData.Question1);// = responseData.Question1;
+                        $("#divQuestion2").html(responseData.Question2);// = responseData.Question2;
+                        $("#divQuestion3").html(responseData.Question3);// = responseData.Question3;
+                        $("#divAnswer1").html(responseData.Answer1);// = responseData.Answer1;
+                        $("#divAnswer2").html(responseData.Answer2);// = responseData.Answer2;
+                        $("#divAnswer3").html(responseData.Answer3);// = responseData.Answer3;                                   
                     },
                     error: function (errorData) {
                         console.log('ERROR');
@@ -164,7 +165,7 @@
             }
 
             // The function when the 'Create New Admin' button gets clicked
-            $('#editAbout').click(function () {
+             $('#editAbout').click(function () {
                 $.ajax({
                     url: "/api.asmx/About",
                     success: function (data) {
@@ -176,7 +177,7 @@
                 $('#editModal').modal('show');
             });
 
-            function BuildEditAbout(data) {
+            function BuildEditAbout() {
                 var Description = $('#inputEditDescription').val();             
                 var Question1 = $('#inputEditQuestion1').val();             
                 var Question2 = $('#inputEditQuestion2').val();             
@@ -188,11 +189,11 @@
                 return {
                     description: Description,
                     question1: Question1,
-                    question1: Question2,
-                    question1: Question3,
-                    question1: Answer1,
-                    question1: Answer2,
-                    question1: Answer3
+                    question2: Question2,
+                    question3: Question3,
+                    answer1: Answer1,
+                    answer2: Answer2,
+                    answer3: Answer3
                 };
             }
 
@@ -205,13 +206,13 @@
                 $('.inputa2').removeClass('is-invalid');
                 $('.inputa3').removeClass('is-invalid');
 
-                var regexDescription = /^[\w ]+$/;
-                var regexQuestion1 = /^[\w ]+$/;
-                var regexQuestion2 = /^[\w ]+$/;
-                var regexQuestion3 = /^[\w ]+$/;
-                var regexAnswer1 = /^[\w ]+$/;
-                var regexAnswer2 = /^[\w ]+$/;
-                var regexAnswer3 = /^[\w ]+$/;
+                var regexDescription = /[A-Za-z0-9 _.,!"'/$]*/;
+                var regexQuestion1 = /[A-Za-z0-9 _.,!"'/$]*/;
+                var regexQuestion2 = /[A-Za-z0-9 _.,!"'/$]*/;
+                var regexQuestion3 = /[A-Za-z0-9 _.,!"'/$]*/;
+                var regexAnswer1 = /[A-Za-z0-9 _.,!"'/$]*/;
+                var regexAnswer2 = /[A-Za-z0-9 _.,!"'/$]*/;
+                var regexAnswer3 = /[A-Za-z0-9 _.,!"'/$]*/;
 
                 hasValidDescription = regexDescription.test(requestData.description);
                 hasValidQuestion1 = regexQuestion1.test(requestData.question1);
@@ -271,11 +272,11 @@
                     $('.inputa3').addClass('is-invalid');
                 }
 
-                return (hasValidAccessnet && hasValidQuestion1 && hasValidQuestion2 && hasValidQuestion3 && hasValidAnswer1 && hasValidAnswer2 && hasValidAnswer3);
+                return (hasValidDescription && hasValidQuestion1 && hasValidQuestion2 && hasValidQuestion3 && hasValidAnswer1 && hasValidAnswer2 && hasValidAnswer3);
             }
 
             $('#editSubmit').click(function () {
-                var requestData = BuildEditAbout(editData)
+                var requestData = BuildEditAbout()
                 var isValidRequest = ValidateAboutRequest(requestData);
                 console.log('Is Edit Form Submission Valid?: ' + isValidRequest);
                 console.log(requestData)
