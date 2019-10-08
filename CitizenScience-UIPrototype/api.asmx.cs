@@ -176,24 +176,11 @@ namespace CitizenScience_UIPrototype
         public void About()
         {
             About about = ClassFunctions.GetAbout();
-<<<<<<< HEAD
+
             if(about != null)
                 BuildResponse(200, about);
             else
                 BuildResponse(500, about);          
-=======
-
-            if (about != null)
-            {
-                BuildResponse(200, about);
-            }
-            else
-            {
-                BuildResponse(500, about);
-            }
-            
-
->>>>>>> fb35ed13b5217a5900225965f4fdf3721d1ffd8f
         }
 
         //////////////////////////// CRUD Watershed \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
