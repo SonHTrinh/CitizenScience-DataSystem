@@ -174,6 +174,8 @@ AS
 	FROM About 
 	ORDER BY AboutID DESC
 
+GO
+
 
 ------------------------------------------------------------------ 
 ------------------------------------------------- CRUD Procedures
@@ -190,8 +192,6 @@ AS
 	WHERE LocationID = @locationid AND [Timestamp] BETWEEN @startdate AND @enddate
 
 GO
-
------ CRUD Temperature
 
 CREATE PROCEDURE [dbo].[AddTemperatures]
 	@locationid int,
