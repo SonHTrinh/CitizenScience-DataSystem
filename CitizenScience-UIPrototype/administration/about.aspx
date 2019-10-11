@@ -24,7 +24,7 @@
                 <div id="divQuestion1"></div>
             </div>
             <div class="col-6">
-                <label for="divAnswer1">Answer 1</label>
+                <label for="divAnswer1" class="font-weight-bold">Answer 1</label>
                 <div id="divAnswer1"></div>
             </div>
         </div>
@@ -36,7 +36,7 @@
                 <div id="divQuestion2"></div>
             </div>
             <div class="col-6">
-                <label for="divAnswer2">Answer 2</label>
+                <label for="divAnswer2" class="font-weight-bold">Answer 2</label>
                 <div id="divAnswer2"></div>
             </div>
         </div>
@@ -48,7 +48,7 @@
                 <div id="divQuestion3"></div>
             </div>
             <div class="col-6">
-                <label for="divAnswer3">Answer 3</label>
+                <label for="divAnswer3" class="font-weight-bold">Answer 3</label>
                 <div id="divAnswer3"></div>
             </div>
         </div>
@@ -138,13 +138,13 @@
                     dataType: 'JSON',
                     success: function (responseData) {
                         console.log(responseData)
-                        $("#divDescription").html(responseData.Description);// = responseData.Description;
-                        $("#divQuestion1").html(responseData.Question1);// = responseData.Question1;
-                        $("#divQuestion2").html(responseData.Question2);// = responseData.Question2;
-                        $("#divQuestion3").html(responseData.Question3);// = responseData.Question3;
-                        $("#divAnswer1").html(responseData.Answer1);// = responseData.Answer1;
-                        $("#divAnswer2").html(responseData.Answer2);// = responseData.Answer2;
-                        $("#divAnswer3").html(responseData.Answer3);// = responseData.Answer3;                                   
+                        $("#divDescription").html(responseData.Description);
+                        $("#divQuestion1").html(responseData.Question1);
+                        $("#divQuestion2").html(responseData.Question2);
+                        $("#divQuestion3").html(responseData.Question3);
+                        $("#divAnswer1").html(responseData.Answer1);
+                        $("#divAnswer2").html(responseData.Answer2);
+                        $("#divAnswer3").html(responseData.Answer3);                                  
                     },
                     error: function (errorData) {
                         console.log('getting ERROR');

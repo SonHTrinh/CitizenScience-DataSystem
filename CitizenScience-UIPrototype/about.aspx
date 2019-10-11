@@ -17,14 +17,14 @@
             <div class="container">                
                 <div id="divDescription"></div>
                 <p>
-                    Citizen Science Data System (CS) is a project headed by Dr. Laura Toran and Dr. Sarah Beganskas
+                    <%--Citizen Science Data System (CS) is a project headed by Dr. Laura Toran and Dr. Sarah Beganskas
                     who both work in the Earth and Environmental Science department in the College of Science and
                     Technology. They are planning to develop an initiative which tasks volunteers with measuring 
                     temperature of water in watersheds located in the Greater Philadelphia and surrounding areas.
                     With the CS Data System, they intend to engage the volunteers that travel to watersheds and 
                     provide accurate data reporting of the measured water temperature. The project will help 
                     visualize the data collected and allow for users that visit the application to view the 
-                    various metrics. 
+                    various metrics. --%>
                 </p>                
                 <a href="#volunteer_form" class=" btn btn-outline-primary" role="button" aria-pressed="true">Interested in Volunteering?</a>           
             </div>
@@ -42,8 +42,8 @@
         <div class="col-lg-12">
             <div class="container">
                 <button class="btn btn-primary" style="width: 100%;" type="button" data-toggle="collapse" data-target="#who1"
-                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion1" runat="server">
-                    Who are we? 
+                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion1">
+                   <%-- Who are we? --%>
                 </button>
             </div>
         </div>
@@ -52,8 +52,8 @@
         <div class="col-lg-12">
             <div class="container">
                 <div class="collapse" id="who1">
-                    <div class="card card-body" id="divAnswer1" runat="server">
-                        Citizen Science Data System (CS) is a project headed by Dr. Laura Toran 
+                    <div class="card card-body" id="divAnswer1">
+                        <%--Citizen Science Data System (CS) is a project headed by Dr. Laura Toran 
                         and Dr. Sarah Beganskas who both work in the Earth and Environmental 
                         Science department in the College of Science and Technology.
                         They are planning to develop an initiative which tasks volunteers
@@ -62,7 +62,7 @@
                         to engage the volunteers that travel to watersheds and provide accurate 
                         data reporting of the measured water temperature. The project will help 
                         visualize the data collected and allow for users that visit the application
-                        to view the various metrics. 
+                        to view the various metrics. --%>
                     </div>
                 </div>
             </div>
@@ -73,8 +73,8 @@
         <div class="col-lg-12">
             <div class="container">
                 <button class="btn btn-primary" style="width: 100%;" type="button" data-toggle="collapse" data-target="#goals1"
-                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion2" runat="server">
-                    What are our goals? 
+                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion2">
+                  <%--  What are our goals? --%>
                 </button>
             </div>
         </div>
@@ -83,13 +83,13 @@
         <div class="col-lg-12">
             <div class="container">
                 <div class="collapse" id="goals1">
-                    <div class="card card-body" id="divAnswer2" runat="server">
-                        The Citizen Science Data System will record water temperature information 
+                    <div class="card card-body" id="divAnswer2">
+                  <%--      The Citizen Science Data System will record water temperature information 
                         and organize it by location. This data will be displayed in the form of 
                         interactive graphs that can be accessed from a map-view user interface.
                         This project will serve to monitor local water source statistics while 
                         also engaging the community by allowing them to be actively involved in 
-                        the collection and analysis of the data.
+                        the collection and analysis of the data.--%>
                     </div>
                 </div>
             </div>
@@ -100,8 +100,8 @@
         <div class="col-lg-12">
             <div class="container">
                 <button class="btn btn-primary" style="width: 100%;" type="button" data-toggle="collapse" data-target="#temp1"
-                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion3" runat="server">
-                    Expected Benefits
+                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion3">
+                 <%--   Expected Benefits--%>
                 </button>
             </div>
         </div>
@@ -110,12 +110,12 @@
         <div class="col-lg-12">
             <div class="container">
                 <div class="collapse" id="temp1">
-                    <div class="card card-body" id="divAnswer3" runat="server">
-                        The main benefits to be gained through this new system will be a secure and organized data 
+                    <div class="card card-body" id="divAnswer3">
+                   <%--     The main benefits to be gained through this new system will be a secure and organized data 
                         storage method for vital water temperature data as well as a way of involving Greater 
                         Philadelphia area residents in the conservation of local water ecosystems. 
                         The system will be designed to allow administrative users to easily record relevant data.
-                        That collected data will then be displayed in an intuitive and user-friendly manner. 
+                        That collected data will then be displayed in an intuitive and user-friendly manner. --%>
                     </div>
                 </div>
             </div>
@@ -178,6 +178,33 @@
         <hr />
     </div>
     <script>
+        $(document).ready(function () {
+
+            RenderManageAboutPage();
+            // This function fills out the contents of the Manage About page
+            function RenderManageAboutPage() {
+                $.ajax({
+                    type: 'GET',
+                    contentType: 'application/json',
+                    url: '/api.asmx/About',
+                    dataType: 'JSON',
+                    success: function (responseData) {
+                        console.log(responseData)
+                        $("#divDescription").html(responseData.Description);
+                        $("#btnQuestion1").html(responseData.Question1);
+                        $("#btnQuestion2").html(responseData.Question2);
+                        $("#btnQuestion3").html(responseData.Question3);
+                        $("#divAnswer1").html(responseData.Answer1);
+                        $("#divAnswer2").html(responseData.Answer2);
+                        $("#divAnswer3").html(responseData.Answer3);
+                    },
+                    error: function (errorData) {
+                        console.log('getting ERROR');
+                        console.log(errorData);
+                    }
+                });
+            }
+        });
         $("#btnSubmit").click(function () {
 
         });
