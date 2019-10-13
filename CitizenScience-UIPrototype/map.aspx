@@ -263,25 +263,60 @@
             }
 
             function initCGraph() {
-                var ctx = document.getElementById("myChart").getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        max: 50,
-                        min: 0,
-                        stepSize: 0,
-                        labels: ["4/21/2019", "4/22/2019", "4/23/2019", "4/24/2019"],
-                        datasets: [{
-                            label: 'Sample Data(Celsius)',
-                            data: [21, 14, 22, 16],
-                            fill: false,
-                            borderColor: '#F08080',
-                            backgroundColor: '#E9C9D1',
-                            borderWidth: 1
-                        }]
+                // Create the data object to send to the server
+                var data = {
+                    locationId: 1,
+                    start: "04-20-2019",
+                    end: "04-25-2019"
+                };
+
+                // Send temperature data request
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    url: '/api.asmx/GetLocationTemperaturesByDateRange',
+                    data: JSON.stringify(data),
+                    success: function (responseData) {
+                        //Store the timestamp and the temperatures of server response
+                        var dateLabelArray = [];
+                        var temperatureArray = [];
+
+                        //Add the timestamp and temperature pairs into the variables
+                        responseData.forEach(function (temperature) {
+                            dateLabelArray.push(temperature.Timestamp);
+                            temperatureArray.push(temperature.Celsius);
+                        });
+
+                        //Get the element to hold the chart
+                        var ctx = document.getElementById("myChart").getContext('2d');
+                        //Create the chart and pass in the timestamp array as labels and the temperature array for data
+                        var myChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                max: 50,
+                                min: 0,
+                                stepSize: 0,
+                                labels: dateLabelArray,
+                                datasets: [{
+                                    label: 'Sample Data(Celsius)',
+                                    data: temperatureArray,
+                                    fill: false,
+                                    borderColor: '#F08080',
+                                    backgroundColor: '#E9C9D1',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {}
+                        });
+
                     },
-                    options: {}
+                    error: function (errorData) {
+                        console.log('ERROR');
+                        console.log(errorData);
+                    }
                 });
+
+
             }
 
             function initFGraph() {
