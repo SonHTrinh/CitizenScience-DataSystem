@@ -19,12 +19,8 @@ html, body {
     padding-left: 20%;
 }
 
-.dropdown-menu > li > a:hover {
-    background-color: #007bff;
+.dropdown-menu:hover {
+    background-color: #999999;
     background-image: none;
 }
 
-.dropdown-submenu > ul > li > a:hover {
-    background-color: #007bff;
-    background-image: none;
-}

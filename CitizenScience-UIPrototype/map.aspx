@@ -18,8 +18,8 @@
         </div>
         <div class="row my-4">
             <div class="col-3 offset-3">
-                <div class="dropdown float-left">
-                  <button class="btn btn-primary dropdown-toggle px-5 py-2" type="button" id="ddBtnWatershed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown float-right">
+                  <button class="btn btn-dark dropdown-toggle px-5 py-2" type="button" id="ddBtnWatershed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Watersheds
                   </button>
                   <div class="dropdown-menu" id="ddMenuWatershed" aria-labelledby="dropdownMenuButton"></div>
@@ -27,7 +27,7 @@
             </div>
             <div class="col-3">
                 <div class="dropdown float-left invisible" id="locationdiv">
-                  <button class="btn btn-primary dropdown-toggle px-5 py-2" type="button" id="ddBtnLocation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                  <button class="btn btn-dark dropdown-toggle px-5 py-2" type="button" id="ddBtnLocation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                   <div class="dropdown-menu" id="ddMenuLocation" aria-labelledby="dropdownMenuButton"></div>
                 </div>
             </div>
@@ -66,8 +66,8 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary">Download Temperature File</button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-dark">Download Temperature File</button>
+                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
