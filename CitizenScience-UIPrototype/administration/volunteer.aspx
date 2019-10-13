@@ -12,7 +12,7 @@
                         <th scope="col">Last Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Message</th>
-                        <th scope="col">Date Submitted</th>
+                        <th scope="col" data-type="date">Date Submitted</th>
                     </tr>
                 </thead>
             </table>
