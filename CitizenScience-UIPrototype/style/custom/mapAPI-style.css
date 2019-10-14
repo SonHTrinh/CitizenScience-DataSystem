@@ -1,11 +1,11 @@
 ﻿/* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
 #map {
-    height: 650px;
+    height: 550px;
     margin-left: 20%;
     margin-right: 20%;
     box-sizing: content-box;
-    border: solid #007bff 1px;
+    border: solid #454545 1px;
 }
 
 /* Optional: Makes the sample page fill the window. */
@@ -19,8 +19,8 @@ html, body {
     padding-left: 20%;
 }
 
-.dropdown-menu:hover {
-    background-color: #999999;
+.dropdown-menu:current {
+    background-color: #737373;
     background-image: none;
 }
 

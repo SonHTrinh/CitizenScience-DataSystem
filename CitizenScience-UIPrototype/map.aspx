@@ -10,11 +10,6 @@
                     <h1 class="jumbotron-heading">Welcome to Citizen Science</h1>            
                 </div>
             </section>  
-            <!--
-            <div class="col-12">
-                <h1 style="text-align: center">Welcome to Citizen Science</h1>
-            </div>
-            -->
         </div>
         <div class="row my-4">
             <div class="col-3 offset-3">
