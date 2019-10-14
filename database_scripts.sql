@@ -176,6 +176,11 @@ AS
 
 GO
 
+CREATE PROCEDURE [dbo].[GetAllAdmins]
+AS
+	SELECT * FROM Admin
+	
+GO
 
 ------------------------------------------------------------------ 
 ------------------------------------------------- CRUD Procedures
@@ -277,7 +282,7 @@ AS
 
 GO
 
------ CRUD Volunteer
+------------------------------------------------- CRUD Volunteer
 CREATE PROCEDURE [dbo].[CreateVolunteer]
 	@firstname nvarchar(MAX),
 	@lastname nvarchar(MAX),
@@ -290,7 +295,30 @@ AS
 	
 GO
 
------ CRUD About
+------------------------------------------------- CRUD Admin
+CREATE PROCEDURE [dbo].[CreateAdmin]
+	@tuid nvarchar(MAX),
+	@active bit
+AS
+	INSERT INTO Admin(TUID, Active)
+	VALUES(@tuid, @active)
+	SELECT * FROM Admin WHERE AdminID = SCOPE_IDENTITY()
+	
+GO
+
+CREATE PROCEDURE [dbo].[UpdateAdmin]
+	@id int,
+	@tuid NVARCHAR(MAX),
+	@active BIT
+AS
+	UPDATE Admin
+	SET TUID = @tuid, Active = @active
+	WHERE AdminID = @id
+	SELECT * FROM Admin where AdminID = @id
+	
+GO
+
+------------------------------------------------- CRUD About
 CREATE PROCEDURE [dbo].[NewAbout]
 	@description NVARCHAR(MAX),
 	@question1 NVARCHAR(MAX),

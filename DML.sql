@@ -75,3 +75,18 @@ VALUES
 (@WatershedId, 'GrovePark_C', -75.1292, 40.1284, '2019-09-29 12:00:00')
 
 GO
+
+
+-- Create About
+INSERT INTO [dbo].[About]
+([ProgramDescription], [Question1], [Question2], [Question3], [Answer1], [Answer2], [Answer3])
+VALUES
+('Citizen Science Data System (CS) is a project headed by Dr. Laura Toran and Dr. Sarah Beganskas who both work in the Earth and Environmental Science department in the College of Science and Technology. They are planning to develop an initiative which tasks volunteers with measuring temperature of water in watersheds located in the Greater Philadelphia and surrounding areas. With the CS Data System, they intend to engage the volunteers that travel to watersheds and provide accurate data reporting of the measured water temperature. The project will help visualize the data collected and allow for users that visit the application to view the various metrics.',
+'Who are we?',
+'What are our goals?',
+'What are the expected benefits?',
+'Citizen Science Data System (CS) is a project headed by Dr. Laura Toran and Dr. Sarah Beganskas who both work in the Earth and Environmental Science department in the College of Science and Technology. They are planning to develop an initiative which tasks volunteers with measuring temperature of water in watersheds located in the Greater Philadelphia and surrounding areas. With the CS Data System, they intend to engage the volunteers that travel to watersheds and provide accurate data reporting of the measured water temperature. The project will help visualize the data collected and allow for users that visit the application to view the various metrics.',
+'The Citizen Science Data System will record water temperature information and organize it by location. This data will be displayed in the form of interactive graphs that can be accessed from a map-view user interface. This project will serve to monitor local water source statistics while also engaging the community by allowing them to be actively involved in the collection and analysis of the data.',
+'The main benefits to be gained through this new system will be a secure and organized data storage method for vital water temperature data as well as a way of involving Greater Philadelphia area residents in the conservation of local water ecosystems. The system will be designed to allow administrative users to easily record relevant data. That collected data will then be displayed in an intuitive and user-friendly manner.')
+
+GO
