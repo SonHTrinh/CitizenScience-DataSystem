@@ -12,7 +12,7 @@
                         <th scope="col">Last Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Message</th>
-                        <th scope="col">Date Submitted</th>
+                        <th scope="col" data-type="date">Date Submitted</th>
                     </tr>
                 </thead>
             </table>
@@ -20,6 +20,13 @@
     </div>
     <script>
         $(document).ready(function () {
+            function convertJsonDateToShortDate(data) {
+                // This function converts a json date to a short date
+                // e.g. /Date(1538377200000)/ to 10/1/2018
+                console.log(data);
+                const dateValue = new Date(parseInt(data.substr(6)));
+                return dateValue.toLocaleDateString();
+            }
 
             // This variable holds the Datatable
             var table = $('#DataTable').DataTable({
@@ -34,7 +41,14 @@
                     { data: 'LastName' },
                     { data: 'Email' },
                     { data: 'Message' },
-                    { data: 'DateSubmitted' }
+                    {
+                        data: 'DateSubmitted',
+                        //type: 'datetime',
+                        //format: 'MM/DD/YYYY',
+                        render: function(data) {
+                            return convertJsonDateToShortDate(data);
+                        } 
+                    }
                 ]
             });
         });
