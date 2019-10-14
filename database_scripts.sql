@@ -91,7 +91,7 @@ CREATE TABLE [dbo].[Volunteer] (
     [FirstName]        NVARCHAR (MAX) NOT NULL,
     [LastName]         NVARCHAR (MAX) NOT NULL,
     [Email]            NVARCHAR (MAX) NOT NULL,
-    [Message]          NVARCHAR (MAX) NULL,
+    [Message]          NVARCHAR (MAX) NOT NULL,
     [DateSubmitted]    DATE           NOT NULL,
     PRIMARY KEY CLUSTERED ([VolunteerID] ASC)
 );
