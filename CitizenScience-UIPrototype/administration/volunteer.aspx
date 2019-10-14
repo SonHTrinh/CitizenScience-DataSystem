@@ -23,7 +23,7 @@
             function convertJsonDateToShortDate(data) {
                 // This function converts a json date to a short date
                 // e.g. /Date(1538377200000)/ to 10/1/2018
-         
+                console.log(data);
                 const dateValue = new Date(parseInt(data.substr(6)));
                 return dateValue.toLocaleDateString();
             }
@@ -43,11 +43,11 @@
                     { data: 'Message' },
                     {
                         data: 'DateSubmitted',
-                        type: 'datetime',
-                        format: 'MM/DD/YYYY'
-                        //render: function(data) {
-                        //    return convertJsonDataToShortDate(data);
-                        //} 
+                        //type: 'datetime',
+                        //format: 'MM/DD/YYYY',
+                        render: function(data) {
+                            return convertJsonDateToShortDate(data);
+                        } 
                     }
                 ]
             });
