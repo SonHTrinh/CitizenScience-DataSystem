@@ -15,7 +15,8 @@
             <table class="table table-striped table-hover table-bordered" style="width: 100%;" id="DataTable">
                 <thead>
                     <tr>
-                        <th scope="col">Accessnet</th>       
+                        <th scope="col">TUID</th>       
+                        <th scope="col">Active Status</th>       
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -36,10 +37,10 @@
           </div>
           <div class="modal-body">
               <div class="form-group">
-                <label for="inputCreateAccessnet">Accessnet</label>
-                <input type="text" class="form-control inputaccessnet" id="inputCreateAccessnet" aria-describedby="nameCreateHelp">
+                <label for="inputCreateTUID">TUID</label>
+                <input type="text" class="form-control inputtuid" id="inputCreateTUID" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                    Accessnet must be ...
+                    TUID must be ...
                 </div>
               </div>            
           </div>
@@ -63,12 +64,19 @@
           </div>
           <div class="modal-body">
                <div class="form-group">
-                <label for="inputUpdateAccessnet">Accessnet</label>
-                <input type="text" class="form-control inputaccessnet" id="inputUpdateAccessnet" aria-describedby="nameCreateHelp">
+                <label for="inputEditTUID">TUID</label>
+                <input type="text" class="form-control inputtuid" id="inputEditTUID" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
                     Accessnet must be ...
                 </div>
-              </div>            
+              </div> 
+              <div class="form-group">
+                <label for="inputEditActive">Active Status</label>
+                <input type="checkbox" class="form-control inputactive" id="inputEditActive" aria-describedby="nameCreateHelp">
+                <div class="invalid-feedback">
+                    Active must be ...
+                </div>
+              </div> 
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="editClose">Close</button>
@@ -126,12 +134,13 @@
 
             // This function fills out the data in the 'Create Modal' before displaying it
             function PopulateCreateModal() {
-                $('#inputCreateAccessnet').val('');
+                $('#inputCreateTUID').val('');
             }
 
             // This function fills out the fields in the 'Edit Modal' before displaying it
             function PopulateEditModal(data) {
-                $('#inputEditAccessnet').val(data.Accessnet);
+                $('#inputEditTUID').val(data.TUID);
+                $('#inputEditActive').prop("checked", data.Active);
             }
 
             // This variable holds the Datatable
@@ -142,8 +151,10 @@
                     dataSrc: ''
                 },
                 columns: [
-                    // The 'Accessnet' column of the table's data
-                    { data: 'Accessnet' },                 
+                    // The 'TUID' column of the table's data
+                    { data: 'TUID' },                 
+                    // The 'Active' column of the table's data
+                    { data: 'Active' },                 
                     // The 'Action' column of the table
                     {
                         data: null,
@@ -180,47 +191,49 @@
             });
 
             function BuildCreateAdmin() {
-                var Accessnet = $('#inputCreateAccessnet').val();           
+                var TUID = $('#inputCreateTUID').val();           
 
                 return {
-                    accessnet: Accessnet
+                    tuid: TUID
                 };
             }
 
             function BuildEditAdmin(data) {
-                var Accessnet = $('#inputEditAccessnet').val();             
-
+                var TUID = $('#inputEditTUID').val();             
+                var Active = $('#inputEditActive').prop("checked");             
                 return {
                     id: data.AdminID,
-                    accessnet: Accessnet
+                    tuid: TUID,
+                    active: Active
                 };
             }
 
             function ValidateAdminRequest(requestData) {
-                $('.inputaccessnet').removeClass('is-invalid');
+                $('.inputtuid').removeClass('is-invalid');
+                $('.inputactive').removeClass('is-invalid');
 
 
                 //  CHECK IF INPUTTED ACCESSNET PRESENT IN TEMPLE'S RECORDS
 
 
-                var regexAccessnet = /^[\w ]+$/;
+                var regexTUID = /^[\w ]+$/;
 
-                hasValidAccessnet = regexAccessnet.test(requestData.accessnet);
+                hasValidTUID = regexTUID.test(requestData.tuid);
 
-                console.log("Valid Accessnet: " + hasValidAccessnet);
+                console.log("Valid Accessnet: " + hasValidTUID);
 
-                if (hasValidAccessnet) {
-                    $('.inputaccessnet').addClass('is-valid');
+                if (hasValidTUID) {
+                    $('.inputtuid').addClass('is-valid');
+                    $('.inputactive').addClass('is-valid');
                 } else {
-                    $('.inputaccessnet').addClass('is-invalid');
+                    $('.inputtuid').addClass('is-invalid');
+                    $('.inputactive').addClass('is-invalid');
                 }
 
-                return (hasValidAccessnet);
+                return (hasValidTUID);
             }
 
             $('#editSubmit').click(function () {
-
-
                 var requestData = BuildEditAdmin(editData)
                 var isValidRequest = ValidateAdminRequest(requestData);
                 console.log('Is Edit Form Submission Valid?: ' + isValidRequest);
@@ -279,13 +292,15 @@
             });
 
             $('#createModal').on('hidden.bs.modal', function (e) {
-                $('.inputaccessnet').removeClass('is-invalid');
-                $('.inputaccessnet').removeClass('is-valid');             
+                $('.inputtuid').removeClass('is-invalid');
+                $('.inputtuid').removeClass('is-valid');             
             });
 
             $('#editModal').on('hidden.bs.modal', function (e) {
-                $('.inputaccessnet').removeClass('is-invalid');
-                $('.inputaccessnet').removeClass('is-valid');               
+                $('.inputtuid').removeClass('is-invalid');
+                $('.inputtuid').removeClass('is-valid');    
+                $('.inputactive').removeClass('is-invalid');
+                $('.inputactive').removeClass('is-valid');    
             });
         });
     </script>
