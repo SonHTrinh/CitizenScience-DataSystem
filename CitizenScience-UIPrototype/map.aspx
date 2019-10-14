@@ -258,7 +258,7 @@
 
                             //Download button
                             $('#downloadCsv').click(function () {
-                                window.location.href = '/api.asmx/AllLocationTemperaturesCsv';
+                                window.location.href = '/cis4396-F06/api.asmx/AllLocationTemperaturesCsv';
                             });
 
                             ////Close Modal
@@ -360,7 +360,7 @@
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
-                    url: '/api.asmx/GetLocationTemperaturesByDateRange',
+                    url: '/cis4396-F06/api.asmx/GetLocationTemperaturesByDateRange',
                     data: JSON.stringify(data),
                     success: function (responseData) {
                         //Store the timestamp and the temperatures of server response
@@ -409,7 +409,7 @@
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
-                    url: '/api.asmx/GetLocationTemperaturesByDateRange',
+                    url: '/cis4396-F06/api.asmx/GetLocationTemperaturesByDateRange',
                     data: JSON.stringify(data),
                     success: function (responseData) {
                         var dateLabelArray = [];
