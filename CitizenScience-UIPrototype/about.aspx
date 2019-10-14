@@ -42,8 +42,8 @@
         <div class="col-lg-12">
             <div class="container">
                 <button class="btn btn-dark" style="width: 100%;" type="button" data-toggle="collapse" data-target="#who1"
-                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion1" runat="server">
-                    Who are we? 
+                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion1">
+                   <%-- Who are we? --%>
                 </button>
             </div>
         </div>
@@ -73,7 +73,7 @@
         <div class="col-lg-12">
             <div class="container">
                 <button class="btn btn-dark" style="width: 100%;" type="button" data-toggle="collapse" data-target="#goals1"
-                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion2" runat="server">
+                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion2">
                     What are our goals? 
                 </button>
             </div>
@@ -100,8 +100,8 @@
         <div class="col-lg-12">
             <div class="container">
                 <button class="btn btn-dark" style="width: 100%;" type="button" data-toggle="collapse" data-target="#temp1"
-                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion3" runat="server">
-                    Expected Benefits
+                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion3">
+                    <%-- Expected Benefits --%>
                 </button>
             </div>
         </div>
@@ -157,6 +157,7 @@
                     &nbsp;<asp:Label ID="lblDisplay" runat="server" Text="" ForeColor="#CC3300"></asp:Label>
                     <br /><br />
                     <div class="alert alert-success" ID="divSuccess" runat="server" visible="false">
+                        <button type="button" class="close" data-dismiss="alert">x</button>
                         <h6 class="alert-heading">Form Submitted!</h6>
                         <p class="mb-0">Thank you for your interest in our program! One of our Citizen Science Program
                                         representatives will contact you at <b><asp:Label ID="lblEmail" runat="server" Text=""></asp:Label></b>!</p>
