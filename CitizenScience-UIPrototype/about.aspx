@@ -150,8 +150,7 @@
                     </div>
                     <div class="form-group">
                         <label for="comments">Message:</label>
-                        <label for="message" style="color: red;">*</label>
-                        <asp:TextBox ID="txtMessage" runat="server" class="form-control" placeholder="Leave a message" TextMode="MultiLine" Rows="5" require="true"></asp:TextBox>
+                        <asp:TextBox ID="txtMessage" runat="server" class="form-control" placeholder="Leave a message (optional)" TextMode="MultiLine" Rows="5" require="true"></asp:TextBox>
                     </div>
                     <asp:Button ID="btnSubmit" runat="server" class="btn btn-info" Text="Submit" OnClick="btnSubmit_Click" OnClientClick="return HideMessage();" />
                     &nbsp;<asp:Label ID="lblDisplay" runat="server" Text="" ForeColor="#CC3300"></asp:Label>
