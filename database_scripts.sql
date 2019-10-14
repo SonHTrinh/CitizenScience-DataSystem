@@ -40,8 +40,9 @@ CREATE TABLE [dbo].[Temperature](
 GO
 
 CREATE TABLE [dbo].[Admin] (
-    [AdminID]     INT            IDENTITY (1, 1) NOT NULL,
-    [Accessnet]   NVARCHAR (MAX) NOT NULL,
+    [AdminID] INT            IDENTITY (1, 1) NOT NULL,
+    [TUID]    NVARCHAR (MAX) NOT NULL,
+    [Active]  BIT            NOT NULL,
     PRIMARY KEY CLUSTERED ([AdminID] ASC)
 );
 
