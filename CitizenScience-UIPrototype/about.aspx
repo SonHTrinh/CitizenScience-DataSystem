@@ -26,7 +26,7 @@
                     visualize the data collected and allow for users that visit the application to view the 
                     various metrics. --%>
                 </p>                
-                <a href="#volunteer_form" class=" btn btn-outline-primary" role="button" aria-pressed="true">Interested in Volunteering?</a>           
+                <a href="#volunteer_form" class=" btn btn-outline-dark" role="button" aria-pressed="true">Interested in Volunteering?</a>           
             </div>
         </div>
     </div>
@@ -41,9 +41,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="container">
-                <button class="btn btn-primary" style="width: 100%;" type="button" data-toggle="collapse" data-target="#who1"
-                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion1">
-                   <%-- Who are we? --%>
+                <button class="btn btn-dark" style="width: 100%;" type="button" data-toggle="collapse" data-target="#who1"
+                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion1" runat="server">
+                    Who are we? 
                 </button>
             </div>
         </div>
@@ -72,9 +72,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="container">
-                <button class="btn btn-primary" style="width: 100%;" type="button" data-toggle="collapse" data-target="#goals1"
-                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion2">
-                  <%--  What are our goals? --%>
+                <button class="btn btn-dark" style="width: 100%;" type="button" data-toggle="collapse" data-target="#goals1"
+                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion2" runat="server">
+                    What are our goals? 
                 </button>
             </div>
         </div>
@@ -99,9 +99,9 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="container">
-                <button class="btn btn-primary" style="width: 100%;" type="button" data-toggle="collapse" data-target="#temp1"
-                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion3">
-                 <%--   Expected Benefits--%>
+                <button class="btn btn-dark" style="width: 100%;" type="button" data-toggle="collapse" data-target="#temp1"
+                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion3" runat="server">
+                    Expected Benefits
                 </button>
             </div>
         </div>
@@ -153,31 +153,30 @@
                         <label for="message" style="color: red;">*</label>
                         <asp:TextBox ID="txtMessage" runat="server" class="form-control" placeholder="Leave a message" TextMode="MultiLine" Rows="5" require="true"></asp:TextBox>
                     </div>
-                    <asp:Button ID="btnSubmit" runat="server" class="btn btn-primary" Text="Submit" OnClick="btnSubmit_Click" />
+                    <asp:Button ID="btnSubmit" runat="server" class="btn btn-info" Text="Submit" OnClick="btnSubmit_Click" OnClientClick="return HideMessage();" />
                     &nbsp;<asp:Label ID="lblDisplay" runat="server" Text="" ForeColor="#CC3300"></asp:Label>
+                    <br /><br />
+                    <div class="alert alert-success" ID="divSuccess" runat="server" visible="false">
+                        <h6 class="alert-heading">Form Submitted!</h6>
+                        <p class="mb-0">Thank you for your interest in our program! One of our Citizen Science Program
+                                        representatives will contact you at <b><asp:Label ID="lblEmail" runat="server" Text=""></asp:Label></b>!</p>
+                    </div>
                 </div>
             </div>
         </div>
 
-
-        <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-          <div class="toast-header">
-            <img src="..." class="rounded mr-2" alt="...">
-            <strong class="mr-auto">Form Submitted!</strong>
-            <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="toast-body">
-            Thank you for your interest in our program! One of our Citizen Science Program
-              representatives will contact you at <asp:Label ID="lblSubmittedEmail" runat="server"></asp:Label>!
-          </div>
-        </div>
     </div>
     <div class="container mb-5">
         <hr />
     </div>
-    <script>
+    <script type="text/javascript">
+        function HideMessage() {
+            var second = 5;
+            setTimeout(function () {
+                document.getElementById("<%=divSuccess.ClientID %>").style.display = "none";
+            }, second * 1000);
+        }; 
+  
         $(document).ready(function () {
 
             RenderManageAboutPage();
