@@ -188,12 +188,28 @@
 
                             //temperture radio buttons default settings
                             if ($('#radioC').is(':checked')) {
-                                //initCGraph(location.LocationID, sd, ed);
-                                initCGraph(1,"04-24-2019", "04-25-2019" );
+                                var startDate = $('#start_datepicker').val();
+                                var endDate = $('#end_datepicker').val();
+                                if ((startDate == "") || (endDate == "")) {
+                                    //initCGraph(location.LocationID, sd, ed);
+                                    initCGraph(1, "04-24-2019", "04-25-2019");
+                                }
+                                else {
+                                    //initCGraph(location.LocationID, startDate, endDate);
+                                    initCGraph(1, startDate, endDate);
+                                }
                             }
                             else if($('#radioF').is(':checked')){
-                                //initFGraph(location.LocationID, sd, ed);
-                                initFGraph(1, "04-24-2019", "04-25-2019");
+                                var startDate = $('#start_datepicker').val();
+                                var endDate = $('#end_datepicker').val();
+                                if ((startDate == "") || (endDate == "")) {
+                                    //initFGraph(location.LocationID, sd, ed);
+                                    initFGraph(1, "04-24-2019", "04-25-2019");
+                                }
+                                else {
+                                    //initFGraph(location.LocationID, startDate, endDate);
+                                    initFGraph(1, startDate, endDate);
+                                }
                             }
 
                             //temperature radio buttons click event
@@ -210,7 +226,7 @@
                                 }
                             });
                             $('#radioF').click(function () {
-                                 var startDate = $('#start_datepicker').val();
+                                var startDate = $('#start_datepicker').val();
                                 var endDate = $('#end_datepicker').val();
                                 if ((startDate == "") || (endDate == "")) {
                                     //initFGraph(location.LocationID, sd, ed);
@@ -250,10 +266,9 @@
                                 window.location.href = '/api.asmx/AllLocationTemperaturesCsv';
                             });
 
-                            //Close Modal
-                            $('#locationModal').on('hidden.bs.modal', function (){
-                                alert(c);
-                            });
+                            ////Close Modal
+                            //$('#locationModal').on('hidden.bs.modal', function (){
+                            //});
                         }
                     }
                 });
