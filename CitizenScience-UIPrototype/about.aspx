@@ -42,8 +42,8 @@
         <div class="col-lg-12">
             <div class="container">
                 <button class="btn btn-dark" style="width: 100%;" type="button" data-toggle="collapse" data-target="#who1"
-                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion1" runat="server">
-                    Who are we? 
+                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion1">
+                   <%-- Who are we? --%>
                 </button>
             </div>
         </div>
@@ -73,7 +73,7 @@
         <div class="col-lg-12">
             <div class="container">
                 <button class="btn btn-dark" style="width: 100%;" type="button" data-toggle="collapse" data-target="#goals1"
-                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion2" runat="server">
+                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion2">
                     What are our goals? 
                 </button>
             </div>
@@ -100,8 +100,8 @@
         <div class="col-lg-12">
             <div class="container">
                 <button class="btn btn-dark" style="width: 100%;" type="button" data-toggle="collapse" data-target="#temp1"
-                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion3" runat="server">
-                    Expected Benefits
+                    aria-expanded="false" aria-controls="collapseExample" id="btnQuestion3">
+                    <%-- Expected Benefits --%>
                 </button>
             </div>
         </div>
