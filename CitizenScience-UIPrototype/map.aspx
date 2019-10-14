@@ -56,17 +56,17 @@
                                             <br /><input type="radio" id="radioC" name="temperature" checked="checked"/> Celsius
                                             <br /><input type="radio" id="radioF" name="temperature" /> Fahrenheit
                                             <br /><br />
-                                            <label>From:</label>
-                                            <input type="date" />
-                                            <label>To:</label>
-                                            <input type="date"/>
-                                            <button>Reset</button>
+                                            From: <input type="text" id="start_datepicker" required>
+                                            To: <input type="text" id="end_datepicker" required>
+                                            <button type="button" id="submit" class="btn btn-danger btn-sm">Submit</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-primary">Download Temperature File</button>
+                                <button type="button" id="downloadCsv" class="btn btn-success">
+                                    <i class="fa fa-file-csv">&nbsp; Download Temperature CSV File</i>
+                                </button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -83,8 +83,31 @@
 
     <script>
         $(function () {
+            $("#start_datepicker").datepicker({
+                dateFormat: 'mm-dd-yy'
+            });
+            $("#end_datepicker").datepicker({
+                dateFormat: 'mm-dd-yy'
+            });
+        });
+
+        $(function () {
             var map = initMap();
+
+            //close last window
             var prevInfo = false;
+
+            //set date
+            //var s = new Date();
+            //s.setMonth(s.getMonth() - 6);
+            ////s.setDate(s.getDate() + 12);
+            //var sd = getFormattedDate(s);
+
+            //var e = new Date();
+            //e.setMonth(e.getMonth() - 6);
+            ////e.setDate(e.getDate() + 13);
+            //var ed = getFormattedDate(e);
+
 
             function buildMarker(location) {
 
@@ -106,7 +129,7 @@
                                 + "<b>Latitude: </b>" + location.Latitude
                                 + "<br/>"
                                 + "<b>Longitude: </b>" + location.Longitude
-                                + "<br/><br/>"
+                                + "<br/><br/>" 
                                 + "<b>**Click on the marker to see more details**</b>"
                                 //+ "<br/> <br/>"
                                 //+ "<a href='#' data-toggle='modal' data-target='#locationModal'>more details >></a>"
@@ -163,24 +186,94 @@
                             //more pictures link
                             $('.modalLink').html('<a href="gallery.aspx">more picture >></a>');
 
-                            //temperture format radio buttons
+                            //temperture radio buttons default settings
                             if ($('#radioC').is(':checked')) {
-                                initCGraph();
+                                var startDate = $('#start_datepicker').val();
+                                var endDate = $('#end_datepicker').val();
+                                if ((startDate == "") || (endDate == "")) {
+                                    //initCGraph(location.LocationID, sd, ed);
+                                    initCGraph(1, "04-24-2019", "04-25-2019");
+                                }
+                                else {
+                                    //initCGraph(location.LocationID, startDate, endDate);
+                                    initCGraph(1, startDate, endDate);
+                                }
                             }
                             else if($('#radioF').is(':checked')){
-                                initFGraph();
+                                var startDate = $('#start_datepicker').val();
+                                var endDate = $('#end_datepicker').val();
+                                if ((startDate == "") || (endDate == "")) {
+                                    //initFGraph(location.LocationID, sd, ed);
+                                    initFGraph(1, "04-24-2019", "04-25-2019");
+                                }
+                                else {
+                                    //initFGraph(location.LocationID, startDate, endDate);
+                                    initFGraph(1, startDate, endDate);
+                                }
                             }
+
+                            //temperature radio buttons click event
                             $('#radioC').click(function () {
-                                initCGraph();
+                                var startDate = $('#start_datepicker').val();
+                                var endDate = $('#end_datepicker').val();
+                                if ((startDate == "") || (endDate == "")) {
+                                    //initCGraph(location.LocationID, sd, ed);
+                                    initCGraph(1, "04-24-2019", "04-25-2019");
+                                }
+                                else {
+                                    //initCGraph(location.LocationID, startDate, endDate);
+                                    initCGraph(1, startDate, endDate);
+                                }
                             });
                             $('#radioF').click(function () {
-                                initFGraph();
+                                var startDate = $('#start_datepicker').val();
+                                var endDate = $('#end_datepicker').val();
+                                if ((startDate == "") || (endDate == "")) {
+                                    //initFGraph(location.LocationID, sd, ed);
+                                    initFGraph(1, "04-24-2019", "04-25-2019");
+                                }
+                                else {
+                                    //initFGraph(location.LocationID, startDate, endDate);
+                                    initFGraph(1, startDate, endDate);
+                                }
                             });
+
+                            //Submit button
+                            $('#submit').click(function () {
+                                var startDate = $('#start_datepicker').val();
+                                var endDate = $('#end_datepicker').val();
+                                if( (startDate == "") || (endDate == "")){
+                                    alert("Please select a date range!");
+                                }
+                                if ((startDate != "") && (endDate != "")) {
+                                    if ($('#radioC').is(':checked')) {
+                                        //initCGraph(location.LocationID, startDate, endDate);
+                                        initCGraph(1, startDate, endDate);
+                                    }
+                                    else if ($('#radioF').is(':checked')) {
+                                        //initFGraph(location.LocationID, startDate, endDate);
+                                        initFGraph(1, startDate, endDate);
+                                    }
+                                }
+                            });
+
+                            ////Reset button
+                            //$('#reset').click(function () {
+                            //}
+
+                            //Download button
+                            $('#downloadCsv').click(function () {
+                                window.location.href = '/api.asmx/AllLocationTemperaturesCsv';
+                            });
+
+                            ////Close Modal
+                            //$('#locationModal').on('hidden.bs.modal', function (){
+                            //});
                         }
                     }
                 });
             }
-          
+
             function initMap() {
                 theMap = new google.maps.Map(document.getElementById('map'), {
                     center: new google.maps.LatLng(40.0319, -75.1134),
@@ -262,67 +355,120 @@
                 }      
             }
 
-            function initCGraph() {
-                var ctx = document.getElementById("myChart").getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        max: 50,
-                        min: 0,
-                        stepSize: 0,
-                        labels: ["4/21/2019", "4/22/2019", "4/23/2019", "4/24/2019"],
-                        datasets: [{
-                            label: 'Sample Data(Celsius)',
-                            data: [21, 14, 22, 16],
-                            fill: false,
-                            borderColor: '#F08080',
-                            backgroundColor: '#E9C9D1',
-                            borderWidth: 1
-                        }]
+            function initCGraph(id, start, end) {
+                var data = {
+                    locationId: id,
+                    start: start,
+                    end: end
+                };
+                // Send temperature data request
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    url: '/api.asmx/GetLocationTemperaturesByDateRange',
+                    data: JSON.stringify(data),
+                    success: function (responseData) {
+                        //Store the timestamp and the temperatures of server response
+                        var dateLabelArray = [];
+                        var temperatureArray = [];
+                        //Add the timestamp and temperature pairs into the variables
+                        responseData.forEach(function (temperature) {
+                            dateLabelArray.push(temperature.Timestamp);
+                            temperatureArray.push(temperature.Celsius);
+                        });
+                        //Get the element to hold the chart
+                        var ctx = document.getElementById("myChart").getContext('2d');
+                        //Create the chart and pass in the timestamp array as labels and the temperature array for data
+                        var myChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                max: 50,
+                                min: 0,
+                                stepSize: 0,
+                                labels: dateLabelArray,
+                                datasets: [{
+                                    label: 'Sample Data(Celsius)',
+                                    data: temperatureArray,
+                                    fill: false,
+                                    borderColor: '#F08080',
+                                    backgroundColor: '#E9C9D1',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {}
+                        });
                     },
-                    options: {}
+                    error: function (errorData) {
+                        console.log('ERROR');
+                        console.log(errorData);
+                    }
+                });
+            }
+            
+            function initFGraph(id, start, end) {
+                var data = {
+                    locationId: id,
+                    start: start,
+                    end: end
+                };
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    url: '/api.asmx/GetLocationTemperaturesByDateRange',
+                    data: JSON.stringify(data),
+                    success: function (responseData) {
+                        var dateLabelArray = [];
+                        var temperatureArray = [];
+                        responseData.forEach(function (temperature) {
+                            dateLabelArray.push(temperature.Timestamp);
+                            temperatureArray.push(temperature.Fahrenheit);
+                        });
+                        var ctx = document.getElementById("myChart").getContext('2d');
+                        var myChart = new Chart(ctx, {
+                            type: 'line',
+                            data: {
+                                max: 50,
+                                min: 0,
+                                stepSize: 0,
+                                labels: dateLabelArray,
+                                datasets: [{
+                                    label: 'Sample Data(Fahrenheit)',
+                                    data: temperatureArray,
+                                    fill: false,
+                                    borderColor: '#186A3B',
+                                    backgroundColor: '#D1E9C9',
+                                    borderWidth: 1
+                                }]
+                            },
+                            options: {}
+                        });
+                    },
+                    error: function (errorData) {
+                        console.log('ERROR');
+                        console.log(errorData);
+                    }
                 });
             }
 
-            function initFGraph() {
-                var ctx = document.getElementById("myChart").getContext('2d');
-                var myChart = new Chart(ctx, {
-                    type: 'line',
-                    data: {
-                        max: 50,
-                        min: 0,
-                        stepSize: 0,
-                        labels: ["4/21/2019", "4/22/2019", "4/23/2019", "4/24/2019"],
-                        datasets: [{
-                            label: 'Sample Data(Fahrenheit)',
-                            data: [70, 57, 72, 61],
-                            fill: false,
-                            borderColor: '#008080',
-                            backgroundColor: '#D1E9C9',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        //scales: {
-                        //    xAxes: [{
-                        //        ticks: {
-                        //            min: '4/21/2019',
-                        //            max: '4/22/2019',
-                        //        },
-                        //        stacked: true,
-                        //        gridLines: {
-                        //            display: false,
-                        //        }
-                        //    }],
-                        //}
-                     }
-                });
-            }
+            function getFormattedDate(date) {
+                var year = date.getFullYear();
 
+                var month = (1 + date.getMonth()).toString();
+                month = month.length > 1 ? month : '0' + month;
+
+                var day = date.getDate().toString();
+                day = day.length > 1 ? day : '0' + day;
+                return month + '-' + day + '-' + year;
+            }
         });
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp7tBTG5O-LXpXR7BL01PlEB63wBC0PSA&callback=initMap"
         async defer></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+    
+    <%--datepicker--%>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 </asp:Content>
