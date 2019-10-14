@@ -186,7 +186,7 @@
                 $.ajax({
                     type: 'GET',
                     contentType: 'application/json',
-                    url: '/api.asmx/About',
+                    url: '/cis4396-F06/api.asmx/About',
                     dataType: 'JSON',
                     success: function (responseData) {
                         console.log(responseData)

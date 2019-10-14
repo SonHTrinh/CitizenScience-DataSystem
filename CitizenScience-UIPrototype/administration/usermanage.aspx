@@ -147,7 +147,7 @@
             var table = $('#DataTable').DataTable({
                 ajax: {
                     // The location to HTTP GET the data for the table
-                    url: '/api.asmx/Admins',
+                    url: '/cis4396-F06/api.asmx/Admins',
                     dataSrc: ''
                 },
                 columns: [
@@ -243,7 +243,7 @@
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: '/api.asmx/UpdateAdmin',
+                        url: '/cis4396-F06/api.asmx/UpdateAdmin',
                         data: JSON.stringify(requestData),
                         dataType: 'JSON',
                         success: function (responseData) {
@@ -273,7 +273,7 @@
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: '/api.asmx/CreateAdmin',
+                        url: '/cis4396-F06/api.asmx/CreateAdmin',
                         data: JSON.stringify(requestData),
                         dataType: 'JSON',
                         success: function (responseData) {
