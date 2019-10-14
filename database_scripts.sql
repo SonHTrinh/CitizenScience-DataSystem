@@ -168,6 +168,19 @@ AS
 
 GO
 
+CREATE PROCEDURE [dbo].[GetLatestAbout]
+AS
+	SELECT TOP 1 * 
+	FROM About 
+	ORDER BY AboutID DESC
+
+GO
+
+CREATE PROCEDURE [dbo].[GetAllAdmins]
+AS
+	SELECT * FROM Admin
+	
+GO
 
 ------------------------------------------------------------------ 
 ------------------------------------------------- CRUD Procedures
@@ -184,8 +197,6 @@ AS
 	WHERE LocationID = @locationid AND [Timestamp] BETWEEN @startdate AND @enddate
 
 GO
-
------ CRUD Temperature
 
 CREATE PROCEDURE [dbo].[AddTemperatures]
 	@locationid int,
@@ -271,7 +282,7 @@ AS
 
 GO
 
------ CRUD Volunteer
+------------------------------------------------- CRUD Volunteer
 CREATE PROCEDURE [dbo].[CreateVolunteer]
 	@firstname nvarchar(MAX),
 	@lastname nvarchar(MAX),
@@ -284,4 +295,42 @@ AS
 	
 GO
 
+------------------------------------------------- CRUD Admin
+CREATE PROCEDURE [dbo].[CreateAdmin]
+	@tuid nvarchar(MAX),
+	@active bit
+AS
+	INSERT INTO Admin(TUID, Active)
+	VALUES(@tuid, @active)
+	SELECT * FROM Admin WHERE AdminID = SCOPE_IDENTITY()
+	
+GO
+
+CREATE PROCEDURE [dbo].[UpdateAdmin]
+	@id int,
+	@tuid NVARCHAR(MAX),
+	@active BIT
+AS
+	UPDATE Admin
+	SET TUID = @tuid, Active = @active
+	WHERE AdminID = @id
+	SELECT * FROM Admin where AdminID = @id
+	
+GO
+
+------------------------------------------------- CRUD About
+CREATE PROCEDURE [dbo].[NewAbout]
+	@description NVARCHAR(MAX),
+	@question1 NVARCHAR(MAX),
+	@question2 NVARCHAR(MAX),
+	@question3 NVARCHAR(MAX),
+	@answer1 NVARCHAR(MAX),
+	@answer2 NVARCHAR(MAX),
+	@answer3 NVARCHAR(MAX)
+AS
+	INSERT INTO About(ProgramDescription, Question1, Question2, Question3, Answer1, Answer2, Answer3)
+	VALUES(@description, @question1, @question2, @question3, @answer1, @answer2, @answer3)
+	SELECT * FROM About WHERE AboutID = SCOPE_IDENTITY()
+	
+GO	
 
