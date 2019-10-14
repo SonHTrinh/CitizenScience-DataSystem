@@ -43,9 +43,11 @@
                     { data: 'Message' },
                     {
                         data: 'DateSubmitted',
-                        render: function(data) {
-                            return convertJsonDataToShortDate(data);
-                        } 
+                        type: 'datetime',
+                        format: 'MM/DD/YYYY'
+                        //render: function(data) {
+                        //    return convertJsonDataToShortDate(data);
+                        //} 
                     }
                 ]
             });
