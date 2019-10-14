@@ -571,7 +571,7 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllAdmins";
             return conn.GetDataSetUsingCmdObj(comm);
         }
-        public static Admin CreateAdmin(string accessnet)
+        public static Admin CreateAdmin(string tuid)
         {
             Admin admin = null;
 
@@ -579,7 +579,8 @@ namespace CitizenScienceClasses
             SqlCommand comm = new SqlCommand();
             comm.CommandType = CommandType.StoredProcedure;
             comm.CommandText = "CreateAdmin";
-            comm.Parameters.AddWithValue("@accessnet", accessnet);
+            comm.Parameters.AddWithValue("@tuid", tuid);
+            comm.Parameters.AddWithValue("@active", true);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
 
             if (dataSet.Tables[0].Rows.Count == 1)
@@ -589,13 +590,14 @@ namespace CitizenScienceClasses
                 admin = new Admin
                 {
                     AdminID = Convert.ToInt32(dataRow["AdminID"]),
-                    Accessnet = Convert.ToString(dataRow["Accessnet"])
+                    TUID = Convert.ToString(dataRow["TUID"]),
+                    Active = Convert.ToBoolean(dataRow["Active"])
                 };
             }
 
             return admin;
         }
-        public static Admin UpdateAdmin(int id, string accessnet)
+        public static Admin UpdateAdmin(int id, string tuid, bool active)
         {
             Admin admin = null;
 
@@ -604,7 +606,8 @@ namespace CitizenScienceClasses
             comm.CommandType = CommandType.StoredProcedure;
             comm.CommandText = "UpdateAdmin";
             comm.Parameters.AddWithValue("@id", id);
-            comm.Parameters.AddWithValue("@accessnet", accessnet);
+            comm.Parameters.AddWithValue("@tuid", tuid);
+            comm.Parameters.AddWithValue("@active", active);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
 
             if (dataSet.Tables[0].Rows.Count == 1)
@@ -614,7 +617,8 @@ namespace CitizenScienceClasses
                 admin = new Admin
                 {
                     AdminID = Convert.ToInt32(dataRow["AdminID"]),
-                    Accessnet = Convert.ToString(dataRow["Accessnet"])
+                    TUID = Convert.ToString(dataRow["TUID"]),
+                    Active = Convert.ToBoolean(dataRow["Active"])
                 };
             }
 
@@ -624,7 +628,7 @@ namespace CitizenScienceClasses
 
 
         /////////////////////////////////   ABOUT FUNCTIONS
-         public static About GetAbout()
+        public static About GetAbout()
         {
             About a = null;
             DBConnect conn = new DBConnect();
@@ -638,7 +642,40 @@ namespace CitizenScienceClasses
 
                 a = new About
                 {
-                    Description = Convert.ToString(dataRow["Description"]),
+                    Description = Convert.ToString(dataRow["ProgramDescription"]),
+                    Question1 = Convert.ToString(dataRow["Question1"]),
+                    Question2 = Convert.ToString(dataRow["Question2"]),
+                    Question3 = Convert.ToString(dataRow["Question3"]),
+                    Answer1 = Convert.ToString(dataRow["Answer1"]),
+                    Answer2 = Convert.ToString(dataRow["Answer2"]),
+                    Answer3 = Convert.ToString(dataRow["Answer3"])
+                };
+            }
+            return a;
+        }
+        public static About UpdateAbout(string description, string question1, string question2, string question3, string answer1, string answer2, string answer3)
+        {
+            //  Update About bahaves like a CREATE function (to keep record of what each iteration of the About page looked like)
+            About a = null;
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "NewAbout";
+            comm.Parameters.AddWithValue("@description", description);
+            comm.Parameters.AddWithValue("@question1", question1);
+            comm.Parameters.AddWithValue("@question2", question2);
+            comm.Parameters.AddWithValue("@question3", question3);
+            comm.Parameters.AddWithValue("@answer1", answer1);
+            comm.Parameters.AddWithValue("@answer2", answer2);
+            comm.Parameters.AddWithValue("@answer3", answer3);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+            if(dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                a = new About
+                {
+                    Description = Convert.ToString(dataRow["ProgramDescription"]),
                     Question1 = Convert.ToString(dataRow["Question1"]),
                     Question2 = Convert.ToString(dataRow["Question2"]),
                     Question3 = Convert.ToString(dataRow["Question3"]),

@@ -170,6 +170,14 @@ AS
 
 GO
 
+CREATE PROCEDURE [dbo].[GetLatestAbout]
+AS
+	SELECT TOP 1 * 
+	FROM About 
+	ORDER BY AboutID DESC
+
+GO
+
 -------------------------------------------------  Image
 CREATE PROCEDURE [dbo].[SetLocationImage]
 	@locationid int,
@@ -251,8 +259,6 @@ AS
 	WHERE LocationID = @locationid AND [Timestamp] BETWEEN @startdate AND @enddate
 
 GO
-
------ CRUD Temperature
 
 CREATE PROCEDURE [dbo].[AddTemperatures]
 	@locationid int,
@@ -351,4 +357,19 @@ AS
 	
 GO
 
+----- CRUD About
+CREATE PROCEDURE [dbo].[NewAbout]
+	@description NVARCHAR(MAX),
+	@question1 NVARCHAR(MAX),
+	@question2 NVARCHAR(MAX),
+	@question3 NVARCHAR(MAX),
+	@answer1 NVARCHAR(MAX),
+	@answer2 NVARCHAR(MAX),
+	@answer3 NVARCHAR(MAX)
+AS
+	INSERT INTO About(ProgramDescription, Question1, Question2, Question3, Answer1, Answer2, Answer3)
+	VALUES(@description, @question1, @question2, @question3, @answer1, @answer2, @answer3)
+	SELECT * FROM About WHERE AboutID = SCOPE_IDENTITY()
+	
+GO	
 

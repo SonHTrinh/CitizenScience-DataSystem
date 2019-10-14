@@ -144,7 +144,8 @@ namespace CitizenScience_UIPrototype
                 Admin admin = new Admin
                 {
                     AdminID = Convert.ToInt32(dataRow["AdminID"]),
-                    Accessnet = Convert.ToString(dataRow["Accessnet"])                
+                    TUID = Convert.ToString(dataRow["TUID"])  ,
+                    Active = Convert.ToBoolean(dataRow["Active"])
                 };
 
                 adminList.Add(admin);
@@ -182,6 +183,18 @@ namespace CitizenScience_UIPrototype
             Context.Response.Clear();
             Context.Response.ContentType = "application/json";
             Context.Response.Write(js.Serialize(locationList));
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void About()
+        {
+            About about = ClassFunctions.GetAbout();
+
+            if(about != null)
+                BuildResponse(200, about);
+            else
+                BuildResponse(500, about);          
         }
 
         //////////////////////////// CRUD Watershed \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -431,9 +444,9 @@ namespace CitizenScience_UIPrototype
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void CreateAdmin(string accessnet)
+        public void CreateAdmin(string tuid)
         {
-            Admin result = ClassFunctions.CreateAdmin(accessnet);
+            Admin result = ClassFunctions.CreateAdmin(tuid);
 
             if (result != null)
             {
@@ -447,9 +460,9 @@ namespace CitizenScience_UIPrototype
         }
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void UpdateAdmin(int id, string accessnet)
+        public void UpdateAdmin(int id, string tuid, bool active)
         {
-            Admin result = ClassFunctions.UpdateAdmin(id, accessnet);
+            Admin result = ClassFunctions.UpdateAdmin(id, tuid, active);
         }
         
         [WebMethod]
@@ -471,6 +484,20 @@ namespace CitizenScience_UIPrototype
                 BuildResponse(500, result);
             }
 
+        }
+
+        //////////////////////////// CRUD About \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void UpdateAbout(string description, string question1, string question2, string question3, string answer1, string answer2, string answer3)
+        {
+            About result = ClassFunctions.UpdateAbout(description, question1, question2, question3, answer1, answer2, answer3);
+            if (result != null)
+                BuildResponse(200, result);
+            else
+                BuildResponse(500, result);
         }
     }
 }

@@ -9,22 +9,29 @@ namespace CitizenScienceClasses
     public class Admin
     {
         private int adminID;
-        private string accessnet;
+        private string tuid;
+        private bool active;
         public Admin() { }
-        public Admin(int id, string access)
+        public Admin(int id, string tu, bool act)
         {
             adminID = id;
-            accessnet = access;
+            tuid = tu;
+            active = act;
         }
         public int AdminID
         {
             get { return adminID; }
             set { adminID = value; }
         }
-        public string Accessnet
+        public string TUID
         {
-            get { return accessnet; }
-            set { accessnet = value; }
-        }        
+            get { return tuid; }
+            set { tuid = value; }
+        }
+        public bool Active
+        {
+            get { return active; }
+            set { active = value; }
+        }
     }
 }
