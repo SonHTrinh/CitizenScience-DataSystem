@@ -157,6 +157,7 @@
                     &nbsp;<asp:Label ID="lblDisplay" runat="server" Text="" ForeColor="#CC3300"></asp:Label>
                     <br /><br />
                     <div class="alert alert-success" ID="divSuccess" runat="server" visible="false">
+                        <button type="button" class="close" data-dismiss="alert">x</button>
                         <h6 class="alert-heading">Form Submitted!</h6>
                         <p class="mb-0">Thank you for your interest in our program! One of our Citizen Science Program
                                         representatives will contact you at <b><asp:Label ID="lblEmail" runat="server" Text=""></asp:Label></b>!</p>
