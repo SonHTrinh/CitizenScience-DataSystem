@@ -40,8 +40,9 @@ CREATE TABLE [dbo].[Temperature](
 GO
 
 CREATE TABLE [dbo].[Admin] (
-    [AdminID]     INT            IDENTITY (1, 1) NOT NULL,
-    [Accessnet]   NVARCHAR (MAX) NOT NULL,
+    [AdminID] INT            IDENTITY (1, 1) NOT NULL,
+    [TUID]    NVARCHAR (MAX) NOT NULL,
+    [Active]  BIT            NOT NULL,
     PRIMARY KEY CLUSTERED ([AdminID] ASC)
 );
 
@@ -90,7 +91,7 @@ CREATE TABLE [dbo].[Volunteer] (
     [FirstName]        NVARCHAR (MAX) NOT NULL,
     [LastName]         NVARCHAR (MAX) NOT NULL,
     [Email]            NVARCHAR (MAX) NOT NULL,
-    [Message]          NVARCHAR (MAX) NULL,
+    [Message]          NVARCHAR (MAX) NOT NULL,
     [DateSubmitted]    DATE           NOT NULL,
     PRIMARY KEY CLUSTERED ([VolunteerID] ASC)
 );
