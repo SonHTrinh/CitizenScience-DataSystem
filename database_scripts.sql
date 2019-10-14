@@ -281,7 +281,13 @@ AS
 	INSERT INTO Volunteer (FirstName, LastName, Email, Message, DateSubmitted)
 	VALUES (@firstname, @lastname, @email, @message, GETDATE())
     SELECT * FROM Volunteer WHERE VolunteerID = SCOPE_IDENTITY()
-	
+------------ CRUD ADMIN 
 GO
+
+CREATE PROCEDURE ValidateAdmin
+	@TU_ID varchar(max)
+AS
+	SELECT * FROM Admin 
+	WHERE AdminID = @TU_ID AND Active = 1
 
 

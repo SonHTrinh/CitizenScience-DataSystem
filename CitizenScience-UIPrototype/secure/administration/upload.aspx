@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/administration/administration.master" AutoEventWireup="true" CodeBehind="upload.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.upload" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/secure/administration/administration.master" AutoEventWireup="true" CodeBehind="upload.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.upload" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
     Upload Data   |   Citizen Science
 </asp:Content>

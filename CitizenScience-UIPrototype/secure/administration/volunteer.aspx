@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/administration/administration.master" AutoEventWireup="true" CodeBehind="volunteer.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.volunteer" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/secure/administration/administration.master" AutoEventWireup="true" CodeBehind="volunteer.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.volunteer" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
     Volunteers   |   Citizen Science
 </asp:Content>

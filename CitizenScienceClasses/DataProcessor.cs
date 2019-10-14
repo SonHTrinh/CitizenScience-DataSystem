@@ -44,6 +44,11 @@ namespace CitizenScienceClasses
             return result;
         }
 
+        //public static int AuthenticateAdmin (string tu_id)
+        //{
+
+        //}
+
 
 
     }
