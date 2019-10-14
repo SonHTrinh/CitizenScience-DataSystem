@@ -338,3 +338,17 @@ AS
 
 GO
 
+----- CRUD Volunteer
+CREATE PROCEDURE [dbo].[CreateVolunteer]
+	@firstname nvarchar(MAX),
+	@lastname nvarchar(MAX),
+	@email nvarchar(MAX),
+	@message nvarchar(MAX)
+AS
+	INSERT INTO Volunteer (FirstName, LastName, Email, Message, DateSubmitted)
+	VALUES (@firstname, @lastname, @email, @message, GETDATE())
+    SELECT * FROM Volunteer WHERE VolunteerID = SCOPE_IDENTITY()
+	
+GO
+
+

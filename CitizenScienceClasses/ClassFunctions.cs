@@ -529,19 +529,37 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllVolunteers";
             return conn.GetDataSetUsingCmdObj(comm);
         }
-
-        public static bool CreateVolunteer(Volunteer v)
+        public static Volunteer CreateVolunteer(string firstName, string lastName, string email, string message)
         {
+            Volunteer result = null;
+
             DBConnect conn = new DBConnect();
             SqlCommand comm = new SqlCommand();
             comm.CommandType = CommandType.StoredProcedure;
-            comm.CommandText = "GetAllVolunteers";
-            int results = conn.DoUpdateUsingCmdObj(comm);
-            if (results == 1)
-                return true;
-            return false;
-        }
+            comm.CommandText = "CreateVolunteer";
+            comm.Parameters.AddWithValue("@firstname", firstName);
+            comm.Parameters.AddWithValue("@lastname", lastName);
+            comm.Parameters.AddWithValue("@email", email);
+            comm.Parameters.AddWithValue("@message", message);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
 
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                result = new Volunteer
+                {
+                    VolunteerID = Convert.ToInt32(dataRow["VolunteerID"]),
+                    FirstName = Convert.ToString(dataRow["FirstName"]),
+                    LastName = Convert.ToString(dataRow["LastName"]),
+                    Email = Convert.ToString(dataRow["Email"]),
+                    Message = Convert.ToString(dataRow["Message"]),
+                    DateSubmitted = Convert.ToDateTime(dataRow["DateSubmitted"])
+                };
+            }
+
+            return result;
+        }
 
 
         /////////////////////////////////   ADMIN FUNCTIONS

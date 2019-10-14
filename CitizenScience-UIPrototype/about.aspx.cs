@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using CitizenScienceClasses;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace CitizenScience_UIPrototype
 {
@@ -12,44 +14,41 @@ namespace CitizenScience_UIPrototype
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
-                RenderAboutPage();
         }
-        protected void RenderAboutPage()
-        {
-            About a = new About();
-            txtAboutDescription.Text = a.Description;
-            btnQuestion1.InnerText = a.Question1;
-            btnQuestion2.InnerText = a.Question2;
-            btnQuestion3.InnerText = a.Question3;
-            divAnswer1.InnerText = a.Answer1;
-            divAnswer2.InnerText = a.Answer2;
-            divAnswer2.InnerText = a.Answer2;
-        }
+
         protected void btnSubmit_Click(object sender, EventArgs e)
         {
-            string fname = txtFname.Value;
-            string lname = txtFname.Value;
-            string email = txtEmail.Value;
-            string message = txtMessage.Value;
-            DateTime submitted = DateTime.Now;
-            if(fname != "")
+            string firstName = txtFirstName.Text;
+            string lastName = txtLastName.Text;
+            string email = txtEmail.Text;
+            string message = txtMessage.Text;
+
+            Volunteer volunteer = new Volunteer();
+            if (firstName != "" && lastName != "" && email != "" && message != "")
             {
-                if(lname != "")
+                volunteer.FirstName = firstName;
+                volunteer.LastName = lastName;
+                volunteer.Email = email;
+                volunteer.Message = message;
+
+                lblDisplay.Text = "";
+
+                try
                 {
-                    if(email != "")
-                    {
-                        Volunteer v = new Volunteer();
-                        v.FirstName = fname;
-                        v.LastName = lname;
-                        v.Email = email;
-                        v.Message = message;
-                        bool success = ClassFunctions.CreateVolunteer(v);
-                        if (success)
-                            lblSubmittedEmail.Text = email;
-                    }
+                    ClassFunctions.CreateVolunteer(firstName, lastName, email, message);
                 }
-            }            
+                catch (Exception ex)
+                {
+                    throw ex;
+                }
+            }
+            else
+            {
+                lblDisplay.Text = "Please fill in all required field!";
+            }
+
+            txtFirstName.Text = ""; txtLastName.Text = ""; txtEmail.Text = ""; txtMessage.Text = "";
+
         }
     }
 }
