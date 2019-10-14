@@ -20,6 +20,13 @@
     </div>
     <script>
         $(document).ready(function () {
+            function convertJsonDateToShortDate(data) {
+                // This function converts a json date to a short date
+                // e.g. /Date(1538377200000)/ to 10/1/2018
+         
+                const dateValue = new Date(parseInt(data.substr(6)));
+                return dateValue.toLocaleDateString();
+            }
 
             // This variable holds the Datatable
             var table = $('#DataTable').DataTable({
@@ -34,7 +41,12 @@
                     { data: 'LastName' },
                     { data: 'Email' },
                     { data: 'Message' },
-                    { data: 'DateSubmitted' }
+                    {
+                        data: 'DateSubmitted',
+                        render: function(data) {
+                            return convertJsonDataToShortDate(data);
+                        } 
+                    }
                 ]
             });
         });
