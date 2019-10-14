@@ -74,7 +74,7 @@
             <div class="container">
                 <button class="btn btn-dark" style="width: 100%;" type="button" data-toggle="collapse" data-target="#goals1"
                     aria-expanded="false" aria-controls="collapseExample" id="btnQuestion2">
-                    What are our goals? 
+                    <%--What are our goals?--%> 
                 </button>
             </div>
         </div>
