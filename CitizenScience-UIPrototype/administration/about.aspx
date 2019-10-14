@@ -134,7 +134,7 @@
                 $.ajax({
                     type: 'GET',
                     contentType: 'application/json',
-                    url: '/api.asmx/About',
+                    url: '/cis4396-F06/api.asmx/About',
                     dataType: 'JSON',
                     success: function (responseData) {
                         console.log(responseData)
@@ -167,7 +167,7 @@
             // The function when the 'Create New Admin' button gets clicked
              $('#editAbout').click(function () {
                 $.ajax({
-                    url: "/api.asmx/About",
+                    url: "/cis4396-F06/api.asmx/About",
                     success: function (data) {
                         PopulateEditModal(data);
                     }
@@ -285,7 +285,7 @@
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: '/api.asmx/UpdateAbout',
+                        url: '/cis4396-F06/api.asmx/UpdateAbout',
                         data: JSON.stringify(requestData),
                         dataType: 'JSON',
                         success: function (responseData) {
