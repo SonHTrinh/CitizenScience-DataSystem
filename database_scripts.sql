@@ -145,6 +145,30 @@ END
 
 GO
 
+-- Trigger that happens when a location is updated
+CREATE TRIGGER [dbo].[LocationAlbumUpdate] ON [dbo].[Location]
+AFTER UPDATE AS
+BEGIN
+   DECLARE @NewImageId int;
+   DECLARE @OldImageId int;
+
+   SELECT @NewImageId = (SELECT [inserted].[ProfileImageID] FROM [inserted])
+   SELECT @OldImageId = (SELECT [deleted].[ProfileImageID] FROM [deleted])
+
+   IF @NewImageId != @OldImageId
+   BEGIN
+	   UPDATE [dbo].[AlbumImages]
+	   SET
+	   ImageID = @NewImageId
+	   WHERE
+	   ImageID = @OldImageId;
+
+	   --DELETE FROM [dbo].[Image] WHERE [ImageID] = @OldImageId;
+   END
+END
+
+GO
+
 -------------------- Stored Procedures --------------------
 
 ------------------------------------------------------------------
