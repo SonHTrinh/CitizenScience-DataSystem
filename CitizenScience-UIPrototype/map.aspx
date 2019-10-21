@@ -93,16 +93,11 @@
             var prevInfo = false;
 
             //set date
-            //var s = new Date();
-            //s.setMonth(s.getMonth() - 6);
-            ////s.setDate(s.getDate() + 12);
-            //var sd = getFormattedDate(s);
-
             //var e = new Date();
-            //e.setMonth(e.getMonth() - 6);
-            ////e.setDate(e.getDate() + 13);
             //var ed = getFormattedDate(e);
-
+            //var s = new Date();
+            //s.setDate(e.getDate() - 7 );
+            //var sd = getFormattedDate(s);
 
             function buildMarker(location) {
 
@@ -261,9 +256,16 @@
                                 window.location.href = '/api.asmx/AllLocationTemperaturesCsv';
                             });
 
-                            ////Close Modal
-                            //$('#locationModal').on('hidden.bs.modal', function (){
-                            //});
+                            //Close Modal
+                            $('#locationModal').on('hidden.bs.modal', function () {
+                                //radio button setting
+                                $('#radioC').prop('checked', true);
+                                $('#radioF').prop('checked', false);
+
+                                //datepicker setting
+                                $('#end_datepicker').val("");
+                                $('#start_datepicker').val("");
+                            });
                         }
                     }
                 });
