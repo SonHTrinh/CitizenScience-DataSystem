@@ -256,7 +256,21 @@
 
                             //Download button
                             $('#downloadCsv').click(function () {
-                                window.location.href = '<% Global.URLPREFIX.ToString(); %>/api.asmx/AllLocationTemperaturesCsv';
+                                window.location.href = '<% Global.URLPREFIX.ToString(); %>/api.asmx/AllLocationTemperaturesCsv';                                
+                                var endDate = $('#end_datepicker').val();
+                                var startDate = $('#start_datepicker').val();
+                                //  If Start and End dates not specified...
+                                if (startDate == "" && endDate == "")
+                                    downloadTempDataNoStartNoEnd(location.LocationID);
+                                //  If Start not specified and End specified...
+                                else if (startDate == "" && endDate != "")
+                                    downloadTempDataNoStartEnd(location.LocationID, endDate);
+                                //  If Start specified and End not specified...
+                                else if (startDate != "" && endDate == "")
+                                    downloadTempDataStartNoEnd(location.LocationID, startDate);
+                                //  If both Start and End specified...
+                                else if (startDate != "" && endDate != "")
+                                    downloadTempDataStartEnd(location.LocationID, startDate, endDate);  
                             });
 
                             //Close Modal
@@ -461,6 +475,23 @@
                 var day = date.getDate().toString();
                 day = day.length > 1 ? day : '0' + day;
                 return month + '-' + day + '-' + year;
+            }
+
+            function downloadTempDataNoStartNoEnd(locationID) {
+                //  Download all Temperature data for selected Location
+                window.location.href = '/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
+            }
+            function downloadTempDataStartNoEnd(locationID, startDate) {
+                //  Download all Temperature data for selected Location from startDate onward
+                alert("NO END");
+            }
+            function downloadTempDataNoStartEnd(locationID, endDate) {
+                //  Download all Temperature data for selected Location beginning of data recording to endDate
+                alert("NO START");
+            }
+            function downloadTempDataStartEnd(locationID, startDate, endDate) {
+                //  Download all Temperature data for selected Location from startDate to endDate
+                alert("START, END");
             }
         });
     </script>
