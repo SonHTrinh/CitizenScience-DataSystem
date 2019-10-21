@@ -117,6 +117,34 @@ CREATE TYPE [dbo].[TEMPERATUREDATA] AS TABLE(
 
 GO
 
+-------------------- Triggers --------------------
+
+-- Trigger that happens when new location is added to the database
+CREATE TRIGGER [dbo].[LocationAlbumCreation] ON [dbo].[Location]
+AFTER INSERT AS
+BEGIN
+   DECLARE @AlbumId int;
+
+    -- Create a new album for the Location
+    INSERT INTO [dbo].[Album]
+    ([Name], [Description], [LastUpdated])
+    SELECT
+    [inserted].[SensorName], [inserted].[SensorName], GETDATE()
+    FROM inserted;
+
+    SELECT @AlbumId = (SELECT SCOPE_IDENTITY());
+
+    -- Create a link from the Location Profile image to the Image Album
+    INSERT INTO [dbo].[AlbumImages]
+    (AlbumID, ImageID, LastUpdated)
+    SELECT
+    @AlbumId, [inserted].[ProfileImageID], GETDATE()
+    FROM inserted;
+
+END
+
+GO
+
 -------------------- Stored Procedures --------------------
 
 ------------------------------------------------------------------
@@ -339,3 +367,35 @@ AS
 	
 GO	
 
+-------------------------------------------------- IMAGES
+
+CREATE PROCEDURE [dbo].[UploadImage]
+	@bytes VARBINARY(MAX),
+	@contenttype varchar(max),
+	@description varchar(max)
+AS
+	INSERT INTO [Image] ([Bytes], [ContentType], [Description], [LastUpdated]) VALUES (@bytes, @contenttype, @description, GETDATE());
+	SELECT * FROM [Image] WHERE [ImageID] = SCOPE_IDENTITY();
+GO
+
+CREATE PROCEDURE [dbo].[GetLocationImage]
+	@locationid int
+AS
+	SELECT * FROM [Image]
+	WHERE ImageId = (SELECT [ProfileImageID] FROM Location WHERE LocationID = @locationid)
+
+GO
+
+CREATE PROCEDURE [dbo].[GetAlbumImageIDs]
+	@albumid int
+AS
+	SELECT [ImageID] FROM [AlbumImages]
+	WHERE [AlbumID] = @albumid
+
+GO
+
+CREATE PROCEDURE [dbo].[GetImage]
+	@imageid int
+AS
+	SELECT * FROM [Image]
+	WHERE ImageId = @imageid
