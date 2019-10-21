@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/administration/administration.master" AutoEventWireup="true" CodeBehind="download.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.download" %>
+<%@ Import Namespace="CitizenScience_UIPrototype" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
     Download Data   |   Citizen Science
 </asp:Content>
@@ -54,7 +55,7 @@
                 $.ajax({
                     type: 'GET',
                     contentType: 'application/json; charset=utf-8',
-                    url: '/api.asmx/ReadAllWatersheds',
+                    url: '<%= Global.Url_Prefix() %>/api.asmx/ReadAllWatersheds',
                     dataType: 'JSON'
                 }).done(function (responseData) {
 
@@ -69,7 +70,7 @@
                         },
                         ajax: {
                             // The location to HTTP GET the data for the table
-                            url: '/api.asmx/ReadAllLocation',
+                            url: '<%= Global.Url_Prefix() %>/api.asmx/ReadAllLocation',
                             dataSrc: ''
                         },
                         columns: [
@@ -107,7 +108,7 @@
                 $('#feedbackDownloadSelect').addClass('invisible');
 
                 if (isDownloadAll) {
-                    window.location.href = '/api.asmx/AllLocationTemperaturesCsv';
+                    window.location.href = '<%= Global.Url_Prefix() %>/api.asmx/AllLocationTemperaturesCsv';
                 } else {
                     var idParameters = '?';
 
@@ -117,7 +118,7 @@
 
                     idParameters = idParameters.substring(0, idParameters.length - 1);
 
-                    window.location.href = '/api.asmx/LocationTemperaturesCsv' + idParameters;
+                    window.location.href = '<%= Global.Url_Prefix() %>/api.asmx/LocationTemperaturesCsv' + idParameters;
                 }
 
                 table.rows('.selected').deselect();             

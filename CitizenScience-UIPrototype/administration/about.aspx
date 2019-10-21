@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/administration/administration.master" AutoEventWireup="true" CodeBehind="about.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.about" %>
+<%@ Import Namespace="CitizenScience_UIPrototype" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
     Manage About   |   Citizen Science
 </asp:Content>
@@ -134,7 +135,7 @@
                 $.ajax({
                     type: 'GET',
                     contentType: 'application/json',
-                    url: '/api.asmx/About',
+                    url: '<%= Global.Url_Prefix() %>/api.asmx/About',
                     dataType: 'JSON',
                     success: function (responseData) {
                         console.log(responseData)
@@ -167,7 +168,7 @@
             // The function when the 'Create New Admin' button gets clicked
              $('#editAbout').click(function () {
                 $.ajax({
-                    url: "/api.asmx/About",
+                    url: "<%= Global.Url_Prefix() %>/api.asmx/About",
                     success: function (data) {
                         PopulateEditModal(data);
                     }
@@ -276,16 +277,16 @@
             }
 
             $('#editSubmit').click(function () {
-                var requestData = BuildEditAbout()
+                var requestData = BuildEditAbout();
                 var isValidRequest = ValidateAboutRequest(requestData);
                 console.log('Is Edit Form Submission Valid?: ' + isValidRequest);
-                console.log(requestData)
+                console.log(requestData);
 
                 if (isValidRequest) {
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: '/api.asmx/UpdateAbout',
+                        url: '<%= Global.Url_Prefix() %>/api.asmx/UpdateAbout',
                         data: JSON.stringify(requestData),
                         dataType: 'JSON',
                         success: function (responseData) {

@@ -104,7 +104,7 @@
 
                 // TODO: find a better way to do this than call and map all locations to thier watersheds
                 $.ajax({
-                    url: "<% Global.URLPREFIX.ToString(); %>/api.asmx/Watersheds",
+                    url: "<%= Global.Url_Prefix() %>/api.asmx/Watersheds",
                     success: function (responseData) {
                         var locationWatershedMapping = new Map();
 
@@ -116,7 +116,7 @@
 
                         var locationInfowindow = new google.maps.InfoWindow({
                             content: "<h6><b>" + location.SensorName + "</b></h6>"
-                                + "<img src='/images/location/get.ashx?locationid=" + location.LocationID +"' width='300' height='200' />" + "<br /><br />"
+                                + "<img src='<%= Global.Url_Prefix() %>/images/location/get.ashx?locationid=" + location.LocationID +"' width='300' height='200' />" + "<br /><br />"
                                 + "<h6><b>Watershed:</b> " + locationWatershedMapping.get(location.WatershedID) + "</h6>"
                                 + "<br/>"
                                 + "<b>Latitude: </b>" + location.Latitude
@@ -171,7 +171,7 @@
                             $(".modalDesc").text(description);
 
                             //image
-                            var imageSrc = "/images/location/get.ashx?locationid=" + location.LocationID;
+                            var imageSrc = "<%= Global.Url_Prefix() %>/images/location/get.ashx?locationid=" + location.LocationID;
                             var imageAlt = "The Picture of the " + locationWatershedMapping.get(location.WatershedID);
                             $(".modalImage").attr("src", imageSrc);
                             $(".modalImage").attr("alt", imageAlt);
@@ -256,7 +256,7 @@
 
                             //Download button
                             $('#downloadCsv').click(function () {
-                                window.location.href = '<% Global.URLPREFIX.ToString(); %>/api.asmx/AllLocationTemperaturesCsv';
+                                window.location.href = '<%= Global.Url_Prefix() %>/api.asmx/AllLocationTemperaturesCsv';
                             });
 
                             //Close Modal
@@ -281,7 +281,7 @@
                 });
 
                 $.ajax({
-                    url: "<% Global.URLPREFIX.ToString(); %>/api.asmx/AllLocations",
+                    url: "<%= Global.Url_Prefix() %>/api.asmx/AllLocations",
                     success: function (data) {
                         for (var i = 0; i < data.length; i++) {
                             var locationObj = data[i];
@@ -297,7 +297,7 @@
             //todo: handle failure
 
             $.ajax({
-                url: "/api.asmx/Watersheds",
+                url: "<%= Global.Url_Prefix() %>/api.asmx/Watersheds",
                 success: populateWatersheds
             });
 
@@ -313,7 +313,7 @@
                 $('#ddBtnLocation').text('Locations');
 
                 $.ajax({
-                    url: "<% Global.URLPREFIX.ToString(); %>/api.asmx/Location?watershedId=" + watershedId,
+                    url: "<%= Global.Url_Prefix() %>/api.asmx/Location?watershedId=" + watershedId,
                     success: function (data) {
                         console.log(data);
                         $('#locationdiv').removeClass('invisible');
@@ -365,7 +365,7 @@
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
-                    url: '<% Global.URLPREFIX.ToString(); %>/api.asmx/GetLocationTemperaturesByDateRange',
+                    url: '<%= Global.Url_Prefix() %>/api.asmx/GetLocationTemperaturesByDateRange',
                     data: JSON.stringify(data),
                     success: function (responseData) {
                         //Store the timestamp and the temperatures of server response
@@ -415,7 +415,7 @@
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
-                    url: '<% Global.URLPREFIX.ToString(); %>/api.asmx/GetLocationTemperaturesByDateRange',
+                    url: '<%= Global.Url_Prefix() %>/api.asmx/GetLocationTemperaturesByDateRange',
                     data: JSON.stringify(data),
                     success: function (responseData) {
                         var dateLabelArray = [];
