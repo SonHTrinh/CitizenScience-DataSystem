@@ -5,12 +5,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
     <div class="container-fluid">
-        <div class="row">
-             <section class="jumbotron text-center w-100" >
-                <div class="container">
-                    <h1 class="jumbotron-heading">Welcome to Citizen Science</h1>            
-                </div>
-            </section>  
+        <div class="row my-3">
+            <div class="col-12 text-center">
+                <h1>Welcome to Citizen Science</h1>
+            </div>
         </div>
         <div class="row my-4">
             <div class="col-3 offset-3">
@@ -73,9 +71,14 @@
             </div>
                 
         </div>
+        <div class="row">
+            <div class="col-12">
+                <div id="map" class="shadow-lg rounded" ></div>
+            </div>
+        </div>
 
     </div>
-    <div id="map" class="shadow-lg p-3 mb-5 bg-white rounded"></div>
+    
 
     <script>
         $(function () {
@@ -290,6 +293,39 @@
                         }
                     }
                 });
+
+                var pennypack = new google.maps.KmlLayer("https://gist.githubusercontent.com/tuf37823/97274aa5bbad9c8f65589eb41db1a265/raw/5b622d0876948447bc2a0e2d3c2835025d25670f/streams_pennypack.kml", {
+                    suppressInfoWindows: true,
+                    preserveViewport: false,
+                    map: theMap
+                });
+/*
+                var pennypackwatershed = new google.maps.KmlLayer("https://gist.githubusercontent.com/tuf37823/97274aa5bbad9c8f65589eb41db1a265/raw/5b622d0876948447bc2a0e2d3c2835025d25670f/watershed_pennypack.kml", {
+                    suppressInfoWindows: true,
+                    preserveViewport: false,
+                    map: theMap
+                });
+*/
+
+                var cobb = new google.maps.KmlLayer("https://gist.githubusercontent.com/tuf37823/97274aa5bbad9c8f65589eb41db1a265/raw/bb8cfaa2aa89713ebfb1d419a9eeeeb93dbf4aec/stream_cobb.kml", {
+                    suppressInfoWindows: true,
+                    preserveViewport: false,
+                    map: theMap
+                });
+
+                var ttf = new google.maps.KmlLayer("https://gist.githubusercontent.com/tuf37823/97274aa5bbad9c8f65589eb41db1a265/raw/bb8cfaa2aa89713ebfb1d419a9eeeeb93dbf4aec/streams_ttf.kml", {
+                    suppressInfoWindows: true,
+                    preserveViewport: false,
+                    map: theMap
+                });
+
+                var wissahickon = new google.maps.KmlLayer("https://gist.githubusercontent.com/tuf37823/97274aa5bbad9c8f65589eb41db1a265/raw/bb8cfaa2aa89713ebfb1d419a9eeeeb93dbf4aec/streams_wissahickon.kml", {
+                    suppressInfoWindows: true,
+                    preserveViewport: false,
+                    map: theMap
+                });
+
+
 
                 return theMap;
             }
