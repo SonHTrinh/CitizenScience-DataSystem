@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CitizenScience.Master" AutoEventWireup="true" CodeBehind="map.aspx.cs" Inherits="CitizenScience_UIPrototype.map" %>
+<%@ Import Namespace="CitizenScience_UIPrototype" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
     Map   |   Citizen Science
 </asp:Content>
@@ -103,7 +104,7 @@
 
                 // TODO: find a better way to do this than call and map all locations to thier watersheds
                 $.ajax({
-                    url: "api.asmx/Watersheds",
+                    url: "<% Global.URLPREFIX.ToString(); %>/api.asmx/Watersheds",
                     success: function (responseData) {
                         var locationWatershedMapping = new Map();
 
@@ -255,7 +256,7 @@
 
                             //Download button
                             $('#downloadCsv').click(function () {
-                                window.location.href = '/api.asmx/AllLocationTemperaturesCsv';
+                                window.location.href = '<% Global.URLPREFIX.ToString(); %>/api.asmx/AllLocationTemperaturesCsv';
                             });
 
                             //Close Modal
@@ -280,7 +281,7 @@
                 });
 
                 $.ajax({
-                    url: "/api.asmx/AllLocations",
+                    url: "<% Global.URLPREFIX.ToString(); %>/api.asmx/AllLocations",
                     success: function (data) {
                         for (var i = 0; i < data.length; i++) {
                             var locationObj = data[i];
@@ -312,7 +313,7 @@
                 $('#ddBtnLocation').text('Locations');
 
                 $.ajax({
-                    url: "/api.asmx/Location?watershedId=" + watershedId,
+                    url: "<% Global.URLPREFIX.ToString(); %>/api.asmx/Location?watershedId=" + watershedId,
                     success: function (data) {
                         console.log(data);
                         $('#locationdiv').removeClass('invisible');
@@ -364,7 +365,7 @@
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
-                    url: '/api.asmx/GetLocationTemperaturesByDateRange',
+                    url: '<% Global.URLPREFIX.ToString(); %>/api.asmx/GetLocationTemperaturesByDateRange',
                     data: JSON.stringify(data),
                     success: function (responseData) {
                         //Store the timestamp and the temperatures of server response
@@ -413,7 +414,7 @@
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
-                    url: '/api.asmx/GetLocationTemperaturesByDateRange',
+                    url: '<% Global.URLPREFIX.ToString(); %>/api.asmx/GetLocationTemperaturesByDateRange',
                     data: JSON.stringify(data),
                     success: function (responseData) {
                         var dateLabelArray = [];
