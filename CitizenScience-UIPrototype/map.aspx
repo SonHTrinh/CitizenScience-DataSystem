@@ -277,7 +277,7 @@
             function initMap() {
                 theMap = new google.maps.Map(document.getElementById('map'), {
                     center: new google.maps.LatLng(40.0319, -75.1134),
-                    zoom: 11
+                    zoom: 10
                 });
 
                 $.ajax({
