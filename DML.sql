@@ -23,16 +23,43 @@ SELECT @WatershedId = (SELECT SCOPE_IDENTITY());
 INSERT INTO [dbo].[Location]
 ([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
 VALUES
-(@WatershedId, 'GilmoreRd_Bridge', -75.3025, -75.3025, 1, GETDATE()),
-(@WatershedId, 'HillcrestAve', -75.3173, 39.9848, 2, GETDATE()),
-(@WatershedId, 'Hollywood_Footbridge', -75.2965, 39.9647, 3, GETDATE()),
-(@WatershedId, 'NaylorsPark_A', -75.2825, 39.9571, 4, GETDATE()),
-(@WatershedId, 'NaylorsPark_B', -75.2810, 39.9562, 5, GETDATE()),
-(@WatershedId, 'NaylorsPark_C', -75.2780, 39.9549, 6, GETDATE()),
-(@WatershedId, 'RemingtonLower', -75.2712, 39.9903, 7, GETDATE()),
-(@WatershedId, 'RemingtonUpper', -75.2724, 39.9922, 8, GETDATE()),
-(@WatershedId, 'WashingtonAve_A', -75.3117, 39.9790, 9, GETDATE()),
-(@WatershedId, 'WashingtonAve_B', -75.3099, 39.9771, 10, GETDATE())
+(@WatershedId, 'GilmoreRd_Bridge', -75.3025, -75.3025, 1, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'HillcrestAve', -75.3173, 39.9848, 2, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'Hollywood_Footbridge', -75.2965, 39.9647, 3, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'NaylorsPark_A', -75.2825, 39.9571, 4, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'NaylorsPark_B', -75.2810, 39.9562, 5, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'NaylorsPark_C', -75.2780, 39.9549, 6, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'RemingtonLower', -75.2712, 39.9903, 7, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'RemingtonUpper', -75.2724, 39.9922, 8, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'WashingtonAve_A', -75.3117, 39.9790, 9, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'WashingtonAve_B', -75.3099, 39.9771, 10, GETDATE());
 
 GO
 DECLARE @WatershedId int;
@@ -49,11 +76,23 @@ SELECT @WatershedId = (SELECT SCOPE_IDENTITY());
 INSERT INTO [dbo].[Location]
 ([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
 VALUES
-(@WatershedId, 'LoriLane', -75.1030, 40.1666, 11, GETDATE()),
-(@WatershedId, 'PennypackCircle_A', -75.0980, 40.1697, 12, GETDATE()),
-(@WatershedId, 'PennypackCircle_B', -75.0990, 40.1692, 13, GETDATE()),
-(@WatershedId, 'PennypackCircle_C', -75.1000, 40.1687, 14, GETDATE()),
-(@WatershedId, 'PennypackCircle_D', -75.1009, 40.1684, 15, GETDATE())
+(@WatershedId, 'LoriLane', -75.1030, 40.1666, 11, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'PennypackCircle_A', -75.0980, 40.1697, 12, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'PennypackCircle_B', -75.0990, 40.1692, 13, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'PennypackCircle_C', -75.1000, 40.1687, 14, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'PennypackCircle_D', -75.1009, 40.1684, 15, GETDATE());
 
 GO
 DECLARE @WatershedId int;
@@ -70,14 +109,35 @@ SELECT @WatershedId = (SELECT SCOPE_IDENTITY());
 INSERT INTO [dbo].[Location]
 ([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
 VALUES
-(@WatershedId, 'AlverthorpeField_B', -75.1070, 40.0892, 16, GETDATE()),
-(@WatershedId, 'AlvPond_Down', -75.1141, 40.0884, 17, GETDATE()),
-(@WatershedId, 'AlvPond_Up', -75.1153, 40.0906, 18, GETDATE()),
-(@WatershedId, 'AnthonyRd', -75.1082, 40.0780, 19, GETDATE()),
-(@WatershedId, 'ArtCenter', -75.1152, 40.0929, 20, GETDATE()),
-(@WatershedId, 'JenkintownRd_Meade', -75.1072, 40.0720, 21, GETDATE()),
-(@WatershedId, 'McKinley', -75.1064, 40.0850, 22, GETDATE()),
-(@WatershedId, 'TwshpLineRd', -75.1080, 40.0760, 23, GETDATE())
+(@WatershedId, 'AlverthorpeField_B', -75.1070, 40.0892, 16, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'AlvPond_Down', -75.1141, 40.0884, 17, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'AlvPond_Up', -75.1153, 40.0906, 18, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'AnthonyRd', -75.1082, 40.0780, 19, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'ArtCenter', -75.1152, 40.0929, 20, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'JenkintownRd_Meade', -75.1072, 40.0720, 21, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'McKinley', -75.1064, 40.0850, 22, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'TwshpLineRd', -75.1080, 40.0760, 23, GETDATE());
 
 GO
 DECLARE @WatershedId int;
@@ -94,10 +154,19 @@ SELECT @WatershedId = (SELECT SCOPE_IDENTITY());
 INSERT INTO [dbo].[Location]
 ([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
 VALUES
-(@WatershedId, 'GrovePark_A', -75.1265, 40.1290, 24, GETDATE()),
-(@WatershedId, 'GrovePark_B', -75.1280, 40.1287, 25, GETDATE()),
-(@WatershedId, 'GrovePark_C', -75.1292, 40.1284, 26, GETDATE()),
-(@WatershedId, 'RoslynPark', -75.1428, 40.1290, 27, GETDATE())
+(@WatershedId, 'GrovePark_A', -75.1265, 40.1290, 24, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'GrovePark_B', -75.1280, 40.1287, 25, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'GrovePark_C', -75.1292, 40.1284, 26, GETDATE());
+INSERT INTO [dbo].[Location]
+([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
+VALUES
+(@WatershedId, 'RoslynPark', -75.1428, 40.1290, 27, GETDATE());
 
 GO
 
