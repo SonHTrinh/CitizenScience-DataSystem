@@ -52,8 +52,9 @@ CREATE TABLE [dbo].[Temperature](
 GO
 
 CREATE TABLE [dbo].[Admin] (
-    [AdminID]     INT            IDENTITY (1, 1) NOT NULL,
-    [Accessnet]   NVARCHAR (MAX) NOT NULL,
+    [AdminID] INT            IDENTITY (1, 1) NOT NULL,
+    [TUID]    NVARCHAR (MAX) NOT NULL,
+    [Active]  BIT            NOT NULL,
     PRIMARY KEY CLUSTERED ([AdminID] ASC)
 );
 
@@ -98,7 +99,7 @@ CREATE TABLE [dbo].[Volunteer] (
     [FirstName]        NVARCHAR (MAX) NOT NULL,
     [LastName]         NVARCHAR (MAX) NOT NULL,
     [Email]            NVARCHAR (MAX) NOT NULL,
-    [Message]          NVARCHAR (MAX) NULL,
+    [Message]          NVARCHAR (MAX) NOT NULL,
     [DateSubmitted]    DATE           NOT NULL,
     PRIMARY KEY CLUSTERED ([VolunteerID] ASC)
 );
@@ -178,82 +179,12 @@ AS
 
 GO
 
--------------------------------------------------  Image
-CREATE PROCEDURE [dbo].[UploadImage]
-	@bytes VARBINARY(MAX),
-	@contenttype varchar(max),
-	@description varchar(max)
+CREATE PROCEDURE [dbo].[GetAllAdmins]
 AS
-	INSERT INTO [Image] ([Bytes], [ContentType], [Description], [LastUpdated]) VALUES (@bytes, @contenttype, @description, GETDATE());
-	SELECT * FROM [Image] WHERE [ImageID] = SCOPE_IDENTITY();
+	SELECT * FROM Admin
+	
 GO
 
-CREATE PROCEDURE [dbo].[SetLocationImage]
-	@locationid int,
-	@bytes VARBINARY(MAX),
-	@contenttype varchar(max)
-AS
-	DECLARE @imageId int;
-	INSERT INTO [Image] ([Bytes], [ContentType],  [LastUpdated]) VALUES (@bytes, @contenttype, GETDATE());
-
-	SELECT @imageId = (SELECT SCOPE_IDENTITY());
-
-	UPDATE Location
-	SET [ProfileImageID] = @imageId,
-	[LastUpdated] = GETDATE()
-	WHERE LocationID = @locationid;
-
-	SELECT * FROM [Location]
-	WHERE LocationID = @locationid;
-
-GO
-
-CREATE PROCEDURE [dbo].[GetLocationImage]
-	@locationid int
-AS
-	SELECT * FROM [Image]
-	WHERE ImageId = (SELECT [ProfileImageID] FROM Location WHERE LocationID = @locationid)
-
-GO
-
-CREATE PROCEDURE [dbo].[AddImageToAlbum]
-	@albumid int,
-	@bytes varbinary(MAX),
-	@contenttype nvarchar(MAX)
-AS
-	DECLARE @imageId int;
-	INSERT INTO [Image] ([Bytes], [ContentType],  [LastUpdated]) VALUES (@bytes, @contenttype, GETDATE());
-
-	SELECT @imageId = (SELECT SCOPE_IDENTITY());
-
-	INSERT INTO [AlbumImages] ([AlbumID], [ImageID], [LastUpdated]) VALUES (@albumid, @imageId, GETDATE())
-
-	UPDATE Album
-	SET [LastUpdated] = GETDATE()
-	WHERE AlbumID = @albumid;
-
-	SELECT * FROM [Image]
-	WHERE [ImageID] = @imageId;
-
-GO
-
-CREATE PROCEDURE [dbo].[GetAlbumImageIDs]
-	@albumid int
-AS
-	SELECT [ImageID] FROM [AlbumImages]
-	WHERE [AlbumID] = @albumid
-
-GO
-
-CREATE PROCEDURE [dbo].[GetImage]
-	@imageid int
-AS
-	SELECT * FROM [Image]
-	WHERE ImageId = @imageid
-
-GO
-
-------------------------------------------------------------------
 ------------------------------------------------- CRUD Procedures
 ------------------------------------------------------------------
 
@@ -356,7 +287,7 @@ AS
 
 GO
 
------ CRUD Volunteer
+------------------------------------------------- CRUD Volunteer
 CREATE PROCEDURE [dbo].[CreateVolunteer]
 	@firstname nvarchar(MAX),
 	@lastname nvarchar(MAX),
@@ -369,7 +300,30 @@ AS
 	
 GO
 
------ CRUD About
+------------------------------------------------- CRUD Admin
+CREATE PROCEDURE [dbo].[CreateAdmin]
+	@tuid nvarchar(MAX),
+	@active bit
+AS
+	INSERT INTO Admin(TUID, Active)
+	VALUES(@tuid, @active)
+	SELECT * FROM Admin WHERE AdminID = SCOPE_IDENTITY()
+	
+GO
+
+CREATE PROCEDURE [dbo].[UpdateAdmin]
+	@id int,
+	@tuid NVARCHAR(MAX),
+	@active BIT
+AS
+	UPDATE Admin
+	SET TUID = @tuid, Active = @active
+	WHERE AdminID = @id
+	SELECT * FROM Admin where AdminID = @id
+	
+GO
+
+------------------------------------------------- CRUD About
 CREATE PROCEDURE [dbo].[NewAbout]
 	@description NVARCHAR(MAX),
 	@question1 NVARCHAR(MAX),

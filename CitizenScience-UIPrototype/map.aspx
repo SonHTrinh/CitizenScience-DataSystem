@@ -10,16 +10,11 @@
                     <h1 class="jumbotron-heading">Welcome to Citizen Science</h1>            
                 </div>
             </section>  
-            <!--
-            <div class="col-12">
-                <h1 style="text-align: center">Welcome to Citizen Science</h1>
-            </div>
-            -->
         </div>
         <div class="row my-4">
             <div class="col-3 offset-3">
-                <div class="dropdown float-left">
-                  <button class="btn btn-primary dropdown-toggle px-5 py-2" type="button" id="ddBtnWatershed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div class="dropdown float-right">
+                  <button class="btn btn-dark dropdown-toggle px-5 py-2" type="button" id="ddBtnWatershed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Watersheds
                   </button>
                   <div class="dropdown-menu" id="ddMenuWatershed" aria-labelledby="dropdownMenuButton"></div>
@@ -27,7 +22,7 @@
             </div>
             <div class="col-3">
                 <div class="dropdown float-left invisible" id="locationdiv">
-                  <button class="btn btn-primary dropdown-toggle px-5 py-2" type="button" id="ddBtnLocation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                  <button class="btn btn-dark dropdown-toggle px-5 py-2" type="button" id="ddBtnLocation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                   <div class="dropdown-menu" id="ddMenuLocation" aria-labelledby="dropdownMenuButton"></div>
                 </div>
             </div>
@@ -64,10 +59,10 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" id="downloadCsv" class="btn btn-success">
+                                <button type="button" id="downloadCsv" class="btn btn-dark">
                                     <i class="fa fa-file-csv">&nbsp; Download Temperature CSV File</i>
                                 </button>
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
@@ -98,16 +93,11 @@
             var prevInfo = false;
 
             //set date
-            //var s = new Date();
-            //s.setMonth(s.getMonth() - 6);
-            ////s.setDate(s.getDate() + 12);
-            //var sd = getFormattedDate(s);
-
             //var e = new Date();
-            //e.setMonth(e.getMonth() - 6);
-            ////e.setDate(e.getDate() + 13);
             //var ed = getFormattedDate(e);
-
+            //var s = new Date();
+            //s.setDate(e.getDate() - 7 );
+            //var sd = getFormattedDate(s);
 
             function buildMarker(location) {
 
@@ -268,9 +258,16 @@
                                 window.location.href = '/api.asmx/AllLocationTemperaturesCsv';
                             });
 
-                            ////Close Modal
-                            //$('#locationModal').on('hidden.bs.modal', function (){
-                            //});
+                            //Close Modal
+                            $('#locationModal').on('hidden.bs.modal', function () {
+                                //radio button setting
+                                $('#radioC').prop('checked', true);
+                                $('#radioF').prop('checked', false);
+
+                                //datepicker setting
+                                $('#end_datepicker').val("");
+                                $('#start_datepicker').val("");
+                            });
                         }
                     }
                 });
