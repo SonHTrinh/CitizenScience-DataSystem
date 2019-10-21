@@ -11,9 +11,7 @@ namespace CitizenScience_UIPrototype.secure.administration
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Context.Response.Status = "403 Forbidden";
-            Context.Response.StatusCode = 403;
-            Context.ApplicationInstance.CompleteRequest();
+            
         }
     }
 }

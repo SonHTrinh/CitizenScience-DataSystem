@@ -25,33 +25,33 @@ namespace CitizenScience_UIPrototype.secure.administration
             //for this "Demo_mode" check the web config 
             //if (ConfigurationManager.AppSettings["demo_mode"].ToLower().Equals("false"))
             //{
-                /* Check if the application is running locally for development
-                 * Retrieve request header information
-                 */
-                if (HttpContext.Current.Request.IsLocal.Equals(true))
-                {
-                    /*The SSO Sign-on page will not appear while running locally. This is only used for development.*/
-                    employeeNumber = "461297";
-                }
-                else
-                {
-                    /*Application is running on server and the user has active Shibboleth session.*/
-                    employeeNumber = GetShibbolethHeaderAttributes();
-                }
+            /* Check if the application is running locally for development
+             * Retrieve request header information
+             */
+            if (HttpContext.Current.Request.IsLocal.Equals(true))
+            {
+                /*The SSO Sign-on page will not appear while running locally. This is only used for development.*/
+                employeeNumber = "915261297";
+            }
+            else
+            {
+                /*Application is running on server and the user has active Shibboleth session.*/
+                employeeNumber = GetShibbolethHeaderAttributes();
+            }
 
 
-                /*Use employee number to get user information from web services and then redirect*/
+            /*Use employee number to get user information from web services and then redirect*/
 
-                GetUserInformation(employeeNumber);
+            GetUserInformation(employeeNumber);
 
 
             //}
         }
 
 
-    /// Retrieve user information from Shibboleth headers
-    /// <returns>User's TUid</returns>
-    protected string GetShibbolethHeaderAttributes()
+        /// Retrieve user information from Shibboleth headers
+        /// <returns>User's TUid</returns>
+        protected string GetShibbolethHeaderAttributes()
         {
             string employeeNumber = Request.Headers["employeeNumber"]; //Use this to retrieve the user's information via the web services  
             Session["SSO_Attribute_mail"] = Request.Headers["mail"];
@@ -70,11 +70,9 @@ namespace CitizenScience_UIPrototype.secure.administration
         {
             if (!string.IsNullOrWhiteSpace(employeeNumber))
             {
-
+                DataSet ds = new DataSet();
                 /* Requesting user's LDAP information via Web Service */
-
                 CitizenScienceClasses.WebService.LDAPuser Temple_Information = CitizenScienceClasses.WebService.Webservice.getLDAPEntryByTUID(employeeNumber);
-
                 /* Checking we received something from Web Services*/
                 if (Temple_Information != null)
                 {
@@ -87,69 +85,36 @@ namespace CitizenScience_UIPrototype.secure.administration
                     Session["Affiliation_Primary"] = Temple_Information.eduPersonPrimaryAffiliation;
                     Session["Affiliation_Secondary"] = Temple_Information.eduPersonAffiliation;
                     Session["Full_Name"] = Temple_Information.cn;
+                    ds = DataProcessor.AuthenticateAdmin(Session["TU_ID"].ToString());
 
 
                 }
+                else if (Temple_Information == null)
+                {
+                    ds = DataProcessor.AuthenticateAdmin(employeeNumber);
+                }
 
-                DBConnect conn = new DBConnect();
-                SqlCommand comm = new SqlCommand();
-                comm.CommandType = CommandType.StoredProcedure;
-                comm.CommandText = "ValidateAdmin";
-
-                //uncomment for live version 
-                //comm.Parameters.AddWithValue("@TU_ID", Session["TU_ID"]);
-
-                comm.Parameters.AddWithValue("@TU_ID", "915261297");
-                DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
-
-                if (dataSet.Tables[0].Rows.Count != 0)
+                if (ds.Tables[0].Rows.Count > 0)
                 {
                     Session["Authenticated"] = true;
-                    /*Successful Login - Allowed to be redirected to Home.aspx*/
                     Response.Redirect("about.aspx");
-                    /*Security Session Variable*/
-
-
                 }
                 else
                 {
                     Server.Transfer("403http.aspx");
+                    Session["Authenticated"] = false;
                 }
             }
+    
 
             else
             {
-            //Error: Couldn't retrieve employeeNumber from request header
                 Server.Transfer("403http.aspx");
+                Session["Authenticated"] = false;
+
             }
         }
-
-
-        //protected void btnEmployeeTestAcct_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        GetUserInformation("888000088");
-        //    }
-        //    catch (Exception)
-        //    {
-        //        Server.Transfer("500http.aspx");
-        //    }
-        //}
-
-
-        //protected void btnStudentTestAcct_Click(object sender, EventArgs e)
-        //{
-        //    try
-        //    {
-        //        GetUserInformation("888000089");
-        //    }
-        //    catch (Exception)
-        //    {
-        //        Server.Transfer("500http.aspx");
-        //    }
-        //}
-
+    
 
         protected void btnShibb_Click(object sender, EventArgs e)
         {

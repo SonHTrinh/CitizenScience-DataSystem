@@ -15,12 +15,15 @@ namespace CitizenScience_UIPrototype.administration
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+
             feedbackSuccess.Visible = false;
             feedbackDanger.Visible = false;
             if (!IsPostBack)
             {
                 GenerateLocationDropdownList();
             }
+            
         }
 
         private void GenerateLocationDropdownList()
