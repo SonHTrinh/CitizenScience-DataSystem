@@ -179,6 +179,15 @@ AS
 GO
 
 -------------------------------------------------  Image
+CREATE PROCEDURE [dbo].[UploadImage]
+	@bytes VARBINARY(MAX),
+	@contenttype varchar(max),
+	@description varchar(max)
+AS
+	INSERT INTO [Image] ([Bytes], [ContentType], [Description], [LastUpdated]) VALUES (@bytes, @contenttype, @description, GETDATE());
+	SELECT * FROM [Image] WHERE [ImageID] = SCOPE_IDENTITY();
+GO
+
 CREATE PROCEDURE [dbo].[SetLocationImage]
 	@locationid int,
 	@bytes VARBINARY(MAX),
@@ -311,10 +320,11 @@ CREATE PROCEDURE [dbo].[CreateLocation]
 	@watershedid int,
     @name varchar(255),
     @latitude float,
-    @longitude float
+    @longitude float,
+	@profileimageid int
 AS
-    INSERT INTO Location (WatershedID, SensorName, Latitude, Longitude, LastUpdated)
-    VALUES (@watershedid, @name, @latitude, @longitude, GETDATE())
+    INSERT INTO Location (WatershedID, SensorName, Latitude, Longitude, ProfileImageID, LastUpdated)
+    VALUES (@watershedid, @name, @latitude, @longitude, @profileimageid, GETDATE())
     SELECT * FROM Location WHERE locationID = SCOPE_IDENTITY()
 
 GO
@@ -331,13 +341,15 @@ CREATE PROCEDURE [dbo].[UpdateLocation]
 	@watershedid int,
     @name varchar(255),
     @latitude float,
-    @longitude float
+    @longitude float,
+	@profileimageid int
 AS
 	UPDATE Location
 	SET WatershedID = @watershedid,
 		SensorName = @name,
 		Latitude = @latitude,
 		Longitude = @longitude,
+		ProfileImageID = @profileimageid,
 		LastUpdated = GETDATE()
 	WHERE LocationID = @id
 	SELECT * FROM Location where LocationID = @id

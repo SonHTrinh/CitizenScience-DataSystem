@@ -13,19 +13,17 @@ namespace CitizenScienceClasses
         private double latitude;
         private double longitude;
         private string sensorName;
-        private string serialNumber;
         private int profileImageID;
         private DateTime lastUpdated;
 
         public Location() { }
-        public Location(int locId, int watId, double lat, double lon, string name, string serial, int profile, DateTime updated)
+        public Location(int locId, int watId, double lat, double lon, string name, int profile, DateTime updated)
         {
             locationID = locId;
             watershedID = watId;
             latitude = lat;
             longitude = lon;
             sensorName = name;
-            serialNumber = serial;
             profileImageID = profile;
             lastUpdated = updated;
         }
@@ -54,11 +52,6 @@ namespace CitizenScienceClasses
         {
             get { return sensorName; }
             set { sensorName = value; }
-        }
-        public string SerialNumber
-        {
-            get { return serialNumber; }
-            set { serialNumber = value; }
         }
         public int ProfileImageID
         {

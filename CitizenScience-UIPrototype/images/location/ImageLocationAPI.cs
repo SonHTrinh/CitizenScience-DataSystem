@@ -47,6 +47,7 @@ namespace CitizenScience_UIPrototype.images.location
         {
             try
             {
+                string description = context.Request.Form.Get("description");
                 HttpPostedFile postedFile = context.Request.Files[0];
                 if (postedFile.ContentLength == 0)
                     throw new Exception("Empty file received");
@@ -60,13 +61,12 @@ namespace CitizenScience_UIPrototype.images.location
                         bytes = binaryReader.ReadBytes((int)stream.Length);
                     }
 
-                    int locationId = int.Parse(context.Request["locationid"]);
                     string contentType = postedFile.ContentType;
 
-                    Location result = ClassFunctions.SetLocationImage(locationId, bytes, contentType);
+                    Image image = ClassFunctions.UploadImage(bytes, contentType, description);
 
                     context.Response.ContentType = contentType;
-                    context.Response.Write(result.ToString());
+                    context.Response.Write(image.ImageID);
                 }
             }
             catch (Exception ex)

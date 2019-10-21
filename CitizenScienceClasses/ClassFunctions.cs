@@ -40,7 +40,7 @@ namespace CitizenScienceClasses
             comm.Parameters.AddWithValue("@watershedID", watershedID);
             return conn.GetDataSetUsingCmdObj(comm);
         }
-        public static Location CreateLocation(int watershedId, string name, double latitude, double longitude)
+        public static Location CreateLocation(int watershedId, string name, double latitude, double longitude, int imageid)
         {
             Location result = null;
 
@@ -52,6 +52,7 @@ namespace CitizenScienceClasses
             comm.Parameters.AddWithValue("@name", name);
             comm.Parameters.AddWithValue("@latitude", latitude);
             comm.Parameters.AddWithValue("@longitude", longitude);
+            comm.Parameters.AddWithValue("@profileimageid", imageid);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
 
             if (dataSet.Tables[0].Rows.Count == 1)
@@ -65,6 +66,7 @@ namespace CitizenScienceClasses
                     SensorName = Convert.ToString(dataRow["SensorName"]),
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),
+                    ProfileImageID = Convert.ToInt32(dataRow["ProfileImageID"]),
                     LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
                 };
             }
@@ -93,6 +95,7 @@ namespace CitizenScienceClasses
                     SensorName = Convert.ToString(dataRow["SensorName"]),
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),
+                    ProfileImageID = Convert.ToInt32(dataRow["ProfileImageID"]),
                     LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
                 };
             }
@@ -121,6 +124,7 @@ namespace CitizenScienceClasses
                     SensorName = Convert.ToString(dataRow["SensorName"]),
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),
+                    ProfileImageID = Convert.ToInt32(dataRow["ProfileImageID"]),
                     LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
                 };
 
@@ -129,7 +133,7 @@ namespace CitizenScienceClasses
 
             return result;
         }
-        public static Location UpdateLocation(int id, int watershedId, string name, double latitude, double longitude)
+        public static Location UpdateLocation(int id, int watershedId, string name, double latitude, double longitude, int imageId)
         {
             Location result = null;
 
@@ -142,6 +146,7 @@ namespace CitizenScienceClasses
             comm.Parameters.AddWithValue("@name", name);
             comm.Parameters.AddWithValue("@latitude", latitude);
             comm.Parameters.AddWithValue("@longitude", longitude);
+            comm.Parameters.AddWithValue("@profileimageid", imageId);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
 
             if (dataSet.Tables[0].Rows.Count == 1)
@@ -155,6 +160,7 @@ namespace CitizenScienceClasses
                     SensorName = Convert.ToString(dataRow["SensorName"]),
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),
+                    ProfileImageID = Convert.ToInt32(dataRow["ProfileImageID"]),
                     LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
                 };
             }
@@ -384,6 +390,35 @@ namespace CitizenScienceClasses
         }
 
         ///////////////////////////////// IMAGE Functions
+
+        public static Image UploadImage(byte[] bytes, string contentType, string description)
+        {
+            Image result = null;
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "UploadImage";
+            comm.Parameters.AddWithValue("@bytes", bytes);
+            comm.Parameters.AddWithValue("@contenttype", contentType);
+            comm.Parameters.AddWithValue("@description", description);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                result = new Image
+                {
+                    ImageID = Convert.ToInt32(dataRow["ImageID"]),
+                    ContentType = Convert.ToString(dataRow["ContentType"]),
+                    Description = Convert.ToString(dataRow["Description"]),
+                    Bytes = dataRow["Bytes"] as byte[]
+                };
+            }
+
+            return result;
+        }
 
         public static Image GetImage(int imageId)
         {
@@ -686,6 +721,7 @@ namespace CitizenScienceClasses
             }
             return a;
         }
+
 
 
     }
