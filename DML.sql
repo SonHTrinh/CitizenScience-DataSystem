@@ -23,7 +23,7 @@ SELECT @WatershedId = (SELECT SCOPE_IDENTITY());
 INSERT INTO [dbo].[Location]
 ([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
 VALUES
-(@WatershedId, 'GilmoreRd_Bridge', -75.3025, -75.3025, 1, GETDATE());
+(@WatershedId, 'GilmoreRd_Bridge', -75.3025, 39.9696, 1, GETDATE());
 INSERT INTO [dbo].[Location]
 ([WatershedID], [SensorName], [Longitude], [Latitude], [ProfileImageID], [LastUpdated])
 VALUES
