@@ -71,13 +71,10 @@
             </div>
                 
         </div>
-        <div class="row">
-            <div class="col-12">
-                <div id="map" class="shadow-lg rounded" ></div>
-            </div>
-        </div>
+
 
     </div>
+    <div id="map" class="shadow-lg p-3 mb-5 bg-white rounded" ></div>
     
 
     <script>
