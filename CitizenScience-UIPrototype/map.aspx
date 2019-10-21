@@ -5,15 +5,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
     <div class="container-fluid">
-        <div class="row">
-             <section class="jumbotron text-center w-100" >
-                <div class="container">
-                    <h1 class="jumbotron-heading">Welcome to Citizen Science</h1>            
-                </div>
-            </section>  
+        <div class="row my-3">
+            <div class="col-12 text-center">
+                <h1>Welcome to Citizen Science</h1>
+            </div>
         </div>
         <div class="row my-4">
-            <div class="col-3 offset-3">
+            <div class="col-6">
                 <div class="dropdown float-right">
                   <button class="btn btn-dark dropdown-toggle px-5 py-2" type="button" id="ddBtnWatershed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Watersheds
@@ -21,7 +19,7 @@
                   <div class="dropdown-menu" id="ddMenuWatershed" aria-labelledby="dropdownMenuButton"></div>
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-6">
                 <div class="dropdown float-left invisible" id="locationdiv">
                   <button class="btn btn-dark dropdown-toggle px-5 py-2" type="button" id="ddBtnLocation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                   <div class="dropdown-menu" id="ddMenuLocation" aria-labelledby="dropdownMenuButton"></div>
@@ -74,8 +72,10 @@
                 
         </div>
 
+
     </div>
-    <div id="map" class="shadow-lg p-3 mb-5 bg-white rounded"></div>
+    <div id="map" class="shadow-lg p-3 mb-5 bg-white rounded" ></div>
+    
 
     <script>
         $(function () {
@@ -104,7 +104,7 @@
 
                 // TODO: find a better way to do this than call and map all locations to thier watersheds
                 $.ajax({
-                    url: "<% Global.URLPREFIX.ToString(); %>/api.asmx/Watersheds",
+                    url: "<%= Global.Url_Prefix() %>/api.asmx/Watersheds",
                     success: function (responseData) {
                         var locationWatershedMapping = new Map();
 
@@ -116,7 +116,7 @@
 
                         var locationInfowindow = new google.maps.InfoWindow({
                             content: "<h6><b>" + location.SensorName + "</b></h6>"
-                                + "<img src='/images/location/get.ashx?locationid=" + location.LocationID +"' width='300' height='200' />" + "<br /><br />"
+                                + "<img src='<%= Global.Url_Prefix() %>/images/location/get.ashx?locationid=" + location.LocationID +"' width='300' height='200' />" + "<br /><br />"
                                 + "<h6><b>Watershed:</b> " + locationWatershedMapping.get(location.WatershedID) + "</h6>"
                                 + "<br/>"
                                 + "<b>Latitude: </b>" + location.Latitude
@@ -171,7 +171,7 @@
                             $(".modalDesc").text(description);
 
                             //image
-                            var imageSrc = "/images/location/get.ashx?locationid=" + location.LocationID;
+                            var imageSrc = "<%= Global.Url_Prefix() %>/images/location/get.ashx?locationid=" + location.LocationID;
                             var imageAlt = "The Picture of the " + locationWatershedMapping.get(location.WatershedID);
                             $(".modalImage").attr("src", imageSrc);
                             $(".modalImage").attr("alt", imageAlt);
@@ -256,7 +256,7 @@
 
                             //Download button
                             $('#downloadCsv').click(function () {
-                                window.location.href = '<% Global.URLPREFIX.ToString(); %>/api.asmx/AllLocationTemperaturesCsv';
+                                window.location.href = '<%= Global.Url_Prefix() %>/api.asmx/AllLocationTemperaturesCsv';
                             });
 
                             //Close Modal
@@ -281,7 +281,7 @@
                 });
 
                 $.ajax({
-                    url: "<% Global.URLPREFIX.ToString(); %>/api.asmx/AllLocations",
+                    url: "<%= Global.Url_Prefix() %>/api.asmx/AllLocations",
                     success: function (data) {
                         for (var i = 0; i < data.length; i++) {
                             var locationObj = data[i];
@@ -291,13 +291,46 @@
                     }
                 });
 
+                var pennypack = new google.maps.KmlLayer("https://gist.githubusercontent.com/tuf37823/97274aa5bbad9c8f65589eb41db1a265/raw/5b622d0876948447bc2a0e2d3c2835025d25670f/streams_pennypack.kml", {
+                    suppressInfoWindows: true,
+                    preserveViewport: false,
+                    map: theMap
+                });
+/*
+                var pennypackwatershed = new google.maps.KmlLayer("https://gist.githubusercontent.com/tuf37823/97274aa5bbad9c8f65589eb41db1a265/raw/5b622d0876948447bc2a0e2d3c2835025d25670f/watershed_pennypack.kml", {
+                    suppressInfoWindows: true,
+                    preserveViewport: false,
+                    map: theMap
+                });
+*/
+
+                var cobb = new google.maps.KmlLayer("https://gist.githubusercontent.com/tuf37823/97274aa5bbad9c8f65589eb41db1a265/raw/bb8cfaa2aa89713ebfb1d419a9eeeeb93dbf4aec/stream_cobb.kml", {
+                    suppressInfoWindows: true,
+                    preserveViewport: false,
+                    map: theMap
+                });
+
+                var ttf = new google.maps.KmlLayer("https://gist.githubusercontent.com/tuf37823/97274aa5bbad9c8f65589eb41db1a265/raw/bb8cfaa2aa89713ebfb1d419a9eeeeb93dbf4aec/streams_ttf.kml", {
+                    suppressInfoWindows: true,
+                    preserveViewport: false,
+                    map: theMap
+                });
+
+                var wissahickon = new google.maps.KmlLayer("https://gist.githubusercontent.com/tuf37823/97274aa5bbad9c8f65589eb41db1a265/raw/bb8cfaa2aa89713ebfb1d419a9eeeeb93dbf4aec/streams_wissahickon.kml", {
+                    suppressInfoWindows: true,
+                    preserveViewport: false,
+                    map: theMap
+                });
+
+
+
                 return theMap;
             }
 
             //todo: handle failure
 
             $.ajax({
-                url: "/api.asmx/Watersheds",
+                url: "<%= Global.Url_Prefix() %>/api.asmx/Watersheds",
                 success: populateWatersheds
             });
 
@@ -313,7 +346,7 @@
                 $('#ddBtnLocation').text('Locations');
 
                 $.ajax({
-                    url: "<% Global.URLPREFIX.ToString(); %>/api.asmx/Location?watershedId=" + watershedId,
+                    url: "<%= Global.Url_Prefix() %>/api.asmx/Location?watershedId=" + watershedId,
                     success: function (data) {
                         console.log(data);
                         $('#locationdiv').removeClass('invisible');
@@ -365,7 +398,7 @@
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
-                    url: '<% Global.URLPREFIX.ToString(); %>/api.asmx/GetLocationTemperaturesByDateRange',
+                    url: '<%= Global.Url_Prefix() %>/api.asmx/GetLocationTemperaturesByDateRange',
                     data: JSON.stringify(data),
                     success: function (responseData) {
                         //Store the timestamp and the temperatures of server response
@@ -415,7 +448,7 @@
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
-                    url: '<% Global.URLPREFIX.ToString(); %>/api.asmx/GetLocationTemperaturesByDateRange',
+                    url: '<%= Global.Url_Prefix() %>/api.asmx/GetLocationTemperaturesByDateRange',
                     data: JSON.stringify(data),
                     success: function (responseData) {
                         var dateLabelArray = [];

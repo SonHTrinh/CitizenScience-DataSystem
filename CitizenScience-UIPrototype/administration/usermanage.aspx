@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/administration/administration.master" AutoEventWireup="true" CodeBehind="usermanage.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.usermanage" %>
+<%@ Import Namespace="CitizenScience_UIPrototype" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
     Manage Admins   |   Citizen Science
 </asp:Content>
@@ -147,7 +148,7 @@
             var table = $('#DataTable').DataTable({
                 ajax: {
                     // The location to HTTP GET the data for the table
-                    url: '/api.asmx/Admins',
+                    url: '<%= Global.Url_Prefix() %>/api.asmx/Admins',
                     dataSrc: ''
                 },
                 columns: [
@@ -243,7 +244,7 @@
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: '/api.asmx/UpdateAdmin',
+                        url: '<%= Global.Url_Prefix() %>/api.asmx/UpdateAdmin',
                         data: JSON.stringify(requestData),
                         dataType: 'JSON',
                         success: function (responseData) {
@@ -273,7 +274,7 @@
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: '/api.asmx/CreateAdmin',
+                        url: '<%= Global.Url_Prefix() %>/api.asmx/CreateAdmin',
                         data: JSON.stringify(requestData),
                         dataType: 'JSON',
                         success: function (responseData) {
