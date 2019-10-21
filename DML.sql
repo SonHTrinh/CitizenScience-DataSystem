@@ -105,3 +105,14 @@ VALUES
 'The main benefits to be gained through this new system will be a secure and organized data storage method for vital water temperature data as well as a way of involving Greater Philadelphia area residents in the conservation of local water ecosystems. The system will be designed to allow administrative users to easily record relevant data. That collected data will then be displayed in an intuitive and user-friendly manner.')
 
 GO
+
+
+
+-- TODO: Find a better way to insert initial images
+DECLARE @cnt INT = 1;
+
+WHILE @cnt <= (SELECT COUNT(*) FROM [dbo].[Location])
+BEGIN
+   EXEC [dbo].[GenerateTestImage] @cnt
+   SET @cnt = @cnt + 1;
+END;
