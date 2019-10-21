@@ -11,7 +11,7 @@
             </div>
         </div>
         <div class="row my-4">
-            <div class="col-3 offset-3">
+            <div class="col-6">
                 <div class="dropdown float-right">
                   <button class="btn btn-dark dropdown-toggle px-5 py-2" type="button" id="ddBtnWatershed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Watersheds
@@ -19,7 +19,7 @@
                   <div class="dropdown-menu" id="ddMenuWatershed" aria-labelledby="dropdownMenuButton"></div>
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-6">
                 <div class="dropdown float-left invisible" id="locationdiv">
                   <button class="btn btn-dark dropdown-toggle px-5 py-2" type="button" id="ddBtnLocation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                   <div class="dropdown-menu" id="ddMenuLocation" aria-labelledby="dropdownMenuButton"></div>
