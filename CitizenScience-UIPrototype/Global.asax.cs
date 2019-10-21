@@ -9,10 +9,11 @@ namespace CitizenScience_UIPrototype
 {
     public class Global : System.Web.HttpApplication
     {
-
+        public static string URLPREFIX;
         protected void Application_Start(object sender, EventArgs e)
         {
-
+            // Uncomment for deploying on school servers
+            URLPREFIX = "/cis4396-F06";
         }
 
         protected void Session_Start(object sender, EventArgs e)
