@@ -118,6 +118,20 @@ namespace CitizenScience_UIPrototype
 
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void GetAlbumImageIds(int albumId)
+        {
+            List<int> result = new List<int>();
+
+            result = ClassFunctions.GetAlbumImageIDs(albumId);
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Clear();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(result));
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void Admins()
         {
             DataSet adminDataSet = ClassFunctions.GetAdmins();
@@ -286,9 +300,9 @@ namespace CitizenScience_UIPrototype
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void CreateLocation(int watershedId, string name, double latitude, double longitude)
+        public void CreateLocation(int watershedId, string name, double latitude, double longitude, int imageId)
         {
-            Location result = ClassFunctions.CreateLocation(watershedId, name, latitude, longitude);
+            Location result = ClassFunctions.CreateLocation(watershedId, name, latitude, longitude, imageId);
 
             if (result != null)
             {
@@ -335,9 +349,9 @@ namespace CitizenScience_UIPrototype
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void UpdateLocation(int id, int watershedId, string name, double latitude, double longitude)
+        public void UpdateLocation(int id, int watershedId, string name, double latitude, double longitude, int imageId)
         {
-            Location result = ClassFunctions.UpdateLocation(id, watershedId, name, latitude, longitude);
+            Location result = ClassFunctions.UpdateLocation(id, watershedId, name, latitude, longitude, imageId);
 
             if (result != null)
             {

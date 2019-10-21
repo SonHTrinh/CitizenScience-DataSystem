@@ -111,9 +111,11 @@
                             locationWatershedMapping.set(watershed.WatershedID, watershed.WatershedName);
                         });
 
+
+
                         var locationInfowindow = new google.maps.InfoWindow({
                             content: "<h6><b>" + location.SensorName + "</b></h6>"
-                                + "<img src='/img/Watershed/Watershed01.jpg' width='300' height='200' />" + "<br /><br />"
+                                + "<img src='/images/location/get.ashx?locationid=" + location.LocationID +"' width='300' height='200' />" + "<br /><br />"
                                 + "<h6><b>Watershed:</b> " + locationWatershedMapping.get(location.WatershedID) + "</h6>"
                                 + "<br/>"
                                 + "<b>Latitude: </b>" + location.Latitude
@@ -168,7 +170,7 @@
                             $(".modalDesc").text(description);
 
                             //image
-                            var imageSrc = "img/Watershed/Watershed1.jpg";
+                            var imageSrc = "/images/location/get.ashx?locationid=" + location.LocationID;
                             var imageAlt = "The Picture of the " + locationWatershedMapping.get(location.WatershedID);
                             $(".modalImage").attr("src", imageSrc);
                             $(".modalImage").attr("alt", imageAlt);

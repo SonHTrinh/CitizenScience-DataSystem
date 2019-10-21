@@ -71,6 +71,11 @@
                     </div>
                   </div>
               </div>
+              <div class="row">
+                  <div class="form-group col-12">
+                      <input type="file" value="Browse" id="inputCreateImageBrowse" />
+                  </div>
+              </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="createClose">Close</button>
@@ -123,6 +128,17 @@
                     </div>
                   </div>
               </div>
+              <div class="row text-center">
+                  <div class="form-group col-12">
+                      <span id="imageEditID" class="invisible"></span>
+                      <img id="imageEdit" width="200" height="200" />
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="form-group col-12">
+                      <input type="file" value="Browse" id="inputEditImageBrowse" onchange="editImageDirty()"/>
+                  </div>
+              </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="editClose">Close</button>
@@ -133,10 +149,16 @@
     </div>
 
     <script>
+        var editImageIsDirty = false;
+
+        function editImageDirty() {
+            editImageIsDirty = true;
+        }
+
         $(document).ready(function () {
             var table;
             var editData;
-            
+
             // This fuction builds the DataTable. Because locations only store watershedIDs we must make a mapping of the watershed IDs to Names
             function initDataTable() {
 
@@ -192,7 +214,7 @@
                 var WatershedId = $('#selectCreateWatershed').val();
                 var Latitude = $('#inputCreateLatitude').val();
                 var Longitude = $('#inputCreateLongitude').val();
-                console.log('WATERSHEDID: ' + WatershedId);
+
                 return {
                     name: Name,
                     watershedId: WatershedId,
@@ -207,13 +229,15 @@
                 var WatershedId = $('#selectEditWatershed').val();
                 var Latitude = $('#inputEditLatitude').val();
                 var Longitude = $('#inputEditLongitude').val();
+                var ImageId = $('#imageEditID').val();
 
                 return {
                     id: LocationId,
                     name: Name,
                     watershedId: WatershedId,
                     latitude: Latitude,
-                    longitude: Longitude
+                    longitude: Longitude,
+                    imageId: ImageId
                 }
             }
 
@@ -398,6 +422,7 @@
                 $('#inputCreateName').val('');
                 $('#inputCreateLatitude').val('');
                 $('#inputCreateLongitude').val('');
+                $('#inputCreateImageBrowse').val('');
 
                 PopulateCreateWatershedSelect();
             }
@@ -405,9 +430,13 @@
 
             // This function fills out the fields in the 'Edit Modal' before displaying it
             function PopulateEditModal(data) {
+                editImageIsDirty = false;
                 $('#inputEditName').val(data.SensorName);
                 $('#inputEditLatitude').val(data.Latitude);
                 $('#inputEditLongitude').val(data.Longitude);
+                $('#inputEditImageBrowse').val('');
+                $('#imageEdit').attr("src", "/images/location/get.ashx?locationid=" + data.LocationID + "&cache=" + Date.now());
+                $('#imageEditID').val(data.ProfileImageID);
 
                 PopulateEditWatershedSelect(data.WatershedID);
             }
@@ -427,6 +456,7 @@
             $('#DataTable').on('click', '.editButton', function () {
                 //Get Data for the the row
                 editData = table.row($(this).parents('tr')).data();
+                $('#imageEdit').attr("src", "");
 
                 //Put the data in the Edit Modal
                 PopulateEditModal(editData);
@@ -440,14 +470,64 @@
             });
 
             $('#editSubmit').click(function () {
-               
-
                 var requestData = BuildEditLocation(editData.LocationID);
 
                 var isValidRequest = ValidateLocationRequest(requestData);
                 console.log('Is Edit Form Submission Valid?: ' + isValidRequest);
+                if (!isValidRequest) return;
 
-                if (isValidRequest) {
+
+                if (editImageIsDirty) {
+                    var fileUpload = $('#inputEditImageBrowse').get(0);
+                    var files = fileUpload.files;
+
+                    var formData = new FormData();
+
+                    for (var i = 0; i < files.length; i++) {
+                        formData.append(files[i].name, files[i]);
+                    }
+
+                    formData.append('description', requestData.name);
+                    formData.append('file', $('#inputEditImageBrowse')[0].files[0]);
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/images/location/set.ashx",
+                        contentType: false,
+                        processData: false,
+                        data: formData,
+                        success: function (dataResponse) {
+                            console.log("Image created with ID: " + dataResponse);
+
+                            // Add the image ID to the new location data
+                            Object.assign(requestData, { imageId: dataResponse });
+
+                            // Save the location data
+                            $.ajax({
+                                type: 'POST',
+                                contentType: 'application/json; charset=utf-8',
+                                url: '/api.asmx/UpdateLocation',
+                                data: JSON.stringify(requestData),
+                                dataType: 'JSON',
+                                success: function (responseData) {
+                                    console.log('Edit Successful');
+                                    console.log(responseData);
+
+                                    $('#editModal').modal('hide');
+                                    
+                                    table.ajax.reload();
+                                },
+                                error: function (errorData) {
+                                    console.log('ERROR');
+                                    console.log(errorData);
+                                }
+                            });
+                        },
+                        error: function (errorData) {
+                            console.log('Error Saving Image');
+                        }
+                    });
+                } else {
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
@@ -467,6 +547,7 @@
                         }
                     });
                 }
+                
             });
 
             // This function runs when the 'Create Modal' gets submitted
@@ -474,27 +555,58 @@
                 var requestData = BuildCreateLocation();
                 console.log(requestData);
                 var isValidRequest = ValidateLocationRequest(requestData);
-                console.log('Is Create Form Submission Valid?: ' + isValidRequest);
+                console.log('Is Create Form Text Submission Valid?: ' + isValidRequest);
+                if (!isValidRequest) return;
 
+                var fileUpload = $('#inputCreateImageBrowse').get(0);
+                var files = fileUpload.files;
+
+                var formData = new FormData();
+
+                for (var i = 0; i < files.length; i++) {
+                    formData.append(files[i].name, files[i]);
+                }
+
+                formData.append('description', requestData.name);
+                formData.append('file', $('#inputCreateImageBrowse')[0].files[0]);
+
+                // Save the image, get the new image ID THEN save the location w/ the image ID info
                 $.ajax({
-                    type: 'POST',
-                    contentType: 'application/json; charset=utf-8',
-                    url: '/api.asmx/CreateLocation',
-                    data: JSON.stringify(requestData),
-                    dataType: 'JSON',
-                    success: function (responseData) {
-                        console.log('Creation Sucessful');
-                        console.log(requestData);
+                    type: "POST",
+                    url: "/images/location/set.ashx",
+                    contentType: false,
+                    processData: false,
+                    data: formData,
+                    success: function (dataResponse) {
+                        console.log("Image created with ID: " + dataResponse);
 
-                        $('#createModal').modal('hide');
-                        table.ajax.reload();
+                        // Add the image ID to the new location data
+                        Object.assign(requestData, { imageId: dataResponse });
+
+                        // Save the location data
+                        $.ajax({
+                            type: 'POST',
+                            contentType: 'application/json; charset=utf-8',
+                            url: '/api.asmx/CreateLocation',
+                            data: JSON.stringify(requestData),
+                            dataType: 'JSON',
+                            success: function (responseData) {
+                                console.log('Location Creation Successful');
+                                console.log(requestData);
+
+                                $('#createModal').modal('hide');
+                                table.ajax.reload();
+                            },
+                            error: function (errorData) {
+                                console.log('Error Saving Location Data');
+                                console.log(errorData);
+                            }
+                        });
                     },
-                    error: function (errorData) {
-                        console.log('ERROR');
-                        console.log(errorData);
+                    error: function(errorData) {
+                        console.log('Error Saving Image');
                     }
                 });
-
             });
 
         });
