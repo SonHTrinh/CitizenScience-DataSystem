@@ -391,6 +391,7 @@
                                     fill: false,
                                     borderColor: '#F08080',
                                     backgroundColor: '#E9C9D1',
+                                    pointRadius: 0,
                                     borderWidth: 1
                                 }]
                             },
@@ -436,6 +437,7 @@
                                     fill: false,
                                     borderColor: '#186A3B',
                                     backgroundColor: '#D1E9C9',
+                                    pointRadius: 0,
                                     borderWidth: 1
                                 }]
                             },
