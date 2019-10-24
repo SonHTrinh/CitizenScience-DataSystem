@@ -15,7 +15,8 @@
     <AssemblyName>CitizenScience-UIPrototype</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress />
+    <Use64BitIISExpress>
+    </Use64BitIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -1727,7 +1728,9 @@
     <Content Include="style\fontawesome\webfonts\fa-regular-400.svg" />
     <Content Include="style\fontawesome\webfonts\fa-solid-900.svg" />
     <None Include="Web References\LDAP_Search\ldap_search.disco" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="WebService1.asmx" />
   </ItemGroup>
   <ItemGroup>
@@ -1865,8 +1868,21 @@
     <Compile Include="gallery.aspx.designer.cs">
       <DependentUpon>gallery.aspx</DependentUpon>
     </Compile>
+    <Compile Include="getimage.ashx.cs">
+      <DependentUpon>getimage.ashx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="images\album\ImageAlbumAPI.cs">
+      <DependentUpon>set.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="images\get.ashx.cs">
+      <DependentUpon>get.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="images\location\ImageLocationAPI.cs">
+      <DependentUpon>get.ashx</DependentUpon>
+      <DependentUpon>set.ashx</DependentUpon>
     </Compile>
     <Compile Include="map.aspx.cs">
       <DependentUpon>map.aspx</DependentUpon>
@@ -1876,6 +1892,9 @@
       <DependentUpon>map.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="setlocationimage.ashx.cs">
+      <DependentUpon>setlocationimage.ashx</DependentUpon>
+    </Compile>
     <Compile Include="WebService1.asmx.cs">
       <DependentUpon>WebService1.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -1885,6 +1904,11 @@
     <Content Include="CitizenScience.Master" />
     <Content Include="secure\administration\administration.master" />
     <None Include="Web References\ldap_search.wsdl" />
+    <Content Include="getimage.ashx" />
+    <Content Include="images\location\get.ashx" />
+    <Content Include="images\location\set.ashx" />
+    <Content Include="images\album\set.ashx" />
+    <Content Include="images\get.ashx" />
     <None Include="packages.config" />
     <Content Include="style\custom\TEMPLE_BRANDING.md" />
     <Content Include="style\fontawesome\less\brands.less" />
@@ -1941,6 +1965,8 @@
     <Content Include="style\fontawesome\webfonts\fa-solid-900.ttf" />
     <Content Include="style\fontawesome\webfonts\fa-solid-900.woff" />
     <Content Include="style\fontawesome\webfonts\fa-solid-900.woff2" />
+    <Content Include="setlocationimage.ashx" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Web References\Reference.map" />
     <Content Include="Web References\TempleLDAPEntry.datasource" />
     <Content Include="Web References\LDAP_Search\TempleLDAPEntry1.datasource">

@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/CitizenScience.Master" AutoEventWireup="true" CodeBehind="administration.master.cs" Inherits="CitizenScience_UIPrototype.administration.administration" %>
+<%@ Import Namespace="CitizenScience_UIPrototype" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
     <asp:ContentPlaceHolder ID="titleName" runat="server">
 
@@ -20,49 +21,49 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="/secure/administration/watershed.aspx">
+                    <a href="<%= Global.Url_Prefix() %>/secure/administration/watershed.aspx">
                         <i class="fas fa-water"></i>
                         <span class="menuItemName">Manage Watersheds</span> 
                     </a>
                 </li>
                 <li>
-                    <a href="/secure/administration/location.aspx">
+                    <a href="<%= Global.Url_Prefix() %>/secure/administration/location.aspx">
                         <i class="fas fa-map-marked-alt"></i>
                         <span class="menuItemName">Manage Locations</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/secure/administration/upload.aspx">
+                    <a href="<%= Global.Url_Prefix() %>/secure/administration/upload.aspx">
                         <i class="fas fa-upload"></i>
                         <span class="menuItemName">Upload Data</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/secure/administration/download.aspx">
+                    <a href="<%= Global.Url_Prefix() %>/secure/administration/download.aspx">
                         <i class="fas fa-download"></i>
                         <span class="menuItemName">Download Data</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/secure/administration/usermanage.aspx">
+                    <a href="<%= Global.Url_Prefix() %>/secure/administration/usermanage.aspx">
                         <i class="fas fa-users"></i>
                         <span class="menuItemName">Manage Admins</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/secure/administration/gallery.aspx">
+                    <a href="<%= Global.Url_Prefix() %>/secure/administration/gallery.aspx">
                         <i class="fas fa-images"></i>
                         <span class="menuItemName">Manage Gallery</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/secure/administration/about.aspx">
+                    <a href="<%= Global.Url_Prefix() %>/secure/administration/about.aspx">
                         <i class="fas fa-question"></i>
                         <span class="menuItemName">Manage About</span>
                     </a>
                 </li>
                 <li>
-                    <a href="/secure/administration/volunteer.aspx">
+                    <a href="<%= Global.Url_Prefix() %>/secure/administration/volunteer.aspx">
                         <i class="fas fa-clipboard"></i>
                         <span class="menuItemName">Volunteers</span>
                     </a>

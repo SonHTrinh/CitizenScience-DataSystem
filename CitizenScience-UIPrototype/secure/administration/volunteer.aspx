@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/secure/administration/administration.master" AutoEventWireup="true" CodeBehind="volunteer.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.volunteer" %>
+<%@ Import Namespace="CitizenScience_UIPrototype" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
     Volunteers   |   Citizen Science
 </asp:Content>
@@ -12,7 +13,7 @@
                         <th scope="col">Last Name</th>
                         <th scope="col">Email</th>
                         <th scope="col">Message</th>
-                        <th scope="col">Date Submitted</th>
+                        <th scope="col" data-type="date">Date Submitted</th>
                     </tr>
                 </thead>
             </table>
@@ -20,12 +21,19 @@
     </div>
     <script>
         $(document).ready(function () {
+            function convertJsonDateToShortDate(data) {
+                // This function converts a json date to a short date
+                // e.g. /Date(1538377200000)/ to 10/1/2018
+                console.log(data);
+                const dateValue = new Date(parseInt(data.substr(6)));
+                return dateValue.toLocaleDateString();
+            }
 
             // This variable holds the Datatable
             var table = $('#DataTable').DataTable({
                 ajax: {
                     // The location to HTTP GET the data for the table
-                    url: '/api.asmx/Volunteers',
+                    url: '<%= Global.Url_Prefix() %>/api.asmx/Volunteers',
                     dataSrc: ''
                 },
                 columns: [
@@ -34,15 +42,13 @@
                     { data: 'LastName' },
                     { data: 'Email' },
                     { data: 'Message' },
-                    { data: 'DateSubmitted' },
-                    // The 'Action' column of the table
                     {
-                        data: null,
-                        orderable: false,
-                        width: '10%',
-                        render: function(data, type, row, meta) {
-                            return
-                        }
+                        data: 'DateSubmitted',
+                        //type: 'datetime',
+                        //format: 'MM/DD/YYYY',
+                        render: function(data) {
+                            return convertJsonDateToShortDate(data);
+                        } 
                     }
                 ]
             });

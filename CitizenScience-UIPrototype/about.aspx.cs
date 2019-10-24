@@ -36,6 +36,10 @@ namespace CitizenScience_UIPrototype
                 try
                 {
                     ClassFunctions.CreateVolunteer(firstName, lastName, email, message);
+
+                    txtFirstName.Text = ""; txtLastName.Text = ""; txtEmail.Text = ""; txtMessage.Text = "";
+                    lblEmail.Text = email;
+                    divSuccess.Visible = true;
                 }
                 catch (Exception ex)
                 {
@@ -44,10 +48,9 @@ namespace CitizenScience_UIPrototype
             }
             else
             {
+                divSuccess.Visible = false;
                 lblDisplay.Text = "Please fill in all required field!";
             }
-
-            txtFirstName.Text = ""; txtLastName.Text = ""; txtEmail.Text = ""; txtMessage.Text = "";
 
         }
     }
