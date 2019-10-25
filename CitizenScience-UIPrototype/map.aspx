@@ -214,35 +214,22 @@
                             //more pictures link
                             $('.modalLink').html('<a href="<%= Global.Url_Prefix() %>/gallery.aspx" class="btn btn-info btn-block">View Location Album</a>');
 
-
-                            //build temperature date inputs
-                            $.get("<%= Global.Url_Prefix() %>/api.asmx/GetLocationLatestTemperature?locationid=" + location.LocationID, function(response) {
-                                console.log('Success getting latest temperature record:');
-                                console.log(response);
-
-                                var endDate = new Date(response.Timestamp);
-                                var formattedEndDate = getFormattedDate(endDate);
-
-                                var startDate = new Date(endDate);
-                                startDate.setDate(endDate.getDate() - 7);
-                                var formattedStartDate = getFormattedDate(startDate);
-
-                                $('#end_datepicker').val(formattedEndDate);
-                                $('#start_datepicker').val(formattedStartDate);
-
-                                initCGraph(location.LocationID, formattedStartDate, formattedEndDate);
-
-                            }).fail(function(response) {
-                                console.log('Error getting latest temperature record!');
-                            });
+                            //Show graph by default after open it
+                            if ($('#radioC').is(':checked')) {
+                                //showLatestDate(location.LocationID);
+                                showLatestDate(1, "C");
+                            }
+                            else if($('#radioF').is(':checked')){
+                                showLatestDate(1, "F");
+                            }
 
                             //temperature radio buttons click event
                             $('#radioC').click(function () {
                                 var startDate = $('#start_datepicker').val();
                                 var endDate = $('#end_datepicker').val();
                                 if ((startDate == "") || (endDate == "")) {
-                                    //initCGraph(location.LocationID, sd, ed);
-                                    initCGraph(1, "04-24-2019", "04-25-2019");
+                                    //showLatestDate(location.LocationID, "C");
+                                    showLatestDate(1, "C");
                                 }
                                 else {
                                     //initCGraph(location.LocationID, startDate, endDate);
@@ -253,8 +240,8 @@
                                 var startDate = $('#start_datepicker').val();
                                 var endDate = $('#end_datepicker').val();
                                 if ((startDate == "") || (endDate == "")) {
-                                    //initFGraph(location.LocationID, sd, ed);
-                                    initFGraph(1, "04-24-2019", "04-25-2019");
+                                    //showLatestDate(location.LocationID, "F");
+                                    showLatestDate(1, "F");
                                 }
                                 else {
                                     //initFGraph(location.LocationID, startDate, endDate);
@@ -295,10 +282,6 @@
                                 //radio button setting
                                 $('#radioC').prop('checked', true);
                                 $('#radioF').prop('checked', false);
-
-                                //datepicker setting
-                                $('#end_datepicker').val("");
-                                $('#start_datepicker').val("");
                             });
                         }
                     }
@@ -419,7 +402,7 @@
                 }      
             }
 
-            function initCGraph(id, start, end) {
+           function initCGraph(id, start, end) {
                 var data = {
                     locationId: id,
                     start: start,
@@ -440,7 +423,8 @@
                             dateLabelArray.push(temperature.Timestamp);
                             temperatureArray.push(temperature.Celsius);
                         });
-                        //Get the element to hold the chart
+                        dateLabelArray.sort();
+                        //checkRepeatedDate(dateLabelArray);
                         var ctx = document.getElementById("myChart").getContext('2d');
                         //Create the chart and pass in the timestamp array as labels and the temperature array for data
                         var myChart = new Chart(ctx, {
@@ -451,7 +435,7 @@
                                 stepSize: 0,
                                 labels: dateLabelArray,
                                 datasets: [{
-                                    label: 'Sample Data(Celsius)',
+                                    label: 'Temperture Data(Celsius)',
                                     data: temperatureArray,
                                     fill: false,
                                     borderColor: '#F08080',
@@ -488,6 +472,8 @@
                             dateLabelArray.push(temperature.Timestamp);
                             temperatureArray.push(temperature.Fahrenheit);
                         });
+                        dateLabelArray.sort();
+                        //checkRepeatedDate(dateLabelArray);
                         var ctx = document.getElementById("myChart").getContext('2d');
                         var myChart = new Chart(ctx, {
                             type: 'line',
@@ -497,7 +483,7 @@
                                 stepSize: 0,
                                 labels: dateLabelArray,
                                 datasets: [{
-                                    label: 'Sample Data(Fahrenheit)',
+                                    label: 'Temperture Data(Fahrenheit)',
                                     data: temperatureArray,
                                     fill: false,
                                     borderColor: '#186A3B',
@@ -525,6 +511,64 @@
                 var day = date.getDate().toString();
                 day = day.length > 1 ? day : '0' + day;
                 return month + '-' + day + '-' + year;
+            }
+
+            function showLatestDate(id, Format) {
+                if (Format == "C") {
+                    $.get("<%= Global.Url_Prefix() %>/api.asmx/GetLocationLatestTemperature?locationid=" + id, function (response) {
+                        console.log('Success getting latest temperature record:');
+                        console.log(response);
+
+                        var endDate = new Date(response.Timestamp);
+                        var formattedEndDate = getFormattedDate(endDate);
+
+                        var startDate = new Date(endDate);
+                        startDate.setDate(endDate.getDate() - 7);
+                        var formattedStartDate = getFormattedDate(startDate);
+
+                        $('#end_datepicker').val(formattedEndDate);
+                        $('#start_datepicker').val(formattedStartDate);
+
+                        initCGraph(id, formattedStartDate, formattedEndDate);
+
+                    }).fail(function (response) {
+                        console.log('Error getting latest temperature record!');
+                    });
+                }
+                else if (Format == "F") {
+                    $.get("<%= Global.Url_Prefix() %>/api.asmx/GetLocationLatestTemperature?locationid=" + id, function (response) {
+                        console.log('Success getting latest temperature record:');
+                        console.log(response);
+
+                        var endDate = new Date(response.Timestamp);
+                        var formattedEndDate = getFormattedDate(endDate);
+
+                        var startDate = new Date(endDate);
+                        startDate.setDate(endDate.getDate() - 7);
+                        var formattedStartDate = getFormattedDate(startDate);
+
+                        $('#end_datepicker').val(formattedEndDate);
+                        $('#start_datepicker').val(formattedStartDate);
+
+                        initFGraph(id, formattedStartDate, formattedEndDate);
+
+                    }).fail(function (response) {
+                        console.log('Error getting latest temperature record!');
+                    });
+                }
+            }
+
+            function checkRepeatedDate(dateArray) {
+                var date = "0";
+                for (var i = 0; i < dateArray.length; i++) {
+                    var nextDate = dateArray[i].substring(0, 10);
+                    if (date != nextDate) {
+                        date = nextDate;
+                    }
+                    else {
+                        dateArray[i] = dateArray[i].substring(11, dateArray[i].length);
+                    }
+                }
             }
         });
     </script>
