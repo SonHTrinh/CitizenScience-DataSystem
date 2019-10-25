@@ -423,7 +423,6 @@
                             dateLabelArray.push(temperature.Timestamp);
                             temperatureArray.push(temperature.Celsius);
                         });
-                        dateLabelArray.sort();
                         //checkRepeatedDate(dateLabelArray);
                         var ctx = document.getElementById("myChart").getContext('2d');
                         //Create the chart and pass in the timestamp array as labels and the temperature array for data
@@ -472,7 +471,6 @@
                             dateLabelArray.push(temperature.Timestamp);
                             temperatureArray.push(temperature.Fahrenheit);
                         });
-                        dateLabelArray.sort();
                         //checkRepeatedDate(dateLabelArray);
                         var ctx = document.getElementById("myChart").getContext('2d');
                         var myChart = new Chart(ctx, {
