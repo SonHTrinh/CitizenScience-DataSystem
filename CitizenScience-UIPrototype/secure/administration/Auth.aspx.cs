@@ -31,7 +31,7 @@ namespace CitizenScience_UIPrototype.secure.administration
             if (HttpContext.Current.Request.IsLocal.Equals(true))
             {
                 /*The SSO Sign-on page will not appear while running locally. This is only used for development.*/
-                employeeNumber = "915261297";
+                employeeNumber = "5";
             }
             else
             {
