@@ -724,6 +724,15 @@ namespace CitizenScienceClasses
 
 
 
+        /////////////////////////////////   GALLERY FUNCTIONS
+        public static DataSet GetAllAlbum()
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAllAlbum";
+            return conn.GetDataSetUsingCmdObj(comm);
+        }
     }
 }
 

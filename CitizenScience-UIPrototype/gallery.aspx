@@ -256,21 +256,23 @@
             x[slideIndex[no] - 1].style.display = "block";
         }
 
-        function initAlbum() {
-            //title
-            var title = 
+        $(function () {
+            function initAlbum() {
+                //title
+                var title =
 
-            //desc
-            var desc = 
+                //desc
+                var desc =
 
-            //image
-            var imageSrc =
+                //image
+                var imageSrc =
 
-        }
+            }
 
-        function initModal() {
+            function initModal() {
 
-        }
+            }
+        });
 
     </script>
 

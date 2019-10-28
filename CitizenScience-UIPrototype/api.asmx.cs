@@ -499,5 +499,36 @@ namespace CitizenScience_UIPrototype
             else
                 BuildResponse(500, result);
         }
+
+        //////////////////////////// CRUD Gallery \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void AllAlbum()
+        {
+            DataSet albumDataSet = ClassFunctions.GetAllAlbum();
+            List<Location> albumList = new List<Location>();
+
+            for (int i = 0; i < albumDataSet.Tables[0].Rows.Count; i++)
+            {
+                DataRow dataRow = albumDataSet.Tables[0].Rows[i];
+
+                Album album = new Album
+                {
+                    AlbumID = Convert.ToInt32(dataRow["AlbumID"]),
+                    Name = Convert.ToString(dataRow["Name"]),
+                    Description = Convert.ToString(dataRow["Description"]),
+                    LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
+                };
+
+                albumList.Add(album);
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Clear();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(albumList));
+        }
     }
 }

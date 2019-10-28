@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="About.cs" />
     <Compile Include="Admin.cs" />
+    <Compile Include="Album.cs" />
     <Compile Include="BulkUpload.cs" />
     <Compile Include="ClassFunctions.cs" />
     <Compile Include="Connection.cs" />
