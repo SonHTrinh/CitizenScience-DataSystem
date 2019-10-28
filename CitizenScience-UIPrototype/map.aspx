@@ -170,7 +170,7 @@
                             var description = "Description about the watershed: " + location.SensorName + " - " + locationWatershedMapping.get(location.WatershedID)+ " (" + location.Latitude + ", " + location.Longitude + ")";
                             $(".modalDesc").text(description);
 
-                            //image
+                            //image                            
                             var imageSrc = "/images/location/get.ashx?locationid=" + location.LocationID;
                             var imageAlt = "The Picture of the " + locationWatershedMapping.get(location.WatershedID);
                             $(".modalImage").attr("src", imageSrc);
@@ -183,9 +183,13 @@
                             if ($('#radioC').is(':checked')) {
                                 var startDate = $('#start_datepicker').val();
                                 var endDate = $('#end_datepicker').val();
+
+                                var today = new Date();
+                                today = today.getDate();
+                                alert(today);
                                 if ((startDate == "") || (endDate == "")) {
-                                    //initCGraph(location.LocationID, sd, ed);
-                                    initCGraph(1, "04-24-2019", "04-25-2019");
+                                    initCGraph(location.LocationID, sd, ed);
+                                    //initCGraph(1, "04-24-2019", "04-25-2019");
                                 }
                                 else {
                                     //initCGraph(location.LocationID, startDate, endDate);
@@ -196,8 +200,8 @@
                                 var startDate = $('#start_datepicker').val();
                                 var endDate = $('#end_datepicker').val();
                                 if ((startDate == "") || (endDate == "")) {
-                                    //initFGraph(location.LocationID, sd, ed);
-                                    initFGraph(1, "04-24-2019", "04-25-2019");
+                                    initFGraph(location.LocationID, sd, ed);
+                                    //initFGraph(1, "04-24-2019", "04-25-2019");
                                 }
                                 else {
                                     //initFGraph(location.LocationID, startDate, endDate);
@@ -255,8 +259,9 @@
                             //}
 
                             //Download button
-                            $('#downloadCsv').click(function () {
-                                window.location.href = '<% Global.URLPREFIX.ToString(); %>/api.asmx/AllLocationTemperaturesCsv';                                
+                            $('#downloadCsv').click(function () {                                
+                                window.location.href = '<% Global.URLPREFIX.ToString(); %>/api.asmx/AllLocationTemperaturesCsv';      
+                                /*
                                 var endDate = $('#end_datepicker').val();
                                 var startDate = $('#start_datepicker').val();
                                 //  If Start and End dates not specified...
@@ -271,6 +276,7 @@
                                 //  If both Start and End specified...
                                 else if (startDate != "" && endDate != "")
                                     downloadTempDataStartEnd(location.LocationID, startDate, endDate);  
+                                */
                             });
 
                             //Close Modal
@@ -477,21 +483,26 @@
                 return month + '-' + day + '-' + year;
             }
 
+            //  TEMPERATURE DATA DOWNLOAD FUNCTIONS
             function downloadTempDataNoStartNoEnd(locationID) {
                 //  Download all Temperature data for selected Location
-                window.location.href = '/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
+                alert(locationID);
+                window.location.href = '<% Global.URLPREFIX.ToString(); %>/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
             }
             function downloadTempDataStartNoEnd(locationID, startDate) {
                 //  Download all Temperature data for selected Location from startDate onward
                 alert("NO END");
+                window.location.href = '<% Global.URLPREFIX.ToString(); %>/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
             }
             function downloadTempDataNoStartEnd(locationID, endDate) {
                 //  Download all Temperature data for selected Location beginning of data recording to endDate
-                alert("NO START");
+                alert("NO START");                
+                window.location.href = '<% Global.URLPREFIX.ToString(); %>/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
             }
             function downloadTempDataStartEnd(locationID, startDate, endDate) {
                 //  Download all Temperature data for selected Location from startDate to endDate
                 alert("START, END");
+                window.location.href = '<% Global.URLPREFIX.ToString(); %>/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
             }
         });
     </script>
