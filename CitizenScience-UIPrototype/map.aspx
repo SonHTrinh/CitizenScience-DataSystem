@@ -39,20 +39,55 @@
                             <div class="modal-body">
                                 <div class="container-fluid">
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <p><img src="img" alt="watershed-location-profile" class="modalImage" style="width: 400px; height: 333px" /></p>
-                                            <p class="modalLink"></p>
-                                            <p class="modalDesc"></p>
+                                        <div class="col-4">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <img src="img" alt="watershed-location-profile" class="modalImage" style="max-width: 100%; max-height: 100%;"  />
+                                                </div>
+                                            </div>
+                                            <div class="row mt-4">
+                                                <div class="col-12">
+                                                    <p class="modalLink"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-4">
+                                                <div class="col-12">
+                                                    <p class="modalDesc"></p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-md-1"></div>
-                                        <div class="col-md-7 ml-auto">
-                                            <canvas id="myChart" style="width: 570px; height: 340px;"></canvas>
-                                            <br /><input type="radio" id="radioC" name="temperature" checked="checked"/> Celsius
-                                            <br /><input type="radio" id="radioF" name="temperature" /> Fahrenheit
-                                            <br /><br />
-                                            From: <input type="text" id="start_datepicker" required>
-                                            To: <input type="text" id="end_datepicker" required>
-                                            <button type="button" id="submit" class="btn btn-danger btn-sm">Submit</button>
+                                        <div class="col-8">
+                                            <div class="row">
+                                                <canvas id="myChart" style="width: 570px; height: 340px;" />
+                                            </div>
+                                            
+                                            <div class="row mt-2">
+                                                <div class="col-12">
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" value="" id="radioC" class="custom-control-input" name="temperature" checked="checked"/>
+                                                        <label class="custom-control-label" for="radioC">Celsius</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" value="" id="radioF" class="custom-control-input" name="temperature"/>
+                                                        <label class="custom-control-label" for="radioF">Fahrenheit</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row mt-2">
+                                                <div class="col-4">
+                                                    <input type="text" class="form-control" id="start_datepicker" required>
+                                                </div>
+                                                <div class="col-1 text-center mx-0 px-0">
+                                                    <p>-</p>
+                                                </div>
+                                                <div class="col-4">
+                                                    <input type="text" class="form-control" id="end_datepicker" required>
+                                                </div>
+                                                <div class="col-3 text-center">
+                                                    <button type="button" id="submit" class="btn btn-primary">Search</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -79,19 +114,17 @@
 
     <script>
         $(function () {
+            var map = initMap();
+
+            //close last window
+            var prevInfo = false;
+
             $("#start_datepicker").datepicker({
                 dateFormat: 'mm-dd-yy'
             });
             $("#end_datepicker").datepicker({
                 dateFormat: 'mm-dd-yy'
             });
-        });
-
-        $(function () {
-            var map = initMap();
-
-            //close last window
-            var prevInfo = false;
 
             //set date
             //var e = new Date();
@@ -156,6 +189,7 @@
                         });
 
                         google.maps.event.addListener(marker, 'click', function () {
+
                             initModal();
                             $('#locationModal').modal('show');
                         });
@@ -177,32 +211,15 @@
                             $(".modalImage").attr("alt", imageAlt);
 
                             //more pictures link
-                            $('.modalLink').html('<a href="gallery.aspx">more picture >></a>');
+                            $('.modalLink').html('<a href="<%= Global.Url_Prefix() %>/gallery.aspx" class="btn btn-info btn-block">View Location Album</a>');
 
-                            //temperture radio buttons default settings
+                            //Show graph by default after open it
                             if ($('#radioC').is(':checked')) {
-                                var startDate = $('#start_datepicker').val();
-                                var endDate = $('#end_datepicker').val();
-                                if ((startDate == "") || (endDate == "")) {
-                                    //initCGraph(location.LocationID, sd, ed);
-                                    initCGraph(1, "04-24-2019", "04-25-2019");
-                                }
-                                else {
-                                    //initCGraph(location.LocationID, startDate, endDate);
-                                    initCGraph(1, startDate, endDate);
-                                }
+                                //showLatestDate(location.LocationID);
+                                showLatestDate(1, "C");
                             }
                             else if($('#radioF').is(':checked')){
-                                var startDate = $('#start_datepicker').val();
-                                var endDate = $('#end_datepicker').val();
-                                if ((startDate == "") || (endDate == "")) {
-                                    //initFGraph(location.LocationID, sd, ed);
-                                    initFGraph(1, "04-24-2019", "04-25-2019");
-                                }
-                                else {
-                                    //initFGraph(location.LocationID, startDate, endDate);
-                                    initFGraph(1, startDate, endDate);
-                                }
+                                showLatestDate(1, "F");
                             }
 
                             //temperature radio buttons click event
@@ -210,8 +227,8 @@
                                 var startDate = $('#start_datepicker').val();
                                 var endDate = $('#end_datepicker').val();
                                 if ((startDate == "") || (endDate == "")) {
-                                    //initCGraph(location.LocationID, sd, ed);
-                                    initCGraph(1, "04-24-2019", "04-25-2019");
+                                    //showLatestDate(location.LocationID, "C");
+                                    showLatestDate(1, "C");
                                 }
                                 else {
                                     //initCGraph(location.LocationID, startDate, endDate);
@@ -222,8 +239,8 @@
                                 var startDate = $('#start_datepicker').val();
                                 var endDate = $('#end_datepicker').val();
                                 if ((startDate == "") || (endDate == "")) {
-                                    //initFGraph(location.LocationID, sd, ed);
-                                    initFGraph(1, "04-24-2019", "04-25-2019");
+                                    //showLatestDate(location.LocationID, "F");
+                                    showLatestDate(1, "F");
                                 }
                                 else {
                                     //initFGraph(location.LocationID, startDate, endDate);
@@ -264,10 +281,6 @@
                                 //radio button setting
                                 $('#radioC').prop('checked', true);
                                 $('#radioF').prop('checked', false);
-
-                                //datepicker setting
-                                $('#end_datepicker').val("");
-                                $('#start_datepicker').val("");
                             });
                         }
                     }
@@ -388,7 +401,7 @@
                 }      
             }
 
-            function initCGraph(id, start, end) {
+           function initCGraph(id, start, end) {
                 var data = {
                     locationId: id,
                     start: start,
@@ -409,7 +422,7 @@
                             dateLabelArray.push(temperature.Timestamp);
                             temperatureArray.push(temperature.Celsius);
                         });
-                        //Get the element to hold the chart
+                        //checkRepeatedDate(dateLabelArray);
                         var ctx = document.getElementById("myChart").getContext('2d');
                         //Create the chart and pass in the timestamp array as labels and the temperature array for data
                         var myChart = new Chart(ctx, {
@@ -420,7 +433,7 @@
                                 stepSize: 0,
                                 labels: dateLabelArray,
                                 datasets: [{
-                                    label: 'Sample Data(Celsius)',
+                                    label: 'Temperture Data(Celsius)',
                                     data: temperatureArray,
                                     fill: false,
                                     borderColor: '#F08080',
@@ -457,6 +470,7 @@
                             dateLabelArray.push(temperature.Timestamp);
                             temperatureArray.push(temperature.Fahrenheit);
                         });
+                        //checkRepeatedDate(dateLabelArray);
                         var ctx = document.getElementById("myChart").getContext('2d');
                         var myChart = new Chart(ctx, {
                             type: 'line',
@@ -466,7 +480,7 @@
                                 stepSize: 0,
                                 labels: dateLabelArray,
                                 datasets: [{
-                                    label: 'Sample Data(Fahrenheit)',
+                                    label: 'Temperture Data(Fahrenheit)',
                                     data: temperatureArray,
                                     fill: false,
                                     borderColor: '#186A3B',
@@ -495,6 +509,64 @@
                 day = day.length > 1 ? day : '0' + day;
                 return month + '-' + day + '-' + year;
             }
+
+            function showLatestDate(id, Format) {
+                if (Format == "C") {
+                    $.get("<%= Global.Url_Prefix() %>/api.asmx/GetLocationLatestTemperature?locationid=" + id, function (response) {
+                        console.log('Success getting latest temperature record:');
+                        console.log(response);
+
+                        var endDate = new Date(response.Timestamp);
+                        var formattedEndDate = getFormattedDate(endDate);
+
+                        var startDate = new Date(endDate);
+                        startDate.setDate(endDate.getDate() - 7);
+                        var formattedStartDate = getFormattedDate(startDate);
+
+                        $('#end_datepicker').val(formattedEndDate);
+                        $('#start_datepicker').val(formattedStartDate);
+
+                        initCGraph(id, formattedStartDate, formattedEndDate);
+
+                    }).fail(function (response) {
+                        console.log('Error getting latest temperature record!');
+                    });
+                }
+                else if (Format == "F") {
+                    $.get("<%= Global.Url_Prefix() %>/api.asmx/GetLocationLatestTemperature?locationid=" + id, function (response) {
+                        console.log('Success getting latest temperature record:');
+                        console.log(response);
+
+                        var endDate = new Date(response.Timestamp);
+                        var formattedEndDate = getFormattedDate(endDate);
+
+                        var startDate = new Date(endDate);
+                        startDate.setDate(endDate.getDate() - 7);
+                        var formattedStartDate = getFormattedDate(startDate);
+
+                        $('#end_datepicker').val(formattedEndDate);
+                        $('#start_datepicker').val(formattedStartDate);
+
+                        initFGraph(id, formattedStartDate, formattedEndDate);
+
+                    }).fail(function (response) {
+                        console.log('Error getting latest temperature record!');
+                    });
+                }
+            }
+
+            function checkRepeatedDate(dateArray) {
+                var date = "0";
+                for (var i = 0; i < dateArray.length; i++) {
+                    var nextDate = dateArray[i].substring(0, 10);
+                    if (date != nextDate) {
+                        date = nextDate;
+                    }
+                    else {
+                        dateArray[i] = dateArray[i].substring(11, dateArray[i].length);
+                    }
+                }
+            }
         });
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp7tBTG5O-LXpXR7BL01PlEB63wBC0PSA&callback=initMap"
@@ -503,7 +575,6 @@
     
     <%--datepicker--%>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 </asp:Content>
