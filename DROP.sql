@@ -57,6 +57,9 @@ GO
 DROP PROCEDURE IF EXISTS [GetAllTemperaturesByLocationId]
 GO
 
+DROP PROCEDURE IF EXISTS [GetLatestLocationTemperature]
+GO
+
 DROP PROCEDURE IF EXISTS [GetAllTemperaturesByMultipleLocationIds]
 GO
 
