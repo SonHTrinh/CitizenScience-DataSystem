@@ -1,0 +1,26 @@
+﻿/* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+#map {
+    height: 550px;
+    margin-left: 20%;
+    margin-right: 20%;
+    box-sizing: content-box;
+    border: solid #454545 1px;
+}
+
+/* Optional: Makes the sample page fill the window. */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#watershed {
+    padding-left: 20%;
+}
+
+.dropdown-menu:current {
+    background-color: #737373;
+    background-image: none;
+}
+
