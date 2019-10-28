@@ -226,6 +226,7 @@ AS
 	SELECT * FROM Temperature JOIN Location ON Temperature.LocationID = Location.LocationID
 	WHERE Temperature.Timestamp >= @startDate
 	AND Temperature.Timestamp <= @endDate
+	AND Temperature.LocationID = @locationID
 
 GO
 
@@ -235,6 +236,7 @@ CREATE PROCEDURE [dbo].[GetTemperaturesByLocationIdNoStartEnd]
 AS
 	SELECT * FROM Temperature JOIN Location ON Temperature.LocationID = Location.LocationID
 	WHERE Temperature.Timestamp <= @endDate
+	AND Temperature.LocationID = @locationID
 
 GO
 
@@ -244,6 +246,7 @@ CREATE PROCEDURE [dbo].[GetTemperaturesByLocationIdStartNoEnd]
 AS
 	SELECT * FROM Temperature JOIN Location ON Temperature.LocationID = Location.LocationID
 	WHERE Temperature.Timestamp >= @startDate
+	AND Temperature.LocationID = @locationID
 
 GO
 -------------------------------------------------------------
