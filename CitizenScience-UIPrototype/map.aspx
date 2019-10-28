@@ -532,23 +532,24 @@
             function downloadTempDataNoStartNoEnd(locationID) {
                 //  Download all Temperature data for selected Location
                 alert(locationID);
-                window.location.href = '<% Global.URLPREFIX.ToString(); %>/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
+                window.location.href = '<%= Global.Url_Prefix() %>/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
             }
             function downloadTempDataStartNoEnd(locationID, startDate) {
                 //  Download all Temperature data for selected Location from startDate onward
                 alert("NO END");
-                window.location.href = '<% Global.URLPREFIX.ToString(); %>/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
+                window.location.href = '<%= Global.Url_Prefix() %>/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
             }
             function downloadTempDataNoStartEnd(locationID, endDate) {
                 //  Download all Temperature data for selected Location beginning of data recording to endDate
                 alert("NO START");                
-                window.location.href = '<% Global.URLPREFIX.ToString(); %>/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
+                window.location.href = '<%= Global.Url_Prefix() %>/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
             }
             function downloadTempDataStartEnd(locationID, startDate, endDate) {
                 //  Download all Temperature data for selected Location from startDate to endDate
                 alert("START, END");
-                window.location.href = '<% Global.URLPREFIX.ToString(); %>/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
-
+                window.location.href = '<%= Global.Url_Prefix() %>/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
+            }
+                
             function showLatestDate(id, Format) {
                 if (Format == "C") {
                     $.get("<%= Global.Url_Prefix() %>/api.asmx/GetLocationLatestTemperature?locationid=" + id, function (response) {
