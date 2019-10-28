@@ -42,9 +42,8 @@
                                         <div class="col-4">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <img src="img" alt="Here should be a picture of the watershed" class="modalImage" style="max-width: 100%; max-height: 100%;"  />
+                                                    <img src="img" alt="watershed-location-profile" class="modalImage" style="max-width: 100%; max-height: 100%;"  />
                                                 </div>
-                                                
                                             </div>
                                             <div class="row mt-4">
                                                 <div class="col-12">
@@ -290,8 +289,8 @@
 
             function initMap() {
                 theMap = new google.maps.Map(document.getElementById('map'), {
-                    center: new google.maps.LatLng(40.0319, -75.1134),
-                    zoom: 10
+                    center: new google.maps.LatLng(40.0219, -75.1134),
+                    zoom: 8
                 });
 
                 $.ajax({

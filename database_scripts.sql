@@ -447,6 +447,11 @@ AS
 
 GO
 
+CREATE PROCEDURE [dbo].[GetAllAlbum]
+AS
+	SELECT * FROM [Album]
+
+GO
 
 -- TODO: Find better way to insert initial images
 -- TEST IMAGE GENERATOR 
