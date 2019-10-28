@@ -22,15 +22,12 @@
                     <div class="modal-body">
                         <div class="slideshow-container">
                             <div class="mySlides1">
-                                <img src="img" style="width: 100%; display: block;" />
+                                <img src="/img/Watershed/Watershed02.jpg" style="width: 100%; display: block;" />
                                 <p></p>
                             </div>
                             <a class="prev" onclick="plusSlides(-1, 0)">&#10094;</a>
                             <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </div>
@@ -183,7 +180,7 @@
         </div>--%>
 
         <div class="contrainer">
-            <div id="iii"></div>
+            <div id="album-placeholder" class="container"></div>
             <asp:DataList ID="rptAlbum" runat="server" RepeatLayout="Table" RepeatColumns="3">
                 <ItemTemplate>
                     <table border="0">
@@ -259,7 +256,7 @@
         $(function buildAlbum(album) {
             $.ajax({
                 url: "<%= Global.Url_Prefix() %>/api.asmx/AllAlbum",
-                success: function (data) {
+                /*success: function (data) {
                     console.log(data);
                     var placehold = $('#iii');
                     var albumTitle = $(".album-name");
@@ -272,6 +269,58 @@
                         placehold.append(newElement);
                     }
 
+                }*/
+                success: function(responseData) {
+                    var numOfAlbums = responseData.length;
+                    var numOfColumnsPerRow = 3;
+                    var numOfRows = Math.ceil(numOfAlbums / numOfColumnsPerRow);
+                    var albumIteration = 0;
+
+                    for (var i = 0; i <= numOfRows; i++) {
+
+                        var row = $(document.createElement('div')).addClass('row').addClass('mb-2');
+
+                        for (var j = 0; j < numOfColumnsPerRow && albumIteration < numOfAlbums; j++) {
+
+                            var column = $(document.createElement('div')).addClass('col-4');
+
+                            var nestedRow1 = $(document.createElement('div')).addClass('row').addClass('justify-content-center');
+                            var imgURL = "/img/Watershed/watershed01.jpg";
+                            var image = $(document.createElement('img')).attr('src', imgURL);
+                            nestedRow1.append(image);
+
+                            var nestedRow2 = $(document.createElement('div')).addClass('row').addClass('justify-content-center');
+                            var titleText = responseData[albumIteration].Name;
+                            var titleElement = $(document.createElement('p')).addClass('font-weight-bold');
+                            titleElement.text(titleText);
+                            nestedRow2.append(titleElement);
+
+                            var nestedRow3 = $(document.createElement('div')).addClass('row').addClass('justify-content-center');
+                            var descriptionText = responseData[albumIteration].Description;
+                            var descriptionElement = $(document.createElement('p'));
+                            descriptionElement.text(descriptionText);
+                            nestedRow3.append(descriptionElement);
+
+                            var nestedRow4 = $(document.createElement('div')).addClass('row').addClass('justify-content-left');
+                            var view = $(document.createElement('a'));
+                            view.addClass('btn btn-outline-dark');
+                            view.text('View');
+                            view.attr('href', '#');
+                            view.attr('data-toggle', 'modal');
+                            view.attr('data-target', '#exampleModalCenter');
+                            nestedRow4.append(view);
+
+                            column.append(nestedRow1);
+                            column.append(nestedRow2);
+                            column.append(nestedRow3);
+                            column.append(nestedRow4);
+
+                            row.append(column);
+                            albumIteration++;
+                        }
+                        
+                        $('#album-placeholder').append(row);
+                    }
                 }
             });
 
