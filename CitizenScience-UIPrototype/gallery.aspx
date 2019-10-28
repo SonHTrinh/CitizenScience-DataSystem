@@ -256,7 +256,15 @@
             x[slideIndex[no] - 1].style.display = "block";
         }
 
-        $(function () {
+        $(function buildAlbum(album) {
+            $.ajax({
+                url: "<%= Global.Url_Prefix() %>/api.asmx/AllAlbum",
+                success: function (responseData) {
+                    var albumImage = new Album();
+
+                    responseData.forEach(albumImage.set(album.AlbumID, album.Name, album.Description))
+                }
+            })
             function initAlbum() {
                 //title
                 var title =
