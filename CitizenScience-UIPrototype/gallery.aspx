@@ -183,35 +183,8 @@
             </div>
         </div>--%>
 
-        <div class="contrainer">
-            <asp:DataList ID="rptAlbum" runat="server" RepeatLayout="Table" RepeatColumns="3">
-                <ItemTemplate>
-                    <table border="0">
-                        <tr>
-                            <td>
-                                <!--Watershed location name-->
-                                <p class="album-name"></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <!--Location profile picture-->
-                                <img src="img" alt="" class="album-image" style="width: 400px; height: 333px" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p class="album-description"></p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <a href="#" target="#exampleModalCenter" class="btn btn-outline-dark">View</a>
-                            </td>
-                        </tr>
-                    </table>
-                </ItemTemplate>
-            </asp:DataList>
+        <div id="album-placeholder" class="container">
+
         </div>
 
     </main>
@@ -257,23 +230,61 @@
         }
 
         $(function buildAlbum(album) {
+
             $.ajax({
                 url: "<%= Global.Url_Prefix() %>/api.asmx/AllAlbum",
-                success: function (responseData) {
-                    var albumImage = new Album();
+                success: function(responseData) {
 
-                    responseData.forEach(albumImage.set(album.AlbumID, album.Name, album.Description))
+                    var numOfAlbums = responseData.length;
+                    var numOfColumnsPerRow = 4;
+                    var numOfRows = Math.ceil(numOfAlbums / numOfColumnsPerRow);
+                    var albumIteration = 0;
+
+                    for (var i = 0; i <= numOfRows; i++) {
+                        var row = $(document.createElement('div')).addClass('row').addClass('mb-2');
+
+                        for (var j = 0; j < numOfColumnsPerRow && albumIteration < numOfAlbums; j++) {
+                            var column = $(document.createElement('div')).addClass('col-3');
+
+                            var nestedRow1 = $(document.createElement('div')).addClass('row').addClass('justify-content-center');
+                            var imgURL = "google.com/img.jpg";
+                            var image = $(document.createElement('img')).attr('src', imgURL);
+                            nestedRow1.append(image);
+
+                            var nestedRow2 = $(document.createElement('div')).addClass('row').addClass('justify-content-center');
+                            var titleText = responseData[albumIteration].Name;
+                            var titleElement = $(document.createElement('p')).addClass('font-weight-bold');
+                            titleElement.text(titleText);
+                            nestedRow2.append(titleElement);
+
+                            var nestedRow3 = $(document.createElement('div')).addClass('row').addClass('justify-content-center');
+                            var descriptionText = responseData[albumIteration].Description;
+                            var descriptionElement = $(document.createElement('p'));
+                            descriptionElement.text(descriptionText);
+                            nestedRow3.append(descriptionElement);
+
+                            column.append(nestedRow1);
+                            column.append(nestedRow2);
+                            column.append(nestedRow3);
+
+                            row.append(column);
+                            albumIteration++;
+                        }
+                        
+                        $('#album-placeholder').append(row);
+                    }
                 }
-            })
-            function initAlbum() {
+            });
+
+            function initAlbum(album) {
                 //title
-                var title =
+                //var title =
 
                 //desc
-                var desc =
+                //var desc =
 
                 //image
-                var imageSrc =
+                //var imageSrc =
 
             }
 
