@@ -5,15 +5,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
     <div class="container-fluid">
-        <div class="row">
-             <section class="jumbotron text-center w-100" >
-                <div class="container">
-                    <h1 class="jumbotron-heading">Welcome to Citizen Science</h1>            
-                </div>
-            </section>  
+        <div class="row my-3">
+            <div class="col-12 text-center">
+                <h1>Welcome to Citizen Science</h1>
+            </div>
         </div>
         <div class="row my-4">
-            <div class="col-3 offset-3">
+            <div class="col-6">
                 <div class="dropdown float-right">
                   <button class="btn btn-dark dropdown-toggle px-5 py-2" type="button" id="ddBtnWatershed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Watersheds
@@ -21,7 +19,7 @@
                   <div class="dropdown-menu" id="ddMenuWatershed" aria-labelledby="dropdownMenuButton"></div>
                 </div>
             </div>
-            <div class="col-3">
+            <div class="col-6">
                 <div class="dropdown float-left invisible" id="locationdiv">
                   <button class="btn btn-dark dropdown-toggle px-5 py-2" type="button" id="ddBtnLocation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                   <div class="dropdown-menu" id="ddMenuLocation" aria-labelledby="dropdownMenuButton"></div>
@@ -41,20 +39,56 @@
                             <div class="modal-body">
                                 <div class="container-fluid">
                                     <div class="row">
-                                        <div class="col-md-4">
-                                            <p><img src="img" alt="Here should be a picture of the watershed" class="modalImage" style="width: 400px; height: 333px" /></p>
-                                            <p class="modalLink"></p>
-                                            <p class="modalDesc"></p>
+                                        <div class="col-4">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <img src="img" alt="Here should be a picture of the watershed" class="modalImage" style="max-width: 100%; max-height: 100%;"  />
+                                                </div>
+                                                
+                                            </div>
+                                            <div class="row mt-4">
+                                                <div class="col-12">
+                                                    <p class="modalLink"></p>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-4">
+                                                <div class="col-12">
+                                                    <p class="modalDesc"></p>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="col-md-1"></div>
-                                        <div class="col-md-7 ml-auto">
-                                            <canvas id="myChart" style="width: 570px; height: 340px;"></canvas>
-                                            <br /><input type="radio" id="radioC" name="temperature" checked="checked"/> Celsius
-                                            <br /><input type="radio" id="radioF" name="temperature" /> Fahrenheit
-                                            <br /><br />
-                                            From: <input type="text" id="start_datepicker" required>
-                                            To: <input type="text" id="end_datepicker" required>
-                                            <button type="button" id="submit" class="btn btn-danger btn-sm">Submit</button>
+                                        <div class="col-8">
+                                            <div class="row">
+                                                <canvas id="myChart" style="width: 570px; height: 340px;" />
+                                            </div>
+                                            
+                                            <div class="row mt-2">
+                                                <div class="col-12">
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" value="" id="radioC" class="custom-control-input" name="temperature" checked="checked"/>
+                                                        <label class="custom-control-label" for="radioC">Celsius</label>
+                                                    </div>
+                                                    <div class="custom-control custom-radio">
+                                                        <input type="radio" value="" id="radioF" class="custom-control-input" name="temperature"/>
+                                                        <label class="custom-control-label" for="radioF">Fahrenheit</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="row mt-2">
+                                                <div class="col-4">
+                                                    <input type="text" class="form-control" id="start_datepicker" required>
+                                                </div>
+                                                <div class="col-1 text-center mx-0 px-0">
+                                                    <p>-</p>
+                                                </div>
+                                                <div class="col-4">
+                                                    <input type="text" class="form-control" id="end_datepicker" required>
+                                                </div>
+                                                <div class="col-3 text-center">
+                                                    <button type="button" id="submit" class="btn btn-primary">Search</button>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -74,24 +108,24 @@
                 
         </div>
 
+
     </div>
-    <div id="map" class="shadow-lg p-3 mb-5 bg-white rounded"></div>
+    <div id="map" class="shadow-lg p-3 mb-5 bg-white rounded" ></div>
+    
 
     <script>
         $(function () {
+            var map = initMap();
+
+            //close last window
+            var prevInfo = false;
+
             $("#start_datepicker").datepicker({
                 dateFormat: 'mm-dd-yy'
             });
             $("#end_datepicker").datepicker({
                 dateFormat: 'mm-dd-yy'
             });
-        });
-
-        $(function () {
-            var map = initMap();
-
-            //close last window
-            var prevInfo = false;
 
             //set date
             //var e = new Date();
@@ -104,7 +138,7 @@
 
                 // TODO: find a better way to do this than call and map all locations to thier watersheds
                 $.ajax({
-                    url: "<% Global.URLPREFIX.ToString(); %>/api.asmx/Watersheds",
+                    url: "<%= Global.Url_Prefix() %>/api.asmx/Watersheds",
                     success: function (responseData) {
                         var locationWatershedMapping = new Map();
 
@@ -116,7 +150,7 @@
 
                         var locationInfowindow = new google.maps.InfoWindow({
                             content: "<h6><b>" + location.SensorName + "</b></h6>"
-                                + "<img src='/images/location/get.ashx?locationid=" + location.LocationID +"' width='300' height='200' />" + "<br /><br />"
+                                + "<img src='<%= Global.Url_Prefix() %>/images/location/get.ashx?locationid=" + location.LocationID +"' width='300' height='200' />" + "<br /><br />"
                                 + "<h6><b>Watershed:</b> " + locationWatershedMapping.get(location.WatershedID) + "</h6>"
                                 + "<br/>"
                                 + "<b>Latitude: </b>" + location.Latitude
@@ -156,6 +190,7 @@
                         });
 
                         google.maps.event.addListener(marker, 'click', function () {
+
                             initModal();
                             $('#locationModal').modal('show');
                         });
@@ -170,43 +205,22 @@
                             var description = "Description about the watershed: " + location.SensorName + " - " + locationWatershedMapping.get(location.WatershedID)+ " (" + location.Latitude + ", " + location.Longitude + ")";
                             $(".modalDesc").text(description);
 
-                            //image                            
-                            var imageSrc = "/images/location/get.ashx?locationid=" + location.LocationID;
+                            //image
+                            var imageSrc = "<%= Global.Url_Prefix() %>/images/location/get.ashx?locationid=" + location.LocationID;
                             var imageAlt = "The Picture of the " + locationWatershedMapping.get(location.WatershedID);
                             $(".modalImage").attr("src", imageSrc);
                             $(".modalImage").attr("alt", imageAlt);
 
                             //more pictures link
-                            $('.modalLink').html('<a href="gallery.aspx">more picture >></a>');
+                            $('.modalLink').html('<a href="<%= Global.Url_Prefix() %>/gallery.aspx" class="btn btn-info btn-block">View Location Album</a>');
 
-                            //temperture radio buttons default settings
+                            //Show graph by default after open it
                             if ($('#radioC').is(':checked')) {
-                                var startDate = $('#start_datepicker').val();
-                                var endDate = $('#end_datepicker').val();
-
-                                var today = new Date();
-                                today = today.getDate();
-                                alert(today);
-                                if ((startDate == "") || (endDate == "")) {
-                                    initCGraph(location.LocationID, sd, ed);
-                                    //initCGraph(1, "04-24-2019", "04-25-2019");
-                                }
-                                else {
-                                    //initCGraph(location.LocationID, startDate, endDate);
-                                    initCGraph(1, startDate, endDate);
-                                }
+                                //showLatestDate(location.LocationID);
+                                showLatestDate(1, "C");
                             }
                             else if($('#radioF').is(':checked')){
-                                var startDate = $('#start_datepicker').val();
-                                var endDate = $('#end_datepicker').val();
-                                if ((startDate == "") || (endDate == "")) {
-                                    initFGraph(location.LocationID, sd, ed);
-                                    //initFGraph(1, "04-24-2019", "04-25-2019");
-                                }
-                                else {
-                                    //initFGraph(location.LocationID, startDate, endDate);
-                                    initFGraph(1, startDate, endDate);
-                                }
+                                showLatestDate(1, "F");
                             }
 
                             //temperature radio buttons click event
@@ -214,8 +228,8 @@
                                 var startDate = $('#start_datepicker').val();
                                 var endDate = $('#end_datepicker').val();
                                 if ((startDate == "") || (endDate == "")) {
-                                    //initCGraph(location.LocationID, sd, ed);
-                                    initCGraph(1, "04-24-2019", "04-25-2019");
+                                    //showLatestDate(location.LocationID, "C");
+                                    showLatestDate(1, "C");
                                 }
                                 else {
                                     //initCGraph(location.LocationID, startDate, endDate);
@@ -226,8 +240,8 @@
                                 var startDate = $('#start_datepicker').val();
                                 var endDate = $('#end_datepicker').val();
                                 if ((startDate == "") || (endDate == "")) {
-                                    //initFGraph(location.LocationID, sd, ed);
-                                    initFGraph(1, "04-24-2019", "04-25-2019");
+                                    //showLatestDate(location.LocationID, "F");
+                                    showLatestDate(1, "F");
                                 }
                                 else {
                                     //initFGraph(location.LocationID, startDate, endDate);
@@ -284,10 +298,6 @@
                                 //radio button setting
                                 $('#radioC').prop('checked', true);
                                 $('#radioF').prop('checked', false);
-
-                                //datepicker setting
-                                $('#end_datepicker').val("");
-                                $('#start_datepicker').val("");
                             });
                         }
                     }
@@ -297,11 +307,11 @@
             function initMap() {
                 theMap = new google.maps.Map(document.getElementById('map'), {
                     center: new google.maps.LatLng(40.0319, -75.1134),
-                    zoom: 11
+                    zoom: 10
                 });
 
                 $.ajax({
-                    url: "<% Global.URLPREFIX.ToString(); %>/api.asmx/AllLocations",
+                    url: "<%= Global.Url_Prefix() %>/api.asmx/AllLocations",
                     success: function (data) {
                         for (var i = 0; i < data.length; i++) {
                             var locationObj = data[i];
@@ -311,13 +321,46 @@
                     }
                 });
 
+                var pennypack = new google.maps.KmlLayer("https://gist.githubusercontent.com/tuf37823/97274aa5bbad9c8f65589eb41db1a265/raw/5b622d0876948447bc2a0e2d3c2835025d25670f/streams_pennypack.kml", {
+                    suppressInfoWindows: true,
+                    preserveViewport: false,
+                    map: theMap
+                });
+/*
+                var pennypackwatershed = new google.maps.KmlLayer("https://gist.githubusercontent.com/tuf37823/97274aa5bbad9c8f65589eb41db1a265/raw/5b622d0876948447bc2a0e2d3c2835025d25670f/watershed_pennypack.kml", {
+                    suppressInfoWindows: true,
+                    preserveViewport: false,
+                    map: theMap
+                });
+*/
+
+                var cobb = new google.maps.KmlLayer("https://gist.githubusercontent.com/tuf37823/97274aa5bbad9c8f65589eb41db1a265/raw/bb8cfaa2aa89713ebfb1d419a9eeeeb93dbf4aec/stream_cobb.kml", {
+                    suppressInfoWindows: true,
+                    preserveViewport: false,
+                    map: theMap
+                });
+
+                var ttf = new google.maps.KmlLayer("https://gist.githubusercontent.com/tuf37823/97274aa5bbad9c8f65589eb41db1a265/raw/bb8cfaa2aa89713ebfb1d419a9eeeeb93dbf4aec/streams_ttf.kml", {
+                    suppressInfoWindows: true,
+                    preserveViewport: false,
+                    map: theMap
+                });
+
+                var wissahickon = new google.maps.KmlLayer("https://gist.githubusercontent.com/tuf37823/97274aa5bbad9c8f65589eb41db1a265/raw/bb8cfaa2aa89713ebfb1d419a9eeeeb93dbf4aec/streams_wissahickon.kml", {
+                    suppressInfoWindows: true,
+                    preserveViewport: false,
+                    map: theMap
+                });
+
+
+
                 return theMap;
             }
 
             //todo: handle failure
 
             $.ajax({
-                url: "/api.asmx/Watersheds",
+                url: "<%= Global.Url_Prefix() %>/api.asmx/Watersheds",
                 success: populateWatersheds
             });
 
@@ -333,7 +376,7 @@
                 $('#ddBtnLocation').text('Locations');
 
                 $.ajax({
-                    url: "<% Global.URLPREFIX.ToString(); %>/api.asmx/Location?watershedId=" + watershedId,
+                    url: "<%= Global.Url_Prefix() %>/api.asmx/Location?watershedId=" + watershedId,
                     success: function (data) {
                         console.log(data);
                         $('#locationdiv').removeClass('invisible');
@@ -375,7 +418,7 @@
                 }      
             }
 
-            function initCGraph(id, start, end) {
+           function initCGraph(id, start, end) {
                 var data = {
                     locationId: id,
                     start: start,
@@ -385,7 +428,7 @@
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
-                    url: '<% Global.URLPREFIX.ToString(); %>/api.asmx/GetLocationTemperaturesByDateRange',
+                    url: '<%= Global.Url_Prefix() %>/api.asmx/GetLocationTemperaturesByDateRange',
                     data: JSON.stringify(data),
                     success: function (responseData) {
                         //Store the timestamp and the temperatures of server response
@@ -396,7 +439,7 @@
                             dateLabelArray.push(temperature.Timestamp);
                             temperatureArray.push(temperature.Celsius);
                         });
-                        //Get the element to hold the chart
+                        //checkRepeatedDate(dateLabelArray);
                         var ctx = document.getElementById("myChart").getContext('2d');
                         //Create the chart and pass in the timestamp array as labels and the temperature array for data
                         var myChart = new Chart(ctx, {
@@ -407,7 +450,7 @@
                                 stepSize: 0,
                                 labels: dateLabelArray,
                                 datasets: [{
-                                    label: 'Sample Data(Celsius)',
+                                    label: 'Temperture Data(Celsius)',
                                     data: temperatureArray,
                                     fill: false,
                                     borderColor: '#F08080',
@@ -435,7 +478,7 @@
                 $.ajax({
                     type: 'POST',
                     contentType: 'application/json; charset=utf-8',
-                    url: '<% Global.URLPREFIX.ToString(); %>/api.asmx/GetLocationTemperaturesByDateRange',
+                    url: '<%= Global.Url_Prefix() %>/api.asmx/GetLocationTemperaturesByDateRange',
                     data: JSON.stringify(data),
                     success: function (responseData) {
                         var dateLabelArray = [];
@@ -444,6 +487,7 @@
                             dateLabelArray.push(temperature.Timestamp);
                             temperatureArray.push(temperature.Fahrenheit);
                         });
+                        //checkRepeatedDate(dateLabelArray);
                         var ctx = document.getElementById("myChart").getContext('2d');
                         var myChart = new Chart(ctx, {
                             type: 'line',
@@ -453,7 +497,7 @@
                                 stepSize: 0,
                                 labels: dateLabelArray,
                                 datasets: [{
-                                    label: 'Sample Data(Fahrenheit)',
+                                    label: 'Temperture Data(Fahrenheit)',
                                     data: temperatureArray,
                                     fill: false,
                                     borderColor: '#186A3B',
@@ -483,6 +527,7 @@
                 return month + '-' + day + '-' + year;
             }
 
+
             //  TEMPERATURE DATA DOWNLOAD FUNCTIONS
             function downloadTempDataNoStartNoEnd(locationID) {
                 //  Download all Temperature data for selected Location
@@ -503,6 +548,63 @@
                 //  Download all Temperature data for selected Location from startDate to endDate
                 alert("START, END");
                 window.location.href = '<% Global.URLPREFIX.ToString(); %>/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
+
+            function showLatestDate(id, Format) {
+                if (Format == "C") {
+                    $.get("<%= Global.Url_Prefix() %>/api.asmx/GetLocationLatestTemperature?locationid=" + id, function (response) {
+                        console.log('Success getting latest temperature record:');
+                        console.log(response);
+
+                        var endDate = new Date(response.Timestamp);
+                        var formattedEndDate = getFormattedDate(endDate);
+
+                        var startDate = new Date(endDate);
+                        startDate.setDate(endDate.getDate() - 7);
+                        var formattedStartDate = getFormattedDate(startDate);
+
+                        $('#end_datepicker').val(formattedEndDate);
+                        $('#start_datepicker').val(formattedStartDate);
+
+                        initCGraph(id, formattedStartDate, formattedEndDate);
+
+                    }).fail(function (response) {
+                        console.log('Error getting latest temperature record!');
+                    });
+                }
+                else if (Format == "F") {
+                    $.get("<%= Global.Url_Prefix() %>/api.asmx/GetLocationLatestTemperature?locationid=" + id, function (response) {
+                        console.log('Success getting latest temperature record:');
+                        console.log(response);
+
+                        var endDate = new Date(response.Timestamp);
+                        var formattedEndDate = getFormattedDate(endDate);
+
+                        var startDate = new Date(endDate);
+                        startDate.setDate(endDate.getDate() - 7);
+                        var formattedStartDate = getFormattedDate(startDate);
+
+                        $('#end_datepicker').val(formattedEndDate);
+                        $('#start_datepicker').val(formattedStartDate);
+
+                        initFGraph(id, formattedStartDate, formattedEndDate);
+
+                    }).fail(function (response) {
+                        console.log('Error getting latest temperature record!');
+                    });
+                }
+            }
+
+            function checkRepeatedDate(dateArray) {
+                var date = "0";
+                for (var i = 0; i < dateArray.length; i++) {
+                    var nextDate = dateArray[i].substring(0, 10);
+                    if (date != nextDate) {
+                        date = nextDate;
+                    }
+                    else {
+                        dateArray[i] = dateArray[i].substring(11, dateArray[i].length);
+                    }
+                }
             }
         });
     </script>
@@ -512,7 +614,6 @@
     
     <%--datepicker--%>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 </asp:Content>

@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/administration/administration.master" AutoEventWireup="true" CodeBehind="watershed.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.watershed" %>
+<%@ Import Namespace="CitizenScience_UIPrototype" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
     Manage Watersheds   |   Citizen Science
 </asp:Content>
@@ -139,7 +140,7 @@
             var table = $('#DataTable').DataTable({
                 ajax: {
                     // The location to HTTP GET the data for the table
-                    url: '/api.asmx/Watersheds',
+                    url: '<%= Global.Url_Prefix() %>/api.asmx/Watersheds',
                     dataSrc: ''
                 },
                 columns: [
@@ -217,18 +218,18 @@
             }
 
             $('#editSubmit').click(function () {
-               
 
-                var requestData = BuildEditWatershed(editData)
+
+                var requestData = BuildEditWatershed(editData);
                 var isValidRequest = ValidateWatershedRequest(requestData);
                 console.log('Is Edit Form Submission Valid?: ' + isValidRequest);
-                console.log(requestData)
+                console.log(requestData);
 
                 if (isValidRequest) {
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: '/api.asmx/UpdateWatershed',
+                        url: '<%= Global.Url_Prefix() %>/api.asmx/UpdateWatershed',
                         data: JSON.stringify(requestData),
                         dataType: 'JSON',
                         success: function (responseData) {
@@ -258,7 +259,7 @@
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: '~/api.asmx/CreateWatershed',
+                        url: '<%= Global.Url_Prefix() %>/api.asmx/CreateWatershed',
                         data: JSON.stringify(requestData),
                         dataType: 'JSON',
                         success: function (responseData) {

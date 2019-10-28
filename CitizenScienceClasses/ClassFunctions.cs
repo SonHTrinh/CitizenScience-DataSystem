@@ -321,7 +321,31 @@ namespace CitizenScienceClasses
 
             return result;
         }
-        
+
+        public static Temperature GetLatestLocationTemperature(int locationId)
+        {
+            Temperature result = null;
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetLatestLocationTemperature";
+            comm.Parameters.AddWithValue("@locationid", locationId);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            foreach (DataRow dataRow in dataSet.Tables[0].Rows)
+            {
+                result = new Temperature
+                {
+                    Id = Convert.ToInt32(dataRow["TempID"]),
+                    Timestamp = Convert.ToDateTime(dataRow["Timestamp"]),
+                    Celsius = Convert.ToDouble(dataRow["TempC"]),
+                    Fahrenheit = Convert.ToDouble(dataRow["TempF"])
+                };
+            }
+
+            return result;
+        }
 
 
         /////////////////////////////////   WATERSHED FUNCTIONS

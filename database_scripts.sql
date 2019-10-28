@@ -304,6 +304,19 @@ AS
 
 GO
 
+CREATE PROCEDURE [dbo].[GetLatestLocationTemperature]
+	@locationid int
+AS
+	SELECT TOP 1 * 
+	FROM [Temperature]
+	WHERE [Timestamp]
+	IN 
+		(SELECT MAX([Timestamp]) FROM [Temperature])
+	AND 
+		[LocationID] = @locationid
+
+GO
+
 ------------------------------------------------- CRUD Watershed
 CREATE PROCEDURE [dbo].[CreateWatershed]
     @name varchar(255)

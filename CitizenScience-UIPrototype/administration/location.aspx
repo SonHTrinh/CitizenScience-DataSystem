@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/administration/administration.master" AutoEventWireup="true" CodeBehind="location.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.location" %>
+<%@ Import Namespace="CitizenScience_UIPrototype" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
     Manage Locations   |   Citizen Science
 </asp:Content>
@@ -168,7 +169,7 @@
                 $.ajax({
                     type: 'GET',
                     contentType: 'application/json; charset=utf-8',
-                    url: '/api.asmx/ReadAllWatersheds',
+                    url: '<%= Global.Url_Prefix() %>/api.asmx/ReadAllWatersheds',
                     dataType: 'JSON'
                 }).done(function (responseData) {
 
@@ -180,7 +181,7 @@
                     table = $('#DataTable').DataTable({
                         ajax: {
                             // The location to HTTP GET the data for the table
-                            url: '/api.asmx/ReadAllLocation',
+                            url: '<%= Global.Url_Prefix() %>/api.asmx/ReadAllLocation',
                             dataSrc: ''
                         },
                         columns: [
@@ -362,7 +363,7 @@
                 $.ajax({
                     type: 'GET',
                     contentType: 'application/json; charset=utf-8',
-                    url: '/api.asmx/ReadAllWatersheds',
+                    url: '<%= Global.Url_Prefix() %>/api.asmx/ReadAllWatersheds',
                     dataType: 'JSON',
                     success: function (responseData) {
 
@@ -391,7 +392,7 @@
                 $.ajax({
                     type: 'GET',
                     contentType: 'application/json; charset=utf-8',
-                    url: '/api.asmx/ReadAllWatersheds',
+                    url: '<%= Global.Url_Prefix() %>/api.asmx/ReadAllWatersheds',
                     dataType: 'JSON',
                     success: function (responseData) {
 
@@ -435,7 +436,7 @@
                 $('#inputEditLatitude').val(data.Latitude);
                 $('#inputEditLongitude').val(data.Longitude);
                 $('#inputEditImageBrowse').val('');
-                $('#imageEdit').attr("src", "/images/location/get.ashx?locationid=" + data.LocationID + "&cache=" + Date.now());
+                $('#imageEdit').attr("src", "<%= Global.Url_Prefix() %>/images/location/get.ashx?locationid=" + data.LocationID + "&cache=" + Date.now());
                 $('#imageEditID').val(data.ProfileImageID);
 
                 PopulateEditWatershedSelect(data.WatershedID);
@@ -492,7 +493,7 @@
 
                     $.ajax({
                         type: "POST",
-                        url: "/images/location/set.ashx",
+                        url: "<%= Global.Url_Prefix() %>/images/location/set.ashx",
                         contentType: false,
                         processData: false,
                         data: formData,
@@ -506,7 +507,7 @@
                             $.ajax({
                                 type: 'POST',
                                 contentType: 'application/json; charset=utf-8',
-                                url: '/api.asmx/UpdateLocation',
+                                url: '<%= Global.Url_Prefix() %>/api.asmx/UpdateLocation',
                                 data: JSON.stringify(requestData),
                                 dataType: 'JSON',
                                 success: function (responseData) {
@@ -531,11 +532,11 @@
                     $.ajax({
                         type: 'POST',
                         contentType: 'application/json; charset=utf-8',
-                        url: '/api.asmx/UpdateLocation',
+                        url: '<%= Global.Url_Prefix() %>/api.asmx/UpdateLocation',
                         data: JSON.stringify(requestData),
                         dataType: 'JSON',
                         success: function (responseData) {
-                            console.log('Edit Successful')
+                            console.log('Edit Successful');
                             console.log(responseData);
 
                             $('#editModal').modal('hide');
@@ -573,7 +574,7 @@
                 // Save the image, get the new image ID THEN save the location w/ the image ID info
                 $.ajax({
                     type: "POST",
-                    url: "/images/location/set.ashx",
+                    url: "<%= Global.Url_Prefix() %>/images/location/set.ashx",
                     contentType: false,
                     processData: false,
                     data: formData,
@@ -587,7 +588,7 @@
                         $.ajax({
                             type: 'POST',
                             contentType: 'application/json; charset=utf-8',
-                            url: '/api.asmx/CreateLocation',
+                            url: '<%= Global.Url_Prefix() %>/api.asmx/CreateLocation',
                             data: JSON.stringify(requestData),
                             dataType: 'JSON',
                             success: function (responseData) {

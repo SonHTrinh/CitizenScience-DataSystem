@@ -15,7 +15,8 @@
     <AssemblyName>CitizenScience-UIPrototype</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>false</Use64BitIISExpress>
+    <Use64BitIISExpress>
+    </Use64BitIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -1926,6 +1927,7 @@
     <Content Include="style\fontawesome\webfonts\fa-solid-900.woff" />
     <Content Include="style\fontawesome\webfonts\fa-solid-900.woff2" />
     <Content Include="setlocationimage.ashx" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

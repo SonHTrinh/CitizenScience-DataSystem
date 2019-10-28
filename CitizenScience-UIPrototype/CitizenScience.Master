@@ -1,5 +1,5 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="CitizenScience.master.cs" Inherits="CitizenScience_UIPrototype.CitizenScience" %>
-
+<%@ Import Namespace="CitizenScience_UIPrototype" %>
 <!DOCTYPE html>
 
 <html>
@@ -49,24 +49,24 @@
                         <div class="col-4">
                             <div class="row">
                                 <div class="col-4 text-right">
-                                    <a href="/map.aspx" class="nav-link float-">
+                                    <a href="<%= Global.Url_Prefix() %>/map.aspx" class="nav-link float-">
                                         <b>Map</b>
                                     </a>
                                 </div>
                                 <div class="col-4 text-center">
-                                    <a href="/gallery.aspx" class="nav-link">
+                                    <a href="<%= Global.Url_Prefix() %>/gallery.aspx" class="nav-link">
                                         <b>Gallery</b>
                                     </a>
                                 </div>
                                 <div class="col-4 text-left">
-                                    <a href="/about.aspx" class="nav-link">
+                                    <a href="<%= Global.Url_Prefix() %>/about.aspx" class="nav-link">
                                         <b>About</b>
                                     </a>
                                 </div>
                             </div>                         
                         </div>
                         <div class="col-4">
-                            <a href="/administration/watershed.aspx" class="nav-link float-right">
+                            <a href="<%= Global.Url_Prefix() %>/administration/watershed.aspx" class="nav-link float-right">
                                 Sign In
                                 <i class="fas fa-sign-in-alt"></i>
                             </a>

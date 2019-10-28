@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CitizenScience.Master" AutoEventWireup="true" CodeBehind="about.aspx.cs" Inherits="CitizenScience_UIPrototype.about" %>
+<%@ Import Namespace="CitizenScience_UIPrototype" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
     About   |   Citizen Science
@@ -74,7 +75,7 @@
             <div class="container">
                 <button class="btn btn-dark" style="width: 100%;" type="button" data-toggle="collapse" data-target="#goals1"
                     aria-expanded="false" aria-controls="collapseExample" id="btnQuestion2">
-                    What are our goals? 
+                    <%-- What are our goals? --%> 
                 </button>
             </div>
         </div>
@@ -186,7 +187,7 @@
                 $.ajax({
                     type: 'GET',
                     contentType: 'application/json',
-                    url: '/api.asmx/About',
+                    url: '<%= Global.Url_Prefix() %>/api.asmx/About',
                     dataType: 'JSON',
                     success: function (responseData) {
                         console.log(responseData)
