@@ -87,6 +87,15 @@ GO
 DROP PROCEDURE IF EXISTS [GetLocationTemperaturesByDateRange]
 GO
 
+DROP PROCEDURE IF EXISTS [GetTemperaturesByLocationIdStartEnd]
+GO
+
+DROP PROCEDURE IF EXISTS [GetTemperaturesByLocationIdNoStartEnd]
+GO
+
+DROP PROCEDURE IF EXISTS [GetTemperaturesByLocationIdStartNoEnd]
+GO
+
 DROP PROCEDURE IF EXISTS [GetLocationImage]
 GO
 
