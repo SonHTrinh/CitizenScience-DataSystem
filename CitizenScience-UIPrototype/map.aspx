@@ -273,7 +273,7 @@
 
                             //Download button
                             $('#downloadCsv').click(function () {                                
-                                window.location.href = '<% Global.URLPREFIX.ToString(); %>/api.asmx/AllLocationTemperaturesCsv';      
+                                window.location.href = '<%= Global.Url_Prefix() %>/api.asmx/AllLocationTemperaturesCsv';      
                                 /*
                                 var endDate = $('#end_datepicker').val();
                                 var startDate = $('#start_datepicker').val();
