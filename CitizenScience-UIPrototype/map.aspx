@@ -40,7 +40,7 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="col-md-4">
-                                            <p><img src="img" alt="Here should be a picture of the watershed" class="modalImage" style="width: 400px; height: 333px" /></p>
+                                            <p><img src="img" alt="watershed-location-profile" class="modalImage" style="width: 400px; height: 333px" /></p>
                                             <p class="modalLink"></p>
                                             <p class="modalDesc"></p>
                                         </div>
@@ -276,8 +276,8 @@
 
             function initMap() {
                 theMap = new google.maps.Map(document.getElementById('map'), {
-                    center: new google.maps.LatLng(40.0319, -75.1134),
-                    zoom: 10
+                    center: new google.maps.LatLng(40.0219, -75.1134),
+                    zoom: 8
                 });
 
                 $.ajax({
