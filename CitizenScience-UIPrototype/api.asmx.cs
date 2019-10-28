@@ -15,7 +15,7 @@ namespace CitizenScience_UIPrototype
     [WebServiceBinding(ConformsTo = WsiProfiles.BasicProfile1_1)]
     [System.ComponentModel.ToolboxItem(false)]
     [ScriptService]
-    public class Api : WebService
+    public class Api : System.Web.Services.WebService
     {
 
         private void BuildResponse(int httpStatus, Object obj)

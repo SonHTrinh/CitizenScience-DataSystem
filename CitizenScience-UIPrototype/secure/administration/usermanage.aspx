@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/administration/administration.master" AutoEventWireup="true" CodeBehind="usermanage.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.usermanage" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/secure/administration/administration.master" AutoEventWireup="true" CodeBehind="usermanage.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.usermanage" %>
 <%@ Import Namespace="CitizenScience_UIPrototype" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
     Manage Admins   |   Citizen Science

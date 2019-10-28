@@ -14,9 +14,9 @@ namespace CitizenScience_UIPrototype
 
         }
 
-        protected void btnLogin_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("admin.aspx");
-        }
+        //protected void btnLogin_Click(object sender, EventArgs e)
+        //{
+        //    Response.Redirect("admin.aspx");
+        //}
     }
 }
