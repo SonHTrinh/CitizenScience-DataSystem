@@ -1,5 +1,4 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CitizenScience.Master" AutoEventWireup="true" CodeBehind="gallery.aspx.cs" Inherits="CitizenScience_UIPrototype.gallery" %>
-
 <%@ Import Namespace="CitizenScience_UIPrototype" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
     Gallery   |   Citizen Science
@@ -7,7 +6,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
     <!--Na's links-->
     <link href="./css/album.css" rel="stylesheet">
-    <link rel="stylesheet" href="galleryAPI-style.css" />
+    <link rel="stylesheet" href="/style/custom/galleryAPI-style.css" />
     <!--//-->
     <main role="main">
         <!--Location modal-->
@@ -184,6 +183,7 @@
         </div>--%>
 
         <div class="contrainer">
+            <div id="iii"></div>
             <asp:DataList ID="rptAlbum" runat="server" RepeatLayout="Table" RepeatColumns="3">
                 <ItemTemplate>
                     <table border="0">
@@ -201,7 +201,7 @@
                         </tr>
                         <tr>
                             <td>
-                                <p class="album-description"></p>
+                                <p class="album-desc"></p>
                             </td>
                         </tr>
                         <tr>
@@ -259,21 +259,33 @@
         $(function buildAlbum(album) {
             $.ajax({
                 url: "<%= Global.Url_Prefix() %>/api.asmx/AllAlbum",
-                success: function (responseData) {
-                    var albumImage = new Album();
+                success: function (data) {
+                    console.log(data);
+                    var placehold = $('#iii');
+                    var albumTitle = $(".album-name");
+                    var albumDesc = $(".album-desc");
 
-                    responseData.forEach(albumImage.set(album.AlbumID, album.Name, album.Description))
+                    for (var i = 0; i < data.length; i++) {
+                        console.log(data[i]);
+                        var newElement = $(document.createElement('p'));
+                        newElement.text(data.albumName);
+                        placehold.append(newElement);
+                    }
+
                 }
-            })
+            });
+
             function initAlbum() {
                 //title
-                var title =
+                var title = album.Name;
+                //$(".album-name").text(title);
 
                 //desc
-                var desc =
+                var desc = album.Description;
+                //$(".album-desc").text(desc);
 
                 //image
-                var imageSrc =
+                var imageSrc;
 
             }
 

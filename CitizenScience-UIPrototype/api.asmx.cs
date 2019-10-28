@@ -508,7 +508,7 @@ namespace CitizenScience_UIPrototype
         public void AllAlbum()
         {
             DataSet albumDataSet = ClassFunctions.GetAllAlbum();
-            List<Location> albumList = new List<Location>();
+            List<Album> albumList = new List<Album>();
 
             for (int i = 0; i < albumDataSet.Tables[0].Rows.Count; i++)
             {
