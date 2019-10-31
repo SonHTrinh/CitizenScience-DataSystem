@@ -99,6 +99,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\ldap_search.disco" />
+    <Content Include="js\map.js" />
     <Content Include="secure\administration\403http.aspx" />
     <Content Include="secure\administration\Auth.aspx" />
     <Content Include="style\custom\admin-style.css" />
@@ -2004,6 +2005,7 @@
       <CachedSettingsPropName>CitizenScience_UIPrototype_LDAPsearch_LDAP_Search</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
