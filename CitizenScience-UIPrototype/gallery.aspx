@@ -183,18 +183,20 @@
                             //Retrieve imageID
                             var albumID = responseData[albumIteration].AlbumID;
                             var imageID; 
+                            var imgURL;
+                            var image;
+                            //Image row
+                            var nestedRow1 = $(document.createElement('div')).addClass('row').addClass('justify-content-center');
                             $.ajax({
                                 url: "<%= Global.Url_Prefix() %>/api.asmx/GetAlbumImageIDs?albumid=" + albumID,
                                 success: function (data) {
                                     console.log(data);
                                     imageID = data.ImageID;
+                                    imgURL = "<%= Global.Url_Prefix() %>/images/location/get.ashx?imageid=" + imageID + "' width='300' height='200'";
+                                    image = $(document.createElement('img')).attr('src', imgURL);
+                                    nestedRow1.append(image);
                                 }
                             })
-                            //Image row
-                            var nestedRow1 = $(document.createElement('div')).addClass('row').addClass('justify-content-center');
-                            var imgURL = "<%= Global.Url_Prefix() %>/images/location/get.ashx?imageid=" + imageID + "' width='300' height='200'";
-                            var image = $(document.createElement('img')).attr('src', imgURL);
-                            nestedRow1.append(image);
                             //Title row
                             var nestedRow2 = $(document.createElement('div')).addClass('row').addClass('justify-content-center');
                             var titleText = responseData[albumIteration].Name;
