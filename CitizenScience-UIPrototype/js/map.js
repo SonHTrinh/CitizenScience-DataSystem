@@ -48,6 +48,8 @@ function initGraph(locationObj, temperatureScale, formattedStartDate, formattedE
 				}
 			});
 
+			var legendText = 'Degrees ' + temperatureScale;
+
 			var ctx = document.getElementById("myChart").getContext('2d');
 			theChart = new Chart(ctx, {
 				type: 'line',
@@ -57,7 +59,7 @@ function initGraph(locationObj, temperatureScale, formattedStartDate, formattedE
 					stepSize: 0,
 					labels: dateLabelArray,
 					datasets: [{
-						label: 'Temperture Data(Fahrenheit)',
+						label: legendText,
 						data: temperatureArray,
 						fill: false,
 						borderColor: '#186A3B',
