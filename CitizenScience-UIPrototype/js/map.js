@@ -249,12 +249,12 @@ function buildMarker(googleMapObj, locationObj) {
 			});
 
 			marker.addListener('mouseover', function () {
-				if (openInfoWindow !== infoWindow) {
+				if (openInfoWindow) {
 					openInfoWindow.close();
 				}
 
 				openInfoWindow = infoWindow;
-				infoWindow.open(googleMapObj);
+				infoWindow.open(googleMapObj, marker);
 			});
 
 			marker.addListener('closeclick', function () {
