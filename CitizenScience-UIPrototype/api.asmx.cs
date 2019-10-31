@@ -486,6 +486,23 @@ namespace CitizenScience_UIPrototype
 
         }
 
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true)]
+        public void GetLocationLatestTemperature(int locationId)
+        {
+            Temperature result = ClassFunctions.GetLatestLocationTemperature(locationId);
+
+            if (result != null)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, result);
+            }
+
+        }
+
         //////////////////////////// CRUD About \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 
