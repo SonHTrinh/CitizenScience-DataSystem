@@ -4,12 +4,12 @@
     Gallery   |   Citizen Science
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
-    <!--Na's links-->
+    <!--Style links-->
     <link href="./css/album.css" rel="stylesheet">
     <link rel="stylesheet" href="/style/custom/galleryAPI-style.css" />
     <!--//-->
     <main role="main">
-        <!--Location modal-->
+        <!--Album Image Modal-->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
@@ -29,11 +29,14 @@
                             <a class="next" onclick="plusSlides(1, 0)">&#10095;</a>
                         </div>
                     </div>
+                    <%--<div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>--%>
                 </div>
             </div>
         </div>
         <!--Volunteer modal-->
-        <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <%--<div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -57,7 +60,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>--%>
         <div class="row">
             <section class="jumbotron text-center w-100">
                 <div class="container">
@@ -70,114 +73,6 @@
                 </div>
             </section>
         </div>
-
-        <%--<div id="myDIV" style="width: 90%; margin: auto;">
-            <div class="album py-5 bg-light">
-                <div class="container">
-                    <h2>Watershed locations</h2>
-                    <hr />
-                    <br />
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card mb-4 box-shadow">
-                                <img src="img/Watershed/Watershed4.jpg" alt="Watershed">
-                                <div class="card-body">
-                                    Pennypack Creek Watershed
-                      <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter">View</button>
-                          </div>
-                          <small class="text-muted">3</small>
-                      </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card mb-4 box-shadow">
-                                <img src="img/Watershed/Watershed5.jpg" alt="Watershed">
-                                <div class="card-body">
-                                    Poquessing Creek Watershed
-                      <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter">View</button>
-                          </div>
-                          <small class="text-muted">3</small>
-                      </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card mb-4 box-shadow">
-                                <img src="img/Watershed/Watershed6.jpg" alt="Watershed">
-                                <div class="card-body">
-                                    Wissahickon Creek Watershed
-                      <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter">View</button>
-                          </div>
-                          <small class="text-muted">3</small>
-                      </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div id="myDIV2" style="width: 90%; margin: auto;">
-            <div class="album py-5 bg-light">
-                <div class="container">
-                    <h2>Volunteers</h2>
-                    <hr />
-                    <br />
-                    <div class="row">
-                        <div class="col-md-4">
-                            <div class="card mb-4 box-shadow">
-                                <img src="img/Volunteer/Volunteer4.jpg" alt="Volunteer">
-                                <div class="card-body">
-                                    Volunteers in Pennypack Creek Watershed
-                      <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter2">View</button>
-                          </div>
-                          <small class="text-muted">3</small>
-                      </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card mb-4 box-shadow">
-                                <img src="img/Volunteer/Volunteer4.jpg" alt="Volunteer">
-                                <div class="card-body">
-                                    Volunteers in Poquessing Creek Watershed
-                      <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter2">View</button>
-                          </div>
-                          <small class="text-muted">3</small>
-                      </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="card mb-4 box-shadow">
-                                <img src="img/Volunteer/Volunteer4.jpg" alt="Volunteer">
-                                <div class="card-body">
-                                    Volunteers in Wissahickon Creek Watershed
-                      <div class="d-flex justify-content-between align-items-center">
-                          <div class="btn-group">
-                              <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#exampleModalCenter2">View</button>
-                          </div>
-                          <small class="text-muted">3</small>
-                      </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>--%>
 
         <div class="contrainer">
             <div id="album-placeholder" class="container"></div>
@@ -235,23 +130,23 @@
 
         var slideIndex = [1, 1];
         var slideId = ["mySlides1", "mySlides2"]
-        showSlides(1, 0);
-        showSlides(1, 1);
+        //showSlides(1, 0);
+        //showSlides(1, 1);
 
         function plusSlides(n, no) {
             showSlides(slideIndex[no] += n, no);
         }
 
-        function showSlides(n, no) {
-            var i;
-            var x = document.getElementsByClassName(slideId[no]);
-            if (n > x.length) { slideIndex[no] = 1 }
-            if (n < 1) { slideIndex[no] = x.length }
-            for (i = 0; i < x.length; i++) {
-                x[i].style.display = "none";
-            }
-            x[slideIndex[no] - 1].style.display = "block";
-        }
+        //function showSlides(n, no) {
+        //    var i;
+        //    var x = document.getElementsByClassName(slideId[no]);
+        //    if (n > x.length) { slideIndex[no] = 1 }
+        //    if (n < 1) { slideIndex[no] = x.length }
+        //    for (i = 0; i < x.length; i++) {
+        //        x[i].style.display = "none";
+        //    }
+        //    x[slideIndex[no] - 1].style.display = "block";
+        //}
 
         $(function buildAlbum(album) {
             $.ajax({
@@ -275,6 +170,7 @@
                     var numOfColumnsPerRow = 3;
                     var numOfRows = Math.ceil(numOfAlbums / numOfColumnsPerRow);
                     var albumIteration = 0;
+                    
 
                     for (var i = 0; i <= numOfRows; i++) {
 
@@ -282,25 +178,36 @@
 
                         for (var j = 0; j < numOfColumnsPerRow && albumIteration < numOfAlbums; j++) {
 
-                            var column = $(document.createElement('div')).addClass('col-4');
+                            var column = $(document.createElement('div')).addClass('col-4 border');
 
+                            //Retrieve imageID
+                            var albumID = responseData[albumIteration].AlbumID;
+                            var imageID; 
+                            $.ajax({
+                                url: "<%= Global.Url_Prefix() %>/api.asmx/GetAlbumImageIDs?albumid=" + albumID,
+                                success: function (data) {
+                                    console.log(data);
+                                    imageID = data.ImageID;
+                                }
+                            })
+                            //Image row
                             var nestedRow1 = $(document.createElement('div')).addClass('row').addClass('justify-content-center');
-                            var imgURL = "/img/Watershed/watershed01.jpg";
+                            var imgURL = "<%= Global.Url_Prefix() %>/images/location/get.ashx?imageid=" + imageID + "' width='300' height='200'";
                             var image = $(document.createElement('img')).attr('src', imgURL);
                             nestedRow1.append(image);
-
+                            //Title row
                             var nestedRow2 = $(document.createElement('div')).addClass('row').addClass('justify-content-center');
                             var titleText = responseData[albumIteration].Name;
                             var titleElement = $(document.createElement('p')).addClass('font-weight-bold');
                             titleElement.text(titleText);
                             nestedRow2.append(titleElement);
-
+                            //Description row
                             var nestedRow3 = $(document.createElement('div')).addClass('row').addClass('justify-content-center');
                             var descriptionText = responseData[albumIteration].Description;
                             var descriptionElement = $(document.createElement('p'));
                             descriptionElement.text(descriptionText);
                             nestedRow3.append(descriptionElement);
-
+                            //View button row
                             var nestedRow4 = $(document.createElement('div')).addClass('row').addClass('justify-content-left');
                             var view = $(document.createElement('a'));
                             view.addClass('btn btn-outline-dark');
@@ -309,7 +216,7 @@
                             view.attr('data-toggle', 'modal');
                             view.attr('data-target', '#exampleModalCenter');
                             nestedRow4.append(view);
-
+                            //Append 
                             column.append(nestedRow1);
                             column.append(nestedRow2);
                             column.append(nestedRow3);

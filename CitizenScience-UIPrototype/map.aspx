@@ -102,7 +102,7 @@
 
             function buildMarker(location) {
 
-                // TODO: find a better way to do this than call and map all locations to thier watersheds
+                // TODO: find a better way to do this than call and map all locations to their watersheds
                 $.ajax({
                     url: "<%= Global.Url_Prefix() %>/api.asmx/Watersheds",
                     success: function (responseData) {
@@ -124,9 +124,6 @@
                                 + "<b>Longitude: </b>" + location.Longitude
                                 + "<br/><br/>" 
                                 + "<b>**Click on the marker to see more details**</b>"
-                                //+ "<br/> <br/>"
-                                //+ "<a href='#' data-toggle='modal' data-target='#locationModal'>more details >></a>"
-                            //Dummy profile picture 
                         });
 
                         var marker = new google.maps.Marker({

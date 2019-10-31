@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CitizenScienceClasses
 {
-    public class Location
+    public class Image
     {        
         private int locationID;
         private int watershedID;
@@ -16,8 +16,8 @@ namespace CitizenScienceClasses
         private int profileImageID;
         private DateTime lastUpdated;
 
-        public Location() { }
-        public Location(int locId, int watId, double lat, double lon, string name, int profile, DateTime updated)
+        public Image() { }
+        public Image(int locId, int watId, double lat, double lon, string name, int profile, DateTime updated)
         {
             locationID = locId;
             watershedID = watId;

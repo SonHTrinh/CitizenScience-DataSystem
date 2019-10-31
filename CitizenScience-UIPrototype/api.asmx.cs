@@ -36,13 +36,13 @@ namespace CitizenScience_UIPrototype
         public void AllLocations()
         {
             DataSet locationsDataSet = ClassFunctions.GetLocations();
-            List<Location> locationList = new List<Location>();
+            List<Image> locationList = new List<Image>();
 
             for (int i = 0; i < locationsDataSet.Tables[0].Rows.Count; i++)
             {
                 DataRow dataRow = locationsDataSet.Tables[0].Rows[i];
 
-                Location location = new Location
+                Image location = new Image
                 {
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),
@@ -162,13 +162,13 @@ namespace CitizenScience_UIPrototype
         public void Location(int watershedId)
         {
             DataSet locationDataSet = ClassFunctions.GetLocationsByWatershed(watershedId);
-            List<Location> locationList = new List<Location>();
+            List<Image> locationList = new List<Image>();
 
             for(int i = 0; i < locationDataSet.Tables[0].Rows.Count; i++)
             {
                 DataRow dataRow = locationDataSet.Tables[0].Rows[i];
 
-                Location location = new Location
+                Image location = new Image
                 {
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),
@@ -302,7 +302,7 @@ namespace CitizenScience_UIPrototype
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void CreateLocation(int watershedId, string name, double latitude, double longitude, int imageId)
         {
-            Location result = ClassFunctions.CreateLocation(watershedId, name, latitude, longitude, imageId);
+            Image result = ClassFunctions.CreateLocation(watershedId, name, latitude, longitude, imageId);
 
             if (result != null)
             {
@@ -319,7 +319,7 @@ namespace CitizenScience_UIPrototype
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void ReadLocation(int id)
         {
-            Location result = ClassFunctions.ReadLocation(id);
+            Image result = ClassFunctions.ReadLocation(id);
 
             if (result != null)
             {
@@ -335,7 +335,7 @@ namespace CitizenScience_UIPrototype
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void ReadAllLocation()
         {
-            List<Location> result = ClassFunctions.ReadAllLocation();
+            List<Image> result = ClassFunctions.ReadAllLocation();
 
             if (result != null)
             {
@@ -351,7 +351,7 @@ namespace CitizenScience_UIPrototype
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void UpdateLocation(int id, int watershedId, string name, double latitude, double longitude, int imageId)
         {
-            Location result = ClassFunctions.UpdateLocation(id, watershedId, name, latitude, longitude, imageId);
+            Image result = ClassFunctions.UpdateLocation(id, watershedId, name, latitude, longitude, imageId);
 
             if (result != null)
             {
@@ -529,6 +529,34 @@ namespace CitizenScience_UIPrototype
             Context.Response.Clear();
             Context.Response.ContentType = "application/json";
             Context.Response.Write(js.Serialize(albumList));
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void GetImage(int imageId)
+        {
+            DataSet imageDataSet = ClassFunctions.GetImage(imageId);
+            List<Image> imageList = new List<Image>();
+
+            for (int i = 0; i < imageDataSet.Tables[0].Rows.Count; i++)
+            {
+                DataRow dataRow = imageDataSet.Tables[0].Rows[i];
+
+                Image image = new Image
+                {
+                    ImageID = Convert.ToInt32(dataRow["ImageID"]),
+                    Bytes = dataRow["Bytes"] as byte[],
+                    Description = Convert.ToString(dataRow["Description"]),
+                    ContentType = Convert.ToString(dataRow["ContentType"])
+                };
+
+                imageList.Add(image);
+            }
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Clear();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(imageList));
         }
     }
 }
