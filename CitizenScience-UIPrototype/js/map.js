@@ -1,5 +1,79 @@
 ﻿var theMap;
 var openInfoWindow;
+var theChart;
+
+initMap();
+
+function hideTemperatureChart() {
+	$('.temperature-chart').hide();
+}
+
+function hideTemperatureDownload() {
+	$('.temperature-download').hide();
+}
+
+function initGraph(locationObj, temperatureScale, formattedStartDate, formattedEndDate) {
+	var data = {
+		locationId: locationObj.LocationID,
+		start: formattedStartDate,
+		end: formattedEndDate
+	};
+
+	if (theChart) theChart.destroy();
+
+	$.ajax({
+		type: 'POST',
+		contentType: 'application/json; charset=utf-8',
+		//		url: '<%= Global.Url_Prefix() %>/api.asmx/GetLocationTemperaturesByDateRange',
+		url: '../api.asmx/GetLocationTemperaturesByDateRange',
+		data: JSON.stringify(data),
+		success: function (responseData) {
+			var dateLabelArray = [];
+			var temperatureArray = [];
+			responseData.forEach(function (temperatureObj) {
+				var date = new Date(temperatureObj.Timestamp);
+				var dd = String(date.getDate()).padStart(2, '0');
+				var mm = String(date.getMonth() + 1).padStart(2, '0'); //January is 0!
+				var yyyy = date.getFullYear();
+
+				date = mm + "-" + dd + "-" + yyyy;
+
+				dateLabelArray.push(date);
+				
+
+				if (temperatureScale == "Fahrenheit") {
+					temperatureArray.push(temperatureObj.Fahrenheit);
+				} else {
+					temperatureArray.push(temperatureObj.Celsius);
+				}
+			});
+
+			var ctx = document.getElementById("myChart").getContext('2d');
+			theChart = new Chart(ctx, {
+				type: 'line',
+				data: {
+					max: 2,
+					min: 0,
+					stepSize: 0,
+					labels: dateLabelArray,
+					datasets: [{
+						label: 'Temperture Data(Fahrenheit)',
+						data: temperatureArray,
+						fill: false,
+						borderColor: '#186A3B',
+						backgroundColor: '#D1E9C9',
+						pointRadius: 0,
+						borderWidth: 1
+					}]
+				}
+			});
+		},
+		error: function (errorData) {
+			console.log('!!ERROR Getting Chart Data');
+			console.log(errorData);
+		}
+	});
+}
 
 function initModal(locationObj, watershedObj) {
 
@@ -22,56 +96,49 @@ function initModal(locationObj, watershedObj) {
 //	$('.modalLink').html('<a href="<%= Global.Url_Prefix() %>/gallery.aspx" class="btn btn-info btn-block">View Location Album</a>');
 	$('.modalLink').html('<a href="../gallery.aspx" class="btn btn-info btn-block">View Location Album</a>');
 
-	//Show graph by default after open it
-	if ($('#radioC').is(':checked')) {
-		//showLatestDate(location.LocationID);
-		showLatestDate(1, "C");
-	}
-	else if ($('#radioF').is(':checked')) {
-		showLatestDate(1, "F");
-	}
 
-	//temperature radio buttons click event
-	$('#radioC').click(function () {
-		var startDate = $('#start_datepicker').val();
-		var endDate = $('#end_datepicker').val();
-		if ((startDate == "") || (endDate == "")) {
-			//showLatestDate(location.LocationID, "C");
-			showLatestDate(1, "C");
-		}
-		else {
-			//initCGraph(location.LocationID, startDate, endDate);
-			initCGraph(1, startDate, endDate);
-		}
-	});
-	$('#radioF').click(function () {
-		var startDate = $('#start_datepicker').val();
-		var endDate = $('#end_datepicker').val();
-		if ((startDate == "") || (endDate == "")) {
-			showLatestDate(1, "F");
-		}
-		else {
-			initFGraph(1, startDate, endDate);
-		}
+	//Build Chart functionality
+	$.get("../api.asmx/GetLocationLatestTemperature?locationid=" + locationObj.LocationID)
+		.done(function (response) {
+			if (response.length !== 0) {
+				var endDate = new Date(response.Timestamp);
+				var formattedEndDate = getFormattedDate(endDate);
+
+				var startDate = new Date(endDate);
+				startDate.setDate(endDate.getDate() - 7);
+				var formattedStartDate = getFormattedDate(startDate);
+
+				$('#end_datepicker').val(formattedEndDate);
+				$('#start_datepicker').val(formattedStartDate);
+
+				var temperatureScale = $('#selectScale').val();
+
+				initGraph(locationObj, temperatureScale, formattedStartDate, formattedEndDate);
+			}
+		}).fail(function(response) {
+
+		}).always(function() {
+	//		$('#locationModal').modal('show');
+		});
+
+	$('.date-picker').change(function() {
+
+		var formattedEndDate = $('#end_datepicker').val();
+		var formattedStartDate = $('#start_datepicker').val();
+
+		var temperatureScale = $('#selectScale').val();
+
+		initGraph(locationObj, temperatureScale, formattedStartDate, formattedEndDate);
 	});
 
-	//Submit button
-	$('#submit').click(function () {
-		var startDate = $('#start_datepicker').val();
-		var endDate = $('#end_datepicker').val();
-		if ((startDate == "") || (endDate == "")) {
-			alert("Please select a date range!");
-		}
-		if ((startDate != "") && (endDate != "")) {
-			if ($('#radioC').is(':checked')) {
-				//initCGraph(location.LocationID, startDate, endDate);
-				initCGraph(1, startDate, endDate);
-			}
-			else if ($('#radioF').is(':checked')) {
-				//initFGraph(location.LocationID, startDate, endDate);
-				initFGraph(1, startDate, endDate);
-			}
-		}
+	$('#selectScale').change(function() {
+
+		var formattedEndDate = $('#end_datepicker').val();
+		var formattedStartDate = $('#start_datepicker').val();
+
+		var temperatureScale = $('#selectScale').val();
+
+		initGraph(locationObj, temperatureScale, formattedStartDate, formattedEndDate);
 	});
 
 	//Download button
@@ -82,10 +149,10 @@ function initModal(locationObj, watershedObj) {
 
 	//Close Modal
 	$('#locationModal').on('hidden.bs.modal', function () {
-		//radio button setting
-		$('#radioC').prop('checked', true);
-		$('#radioF').prop('checked', false);
+
 	});
+
+	$('#locationModal').modal('show');
 }
 
 function populateWatersheds(watershedObjArray) {
@@ -263,57 +330,9 @@ function buildMarker(googleMapObj, locationObj) {
 
 			marker.addListener('click', function () {
 				initModal(locationObj, watershedObj);
-				$('#locationModal').modal('show');
 			});
 		}
 	});
-}
-
-function showLatestDate(id, Format) {
-	if (Format == "C") {
-//		$.get("<%= Global.Url_Prefix() %>/api.asmx/GetLocationLatestTemperature?locationid=" + id, function (response) {
-		$.get("../api.asmx/GetLocationLatestTemperature?locationid=" + id, function (response) {
-			console.log('Success getting latest temperature record:');
-			console.log(response);
-
-			var endDate = new Date(response.Timestamp);
-			var formattedEndDate = getFormattedDate(endDate);
-
-			var startDate = new Date(endDate);
-			startDate.setDate(endDate.getDate() - 7);
-			var formattedStartDate = getFormattedDate(startDate);
-
-			$('#end_datepicker').val(formattedEndDate);
-			$('#start_datepicker').val(formattedStartDate);
-
-			initCGraph(id, formattedStartDate, formattedEndDate);
-
-		}).fail(function (response) {
-			console.log('Error getting latest temperature record!');
-		});
-	}
-	else if (Format == "F") {
-//		$.get("<%= Global.Url_Prefix() %>/api.asmx/GetLocationLatestTemperature?locationid=" + id, function (response) {
-		$.get("../api.asmx/GetLocationLatestTemperature?locationid=" + id, function (response) {
-			console.log('Success getting latest temperature record:');
-			console.log(response);
-
-			var endDate = new Date(response.Timestamp);
-			var formattedEndDate = getFormattedDate(endDate);
-
-			var startDate = new Date(endDate);
-			startDate.setDate(endDate.getDate() - 7);
-			var formattedStartDate = getFormattedDate(startDate);
-
-			$('#end_datepicker').val(formattedEndDate);
-			$('#start_datepicker').val(formattedStartDate);
-
-			initFGraph(id, formattedStartDate, formattedEndDate);
-
-		}).fail(function (response) {
-			console.log('Error getting latest temperature record!');
-		});
-	}
 }
 
 function selectWatershed(event) {
@@ -352,8 +371,8 @@ function populateLocations(watershedId) {
 function selectLocation(event) {
 	$('#ddBtnLocation').text(event.data.SensorName);
 
-	map.panTo({ lat: event.data.Latitude, lng: event.data.Longitude });
-	map.setZoom(18);
+	theMap.panTo({ lat: event.data.Latitude, lng: event.data.Longitude });
+	theMap.setZoom(18);
 }
 
 function checkRepeatedDate(dateArray) {
@@ -428,7 +447,7 @@ function initMap() {
 	return theMap;
 }
 
-initMap();
+
 
 $(function () {
 
@@ -437,6 +456,7 @@ $(function () {
 		url: "../api.asmx/Watersheds",
 		success: populateWatersheds
 	});
+
 
 	$("#start_datepicker").datepicker({
 		dateFormat: 'mm-dd-yy'

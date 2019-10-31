@@ -1,6 +1,7 @@
 ﻿using CitizenScienceClasses;
 using CsvHelper;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -19,7 +20,16 @@ namespace CitizenScienceClasses
             using (StreamReader streamReader = new StreamReader(filestream))
             using (CsvReader csvReader = new CsvReader(streamReader))
             {
-                result = csvReader.GetRecords<Temperature>().ToList();
+                while (csvReader.Read())
+                {
+                    Temperature temperature = new Temperature();
+                    temperature.Timestamp = DateTime.Parse(csvReader.GetField(0));
+                    temperature.Celsius = double.Parse(csvReader.GetField(1));
+                    temperature.Fahrenheit = double.Parse(csvReader.GetField(2));
+                    result.Add(temperature);
+                }
+//                var records = csvReader.GetRecords<Temperature>();
+//                result = records.ToList();
             }
 
             return result;
