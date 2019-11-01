@@ -144,7 +144,7 @@ function initModal(locationObj, watershedObj) {
 		}).fail(function(response) {
 			showNoDataFoundElements();
 		}).always(function() {
-	//		$('#locationModal').modal('show');
+
 		});
 
 	$('.chart-modifier').off('change').on('change', function() {
