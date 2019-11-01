@@ -500,7 +500,13 @@ namespace CitizenScience_UIPrototype
         [ScriptMethod(UseHttpGet = true)]
         public void LocationTemperaturesCsvStartEnd(int locationId, DateTime startDate, DateTime endDate)
         {
-            string csvFileName = $"Temperatures-{DateTime.Now.ToString("M/d/yy-H:mm")}.csv";
+            Location location = ClassFunctions.ReadLocation(locationId);
+            Watershed watershed = ClassFunctions.ReadWatershed(location.WatershedID);
+
+            string formattedLocationName = ClassFunctions.FormatForFileSystem(location.SensorName);
+            string formattedWatershedName = ClassFunctions.FormatForFileSystem(watershed.WatershedName);
+
+            string csvFileName = $"{formattedWatershedName}-{formattedLocationName}-{startDate.ToString("M/d/yy-H:mm")}_{endDate.ToString("M/d/yy-H:mm")}.csv";
 
             DataSet temperatureDataset = ClassFunctions.GetTemperaturesByLocationIdStartEnd(locationId, startDate, endDate);
 

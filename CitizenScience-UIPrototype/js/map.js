@@ -19,7 +19,10 @@ function initGraph(locationObj, temperatureScale, formattedStartDate, formattedE
 		end: formattedEndDate
 	};
 
-	if (theChart) theChart.destroy();
+	if (theChart != undefined) {
+		console.log('Destroying Chart');
+		theChart.destroy();
+	}
 
 	$.ajax({
 		type: 'POST',
@@ -77,10 +80,28 @@ function initGraph(locationObj, temperatureScale, formattedStartDate, formattedE
 	});
 }
 
+function hideDataElements() {
+	$('.data-element').hide();
+}
+
+function showDataElements() {
+	$('.data-element').show();
+}
+
+function hideNoDataFoundElements() {
+	$('.nodata-element').hide();
+}
+
+function showNoDataFoundElements() {
+	$('.nodata-element').show();
+}
+
 function initModal(locationObj, watershedObj) {
+	hideDataElements();
+	hideNoDataFoundElements();
 
 	//title
-	var title = locationObj.SensorName + " - " + watershedObj.WatershedName;
+	var title = locationObj.SensorName;
 	$(".modal-title").text(title);
 
 	//desc
@@ -91,8 +112,7 @@ function initModal(locationObj, watershedObj) {
 //	var imageSrc = "<%= Global.Url_Prefix() %>/images/location/get.ashx?locationid=" + location.LocationID;
 	var imageSrc = "../images/location/get.ashx?locationid=" + locationObj.LocationID;
 	var imageAlt = "The Picture of the " + locationObj.SensorName;
-	$(".modalImage").attr("src", imageSrc);
-	$(".modalImage").attr("alt", imageAlt);
+	$(".modalImage").attr("src", imageSrc).attr("alt", imageAlt);
 
 	//more pictures link
 //	$('.modalLink').html('<a href="<%= Global.Url_Prefix() %>/gallery.aspx" class="btn btn-info btn-block">View Location Album</a>');
@@ -116,25 +136,18 @@ function initModal(locationObj, watershedObj) {
 				var temperatureScale = $('#selectScale').val();
 
 				initGraph(locationObj, temperatureScale, formattedStartDate, formattedEndDate);
+
+				showDataElements();
+			} else {
+				showNoDataFoundElements();
 			}
 		}).fail(function(response) {
-
+			showNoDataFoundElements();
 		}).always(function() {
 	//		$('#locationModal').modal('show');
 		});
 
-	$('.date-picker').change(function() {
-
-		var formattedEndDate = $('#end_datepicker').val();
-		var formattedStartDate = $('#start_datepicker').val();
-
-		var temperatureScale = $('#selectScale').val();
-
-		initGraph(locationObj, temperatureScale, formattedStartDate, formattedEndDate);
-	});
-
-	$('#selectScale').change(function() {
-
+	$('.chart-modifier').off('change').on('change', function() {
 		var formattedEndDate = $('#end_datepicker').val();
 		var formattedStartDate = $('#start_datepicker').val();
 
@@ -144,14 +157,20 @@ function initModal(locationObj, watershedObj) {
 	});
 
 	//Download button
-	$('#downloadCsv').click(function () {
+	$('#downloadCsv').off('click').on('click', function () {
 //		window.location.href = '<%= Global.Url_Prefix() %>/api.asmx/AllLocationTemperaturesCsv';
-		window.location.href = '../api.asmx/AllLocationTemperaturesCsv';
+		var formattedEndDate = $('#end_datepicker').val();
+		var formattedStartDate = $('#start_datepicker').val();
+
+		var locationId = locationObj.LocationID;
+
+		window.location.href = '../api.asmx/LocationTemperaturesCsvStartEnd?locationId=' + locationId + '&startDate=' + formattedStartDate + '&endDate=' + formattedEndDate;
 	});
 
 	//Close Modal
-	$('#locationModal').on('hidden.bs.modal', function () {
-
+	$('#locationModal').off('hidden.bs.modal').on('hidden.bs.modal', function () {
+		$('#end_datepicker').val(null);
+		$('#start_datepicker').val(null);
 	});
 
 	$('#locationModal').modal('show');
@@ -169,106 +188,6 @@ function populateWatersheds(watershedObjArray) {
 
 		watershedMenu.append(newElement);
 	}
-}
-
-function initCGraph(id, start, end) {
-	var data = {
-		locationId: id,
-		start: start,
-		end: end
-	};
-	// Send temperature data request
-	$.ajax({
-		type: 'POST',
-		contentType: 'application/json; charset=utf-8',
-//		url: '<%= Global.Url_Prefix() %>/api.asmx/GetLocationTemperaturesByDateRange',
-		url: '../api.asmx/GetLocationTemperaturesByDateRange',
-		data: JSON.stringify(data),
-		success: function (responseData) {
-			//Store the timestamp and the temperatures of server response
-			var dateLabelArray = [];
-			var temperatureArray = [];
-			//Add the timestamp and temperature pairs into the variables
-			responseData.forEach(function (temperature) {
-				dateLabelArray.push(temperature.Timestamp);
-				temperatureArray.push(temperature.Celsius);
-			});
-			//checkRepeatedDate(dateLabelArray);
-			var ctx = document.getElementById("myChart").getContext('2d');
-			//Create the chart and pass in the timestamp array as labels and the temperature array for data
-			var myChart = new Chart(ctx, {
-				type: 'line',
-				data: {
-					max: 50,
-					min: 0,
-					stepSize: 0,
-					labels: dateLabelArray,
-					datasets: [{
-						label: 'Temperture Data(Celsius)',
-						data: temperatureArray,
-						fill: false,
-						borderColor: '#F08080',
-						backgroundColor: '#E9C9D1',
-						pointRadius: 0,
-						borderWidth: 1
-					}]
-				},
-				options: {}
-			});
-		},
-		error: function (errorData) {
-			console.log('ERROR');
-			console.log(errorData);
-		}
-	});
-}
-
-function initFGraph(id, start, end) {
-	var data = {
-		locationId: id,
-		start: start,
-		end: end
-	};
-	$.ajax({
-		type: 'POST',
-		contentType: 'application/json; charset=utf-8',
-//		url: '<%= Global.Url_Prefix() %>/api.asmx/GetLocationTemperaturesByDateRange',
-		url: '../api.asmx/GetLocationTemperaturesByDateRange',
-		data: JSON.stringify(data),
-		success: function (responseData) {
-			var dateLabelArray = [];
-			var temperatureArray = [];
-			responseData.forEach(function (temperature) {
-				dateLabelArray.push(temperature.Timestamp);
-				temperatureArray.push(temperature.Fahrenheit);
-			});
-			//checkRepeatedDate(dateLabelArray);
-			var ctx = document.getElementById("myChart").getContext('2d');
-			var myChart = new Chart(ctx, {
-				type: 'line',
-				data: {
-					max: 50,
-					min: 0,
-					stepSize: 0,
-					labels: dateLabelArray,
-					datasets: [{
-						label: 'Temperture Data(Fahrenheit)',
-						data: temperatureArray,
-						fill: false,
-						borderColor: '#186A3B',
-						backgroundColor: '#D1E9C9',
-						pointRadius: 0,
-						borderWidth: 1
-					}]
-				},
-				options: {}
-			});
-		},
-		error: function (errorData) {
-			console.log('ERROR');
-			console.log(errorData);
-		}
-	});
 }
 
 function buildMarker(googleMapObj, locationObj) {

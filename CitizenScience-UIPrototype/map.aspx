@@ -60,28 +60,14 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-8">
+                            <div class="col-8 data-element">
                                 <div class="row temperature-chart">
                                     <canvas id="myChart" style="width: 570px; height: 340px;" />
                                 </div>
-                                
-                                <%-- <div class="row mt-2"> --%>
-                                <%--     <div class="col-12"> --%>
-                                <%--         <div class="custom-control custom-radio"> --%>
-                                <%--             <input type="radio" value="" id="radioC" class="custom-control-input" name="temperature" checked="checked"/> --%>
-                                <%--             <label class="custom-control-label" for="radioC">Celsius</label> --%>
-                                <%--         </div> --%>
-                                <%--         <div class="custom-control custom-radio"> --%>
-                                <%--             <input type="radio" value="" id="radioF" class="custom-control-input" name="temperature"/> --%>
-                                <%--             <label class="custom-control-label" for="radioF">Fahrenheit</label> --%>
-                                <%--         </div> --%>
-                                <%--     </div> --%>
-                                <%-- </div> --%>
-                                
                                 <div class="row mt-5 temperature-chart">
                                     <div class="col-3">
                                         <div class="form-group">
-                                            <select class="form-control" id="selectScale">
+                                            <select class="form-control chart-modifier" id="selectScale">
                                                 <option>Celsius</option>
                                                 <option>Fahrenheit</option>
                                             </select>
@@ -92,25 +78,30 @@
                                     </div>
                                     
                                     <div class="col-3">
-                                        <input type="text" class="form-control text-center date-picker" id="start_datepicker" readonly>
+                                        <input type="text" class="form-control text-center chart-modifier" id="start_datepicker" readonly>
                                     </div>
                                     <div class="col-1 text-center mx-0 px-0">
                                         <p>to</p>
                                     </div>
                                     <div class="col-3">
-                                        <input type="text" class="form-control text-center date-picker" id="end_datepicker" readonly>
+                                        <input type="text" class="form-control text-center chart-modifier" id="end_datepicker" readonly>
                                     </div>
                                     <div class="col-1"></div>
-                                    <%-- <div class="col-3 text-center"> --%>
-                                    <%--     <button type="button" id="submit" class="btn btn-primary">Search</button> --%>
-                                    <%-- </div> --%>
+                                </div>
+                            </div>
+                            <div class="col-8 nodata-element">
+                                <div class="row justify-content-center mt-5">
+                                    <i class="fas fa-exclamation-triangle fa-10x"></i>
+                                </div>
+                                <div class="row justify-content-center mt-5">
+                                    <h5>No Temperature Data Exists For This Location</h5>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="downloadCsv" class="btn btn-dark temperature-download">
+                    <button type="button" id="downloadCsv" class="btn btn-dark temperature-download data-element">
                         <i class="fa fa-file-csv">&nbsp; Download Temperature CSV File</i>
                     </button>
                     <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Close</button>
