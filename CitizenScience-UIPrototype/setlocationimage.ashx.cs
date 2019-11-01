@@ -33,7 +33,7 @@ namespace CitizenScience_UIPrototype
                     int locationId = int.Parse(context.Request["locationid"]);
                     string contentType = postedFile.ContentType;
 
-                    Image result = ClassFunctions.SetLocationImage(locationId, bytes, contentType);
+                    Location result = ClassFunctions.SetLocationImage(locationId, bytes, contentType);
 
                     context.Response.ContentType = contentType;
                     context.Response.Write(result.ToString());

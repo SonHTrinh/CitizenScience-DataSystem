@@ -29,10 +29,10 @@ namespace CitizenScience_UIPrototype.images.album
                     int albumId = int.Parse(context.Request["albumid"]);
                     string contentType = postedFile.ContentType;
 
-                    Image result = ClassFunctions.SetLocationImage(albumId, bytes, contentType);
+                    //Image result = ClassFunctions.SetLocationImage(albumId, bytes, contentType);
 
-                    context.Response.ContentType = contentType;
-                    context.Response.Write(result.ToString());
+                    //context.Response.ContentType = contentType;
+                    //context.Response.Write(result.ToString());
                 }
             }
             catch (Exception ex)

@@ -40,9 +40,9 @@ namespace CitizenScienceClasses
             comm.Parameters.AddWithValue("@watershedID", watershedID);
             return conn.GetDataSetUsingCmdObj(comm);
         }
-        public static Image CreateLocation(int watershedId, string name, double latitude, double longitude, int imageid)
+        public static Location CreateLocation(int watershedId, string name, double latitude, double longitude, int imageid)
         {
-            Image result = null;
+            Location result = null;
 
             DBConnect conn = new DBConnect();
             SqlCommand comm = new SqlCommand();
@@ -59,7 +59,7 @@ namespace CitizenScienceClasses
             {
                 DataRow dataRow = dataSet.Tables[0].Rows[0];
 
-                result = new Image
+                result = new Location
                 {
                     LocationID = Convert.ToInt32(dataRow["LocationID"]),
                     WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
@@ -73,9 +73,9 @@ namespace CitizenScienceClasses
 
             return result;
         }
-        public static Image ReadLocation(int id)
+        public static Location ReadLocation(int id)
         {
-            Image result = null;
+            Location result = null;
 
             DBConnect conn = new DBConnect();
             SqlCommand comm = new SqlCommand();
@@ -88,7 +88,7 @@ namespace CitizenScienceClasses
             {
                 DataRow dataRow = dataSet.Tables[0].Rows[0];
 
-                result = new Image
+                result = new Location
                 {
                     LocationID = Convert.ToInt32(dataRow["LocationID"]),
                     WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
@@ -102,9 +102,9 @@ namespace CitizenScienceClasses
 
             return result;
         }
-        public static List<Image> ReadAllLocation()
+        public static List<Location> ReadAllLocation()
         {
-            List<Image> result = new List<Image>();
+            List<Location> result = new List<Location>();
 
             DBConnect conn = new DBConnect();
             SqlCommand comm = new SqlCommand();
@@ -117,7 +117,7 @@ namespace CitizenScienceClasses
             {
                 DataRow dataRow = dataSet.Tables[0].Rows[i];
 
-                Image location = new Image
+                Location location = new Location
                 {
                     LocationID = Convert.ToInt32(dataRow["LocationID"]),
                     WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
@@ -133,9 +133,9 @@ namespace CitizenScienceClasses
 
             return result;
         }
-        public static Image UpdateLocation(int id, int watershedId, string name, double latitude, double longitude, int imageId)
+        public static Location UpdateLocation(int id, int watershedId, string name, double latitude, double longitude, int imageId)
         {
-            Image result = null;
+            Location result = null;
 
             DBConnect conn = new DBConnect();
             SqlCommand comm = new SqlCommand();
@@ -153,7 +153,7 @@ namespace CitizenScienceClasses
             {
                 DataRow dataRow = dataSet.Tables[0].Rows[0];
 
-                result = new Image
+                result = new Location
                 {
                     LocationID = Convert.ToInt32(dataRow["LocationID"]),
                     WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
@@ -472,9 +472,9 @@ namespace CitizenScienceClasses
             return result;
         }
 
-        public static Image SetLocationImage(int locationId, byte[] bytes, string contentType)
+        public static Location SetLocationImage(int locationId, byte[] bytes, string contentType)
         {
-            Image result = null;
+            Location result = null;
 
             DBConnect conn = new DBConnect();
             SqlCommand comm = new SqlCommand();
@@ -489,7 +489,7 @@ namespace CitizenScienceClasses
             {
                 DataRow dataRow = dataSet.Tables[0].Rows[0];
 
-                result = new Image
+                result = new Location
                 {
                     LocationID = Convert.ToInt32(dataRow["LocationID"]),
                     WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
@@ -758,6 +758,7 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllAlbum";
             return conn.GetDataSetUsingCmdObj(comm);
         }
+
     }
 }
 

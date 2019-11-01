@@ -25,11 +25,11 @@ namespace CitizenScience_UIPrototype.administration
 
         private void GenerateLocationDropdownList()
         {
-            List<Image> locationList = ClassFunctions.ReadAllLocation();
+            List<Location> locationList = ClassFunctions.ReadAllLocation();
 
             ddlLocations.Items.Add(new ListItem("-- Select --", ""));
 
-            foreach(Image location in locationList)
+            foreach(Location location in locationList)
             {
                 ddlLocations.Items.Add(new ListItem(location.SensorName, location.LocationID.ToString()));
             }
