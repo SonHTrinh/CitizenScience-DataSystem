@@ -73,6 +73,8 @@ function initModal(albumObj) {
 
 	clearNodeChildren(document.getElementById("album-image-placeholder"));
 
+	$('#modalTitle').text(albumObj.Name);
+
 	$.get({
 		url: '../api.asmx/GetAlbumImageIds?albumId=' + albumObj.AlbumID
 	}).done(function(imageIdArray) {
@@ -118,7 +120,6 @@ $(function() {
 
 				for (var j = 0; j < numOfColumnsPerRow && albumIteration < numOfAlbums; j++) {
 
-					//Append 
 					var albumColumnElement = buildAlbumElement(responseData[albumIteration], 'col-3');
 
 					row.append(albumColumnElement);
