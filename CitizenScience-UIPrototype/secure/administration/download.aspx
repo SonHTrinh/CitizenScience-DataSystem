@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/administration/administration.master" AutoEventWireup="true" CodeBehind="download.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.download" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/secure/administration/administration.master" AutoEventWireup="true" CodeBehind="download.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.download" %>
 <%@ Import Namespace="CitizenScience_UIPrototype" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
     Download Data   |   Citizen Science

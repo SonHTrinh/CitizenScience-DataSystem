@@ -21,49 +21,49 @@
             </div>
             <ul class="list-unstyled components">
                 <li>
-                    <a href="<%= Global.Url_Prefix() %>/administration/watershed.aspx">
+                    <a href="<%= Global.Url_Prefix() %>/secure/administration/watershed.aspx">
                         <i class="fas fa-water"></i>
                         <span class="menuItemName">Manage Watersheds</span> 
                     </a>
                 </li>
                 <li>
-                    <a href="<%= Global.Url_Prefix() %>/administration/location.aspx">
+                    <a href="<%= Global.Url_Prefix() %>/secure/administration/location.aspx">
                         <i class="fas fa-map-marked-alt"></i>
                         <span class="menuItemName">Manage Locations</span>
                     </a>
                 </li>
                 <li>
-                    <a href="<%= Global.Url_Prefix() %>/administration/upload.aspx">
+                    <a href="<%= Global.Url_Prefix() %>/secure/administration/upload.aspx">
                         <i class="fas fa-upload"></i>
                         <span class="menuItemName">Upload Data</span>
                     </a>
                 </li>
                 <li>
-                    <a href="<%= Global.Url_Prefix() %>/administration/download.aspx">
+                    <a href="<%= Global.Url_Prefix() %>/secure/administration/download.aspx">
                         <i class="fas fa-download"></i>
                         <span class="menuItemName">Download Data</span>
                     </a>
                 </li>
                 <li>
-                    <a href="<%= Global.Url_Prefix() %>/administration/usermanage.aspx">
+                    <a href="<%= Global.Url_Prefix() %>/secure/administration/usermanage.aspx">
                         <i class="fas fa-users"></i>
                         <span class="menuItemName">Manage Admins</span>
                     </a>
                 </li>
                 <li>
-                    <a href="<%= Global.Url_Prefix() %>/administration/gallery.aspx">
+                    <a href="<%= Global.Url_Prefix() %>/secure/administration/gallery.aspx">
                         <i class="fas fa-images"></i>
                         <span class="menuItemName">Manage Gallery</span>
                     </a>
                 </li>
                 <li>
-                    <a href="<%= Global.Url_Prefix() %>/administration/about.aspx">
+                    <a href="<%= Global.Url_Prefix() %>/secure/administration/about.aspx">
                         <i class="fas fa-question"></i>
                         <span class="menuItemName">Manage About</span>
                     </a>
                 </li>
                 <li>
-                    <a href="<%= Global.Url_Prefix() %>/administration/volunteer.aspx">
+                    <a href="<%= Global.Url_Prefix() %>/secure/administration/volunteer.aspx">
                         <i class="fas fa-clipboard"></i>
                         <span class="menuItemName">Volunteers</span>
                     </a>

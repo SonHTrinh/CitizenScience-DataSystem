@@ -89,17 +89,29 @@
   <ItemGroup>
     <Content Include="about.aspx" />
     <Content Include="Default.aspx" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\LDAP_Search\ldap_search.wsdl" />
+    <None Include="Web References\LDAP_Search\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ldap_search.disco" />
+    <Content Include="secure\administration\403http.aspx" />
+    <Content Include="secure\administration\Auth.aspx" />
     <Content Include="js\gallery.js" />
     <Content Include="style\custom\admin-style.css" />
     <Content Include="admin.aspx" />
-    <Content Include="administration\about.aspx" />
-    <Content Include="administration\download.aspx" />
-    <Content Include="administration\gallery.aspx" />
-    <Content Include="administration\location.aspx" />
-    <Content Include="administration\upload.aspx" />
-    <Content Include="administration\usermanage.aspx" />
-    <Content Include="administration\volunteer.aspx" />
-    <Content Include="administration\watershed.aspx" />
+    <Content Include="secure\administration\about.aspx" />
+    <Content Include="secure\administration\download.aspx" />
+    <Content Include="secure\administration\gallery.aspx" />
+    <Content Include="secure\administration\location.aspx" />
+    <Content Include="secure\administration\upload.aspx" />
+    <Content Include="secure\administration\usermanage.aspx" />
+    <Content Include="secure\administration\volunteer.aspx" />
+    <Content Include="secure\administration\watershed.aspx" />
     <Content Include="api.asmx" />
     <Content Include="debug.aspx" />
     <Content Include="gallery.aspx" />
@@ -1694,6 +1706,7 @@
     <Content Include="style\fontawesome\webfonts\fa-brands-400.svg" />
     <Content Include="style\fontawesome\webfonts\fa-regular-400.svg" />
     <Content Include="style\fontawesome\webfonts\fa-solid-900.svg" />
+    <None Include="Web References\LDAP_Search\ldap_search.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1713,67 +1726,92 @@
     <Compile Include="admin.aspx.designer.cs">
       <DependentUpon>admin.aspx</DependentUpon>
     </Compile>
-    <Compile Include="administration\about.aspx.cs">
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\LDAP_Search\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\Reference.cs" />
+    <Compile Include="secure\administration\403http.aspx.cs">
+      <DependentUpon>403http.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="secure\administration\403http.aspx.designer.cs">
+      <DependentUpon>403http.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="secure\administration\about.aspx.cs">
       <DependentUpon>about.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="administration\about.aspx.designer.cs">
+    <Compile Include="secure\administration\about.aspx.designer.cs">
       <DependentUpon>about.aspx</DependentUpon>
     </Compile>
-    <Compile Include="administration\administration.master.cs">
+    <Compile Include="secure\administration\administration.master.cs">
       <DependentUpon>administration.master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="administration\administration.master.designer.cs">
+    <Compile Include="secure\administration\administration.master.designer.cs">
       <DependentUpon>administration.master</DependentUpon>
     </Compile>
-    <Compile Include="administration\download.aspx.cs">
+    <Compile Include="secure\administration\Auth.aspx.cs">
+      <DependentUpon>Auth.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="secure\administration\Auth.aspx.designer.cs">
+      <DependentUpon>Auth.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="secure\administration\download.aspx.cs">
       <DependentUpon>download.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="administration\download.aspx.designer.cs">
+    <Compile Include="secure\administration\download.aspx.designer.cs">
       <DependentUpon>download.aspx</DependentUpon>
     </Compile>
-    <Compile Include="administration\gallery.aspx.cs">
+    <Compile Include="secure\administration\gallery.aspx.cs">
       <DependentUpon>gallery.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="administration\gallery.aspx.designer.cs">
+    <Compile Include="secure\administration\gallery.aspx.designer.cs">
       <DependentUpon>gallery.aspx</DependentUpon>
     </Compile>
-    <Compile Include="administration\location.aspx.cs">
+    <Compile Include="secure\administration\location.aspx.cs">
       <DependentUpon>location.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="administration\location.aspx.designer.cs">
+    <Compile Include="secure\administration\location.aspx.designer.cs">
       <DependentUpon>location.aspx</DependentUpon>
     </Compile>
-    <Compile Include="administration\upload.aspx.cs">
+    <Compile Include="secure\administration\upload.aspx.cs">
       <DependentUpon>upload.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="administration\upload.aspx.designer.cs">
+    <Compile Include="secure\administration\upload.aspx.designer.cs">
       <DependentUpon>upload.aspx</DependentUpon>
     </Compile>
-    <Compile Include="administration\usermanage.aspx.cs">
+    <Compile Include="secure\administration\usermanage.aspx.cs">
       <DependentUpon>usermanage.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="administration\usermanage.aspx.designer.cs">
+    <Compile Include="secure\administration\usermanage.aspx.designer.cs">
       <DependentUpon>usermanage.aspx</DependentUpon>
     </Compile>
-    <Compile Include="administration\volunteer.aspx.cs">
+    <Compile Include="secure\administration\volunteer.aspx.cs">
       <DependentUpon>volunteer.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="administration\volunteer.aspx.designer.cs">
+    <Compile Include="secure\administration\volunteer.aspx.designer.cs">
       <DependentUpon>volunteer.aspx</DependentUpon>
     </Compile>
-    <Compile Include="administration\watershed.aspx.cs">
+    <Compile Include="secure\administration\watershed.aspx.cs">
       <DependentUpon>watershed.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="administration\watershed.aspx.designer.cs">
+    <Compile Include="secure\administration\watershed.aspx.designer.cs">
       <DependentUpon>watershed.aspx</DependentUpon>
     </Compile>
     <Compile Include="CitizenScience.Master.cs">
@@ -1835,7 +1873,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CitizenScience.Master" />
-    <Content Include="administration\administration.master" />
+    <Content Include="secure\administration\administration.master" />
+    <None Include="Web References\ldap_search.wsdl" />
+    <Content Include="getimage.ashx" />
     <Content Include="images\location\get.ashx" />
     <Content Include="images\location\set.ashx" />
     <Content Include="images\album\set.ashx" />
@@ -1900,6 +1940,11 @@
     <Content Include="style\fontawesome\webfonts\fa-solid-900.woff2" />
     <Content Include="setlocationimage.ashx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Web References\Reference.map" />
+    <Content Include="Web References\TempleLDAPEntry.datasource" />
+    <Content Include="Web References\LDAP_Search\TempleLDAPEntry1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1916,7 +1961,22 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="https://preprod-wsw.temple.edu/ws_ldapsearch/ldap_search.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\LDAP_Search\</RelPath>
+      <UpdateFromURL>https://preprod-wsw.temple.edu/ws_ldapsearch/ldap_search.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CitizenScience_UIPrototype_LDAPsearch_LDAP_Search</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
@@ -1932,7 +1992,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>63093</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:63073/</IISUrl>
+          <IISUrl>http://localhost:50000/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

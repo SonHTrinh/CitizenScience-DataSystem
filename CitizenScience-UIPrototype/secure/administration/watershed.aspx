@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/administration/administration.master" AutoEventWireup="true" CodeBehind="watershed.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.watershed" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/secure/administration/administration.master" AutoEventWireup="true" CodeBehind="watershed.aspx.cs" Inherits="CitizenScience_UIPrototype.administration.watershed" %>
 <%@ Import Namespace="CitizenScience_UIPrototype" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
     Manage Watersheds   |   Citizen Science

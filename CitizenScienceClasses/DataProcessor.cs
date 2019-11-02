@@ -2,6 +2,8 @@
 using CsvHelper;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -44,7 +46,20 @@ namespace CitizenScienceClasses
             return result;
         }
 
+        public static DataSet AuthenticateAdmin(string tu_id)
+        {
+            string employeeNumber = tu_id;
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "ValidateAdmin";
 
+            // uncomment for live version
+            comm.Parameters.AddWithValue("@TU_ID", employeeNumber);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
 
+            return dataSet; 
+            
+        }
     }
 }

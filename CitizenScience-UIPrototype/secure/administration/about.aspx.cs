@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using CitizenScienceClasses;
 
 namespace CitizenScience_UIPrototype.administration
 {
@@ -12,7 +11,11 @@ namespace CitizenScience_UIPrototype.administration
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
-        }       
+            if (Session["Authenticated"].ToString() == "" || Session["Authenticated"].ToString() == null || Session["Authenticated"].ToString() == "false")
+            {
+                Server.Transfer("403http.aspx"); 
+            }
+
+        }
     }
 }
