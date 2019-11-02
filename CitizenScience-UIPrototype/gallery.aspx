@@ -6,9 +6,10 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
     <!--Style links-->
     <link rel="stylesheet" href="/style/custom/galleryAPI-style.css" />
-    <%-- Javascript --%>
+    <!-- Javascript -->
     <script src="js/gallery.js"></script>
     
+    <!-- Html content -->
     <div class="container-fluid" id="album-placeholder">
         <div class="row mt-1">
             <div class="col-12 text-center">
@@ -17,9 +18,13 @@
         </div>
         <div class="row mt-1 mb-3">
             <div class="col-12">
-                <button class="btn btn-success">button</button>
+                <button class="btn btn-success">button1</button>
+                <button class="btn btn-success">button2</button>
+                <button class="btn btn-success">button3</button>
             </div>
         </div>
-        
     </div>
+    
+    <!-- Album Modal -->
+
 </asp:Content>
