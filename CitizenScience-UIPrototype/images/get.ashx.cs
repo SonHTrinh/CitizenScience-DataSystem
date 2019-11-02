@@ -18,7 +18,7 @@ namespace CitizenScience_UIPrototype.images
             {
                 Image image = null;
                 byte[] bytes;
-                int imageId = int.Parse(context.Request["imageid"]);
+                int imageId = int.Parse(context.Request["id"]);
 
                 image = ClassFunctions.GetImage(imageId);
 

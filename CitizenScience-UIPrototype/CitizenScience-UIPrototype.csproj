@@ -1875,7 +1875,6 @@
     <Content Include="CitizenScience.Master" />
     <Content Include="secure\administration\administration.master" />
     <None Include="Web References\ldap_search.wsdl" />
-    <Content Include="getimage.ashx" />
     <Content Include="images\location\get.ashx" />
     <Content Include="images\location\set.ashx" />
     <Content Include="images\album\set.ashx" />

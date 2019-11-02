@@ -1,6 +1,6 @@
 ﻿
 function buildAlbumElement(albumObj, columnClass) {
-	var imageUrl = 'images/albumprofile.ashx?albumId=' + albumObj.AlbumID;
+	var imageUrl = '../images/album/get.ashx?id=' + albumObj.AlbumID;
 	var imageHeight = '200px';
 	var imageWidth = '200px';
 	var albumTitle = albumObj.Name;
@@ -38,6 +38,7 @@ function buildAlbumElement(albumObj, columnClass) {
 		.attr('src', imageUrl);
 
 	var viewButton = $(document.createElement('button'))
+		.attr('id', 'album-view-' + albumObj.AlbumID)
 		.attr('type', 'button')
 		.attr('data-toggle', 'modal')
 		.attr('data-target', '.bd-example-modal-lg')
@@ -45,13 +46,15 @@ function buildAlbumElement(albumObj, columnClass) {
 		.addClass('btn-primary')
 		.addClass('px-5')
 		.addClass('my-2')
-		.text('View');
+		.text('View')
+		.click(function() {
+			initModal(albumObj);
+		});
 		
 
 	titleRow.append(title);
 	profileImageRow.append(profileImage);
 	buttonRow.append(viewButton);
-
 
 	columnElement.append(titleRow);
 	columnElement.append(profileImageRow);
@@ -59,6 +62,10 @@ function buildAlbumElement(albumObj, columnClass) {
 	columnElement.append(buttonRow);
 
 	return columnElement;
+}
+
+function initModal(albumObj) {
+
 }
 
 $(function() {
@@ -73,7 +80,9 @@ $(function() {
 
 			for (var i = 0; i <= numOfRows; i++) {
 
-				var row = $(document.createElement('div')).addClass('row').addClass('my-5');
+				var row = $(document.createElement('div'))
+					.addClass('row')
+					.addClass('my-5');
 
 				for (var j = 0; j < numOfColumnsPerRow && albumIteration < numOfAlbums; j++) {
 

@@ -26,7 +26,7 @@ namespace CitizenScience_UIPrototype.images.album
                         bytes = binaryReader.ReadBytes((int)stream.Length);
                     }
 
-                    int albumId = int.Parse(context.Request["albumid"]);
+                    int albumId = int.Parse(context.Request["id"]);
                     string contentType = postedFile.ContentType;
 
                     //Image result = ClassFunctions.SetLocationImage(albumId, bytes, contentType);
