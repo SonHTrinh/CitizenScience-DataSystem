@@ -1,22 +1,33 @@
 ﻿
-function buildAlbumElement(albumObj) {
+function buildAlbumElement(albumObj, columnClass) {
 	var imageUrl = 'images/albumprofile.ashx?albumId=' + albumObj.AlbumID;
 	var imageHeight = '200px';
 	var imageWidth = '200px';
-	var albumTitle = albumObj.Title;
+	var albumTitle = albumObj.Name;
 
-	var baseElement = $(document.createElement('div'));
+	// The element to hold everything
+	var columnElement = $(document.createElement('div'))
+		.addClass('album-element')
+		.addClass(columnClass);
 
+	// Row elements
 	var titleRow = $(document.createElement('div'))
 		.addClass('row')
 		.addClass('justify-content-center');
 
 	var profileImageRow = $(document.createElement('div'))
-		.addClass('row');
+		.addClass('row')
+		.addClass('justify-content-center');
 
 	var descriptionRow = $(document.createElement('div'))
-		.addClass('row');
+		.addClass('row')
+		.addClass('justify-content-center');
 
+	var buttonRow = $(document.createElement('div'))
+		.addClass('row')
+		.addClass('justify-content-center');
+
+	// Content
 	var title = $(document.createElement('p'))
 		.addClass('font-weight-bold')
 		.text(albumTitle);
@@ -26,14 +37,28 @@ function buildAlbumElement(albumObj) {
 		.css('width', imageWidth)
 		.attr('src', imageUrl);
 
+	var viewButton = $(document.createElement('button'))
+		.attr('type', 'button')
+		.attr('data-toggle', 'modal')
+		.attr('data-target', '.bd-example-modal-lg')
+		.addClass('btn')
+		.addClass('btn-primary')
+		.addClass('mx-5')
+		.addClass('my-2')
+		.text('View');
+		
+
 	titleRow.append(title);
 	profileImageRow.append(profileImage);
+	buttonRow.append(viewButton);
 
-	baseElement.append(titleRow);
-	baseElement.append(profileImageRow);
-	baseElement.append(descriptionRow);
 
-	return baseElement;
+	columnElement.append(titleRow);
+	columnElement.append(profileImageRow);
+	columnElement.append(descriptionRow);
+	columnElement.append(buttonRow);
+
+	return columnElement;
 }
 
 $(function() {
@@ -48,27 +73,14 @@ $(function() {
 
 			for (var i = 0; i <= numOfRows; i++) {
 
-				var row = $(document.createElement('div')).addClass('row').addClass('mb-2');
+				var row = $(document.createElement('div')).addClass('row').addClass('my-5');
 
 				for (var j = 0; j < numOfColumnsPerRow && albumIteration < numOfAlbums; j++) {
 
-					var column = $(document.createElement('div')).addClass('col-3 border');
-
-					//View button row
-					var nestedRow4 = $(document.createElement('div')).addClass('row').addClass('justify-content-left');
-					var view = $(document.createElement('a'));
-					view.addClass('btn btn-outline-dark');
-					view.text('View');
-					view.attr('href', '#');
-					view.attr('data-toggle', 'modal');
-					view.attr('data-target', '#exampleModalCenter');
-					nestedRow4.append(view);
 					//Append 
-					var albumElement = buildAlbumElement(responseData[albumIteration]);
+					var albumColumnElement = buildAlbumElement(responseData[albumIteration], 'col-3');
 
-					column.append(albumElement);
-
-					row.append(column);
+					row.append(albumColumnElement);
 					albumIteration++;
 				}
 

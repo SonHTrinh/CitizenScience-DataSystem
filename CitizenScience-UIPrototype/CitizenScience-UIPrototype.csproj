@@ -103,6 +103,7 @@
     <Content Include="api.asmx" />
     <Content Include="debug.aspx" />
     <Content Include="gallery.aspx" />
+    <Content Include="style\custom\gallery.css" />
     <Content Include="style\custom\galleryAPI-style.css" />
     <Content Include="Global.asax" />
     <Content Include="img\bell-tower.jpg" />

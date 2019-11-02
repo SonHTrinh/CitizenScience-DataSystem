@@ -5,26 +5,71 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
     <!--Style links-->
-    <link rel="stylesheet" href="/style/custom/galleryAPI-style.css" />
+    <link rel="stylesheet" href="/style/custom/gallery.css" />
     <!-- Javascript -->
     <script src="js/gallery.js"></script>
     
     <!-- Html content -->
-    <div class="container-fluid" id="album-placeholder">
-        <div class="row mt-1">
+    <div class="container" id="album-placeholder">
+        <div class="row my-3">
             <div class="col-12 text-center">
                 <h1>Image Gallery</h1>
             </div>
         </div>
-        <div class="row mt-1 mb-3">
-            <div class="col-12">
-                <button class="btn btn-success">button1</button>
-                <button class="btn btn-success">button2</button>
-                <button class="btn btn-success">button3</button>
+        <div class="row my-4 justify-content-center">
+            <div class="col-4 text-center">
+                <button class="btn btn-success">All</button>
+                <button class="btn btn-success">Locations</button>
+                <button class="btn btn-success">Other</button>
             </div>
         </div>
     </div>
     
     <!-- Album Modal -->
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-12">
+                                <div id="carouselExampleControls" class="carousel slide" data-interval="false">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img class="d-block w-100" src="https://picsum.photos/100" alt="First slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="https://picsum.photos/200" alt="Second slide">
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img class="d-block w-100" src="https://picsum.photos/300" alt="Third slide">
+                                        </div>
+                                    </div>
+                                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Previous</span>
+                                    </a>
+                                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%-- <div class="modal-footer"> --%>
+                <%--     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --%>
+                <%--     <button type="button" class="btn btn-primary">Save changes</button> --%>
+                <%-- </div> --%>
+            </div>
+        </div>
+    </div>
 
 </asp:Content>
