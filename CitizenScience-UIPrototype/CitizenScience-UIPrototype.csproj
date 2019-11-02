@@ -1841,6 +1841,7 @@
     <Content Include="images\album\set.ashx" />
     <Content Include="images\get.ashx" />
     <Content Include="images\album\get.ashx" />
+    <Content Include="img\.gitkeep" />
     <None Include="packages.config" />
     <Content Include="style\custom\TEMPLE_BRANDING.md" />
     <Content Include="style\fontawesome\less\brands.less" />
@@ -1915,9 +1916,7 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="img\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
