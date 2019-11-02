@@ -1,5 +1,10 @@
 ﻿
 function buildAlbumElement(albumObj) {
+	var imageUrl = 'images/albumprofile.ashx?albumId=' + albumObj.AlbumID;
+	var imageHeight = '200px';
+	var imageWidth = '200px';
+	var albumTitle = albumObj.Title;
+
 	var baseElement = $(document.createElement('div'));
 
 	var titleRow = $(document.createElement('div'))
@@ -14,10 +19,11 @@ function buildAlbumElement(albumObj) {
 
 	var title = $(document.createElement('p'))
 		.addClass('font-weight-bold')
-		.text(albumObj.Title);
+		.text(albumTitle);
 
-	var imageUrl = 'images/albumprofile.ashx?albumId=' + albumObj.AlbumID;
 	var profileImage = $(document.createElement('img'))
+		.css('height', imageHeight)
+		.css('width', imageWidth)
 		.attr('src', imageUrl);
 
 	titleRow.append(title);
@@ -30,12 +36,13 @@ function buildAlbumElement(albumObj) {
 	return baseElement;
 }
 
-$(function buildAlbum(album) {
+$(function() {
+
 	$.ajax({
 		url: "../api.asmx/AllAlbum",
 		success: function (responseData) {
 			var numOfAlbums = responseData.length;
-			var numOfColumnsPerRow = 3;
+			var numOfColumnsPerRow = 4;
 			var numOfRows = Math.ceil(numOfAlbums / numOfColumnsPerRow);
 			var albumIteration = 0;
 
@@ -45,7 +52,7 @@ $(function buildAlbum(album) {
 
 				for (var j = 0; j < numOfColumnsPerRow && albumIteration < numOfAlbums; j++) {
 
-					var column = $(document.createElement('div')).addClass('col-4 border');
+					var column = $(document.createElement('div')).addClass('col-3 border');
 
 					//View button row
 					var nestedRow4 = $(document.createElement('div')).addClass('row').addClass('justify-content-left');
