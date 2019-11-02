@@ -43,7 +43,7 @@ function buildAlbumElement(albumObj, columnClass) {
 		.attr('data-target', '.bd-example-modal-lg')
 		.addClass('btn')
 		.addClass('btn-primary')
-		.addClass('mx-5')
+		.addClass('px-5')
 		.addClass('my-2')
 		.text('View');
 		

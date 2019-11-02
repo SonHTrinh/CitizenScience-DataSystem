@@ -1720,7 +1720,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="WebService1.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="about.aspx.cs">
@@ -1832,9 +1831,6 @@
     <Compile Include="gallery.aspx.designer.cs">
       <DependentUpon>gallery.aspx</DependentUpon>
     </Compile>
-    <Compile Include="getimage.ashx.cs">
-      <DependentUpon>getimage.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1859,19 +1855,15 @@
     <Compile Include="setlocationimage.ashx.cs">
       <DependentUpon>setlocationimage.ashx</DependentUpon>
     </Compile>
-    <Compile Include="WebService1.asmx.cs">
-      <DependentUpon>WebService1.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="CitizenScience.Master" />
     <Content Include="administration\administration.master" />
-    <Content Include="getimage.ashx" />
     <Content Include="images\location\get.ashx" />
     <Content Include="images\location\set.ashx" />
     <Content Include="images\album\set.ashx" />
     <Content Include="images\get.ashx" />
+    <Content Include="images\album\get.ashx" />
     <None Include="packages.config" />
     <Content Include="style\custom\TEMPLE_BRANDING.md" />
     <Content Include="style\fontawesome\less\brands.less" />
