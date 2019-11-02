@@ -23,10 +23,11 @@
                 <button class="btn btn-success">Other</button>
             </div>
         </div>
+        <!-- Rows with Album Elements will be appended here -->
     </div>
     
     <!-- Album Modal -->
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div id="gallery-modal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -40,16 +41,8 @@
                         <div class="row">
                             <div class="col-12">
                                 <div id="carouselExampleControls" class="carousel slide" data-interval="false">
-                                    <div class="carousel-inner">
-                                        <div class="carousel-item active">
-                                            <img class="d-block w-100" src="https://picsum.photos/100" alt="First slide">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block w-100" src="https://picsum.photos/200" alt="Second slide">
-                                        </div>
-                                        <div class="carousel-item">
-                                            <img class="d-block w-100" src="https://picsum.photos/300" alt="Third slide">
-                                        </div>
+                                    <div id="album-image-placeholder" class="carousel-inner">
+                                        <!-- Images will be appended to here -->
                                     </div>
                                     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
                                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>

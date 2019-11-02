@@ -57,8 +57,24 @@ namespace CitizenScience_UIPrototype.images.album
 
         public void ProcessRequest(HttpContext context)
         {
-            context.Response.ContentType = "text/plain";
-            context.Response.Write("Hello World");
+            try
+            {
+                Image image = null;
+                byte[] bytes;
+                int albumId = int.Parse(context.Request["id"]);
+
+                image = ClassFunctions.GetAlbumImage(albumId);
+
+                context.Response.ContentType = image.ContentType;
+                context.Response.BinaryWrite(image.Bytes);
+
+            }
+            catch (Exception ex)
+            {
+                context.Response.Write("Error occurred on server " +
+                                       ex.Message);
+            }
+
         }
 
         public bool IsReusable

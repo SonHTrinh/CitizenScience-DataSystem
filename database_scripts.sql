@@ -78,6 +78,7 @@ CREATE TABLE [dbo].[Album] (
     [AlbumID]     INT            IDENTITY (1, 1) NOT NULL,
     [Name]    NVARCHAR (MAX) NOT NULL,
     [Description] NVARCHAR (MAX) NOT NULL,
+	[IsLocationAlbum] BIT,
 	[LastUpdated] DATETIME,
     PRIMARY KEY CLUSTERED ([AlbumID] ASC)
 );
@@ -470,6 +471,14 @@ CREATE PROCEDURE [dbo].[GetLocationImage]
 AS
 	SELECT * FROM [Image]
 	WHERE ImageId = (SELECT [ProfileImageID] FROM Location WHERE LocationID = @locationid)
+
+GO
+
+CREATE PROCEDURE [dbo].[GetAlbumImage]
+	@albumid int
+AS
+	SELECT * FROM [Image]
+	WHERE [ImageId] = (SELECT [ImageID] FROM [AlbumImages] WHERE AlbumID = @albumid AND [ImageID] IN (SELECT [ProfileImageID] FROM [Location]))
 
 GO
 

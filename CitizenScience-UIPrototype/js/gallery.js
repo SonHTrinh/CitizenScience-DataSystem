@@ -40,8 +40,6 @@ function buildAlbumElement(albumObj, columnClass) {
 	var viewButton = $(document.createElement('button'))
 		.attr('id', 'album-view-' + albumObj.AlbumID)
 		.attr('type', 'button')
-		.attr('data-toggle', 'modal')
-		.attr('data-target', '.bd-example-modal-lg')
 		.addClass('btn')
 		.addClass('btn-primary')
 		.addClass('px-5')
@@ -64,8 +62,42 @@ function buildAlbumElement(albumObj, columnClass) {
 	return columnElement;
 }
 
-function initModal(albumObj) {
+function clearNodeChildren(node) {
+	while (node.firstChild) {
+		node.removeChild(node.firstChild);
+	}
+}
 
+function initModal(albumObj) {
+	var imagePlaceholder = $('#album-image-placeholder');
+
+	clearNodeChildren(document.getElementById("album-image-placeholder"));
+
+	$.get({
+		url: '../api.asmx/GetAlbumImageIds?albumId=' + albumObj.AlbumID
+	}).done(function(imageIdArray) {
+
+		imageIdArray.forEach(function(imageId) {
+			var imageUrl = "../images/get.ashx?id=" + imageId;
+
+			var carouselItemElement = $(document.createElement('div'))
+				.addClass('carousel-item');
+
+			var imageElement = $(document.createElement('img'))
+				.addClass('d-block')
+				.addClass('w-100')
+				.attr('src', imageUrl);
+
+			carouselItemElement.append(imageElement);
+			imagePlaceholder.append(carouselItemElement);
+		});
+
+		imagePlaceholder.children(':first').addClass('active');
+
+		$('#gallery-modal').modal('show');
+	}).fail(function() {
+		console.log("Error Getting Image IDs for Album " + albumObj.AlbumID);
+	});
 }
 
 $(function() {
