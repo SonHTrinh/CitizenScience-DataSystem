@@ -458,7 +458,28 @@
                                     borderWidth: 1
                                 }]
                             },
-                            options: {}
+                            options: {
+                                events: [],
+                                scales: {
+                                    showXLabels: 100,
+                                    yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Temperture(Fahrenheit)'
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: true,
+                                            maxTicksLimit: 7
+                                        },
+                                        scaleLabel: {
+                                            display: true,       
+                                            labelString: 'Date/Time',
+                                        }
+                                    }]
+                                } 
+                            }
                         });
                     },
                     error: function (errorData) {
@@ -505,7 +526,28 @@
                                     borderWidth: 1
                                 }]
                             },
-                            options: {}
+                            options: {
+                                events: [],
+                                scales: {
+                                    showXLabels: 100,
+                                    yAxes: [{
+                                        scaleLabel: {
+                                            display: true,
+                                            labelString: 'Temperture(Fahrenheit)'
+                                        }
+                                    }],
+                                    xAxes: [{
+                                        ticks: {
+                                            autoSkip: true,
+                                            maxTicksLimit: 7
+                                        },
+                                        scaleLabel: {
+                                            display: true,       
+                                            labelString: 'Date/Time',
+                                        }
+                                    }]
+                                } 
+                            }
                         });
                     },
                     error: function (errorData) {
