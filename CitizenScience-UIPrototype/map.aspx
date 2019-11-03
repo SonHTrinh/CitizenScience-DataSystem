@@ -42,9 +42,8 @@
                                         <div class="col-4">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <img src="img" alt="Here should be a picture of the watershed" class="modalImage" style="max-width: 100%; max-height: 100%;"  />
+                                                    <img src="img" alt="watershed-location-profile" class="modalImage" style="max-width: 100%; max-height: 100%;"  />
                                                 </div>
-                                                
                                             </div>
                                             <div class="row mt-4">
                                                 <div class="col-12">
@@ -273,8 +272,24 @@
                             //}
 
                             //Download button
-                            $('#downloadCsv').click(function () {
-                                window.location.href = '<%= Global.Url_Prefix() %>/api.asmx/AllLocationTemperaturesCsv';
+                            $('#downloadCsv').click(function () {                                
+                                window.location.href = '<%= Global.Url_Prefix() %>/api.asmx/AllLocationTemperaturesCsv';      
+                                /*
+                                var endDate = $('#end_datepicker').val();
+                                var startDate = $('#start_datepicker').val();
+                                //  If Start and End dates not specified...
+                                if (startDate == "" && endDate == "")
+                                    downloadTempDataNoStartNoEnd(location.LocationID);
+                                //  If Start not specified and End specified...
+                                else if (startDate == "" && endDate != "")
+                                    downloadTempDataNoStartEnd(location.LocationID, endDate);
+                                //  If Start specified and End not specified...
+                                else if (startDate != "" && endDate == "")
+                                    downloadTempDataStartNoEnd(location.LocationID, startDate);
+                                //  If both Start and End specified...
+                                else if (startDate != "" && endDate != "")
+                                    downloadTempDataStartEnd(location.LocationID, startDate, endDate);  
+                                */
                             });
 
                             //Close Modal
@@ -290,8 +305,8 @@
 
             function initMap() {
                 theMap = new google.maps.Map(document.getElementById('map'), {
-                    center: new google.maps.LatLng(40.0319, -75.1134),
-                    zoom: 10
+                    center: new google.maps.LatLng(40.0219, -75.1134),
+                    zoom: 8
                 });
 
                 $.ajax({
@@ -511,6 +526,29 @@
                 return month + '-' + day + '-' + year;
             }
 
+
+            //  TEMPERATURE DATA DOWNLOAD FUNCTIONS
+            function downloadTempDataNoStartNoEnd(locationID) {
+                //  Download all Temperature data for selected Location
+                alert(locationID);
+                window.location.href = '<%= Global.Url_Prefix() %>/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
+            }
+            function downloadTempDataStartNoEnd(locationID, startDate) {
+                //  Download all Temperature data for selected Location from startDate onward
+                alert("NO END");
+                window.location.href = '<%= Global.Url_Prefix() %>/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
+            }
+            function downloadTempDataNoStartEnd(locationID, endDate) {
+                //  Download all Temperature data for selected Location beginning of data recording to endDate
+                alert("NO START");                
+                window.location.href = '<%= Global.Url_Prefix() %>/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
+            }
+            function downloadTempDataStartEnd(locationID, startDate, endDate) {
+                //  Download all Temperature data for selected Location from startDate to endDate
+                alert("START, END");
+                window.location.href = '<%= Global.Url_Prefix() %>/api.asmx/LocationTemperaturesCsv?locationId' + locationID;
+            }
+                
             function showLatestDate(id, Format) {
                 if (Format == "C") {
                     $.get("<%= Global.Url_Prefix() %>/api.asmx/GetLocationLatestTemperature?locationid=" + id, function (response) {

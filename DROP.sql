@@ -57,6 +57,9 @@ GO
 DROP PROCEDURE IF EXISTS [GetAllTemperaturesByLocationId]
 GO
 
+DROP PROCEDURE IF EXISTS [GetLatestLocationTemperature]
+GO
+
 DROP PROCEDURE IF EXISTS [GetAllTemperaturesByMultipleLocationIds]
 GO
 
@@ -82,6 +85,15 @@ DROP PROCEDURE IF EXISTS [GetAllVolunteers]
 GO
 
 DROP PROCEDURE IF EXISTS [GetLocationTemperaturesByDateRange]
+GO
+
+DROP PROCEDURE IF EXISTS [GetTemperaturesByLocationIdStartEnd]
+GO
+
+DROP PROCEDURE IF EXISTS [GetTemperaturesByLocationIdNoStartEnd]
+GO
+
+DROP PROCEDURE IF EXISTS [GetTemperaturesByLocationIdStartNoEnd]
 GO
 
 DROP PROCEDURE IF EXISTS [GetLocationImage]
@@ -112,6 +124,9 @@ DROP PROCEDURE IF EXISTS [CreateAdmin]
 GO
 
 DROP PROCEDURE IF EXISTS [UpdateAdmin]
+GO
+
+DROP PROCEDURE IF EXISTS [ValidateAdmin]
 GO
 
 DROP PROCEDURE IF EXISTS [NewAbout]

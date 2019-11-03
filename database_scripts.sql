@@ -217,6 +217,40 @@ AS
 
 GO
 
+-----------------------------	MAP PAGE DOWNLOAD PROCEDURES
+CREATE PROCEDURE [dbo].[GetTemperaturesByLocationIdStartEnd]
+	@locationID int,
+	@startDate date,
+	@endDate date
+AS
+	SELECT * FROM Temperature JOIN Location ON Temperature.LocationID = Location.LocationID
+	WHERE Temperature.Timestamp >= @startDate
+	AND Temperature.Timestamp <= @endDate
+	AND Temperature.LocationID = @locationID
+
+GO
+
+CREATE PROCEDURE [dbo].[GetTemperaturesByLocationIdNoStartEnd]
+	@locationID int,
+	@endDate date
+AS
+	SELECT * FROM Temperature JOIN Location ON Temperature.LocationID = Location.LocationID
+	WHERE Temperature.Timestamp <= @endDate
+	AND Temperature.LocationID = @locationID
+
+GO
+
+CREATE PROCEDURE [dbo].[GetTemperaturesByLocationIdStartNoEnd]
+	@locationID int,
+	@startDate date
+AS
+	SELECT * FROM Temperature JOIN Location ON Temperature.LocationID = Location.LocationID
+	WHERE Temperature.Timestamp >= @startDate
+	AND Temperature.LocationID = @locationID
+
+GO
+-------------------------------------------------------------
+
 CREATE PROCEDURE [dbo].[GetAllVolunteers]
 AS
 	SELECT * FROM Volunteer
@@ -376,6 +410,14 @@ AS
 	
 GO
 
+CREATE PROCEDURE [dbo].[ValidateAdmin]
+	@TU_ID varchar(max)
+AS
+	SELECT * FROM Admin 
+	WHERE AdminID = @TU_ID AND Active = 1
+
+GO
+
 CREATE PROCEDURE [dbo].[UpdateAdmin]
 	@id int,
 	@tuid NVARCHAR(MAX),
@@ -455,6 +497,11 @@ AS
 
 GO
 
+CREATE PROCEDURE [dbo].[GetAllAlbum]
+AS
+	SELECT * FROM [Album]
+
+GO
 
 -- TODO: Find better way to insert initial images
 -- TEST IMAGE GENERATOR 

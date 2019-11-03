@@ -213,7 +213,42 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllTemperaturesByMultipleLocationIds";
             comm.Parameters.AddWithValue("@listOfLocationID", commaList);
             return conn.GetDataSetUsingCmdObj(comm);
-        }        
+        }  
+
+
+        public static DataSet GetTemperaturesByLocationIdStartNoEnd(int locationID, DateTime startDate)
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetTemperaturesByLocationIdStartNoEnd";
+            comm.Parameters.AddWithValue("@locationID", locationID);
+            comm.Parameters.AddWithValue("@startDate", startDate);
+            return conn.GetDataSetUsingCmdObj(comm);
+        }
+        public static DataSet GetTemperaturesByLocationIdNoStartEnd(int locationID, DateTime endDate)
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetTemperaturesByLocationIdNoStartEnd";
+            comm.Parameters.AddWithValue("@locationID", locationID);
+            comm.Parameters.AddWithValue("@endDate", endDate);
+            return conn.GetDataSetUsingCmdObj(comm);
+        }
+        public static DataSet GetTemperaturesByLocationIdStartEnd(int locationID, DateTime startDate, DateTime endDate)
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetTemperaturesByLocationIdStartEnd";
+            comm.Parameters.AddWithValue("@locationID", locationID);
+            comm.Parameters.AddWithValue("@startDate", startDate);
+            comm.Parameters.AddWithValue("@endDate", endDate);
+            return conn.GetDataSetUsingCmdObj(comm);
+        }
+
+
         public static int AddTempsToDatabase(List<Temperature> temperatureList, int locationid)
         {
             int k = 0;
@@ -311,7 +346,6 @@ namespace CitizenScienceClasses
 
             return result;
         }
-
 
 
         /////////////////////////////////   WATERSHED FUNCTIONS
@@ -749,6 +783,15 @@ namespace CitizenScienceClasses
 
 
 
+        /////////////////////////////////   GALLERY FUNCTIONS
+        public static DataSet GetAllAlbum()
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAllAlbum";
+            return conn.GetDataSetUsingCmdObj(comm);
+        }
     }
 }
 
