@@ -15,8 +15,7 @@
     <AssemblyName>CitizenScience-UIPrototype</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>
-    </Use64BitIISExpress>
+    <Use64BitIISExpress>true</Use64BitIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -45,6 +44,7 @@
         </ObjectGroup>
       </Objects>
     </PublishDatabaseSettings>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -99,6 +99,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\ldap_search.disco" />
+    <Content Include="js\map.js" />
     <Content Include="secure\administration\403http.aspx" />
     <Content Include="secure\administration\Auth.aspx" />
     <Content Include="style\custom\admin-style.css" />
@@ -2004,6 +2005,7 @@
       <CachedSettingsPropName>CitizenScience_UIPrototype_LDAPsearch_LDAP_Search</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
