@@ -430,21 +430,6 @@ AS
 	
 GO
 
-CREATE PROCEDURE ValidateAdmin
-	@TU_ID varchar(max)
-AS
-	SELECT * FROM Admin 
-	WHERE AdminID = @TU_ID AND Active = 1
-
-GO
-
-CREATE PROCEDURE ValidateAdmin
-	@TU_ID varchar(max)
-AS
-	SELECT * FROM Admin 
-	WHERE TUID = @TU_ID AND Active = 1;
-
-GO
 
 ------------------------------------------------- CRUD About
 CREATE PROCEDURE [dbo].[NewAbout]
