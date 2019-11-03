@@ -99,6 +99,7 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\ldap_search.disco" />
+    <Content Include="favicon.png" />
     <Content Include="secure\administration\403http.aspx" />
     <Content Include="secure\administration\Auth.aspx" />
     <Content Include="js\gallery.js" />
