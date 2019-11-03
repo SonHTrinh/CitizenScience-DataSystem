@@ -307,13 +307,11 @@ GO
 CREATE PROCEDURE [dbo].[GetLatestLocationTemperature]
 	@locationid int
 AS
-	SELECT TOP 1 * 
+	SELECT TOP 1 *
 	FROM [Temperature]
 	WHERE [Timestamp]
-	IN 
-		(SELECT MAX([Timestamp]) FROM [Temperature])
-	AND 
-		[LocationID] = @locationid
+	IN
+		(SELECT MAX([Timestamp]) FROM [Temperature] WHERE [LocationID] = @locationid)
 
 GO
 
@@ -428,14 +426,6 @@ AS
 	WHERE AdminID = @id
 	SELECT * FROM Admin where AdminID = @id
 	
-GO
-
-CREATE PROCEDURE ValidateAdmin
-	@TU_ID varchar(max)
-AS
-	SELECT * FROM Admin 
-	WHERE AdminID = @TU_ID AND Active = 1
-
 GO
 
 ------------------------------------------------- CRUD About

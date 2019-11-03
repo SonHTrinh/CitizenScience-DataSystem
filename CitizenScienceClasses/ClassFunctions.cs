@@ -792,6 +792,17 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllAlbum";
             return conn.GetDataSetUsingCmdObj(comm);
         }
+
+        ///////////////////////////////// Convenience Functions
+        public static string FormatForFileSystem(string theString)
+        {
+            foreach (char c in System.IO.Path.GetInvalidFileNameChars())
+            {
+                theString = theString.Replace(c, '_');
+            }
+
+            return theString;
+        } 
     }
 }
 
