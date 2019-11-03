@@ -75,7 +75,7 @@ function initGraph(locationObj, temperatureScale, formattedStartDate, formattedE
 				options: {
 					legend: {
 						display: false
-		},
+					},
 					events: [],
 					scales: {
 						showXLabels: 100,
@@ -83,7 +83,7 @@ function initGraph(locationObj, temperatureScale, formattedStartDate, formattedE
 							scaleLabel: {
 								display: true,
 								labelString: 'Temperture (' + legendText + ')'
-		}
+							}
 						}],
 						xAxes: [{
 							ticks: {
