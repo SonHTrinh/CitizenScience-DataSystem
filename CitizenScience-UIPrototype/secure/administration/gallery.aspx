@@ -193,6 +193,8 @@
                 var icon = $(document.createElement('i'))
                     .addClass('fas fa-angle-right');
 
+
+
                 button.append(icon);
                 placeholder.append(button);
 
