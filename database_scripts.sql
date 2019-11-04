@@ -413,7 +413,7 @@ CREATE PROCEDURE [dbo].[ValidateAdmin]
 	@TU_ID varchar(max)
 AS
 	SELECT * FROM Admin 
-	WHERE AdminID = @TU_ID AND Active = 1
+	WHERE TUID = @TU_ID AND Active = 1
 
 GO
 
