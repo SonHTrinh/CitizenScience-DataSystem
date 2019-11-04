@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -820,6 +820,19 @@ namespace CitizenScienceClasses
             return conn.GetDataSetUsingCmdObj(comm);
         }
 
+
+      
+        ///////////////////////////////// Convenience Functions
+        public static string FormatForFileSystem(string theString)
+        {
+            foreach (char c in System.IO.Path.GetInvalidFileNameChars())
+            {
+                theString = theString.Replace(c, '_');
+            }
+
+            return theString;
+        } 
+      
     }
 }
 
