@@ -21,7 +21,7 @@ namespace CitizenScienceClasses
 
         //FOR PUBLIC INTERNET
         //String SqlConnectString = "server=67.205.188.98;Database=brian0;User id=SA;Password=H5$5L7!Ajn4ef#3iYH";
-
+        
         String SqlConnectString = ConfigurationManager.ConnectionStrings["Database"].ConnectionString; 
 
         SqlConnection myConnectionSql;
@@ -31,7 +31,13 @@ namespace CitizenScienceClasses
 
         public DBConnect()
         {
-            myConnectionSql = new SqlConnection(SqlConnectString);
+            SqlConnectionStringBuilder builder = new SqlConnectionStringBuilder(SqlConnectString);
+            string base64Encoded = builder.Password;
+            byte[] data = System.Convert.FromBase64String(base64Encoded);
+            string base64Decoded = System.Text.ASCIIEncoding.ASCII.GetString(data);
+            builder.Password = base64Decoded;
+
+            myConnectionSql = new SqlConnection(builder.ToString());
         }
 
         // This method is used to execute a SELECT SQL statement and retrieve a record set containing the results.
