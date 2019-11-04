@@ -89,6 +89,7 @@
   <ItemGroup>
     <Content Include="about.aspx" />
     <Content Include="Default.aspx" />
+    <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

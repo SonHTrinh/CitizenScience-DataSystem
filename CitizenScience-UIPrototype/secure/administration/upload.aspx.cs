@@ -15,7 +15,10 @@ namespace CitizenScience_UIPrototype.administration
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["Authenticated"] == null || Session["Authenticated"].ToString() == "" || Session["Authenticated"].ToString() == "false")
+            {
+                Server.Transfer("403http.aspx");
+            }
 
             feedbackSuccess.Visible = false;
             feedbackDanger.Visible = false;
