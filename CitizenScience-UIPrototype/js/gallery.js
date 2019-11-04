@@ -1,6 +1,6 @@
 ﻿
 function buildAlbumElement(albumObj, columnClass) {
-	var imageUrl = '../images/album/get.ashx?id=' + albumObj.AlbumID;
+	var imageUrl = 'images/album/get.ashx?id=' + albumObj.AlbumID;
 	var imageHeight = '200px';
 	var imageWidth = '300px';
     var albumTitle = albumObj.Name;
@@ -86,7 +86,7 @@ function initModal(albumObj) {
 	}).done(function(imageIdArray) {
 
 		imageIdArray.forEach(function(imageId) {
-			var imageUrl = "../images/get.ashx?id=" + imageId;
+			var imageUrl = "images/get.ashx?id=" + imageId;
 
 			var carouselItemElement = $(document.createElement('div'))
 				.addClass('carousel-item');
