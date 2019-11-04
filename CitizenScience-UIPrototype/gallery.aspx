@@ -18,9 +18,9 @@
         </div>
         <div class="row my-4 justify-content-center">
             <div class="col-4 text-center">
-                <button class="btn btn-success">All</button>
-                <button class="btn btn-success">Locations</button>
-                <button class="btn btn-success">Other</button>
+                <button class="btn btn-dark">All</button>
+                <button class="btn btn-dark">Locations</button>
+                <button class="btn btn-dark">Volunteers</button>
             </div>
         </div>
         <!-- Rows with Album Elements will be appended here -->

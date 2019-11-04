@@ -2,8 +2,9 @@
 function buildAlbumElement(albumObj, columnClass) {
 	var imageUrl = '../images/album/get.ashx?id=' + albumObj.AlbumID;
 	var imageHeight = '200px';
-	var imageWidth = '200px';
-	var albumTitle = albumObj.Name;
+	var imageWidth = '300px';
+    var albumTitle = albumObj.Name;
+    var albumDesc = albumObj.Description;
 
 	// The element to hold everything
 	var columnElement = $(document.createElement('div'))
@@ -35,14 +36,18 @@ function buildAlbumElement(albumObj, columnClass) {
 	var profileImage = $(document.createElement('img'))
 		.css('height', imageHeight)
 		.css('width', imageWidth)
-		.attr('src', imageUrl);
+        .attr('src', imageUrl);
+
+    var desc = $(document.createElement('p'))
+        .addClass('font-weight')
+        .text(albumDesc);
 
 	var viewButton = $(document.createElement('button'))
 		.attr('id', 'album-view-' + albumObj.AlbumID)
 		.attr('type', 'button')
 		.addClass('btn')
-		.addClass('btn-primary')
-		.addClass('px-5')
+        .addClass('btn-outline-dark')
+		.addClass('px-3')
 		.addClass('my-2')
 		.text('View')
 		.click(function() {
@@ -51,7 +56,8 @@ function buildAlbumElement(albumObj, columnClass) {
 		
 
 	titleRow.append(title);
-	profileImageRow.append(profileImage);
+    profileImageRow.append(profileImage);
+    descriptionRow.append(desc);
 	buttonRow.append(viewButton);
 
 	columnElement.append(titleRow);
@@ -108,7 +114,7 @@ $(function() {
 		url: "../api.asmx/AllAlbum",
 		success: function (responseData) {
 			var numOfAlbums = responseData.length;
-			var numOfColumnsPerRow = 4;
+			var numOfColumnsPerRow = 3;
 			var numOfRows = Math.ceil(numOfAlbums / numOfColumnsPerRow);
 			var albumIteration = 0;
 
@@ -120,7 +126,7 @@ $(function() {
 
 				for (var j = 0; j < numOfColumnsPerRow && albumIteration < numOfAlbums; j++) {
 
-					var albumColumnElement = buildAlbumElement(responseData[albumIteration], 'col-3');
+					var albumColumnElement = buildAlbumElement(responseData[albumIteration], 'col-4');
 
 					row.append(albumColumnElement);
 					albumIteration++;
