@@ -11,7 +11,7 @@
     <div class="row mb-4">
         <div class="col-12">
             <button type="button" id="createLocation" class="btn btn-success float-left">
-                <i class="fa fa-plus">&nbsp; Create New Location</i>
+                <i class="fa fa-plus">&nbsp; Create New Album</i>
             </button>
         </div>
     </div>
@@ -168,7 +168,7 @@
 
 
             // Add event listener for opening and closing details
-            $('#DataTable').on('click', 'td.details-control', function () {
+            $('#DataTable').on('click', 'td a.details-control', function () {
 
                 var tr = $(this).closest('tr');
                 var row = table.row(tr);
@@ -184,6 +184,20 @@
                     tr.addClass('shown');
                 }
             });
+
+            function renderAlbumExpand() {
+                var placeholder = $(document.createElement('div'));
+                var button = $(document.createElement('a'))
+                    .addClass('btn btn-primary btn-sm  btn-block details-control')
+                    .attr('href', '#');
+                var icon = $(document.createElement('i'))
+                    .addClass('fas fa-angle-right');
+
+                button.append(icon);
+                placeholder.append(button);
+
+                return placeholder.html();
+            }
 
             // This fuction builds the DataTable. Because locations only store watershedIDs we must make a mapping of the watershed IDs to Names
             function initDataTable() {
@@ -203,11 +217,13 @@
                         data: responseData,
                         columns: [
                             {
-                                "className": 'details-control',
-                                "orderable": false,
-                                "data": null,
-                                "defaultContent": ''
-                            },
+                                data: null,
+                                render: function(data, type, row, meta) {
+                                    return renderAlbumExpand();
+                                },
+                                orderable: false,
+                                width: '5%'
+                },
                             { "data": "Name" },
                             { "data": "Description" }
                         ]
