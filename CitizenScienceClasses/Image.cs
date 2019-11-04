@@ -8,7 +8,6 @@ namespace CitizenScienceClasses
 {
     public class Image
     {
-
         private int imageID;
         private byte[] bytes;
         private string description;
