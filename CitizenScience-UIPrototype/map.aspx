@@ -110,8 +110,6 @@
         </div>
     </div>
 
-    <div id="map" class="shadow-lg p-3 mb-5 bg-white rounded" ></div>
-
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp7tBTG5O-LXpXR7BL01PlEB63wBC0PSA"></script>
     <script src="/js/map.js"></script> 
