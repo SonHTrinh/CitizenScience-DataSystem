@@ -78,6 +78,7 @@ CREATE TABLE [dbo].[Album] (
     [AlbumID]     INT            IDENTITY (1, 1) NOT NULL,
     [Name]    NVARCHAR (MAX) NOT NULL,
     [Description] NVARCHAR (MAX) NOT NULL,
+	[IsLocationAlbum] BIT,
 	[LastUpdated] DATETIME,
     PRIMARY KEY CLUSTERED ([AlbumID] ASC)
 );
@@ -307,13 +308,11 @@ GO
 CREATE PROCEDURE [dbo].[GetLatestLocationTemperature]
 	@locationid int
 AS
-	SELECT TOP 1 * 
+	SELECT TOP 1 *
 	FROM [Temperature]
 	WHERE [Timestamp]
-	IN 
-		(SELECT MAX([Timestamp]) FROM [Temperature])
-	AND 
-		[LocationID] = @locationid
+	IN
+		(SELECT MAX([Timestamp]) FROM [Temperature] WHERE [LocationID] = @locationid)
 
 GO
 
@@ -430,7 +429,6 @@ AS
 	
 GO
 
-
 ------------------------------------------------- CRUD About
 CREATE PROCEDURE [dbo].[NewAbout]
 	@description NVARCHAR(MAX),
@@ -463,6 +461,14 @@ CREATE PROCEDURE [dbo].[GetLocationImage]
 AS
 	SELECT * FROM [Image]
 	WHERE ImageId = (SELECT [ProfileImageID] FROM Location WHERE LocationID = @locationid)
+
+GO
+
+CREATE PROCEDURE [dbo].[GetAlbumImage]
+	@albumid int
+AS
+	SELECT * FROM [Image]
+	WHERE [ImageId] = (SELECT [ImageID] FROM [AlbumImages] WHERE AlbumID = @albumid AND [ImageID] IN (SELECT [ProfileImageID] FROM [Location]))
 
 GO
 

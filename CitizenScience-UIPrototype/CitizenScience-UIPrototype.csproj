@@ -15,8 +15,7 @@
     <AssemblyName>CitizenScience-UIPrototype</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
-    <Use64BitIISExpress>
-    </Use64BitIISExpress>
+    <Use64BitIISExpress>true</Use64BitIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -45,6 +44,7 @@
         </ObjectGroup>
       </Objects>
     </PublishDatabaseSettings>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -99,8 +99,10 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\ldap_search.disco" />
+    <Content Include="js\map.js" />
     <Content Include="secure\administration\403http.aspx" />
     <Content Include="secure\administration\Auth.aspx" />
+    <Content Include="js\gallery.js" />
     <Content Include="style\custom\admin-style.css" />
     <Content Include="admin.aspx" />
     <Content Include="secure\administration\about.aspx" />
@@ -114,31 +116,9 @@
     <Content Include="api.asmx" />
     <Content Include="debug.aspx" />
     <Content Include="gallery.aspx" />
+    <Content Include="style\custom\gallery.css" />
     <Content Include="style\custom\galleryAPI-style.css" />
     <Content Include="Global.asax" />
-    <Content Include="img\bell-tower.jpg" />
-    <Content Include="img\graph.png" />
-    <Content Include="img\logo.jpg" />
-    <Content Include="img\temple-logo.png" />
-    <Content Include="img\Volunteer\Volunteer01.jpg" />
-    <Content Include="img\Volunteer\Volunteer02.jpg" />
-    <Content Include="img\Volunteer\Volunteer03.jpg" />
-    <Content Include="img\Volunteer\Volunteer1.jpg" />
-    <Content Include="img\Volunteer\Volunteer2.jpg" />
-    <Content Include="img\Volunteer\Volunteer3.jpg" />
-    <Content Include="img\Volunteer\Volunteer4.jpg" />
-    <Content Include="img\Volunteer\Volunteer5.jpg" />
-    <Content Include="img\Volunteer\Volunteer6.jpg" />
-    <Content Include="img\watershed.png" />
-    <Content Include="img\Watershed\Watershed01.jpg" />
-    <Content Include="img\Watershed\Watershed02.jpg" />
-    <Content Include="img\Watershed\Watershed03.jpg" />
-    <Content Include="img\Watershed\Watershed1.jpg" />
-    <Content Include="img\Watershed\Watershed2.jpg" />
-    <Content Include="img\Watershed\Watershed3.jpg" />
-    <Content Include="img\Watershed\Watershed4.jpg" />
-    <Content Include="img\Watershed\Watershed5.jpg" />
-    <Content Include="img\Watershed\Watershed6.jpg" />
     <Content Include="map.aspx" />
     <Content Include="style\custom\mapAPI-style.css" />
     <Content Include="style\custom\datatable.css" />
@@ -1731,7 +1711,6 @@
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="WebService1.asmx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="about.aspx.cs">
@@ -1868,9 +1847,6 @@
     <Compile Include="gallery.aspx.designer.cs">
       <DependentUpon>gallery.aspx</DependentUpon>
     </Compile>
-    <Compile Include="getimage.ashx.cs">
-      <DependentUpon>getimage.ashx</DependentUpon>
-    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1892,23 +1868,17 @@
       <DependentUpon>map.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="setlocationimage.ashx.cs">
-      <DependentUpon>setlocationimage.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="WebService1.asmx.cs">
-      <DependentUpon>WebService1.asmx</DependentUpon>
-      <SubType>Component</SubType>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="CitizenScience.Master" />
     <Content Include="secure\administration\administration.master" />
     <None Include="Web References\ldap_search.wsdl" />
-    <Content Include="getimage.ashx" />
     <Content Include="images\location\get.ashx" />
     <Content Include="images\location\set.ashx" />
     <Content Include="images\album\set.ashx" />
     <Content Include="images\get.ashx" />
+    <Content Include="images\album\get.ashx" />
+    <Content Include="img\.gitkeep" />
     <None Include="packages.config" />
     <Content Include="style\custom\TEMPLE_BRANDING.md" />
     <Content Include="style\fontawesome\less\brands.less" />
@@ -1965,7 +1935,6 @@
     <Content Include="style\fontawesome\webfonts\fa-solid-900.ttf" />
     <Content Include="style\fontawesome\webfonts\fa-solid-900.woff" />
     <Content Include="style\fontawesome\webfonts\fa-solid-900.woff2" />
-    <Content Include="setlocationimage.ashx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <Content Include="Web References\Reference.map" />
     <Content Include="Web References\TempleLDAPEntry.datasource" />
@@ -2004,6 +1973,7 @@
       <CachedSettingsPropName>CitizenScience_UIPrototype_LDAPsearch_LDAP_Search</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

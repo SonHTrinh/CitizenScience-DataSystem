@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -564,6 +564,33 @@ namespace CitizenScienceClasses
             return result;
         }
 
+        public static Image GetAlbumImage(int albumId)
+        {
+            Image result = null;
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAlbumImage";
+            comm.Parameters.AddWithValue("@albumid", albumId);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                result = new Image
+                {
+                    ImageID = Convert.ToInt32(dataRow["ImageID"]),
+                    Bytes = dataRow["Bytes"] as byte[],
+                    Description = Convert.ToString(dataRow["Description"]),
+                    ContentType = Convert.ToString(dataRow["ContentType"])
+                };
+            }
+
+            return result;
+        }
+
         public static List<int> GetAlbumImageIDs(int albumId)
         {
             List<int> result = new List<int>();
@@ -792,6 +819,20 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllAlbum";
             return conn.GetDataSetUsingCmdObj(comm);
         }
+
+
+      
+        ///////////////////////////////// Convenience Functions
+        public static string FormatForFileSystem(string theString)
+        {
+            foreach (char c in System.IO.Path.GetInvalidFileNameChars())
+            {
+                theString = theString.Replace(c, '_');
+            }
+
+            return theString;
+        } 
+      
     }
 }
 

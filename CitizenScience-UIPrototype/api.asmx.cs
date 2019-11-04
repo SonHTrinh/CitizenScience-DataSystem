@@ -385,7 +385,7 @@ namespace CitizenScience_UIPrototype
         [ScriptMethod(UseHttpGet = true)]
         public void LocationTemperaturesCsv(int[] locationId)
         {
-            string csvFileName = $"Temperatures-{DateTime.Now.ToString("M/d/yy-H:mm")}.csv";
+            string csvFileName = $"Temperatures-{DateTime.Now.ToString("MMddyyyy")}.csv";
 
             DataSet temperatureDataset = ClassFunctions.GetAllTemperaturesByMultipleLocationIds(new List<int>(locationId));
 
@@ -414,7 +414,7 @@ namespace CitizenScience_UIPrototype
         [ScriptMethod(UseHttpGet = true)]
         public void AllLocationTemperaturesCsv()
         {
-            string csvFileName = $"Temperatures-{DateTime.Now.ToString("M/d/yy-H:mm")}.csv";
+            string csvFileName = $"Temperatures-{DateTime.Now.ToString("MMddyyyy")}.csv";
 
             DataSet temperatureDataset = ClassFunctions.GetAllTemperatures();
 
@@ -439,68 +439,17 @@ namespace CitizenScience_UIPrototype
             Context.Response.End();
         }
 
-        //  MAP PAGE DOWNLOAD FUNCTIONS
-        [WebMethod]
-        [ScriptMethod(UseHttpGet = true)]
-        public void LocationTemperaturesCsvStartNoEnd(int locationId, DateTime startDate)
-        {
-            string csvFileName = $"Temperatures-{DateTime.Now.ToString("M/d/yy-H:mm")}.csv";
-
-            DataSet temperatureDataset = ClassFunctions.GetTemperaturesByLocationIdStartNoEnd(locationId, startDate);
-
-            List<Temperature> temperatureList = new List<Temperature>();
-            for (int i = 0; i < temperatureDataset.Tables[0].Rows.Count; i++)
-            {
-                DataRow dataRow = temperatureDataset.Tables[0].Rows[i];
-
-                Temperature t = new Temperature();
-                t.Timestamp = Convert.ToDateTime(dataRow["Timestamp"].ToString());
-                t.Celsius = Convert.ToDouble(dataRow["TempC"]);
-                t.Fahrenheit = Convert.ToDouble(dataRow["TempF"]);
-                temperatureList.Add(t);
-            }
-
-            byte[] allTempDataBytes = DataProcessor.CreateCsvAsBytes(temperatureList);
-
-            Context.Response.Clear();
-            Context.Response.ContentType = "application/force-download";
-            Context.Response.AddHeader("content-disposition", "attachment; filename=" + csvFileName);
-            Context.Response.BinaryWrite(allTempDataBytes);
-            Context.Response.End();
-        }
-        [WebMethod]
-        [ScriptMethod(UseHttpGet = true)]
-        public void LocationTemperaturesCsvNoStartEnd(int locationId, DateTime endDate)
-        {
-            string csvFileName = $"Temperatures-{DateTime.Now.ToString("M/d/yy-H:mm")}.csv";
-
-            DataSet temperatureDataset = ClassFunctions.GetTemperaturesByLocationIdNoStartEnd(locationId, endDate);
-
-            List<Temperature> temperatureList = new List<Temperature>();
-            for (int i = 0; i < temperatureDataset.Tables[0].Rows.Count; i++)
-            {
-                DataRow dataRow = temperatureDataset.Tables[0].Rows[i];
-
-                Temperature t = new Temperature();
-                t.Timestamp = Convert.ToDateTime(dataRow["Timestamp"].ToString());
-                t.Celsius = Convert.ToDouble(dataRow["TempC"]);
-                t.Fahrenheit = Convert.ToDouble(dataRow["TempF"]);
-                temperatureList.Add(t);
-            }
-
-            byte[] allTempDataBytes = DataProcessor.CreateCsvAsBytes(temperatureList);
-
-            Context.Response.Clear();
-            Context.Response.ContentType = "application/force-download";
-            Context.Response.AddHeader("content-disposition", "attachment; filename=" + csvFileName);
-            Context.Response.BinaryWrite(allTempDataBytes);
-            Context.Response.End();
-        }
         [WebMethod]
         [ScriptMethod(UseHttpGet = true)]
         public void LocationTemperaturesCsvStartEnd(int locationId, DateTime startDate, DateTime endDate)
         {
-            string csvFileName = $"Temperatures-{DateTime.Now.ToString("M/d/yy-H:mm")}.csv";
+            Location location = ClassFunctions.ReadLocation(locationId);
+            Watershed watershed = ClassFunctions.ReadWatershed(location.WatershedID);
+
+            string formattedLocationName = ClassFunctions.FormatForFileSystem(location.SensorName);
+            string formattedWatershedName = ClassFunctions.FormatForFileSystem(watershed.WatershedName);
+
+            string csvFileName = $"{formattedWatershedName}-{formattedLocationName}_{startDate.ToString("MMddyyyy")}-{endDate.ToString("MMddyyyy")}.csv";
 
             DataSet temperatureDataset = ClassFunctions.GetTemperaturesByLocationIdStartEnd(locationId, startDate, endDate);
 
@@ -632,6 +581,34 @@ namespace CitizenScience_UIPrototype
             Context.Response.Clear();
             Context.Response.ContentType = "application/json";
             Context.Response.Write(js.Serialize(albumList));
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void GetImageIdForAlbum(int albumId)
+        {
+//            Image image = ClassFunctions.GetImage(imageId);
+//            List<Image> imageList = new List<Image>();
+//
+//            for (int i = 0; i < imageDataSet.Tables[0].Rows.Count; i++)
+//            {
+//                DataRow dataRow = imageDataSet.Tables[0].Rows[i];
+//
+//                Image image = new Image
+//                {
+//                    ImageID = Convert.ToInt32(dataRow["ImageID"]),
+//                    Bytes = dataRow["Bytes"] as byte[],
+//                    Description = Convert.ToString(dataRow["Description"]),
+//                    ContentType = Convert.ToString(dataRow["ContentType"])
+//                };
+//
+//                imageList.Add(image);
+//            }
+//
+//            JavaScriptSerializer js = new JavaScriptSerializer();
+//            Context.Response.Clear();
+//            Context.Response.ContentType = "application/json";
+//            Context.Response.Write(js.Serialize(image));
         }
     }
 }

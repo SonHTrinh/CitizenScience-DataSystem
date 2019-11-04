@@ -26,13 +26,13 @@ namespace CitizenScience_UIPrototype.images.album
                         bytes = binaryReader.ReadBytes((int)stream.Length);
                     }
 
-                    int albumId = int.Parse(context.Request["albumid"]);
+                    int albumId = int.Parse(context.Request["id"]);
                     string contentType = postedFile.ContentType;
 
-                    Location result = ClassFunctions.SetLocationImage(albumId, bytes, contentType);
+                    //Image result = ClassFunctions.SetLocationImage(albumId, bytes, contentType);
 
-                    context.Response.ContentType = contentType;
-                    context.Response.Write(result.ToString());
+                    //context.Response.ContentType = contentType;
+                    //context.Response.Write(result.ToString());
                 }
             }
             catch (Exception ex)
@@ -40,6 +40,41 @@ namespace CitizenScience_UIPrototype.images.album
                 context.Response.Write("Error occurred on server " +
                   ex.Message);
             }
+        }
+
+        public bool IsReusable
+        {
+            get
+            {
+                return false;
+            }
+        }
+    }
+
+
+    public class Get : IHttpHandler
+    {
+
+        public void ProcessRequest(HttpContext context)
+        {
+            try
+            {
+                Image image = null;
+                byte[] bytes;
+                int albumId = int.Parse(context.Request["id"]);
+
+                image = ClassFunctions.GetAlbumImage(albumId);
+
+                context.Response.ContentType = image.ContentType;
+                context.Response.BinaryWrite(image.Bytes);
+
+            }
+            catch (Exception ex)
+            {
+                context.Response.Write("Error occurred on server " +
+                                       ex.Message);
+            }
+
         }
 
         public bool IsReusable
