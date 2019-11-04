@@ -9,6 +9,23 @@ END;
 
 
 DECLARE @WatershedId int;
+-----------------Adding Admin 
+
+
+INSERT INTO [dbo].[Admin]
+([TUID], [Active])
+VALUES 
+('888000089', 1); 
+
+INSERT INTO [dbo].[Admin]
+([TUID], [Active])
+VALUES 
+('915261297', 1)
+
+INSERT INTO [dbo].[Admin]
+([TUID], [Active])
+VALUES 
+('915149546', 1)
 
 ----- Create Cobbs Watershed
 INSERT INTO [dbo].[Watershed]
