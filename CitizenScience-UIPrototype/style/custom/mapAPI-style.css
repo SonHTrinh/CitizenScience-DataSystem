@@ -1,9 +1,9 @@
 ﻿/* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
 #map {
-    height: 550px;
-    margin-left: 20%;
-    margin-right: 20%;
+    height: 650px;
+    margin-left: 10%;
+    margin-right: 10%;
     box-sizing: content-box;
     border: solid #454545 1px;
 }
