@@ -582,33 +582,5 @@ namespace CitizenScience_UIPrototype
             Context.Response.ContentType = "application/json";
             Context.Response.Write(js.Serialize(albumList));
         }
-
-        [WebMethod]
-        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void GetImageIdForAlbum(int albumId)
-        {
-//            Image image = ClassFunctions.GetImage(imageId);
-//            List<Image> imageList = new List<Image>();
-//
-//            for (int i = 0; i < imageDataSet.Tables[0].Rows.Count; i++)
-//            {
-//                DataRow dataRow = imageDataSet.Tables[0].Rows[i];
-//
-//                Image image = new Image
-//                {
-//                    ImageID = Convert.ToInt32(dataRow["ImageID"]),
-//                    Bytes = dataRow["Bytes"] as byte[],
-//                    Description = Convert.ToString(dataRow["Description"]),
-//                    ContentType = Convert.ToString(dataRow["ContentType"])
-//                };
-//
-//                imageList.Add(image);
-//            }
-//
-//            JavaScriptSerializer js = new JavaScriptSerializer();
-//            Context.Response.Clear();
-//            Context.Response.ContentType = "application/json";
-//            Context.Response.Write(js.Serialize(image));
-        }
     }
 }

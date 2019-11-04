@@ -1,4 +1,4 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/CitizenScience.Master" AutoEventWireup="true" CodeBehind="map.aspx.cs" Inherits="CitizenScience_UIPrototype.map" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CitizenScience.Master" AutoEventWireup="true" CodeBehind="map.aspx.cs" Inherits="CitizenScience_UIPrototype.map" %>
 <%@ Import Namespace="CitizenScience_UIPrototype" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="titleName" runat="server">
     Map   |   Citizen Science
