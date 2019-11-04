@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -471,7 +472,7 @@ namespace CitizenScienceClasses
                 {
                     ImageID = Convert.ToInt32(dataRow["ImageID"]),
                     ContentType = Convert.ToString(dataRow["ContentType"]),
-                    Description = Convert.ToString(dataRow["Description"]),
+                    Filename = Convert.ToString(dataRow["Filename"]),
                     Bytes = dataRow["Bytes"] as byte[]
                 };
             }
@@ -498,7 +499,33 @@ namespace CitizenScienceClasses
                 {
                     ImageID = Convert.ToInt32(dataRow["ImageID"]),
                     Bytes = dataRow["Bytes"] as byte[],
-                    Description = Convert.ToString(dataRow["Description"]),
+                    Filename = Convert.ToString(dataRow["Filename"]),
+                    ContentType = Convert.ToString(dataRow["ContentType"])
+                };
+            }
+
+            return result;
+        }
+
+        public static Image GetImageInfo(int imageId)
+        {
+            Image result = null;
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetImage";
+            comm.Parameters.AddWithValue("@imageid", imageId);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                result = new Image
+                {
+                    ImageID = Convert.ToInt32(dataRow["ImageID"]),
+                    Filename = Convert.ToString(dataRow["Filename"]),
                     ContentType = Convert.ToString(dataRow["ContentType"])
                 };
             }
@@ -556,7 +583,7 @@ namespace CitizenScienceClasses
                 {
                     ImageID = Convert.ToInt32(dataRow["ImageID"]),
                     Bytes = dataRow["Bytes"] as byte[],
-                    Description = Convert.ToString(dataRow["Description"]),
+                    Filename = Convert.ToString(dataRow["Filename"]),
                     ContentType = Convert.ToString(dataRow["ContentType"])
                 };
             }
@@ -583,7 +610,7 @@ namespace CitizenScienceClasses
                 {
                     ImageID = Convert.ToInt32(dataRow["ImageID"]),
                     Bytes = dataRow["Bytes"] as byte[],
-                    Description = Convert.ToString(dataRow["Description"]),
+                    Filename = Convert.ToString(dataRow["Filename"]),
                     ContentType = Convert.ToString(dataRow["ContentType"])
                 };
             }
@@ -632,7 +659,7 @@ namespace CitizenScienceClasses
                 {
                     ImageID = Convert.ToInt32(dataRow["ImageID"]),
                     Bytes = dataRow["Bytes"] as byte[],
-                    Description = Convert.ToString(dataRow["Description"]),
+                    Filename = Convert.ToString(dataRow["Filename"]),
                     ContentType = Convert.ToString(dataRow["ContentType"])
                 };
             }
@@ -808,16 +835,103 @@ namespace CitizenScienceClasses
             return a;
         }
 
+        public static int GetAlbumProfileImageID(int albumId)
+        {
+            int returnResult = -1;
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAlbumProfileImageID";
+            comm.Parameters.AddWithValue("@albumid", albumId);
 
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                returnResult = Convert.ToInt32(dataRow["ProfileImageID"]);
+            }
+
+            return returnResult;
+        }
+
+        public static Album GetAlbum(int albumId)
+        {
+            Album returnResult = null;
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAlbum";
+            comm.Parameters.AddWithValue("@albumid", albumId);
+
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                returnResult = new Album
+                {
+                    AlbumID = Convert.ToInt32(dataRow["AlbumID"]),
+                    Name = Convert.ToString(dataRow["Name"]),
+                    Description = Convert.ToString(dataRow["Description"]),
+                    IsLocationAlbum = Convert.ToBoolean(dataRow["IsLocationAlbum"])
+                };
+
+                returnResult.ImageList = GetAlbumImages(returnResult.AlbumID);
+                int profileImageId = GetAlbumProfileImageID(returnResult.AlbumID);
+                returnResult.ProfileImage = GetImage(profileImageId);
+            }
+
+            return returnResult;
+        }
+
+        public static List<Image> GetAlbumImages(int albumId)
+        {
+            List<Image> returnResult = new List<Image>();
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAlbumImageIDs";
+            comm.Parameters.AddWithValue("@albumid", albumId);
+
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            foreach (DataRow dataRow in dataSet.Tables[0].Rows)
+            {
+                int imageId = 0;
+                imageId = Convert.ToInt32(dataRow[imageId]);
+
+                returnResult.Add(ClassFunctions.GetImageInfo(imageId));
+            }
+
+            return returnResult;
+        }
 
         /////////////////////////////////   GALLERY FUNCTIONS
-        public static DataSet GetAllAlbum()
+        public static List<Album> GetAllAlbum()
         {
+            List<Album> returnResult = new List<Album>();
             DBConnect conn = new DBConnect();
             SqlCommand comm = new SqlCommand();
             comm.CommandType = CommandType.StoredProcedure;
             comm.CommandText = "GetAllAlbum";
-            return conn.GetDataSetUsingCmdObj(comm);
+
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            foreach(DataRow dataRow in dataSet.Tables[0].Rows)
+            {
+                Album album = new Album
+                {
+                    AlbumID = Convert.ToInt32(dataRow["AlbumID"]),
+                    Name = Convert.ToString(dataRow["Name"]),
+                    Description = Convert.ToString(dataRow["Description"]),
+                    LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
+                };
+
+                returnResult.Add(album);
+            }
+
+            return returnResult;
         }
 
     }

@@ -610,28 +610,47 @@ namespace CitizenScience_UIPrototype
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void AllAlbum()
         {
-            DataSet albumDataSet = ClassFunctions.GetAllAlbum();
-            List<Album> albumList = new List<Album>();
+            List<Album> result = ClassFunctions.GetAllAlbum();
 
-            for (int i = 0; i < albumDataSet.Tables[0].Rows.Count; i++)
+
+            if (result != null)
             {
-                DataRow dataRow = albumDataSet.Tables[0].Rows[i];
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, result);
+            }
+        }
 
-                Album album = new Album
-                {
-                    AlbumID = Convert.ToInt32(dataRow["AlbumID"]),
-                    Name = Convert.ToString(dataRow["Name"]),
-                    Description = Convert.ToString(dataRow["Description"]),
-                    LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
-                };
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void AllAlbumDetails()
+        {
+         
+            List<Album> albumList = ClassFunctions.GetAllAlbum();
+            List<Album> result = new List<Album>();
 
-                albumList.Add(album);
+            foreach (Album album in albumList)
+            {
+                int profileImageId = ClassFunctions.GetAlbumProfileImageID(album.AlbumID);
+                Image albumProfileImage = ClassFunctions.GetImage(album.AlbumID);
+                List<Image> albumImages = ClassFunctions.GetAlbumImages(album.AlbumID);
+
+                album.ProfileImage = albumProfileImage;
+                album.ImageList = albumImages;
+
+                result.Add(album);
             }
 
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            Context.Response.Clear();
-            Context.Response.ContentType = "application/json";
-            Context.Response.Write(js.Serialize(albumList));
+            if (result != null)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, result);
+            }
         }
 
         [WebMethod]
@@ -649,7 +668,7 @@ namespace CitizenScience_UIPrototype
 //                {
 //                    ImageID = Convert.ToInt32(dataRow["ImageID"]),
 //                    Bytes = dataRow["Bytes"] as byte[],
-//                    Description = Convert.ToString(dataRow["Description"]),
+//                    Filename = Convert.ToString(dataRow["Filename"]),
 //                    ContentType = Convert.ToString(dataRow["ContentType"])
 //                };
 //

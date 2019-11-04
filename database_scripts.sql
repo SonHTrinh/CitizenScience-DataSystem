@@ -16,7 +16,7 @@ GO
 CREATE TABLE [dbo].[Image] (
     [ImageID]          INT            IDENTITY (1, 1) NOT NULL,
     [Bytes]			   VARBINARY (MAX) NOT NULL,
-    [Description] NVARCHAR (MAX),
+    [Filename] NVARCHAR (MAX),
 	[ContentType] NVARCHAR (MAX),
     [LastUpdated]      DATETIME           NOT NULL,
     PRIMARY KEY CLUSTERED ([ImageID] ASC)
@@ -78,6 +78,7 @@ CREATE TABLE [dbo].[Album] (
     [AlbumID]     INT            IDENTITY (1, 1) NOT NULL,
     [Name]    NVARCHAR (MAX) NOT NULL,
     [Description] NVARCHAR (MAX) NOT NULL,
+	[ProfileImageID] INT,
 	[IsLocationAlbum] BIT,
 	[LastUpdated] DATETIME,
     PRIMARY KEY CLUSTERED ([AlbumID] ASC)
@@ -490,6 +491,16 @@ AS
 
 GO
 
+Create Procedure [dbo].[GetAlbumProfileImageID]
+	@albumid int
+AS
+	SELECT [ProfileImage]
+	FROM [Album]
+	WHERE [Album].[AlbumID] = @albumid
+
+GO
+
+
 CREATE PROCEDURE [dbo].[GetImage]
 	@imageid int
 AS
@@ -502,6 +513,15 @@ CREATE PROCEDURE [dbo].[GetAllAlbum]
 AS
 	SELECT * FROM [Album]
 
+GO
+
+CREATE PROCEDURE [dbo].[GetAlbum]
+	@albumid int
+AS
+	SELECT *
+	FROM [Album]
+	WHERE [Album].AlbumID = @albumid
+	
 GO
 
 -- TODO: Find better way to insert initial images

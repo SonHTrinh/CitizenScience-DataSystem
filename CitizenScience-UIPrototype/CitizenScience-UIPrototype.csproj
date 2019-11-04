@@ -88,6 +88,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="about.aspx" />
+    <Content Include="style\arrow-down.png" />
     <Content Include="Default.aspx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -100,6 +101,7 @@
     </None>
     <None Include="Web References\ldap_search.disco" />
     <Content Include="favicon.png" />
+    <Content Include="style\arrow-right.png" />
     <Content Include="secure\administration\403http.aspx" />
     <Content Include="secure\administration\Auth.aspx" />
     <Content Include="js\gallery.js" />
@@ -116,6 +118,7 @@
     <Content Include="api.asmx" />
     <Content Include="debug.aspx" />
     <Content Include="gallery.aspx" />
+    <Content Include="style\custom\administration-gallery.css" />
     <Content Include="style\custom\gallery.css" />
     <Content Include="style\custom\galleryAPI-style.css" />
     <Content Include="Global.asax" />
