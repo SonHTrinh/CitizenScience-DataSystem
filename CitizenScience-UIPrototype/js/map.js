@@ -61,15 +61,41 @@ function initGraph(locationObj, temperatureScale, formattedStartDate, formattedE
 					min: 0,
 					stepSize: 0,
 					labels: dateLabelArray,
-					datasets: [{
-						label: legendText,
-						data: temperatureArray,
-						fill: false,
-						borderColor: '#186A3B',
-						backgroundColor: '#D1E9C9',
-						pointRadius: 0,
-						borderWidth: 1
-					}]
+					datasets: [
+						{
+							data: temperatureArray,
+							fill: false,
+							borderColor: '#186A3B',
+							backgroundColor: '#D1E9C9',
+							pointRadius: 0,
+							borderWidth: 1
+						}
+					]
+				},
+				options: {
+					legend: {
+						display: false
+					},
+					events: [],
+					scales: {
+						showXLabels: 100,
+						yAxes: [{
+							scaleLabel: {
+								display: true,
+								labelString: 'Temperture (' + legendText + ')'
+							}
+						}],
+						xAxes: [{
+							ticks: {
+								autoSkip: true,
+								maxTicksLimit: 20
+							},
+							scaleLabel: {
+								display: true,
+								labelString: 'Date'
+							}
+						}]
+					}
 				}
 			});
 		},
@@ -144,7 +170,7 @@ function initModal(locationObj, watershedObj) {
 		}).fail(function(response) {
 			showNoDataFoundElements();
 		}).always(function() {
-
+			$('#locationModal').modal('show');
 		});
 
 	$('.chart-modifier').off('change').on('change', function() {
@@ -172,8 +198,6 @@ function initModal(locationObj, watershedObj) {
 		$('#end_datepicker').val(null);
 		$('#start_datepicker').val(null);
 	});
-
-	$('#locationModal').modal('show');
 }
 
 function populateWatersheds(watershedObjArray) {
@@ -206,14 +230,13 @@ function buildMarker(googleMapObj, locationObj) {
 			var watershedObj = watershedObjMap.get(locationObj.WatershedID);
 
 			var infoWindow = new google.maps.InfoWindow({
+				disableAutoPan: true,
 				content: "<h6><b>" +
 					locationObj.SensorName +
 					"</b></h6>"
 //					+ "<img src='<%= Global.Url_Prefix() %>/images/location/get.ashx?locationid=" + locationObj.LocationID + "' width='300' height='200' />" + "<br /><br />"
 					+
-					"<img src='../images/location/get.ashx?locationid=" +
-					locationObj.LocationID +
-					"' width='300' height='200' />" +
+					"<img src='../images/location/get.ashx?locationid=" + locationObj.LocationID + "' width='300' height='200' />" +
 					"<br /><br />" +
 					"<h6><b>Watershed:</b> " +
 					watershedObj.WatershedName +
