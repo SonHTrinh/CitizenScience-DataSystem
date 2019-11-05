@@ -214,18 +214,21 @@ $(document).ready(function () {
 
 			fileList.forEach(function (file) {
 				var formData = new FormData();
-				formData.append(file.name, file);
+				
+				//formData.append(file.name, file);
+				console.log(formData);
 
-				$.post('../images/album/add.ashx', formData, function() {
-					console.log("Uploading Files");
-				})
-				.done(function(responseData) {
-					console.log("Success Uploading " + file.name);
-				})
-				.error(function() {
-					console.log("Fail to Upload " + file.name);
-					console.log(file);
-				});
+				var requestParams = {
+					url: '../../images/album/add.ashx?id=' + data.AlbumID,
+					data: formData,
+					success: function() {
+						console.log("Success Uploading " + file.name);
+					},
+					processData: false
+				}
+
+				$.post(requestParams);
+
 
 			});
 		});
