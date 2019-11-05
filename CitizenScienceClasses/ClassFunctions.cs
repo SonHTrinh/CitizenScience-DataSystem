@@ -480,6 +480,35 @@ namespace CitizenScienceClasses
             return result;
         }
 
+        public static Image UploadAlbumImage(byte[] bytes, string contentType, string description, int albumId)
+        {
+            Image result = null;
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "UploadAlbumImage";
+            comm.Parameters.AddWithValue("@albumid", albumId);
+            comm.Parameters.AddWithValue("@bytes", bytes);
+            comm.Parameters.AddWithValue("@contenttype", contentType);
+            comm.Parameters.AddWithValue("@description", description);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                result = new Image
+                {
+                    ImageID = Convert.ToInt32(dataRow["ImageID"]),
+                    ContentType = Convert.ToString(dataRow["ContentType"]),
+                    Filename = Convert.ToString(dataRow["Filename"]),
+                };
+            }
+
+            return result;
+        }
+
         public static Image GetImage(int imageId)
         {
             Image result = null;

@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="about.aspx" />
+    <Content Include="js\administration-gallery.js" />
     <Content Include="style\arrow-down.png" />
     <Content Include="Default.aspx" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
@@ -1858,8 +1859,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="images\album\ImageAlbumAPI.cs">
-      <DependentUpon>set.ashx</DependentUpon>
+    <Compile Include="images\album\add.ashx.cs">
+      <DependentUpon>add.ashx</DependentUpon>
     </Compile>
     <Compile Include="images\get.ashx.cs">
       <DependentUpon>get.ashx</DependentUpon>
@@ -1883,7 +1884,7 @@
     <None Include="Web References\ldap_search.wsdl" />
     <Content Include="images\location\get.ashx" />
     <Content Include="images\location\set.ashx" />
-    <Content Include="images\album\set.ashx" />
+    <Content Include="images\album\add.ashx" />
     <Content Include="images\get.ashx" />
     <Content Include="images\album\get.ashx" />
     <None Include="packages.config" />

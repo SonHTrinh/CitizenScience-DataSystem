@@ -463,6 +463,23 @@ AS
 	SELECT * FROM [Image] WHERE [ImageID] = SCOPE_IDENTITY();
 GO
 
+CREATE PROCEDURE [dbo].[UploadAlbumImage]
+	@albumid int,
+	@bytes VARBINARY(MAX),
+	@contenttype varchar(max),
+	@filename varchar(max)
+AS
+	DECLARE @newimageid int;
+	
+	INSERT INTO [Image] ([Bytes], [ContentType], [Filename], [LastUpdated]) VALUES (@bytes, @contenttype, @filename, GETDATE());
+	
+	SELECT @newimageid = (SELECT SCOPE_IDENTITY());
+
+	INSERT INTO [dbo].[AlbumImages] ([AlbumID], [ImageID]) VALUES (@albumid, @newimageid);
+
+	SELECT * FROM [Image] WHERE [ImageID] = @newimageid;
+GO
+
 CREATE PROCEDURE [dbo].[GetLocationImage]
 	@locationid int
 AS
