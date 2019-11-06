@@ -16,6 +16,10 @@ tr.shown td.details-control {
     background: url('../arrow-right.png') no-repeat center center;
 }
 
-.nav-link {
+#viewAddNewImage .nav-link {
+    color: #495057;
+}
+
+#viewManageImages .nav-link {
     color: #495057;
 }
