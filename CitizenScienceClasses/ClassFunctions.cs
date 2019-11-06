@@ -638,6 +638,32 @@ namespace CitizenScienceClasses
                 result = new Image
                 {
                     ImageID = Convert.ToInt32(dataRow["ImageID"]),
+                    Bytes = dataRow["Bytes"] as byte[],
+                    Filename = Convert.ToString(dataRow["Filename"]),
+                    ContentType = Convert.ToString(dataRow["ContentType"])
+                };
+            }
+
+            return result;
+        }
+        public static Image GetAlbumProfileImageDetails(int albumId)
+        {
+            Image result = null;
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAlbumProfileImageDetails";
+            comm.Parameters.AddWithValue("@albumid", albumId);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                result = new Image
+                {
+                    ImageID = Convert.ToInt32(dataRow["ImageID"]),
                     Filename = Convert.ToString(dataRow["Filename"])
                 };
             }

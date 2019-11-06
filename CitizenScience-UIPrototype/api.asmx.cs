@@ -158,6 +158,19 @@ namespace CitizenScience_UIPrototype
             Context.Response.Write(js.Serialize(result));
         }
 
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void GetAlbumProfileImageDetails(int albumId)
+        {
+            Image result = new Image();
+
+            result = ClassFunctions.GetAlbumProfileImageDetails(albumId);
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Clear();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(result));
+        }
 
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]

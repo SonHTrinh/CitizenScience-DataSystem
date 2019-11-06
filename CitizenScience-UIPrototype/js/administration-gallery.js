@@ -220,7 +220,7 @@ $(document).ready(function () {
 			$('.viewManageItem').show();
 		});
 
-		$.get('../../api.asmx/GetAlbumProfileImage?albumid=' + data.AlbumID).done(function (responseProfileImage) {
+		$.get('../../api.asmx/GetAlbumProfileImageDetails?albumid=' + data.AlbumID).done(function (responseProfileImage) {
 			var profileImage = responseProfileImage;
 
 			$.get('../../api.asmx/GetAlbumImagesDetails?albumid=' + data.AlbumID).done(function(responseAlbumImages) {
@@ -231,7 +231,13 @@ $(document).ready(function () {
 				responseAlbumImages.forEach(function(image) {
 					var newElement = $(document.createElement('option'));
 					newElement.attr('value', image.ImageID);
-					newElement.text(image.Filename);
+
+					if (image.ImageID == profileImage.ImageID) {
+						newElement.text('(P) ' + image.Filename);
+					} else {
+						newElement.text(image.Filename);
+					}
+					
 
 					selector.append(newElement);
 				});

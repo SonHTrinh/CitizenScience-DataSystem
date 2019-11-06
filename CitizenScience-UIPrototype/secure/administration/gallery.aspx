@@ -161,6 +161,7 @@
                             <!-- View selected image -->
                         <img width="250px" height="250px" id="viewSelectedImage"/>
                     </div>
+
                     <div class="form-row mt-5 viewAddNewItem" id="viewAddRow">
                         <div class="form-group col-12">
                             <!-- Add New Image Panel -->
