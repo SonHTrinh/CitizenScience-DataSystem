@@ -451,7 +451,7 @@ namespace CitizenScienceClasses
 
         ///////////////////////////////// IMAGE Functions
 
-        public static Image UploadImage(byte[] bytes, string contentType, string description)
+        public static Image UploadImage(byte[] bytes, string contentType, string filename)
         {
             Image result = null;
 
@@ -461,7 +461,7 @@ namespace CitizenScienceClasses
             comm.CommandText = "UploadImage";
             comm.Parameters.AddWithValue("@bytes", bytes);
             comm.Parameters.AddWithValue("@contenttype", contentType);
-            comm.Parameters.AddWithValue("@description", description);
+            comm.Parameters.AddWithValue("@filename", filename);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
 
             if (dataSet.Tables[0].Rows.Count == 1)
@@ -480,7 +480,7 @@ namespace CitizenScienceClasses
             return result;
         }
 
-        public static Image UploadAlbumImage(byte[] bytes, string contentType, string description, int albumId)
+        public static Image UploadAlbumImage(byte[] bytes, string contentType, string filename, int albumId)
         {
             Image result = null;
 
@@ -491,7 +491,7 @@ namespace CitizenScienceClasses
             comm.Parameters.AddWithValue("@albumid", albumId);
             comm.Parameters.AddWithValue("@bytes", bytes);
             comm.Parameters.AddWithValue("@contenttype", contentType);
-            comm.Parameters.AddWithValue("@description", description);
+            comm.Parameters.AddWithValue("@filename", filename);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
 
             if (dataSet.Tables[0].Rows.Count == 1)

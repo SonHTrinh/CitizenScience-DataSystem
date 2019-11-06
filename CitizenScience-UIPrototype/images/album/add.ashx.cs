@@ -13,7 +13,7 @@ namespace CitizenScience_UIPrototype.images.album
         {
             try
             {
-                string description = context.Request.Form.Get("description");
+                string filename = context.Request.Form.Get("filename");
                 HttpPostedFile postedFile = context.Request.Files[0];
                 if (postedFile.ContentLength == 0)
                     throw new Exception("Empty file received");
@@ -30,14 +30,14 @@ namespace CitizenScience_UIPrototype.images.album
 
                     string contentType = postedFile.ContentType;
 
-                    Image image = ClassFunctions.UploadImage(bytes, contentType, description);
+                    Image image = ClassFunctions.UploadAlbumImage(bytes, contentType, filename, albumId);
 
-                    context.Response.ContentType = contentType;
                     context.Response.Write(image.ImageID);
                 }
             }
             catch (Exception ex)
             {
+                context.Response.StatusCode = 500;
                 context.Response.Write("Error occurred on server " +
                                        ex.Message);
             }
@@ -72,6 +72,7 @@ namespace CitizenScience_UIPrototype.images.album
             }
             catch (Exception ex)
             {
+                context.Response.StatusCode = 500;
                 context.Response.Write("Error occurred on server " +
                                        ex.Message);
             }

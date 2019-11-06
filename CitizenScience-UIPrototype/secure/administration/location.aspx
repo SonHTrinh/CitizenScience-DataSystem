@@ -488,7 +488,7 @@
                         formData.append(files[i].name, files[i]);
                     }
 
-                    formData.append('description', requestData.name);
+                    formData.append('filename', requestData.name);
                     formData.append('file', $('#inputEditImageBrowse')[0].files[0]);
 
                     $.ajax({
@@ -568,7 +568,7 @@
                     formData.append(files[i].name, files[i]);
                 }
 
-                formData.append('description', requestData.name);
+                formData.append('filename', requestData.name);
                 formData.append('file', $('#inputCreateImageBrowse')[0].files[0]);
 
                 // Save the image, get the new image ID THEN save the location w/ the image ID info

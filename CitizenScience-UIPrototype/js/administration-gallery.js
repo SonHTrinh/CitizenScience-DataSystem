@@ -62,7 +62,6 @@ $(document).ready(function () {
 	// This fuction builds the DataTable. Because locations only store watershedIDs we must make a mapping of the watershed IDs to Names
 	function initDataTable() {
 
-
 		// Get all the watershed names and map them with thier IDs THEN build the datatable
 		$.ajax({
 			type: 'GET',
@@ -215,12 +214,14 @@ $(document).ready(function () {
 			fileList.forEach(function (file) {
 				var formData = new FormData();
 				
-				//formData.append(file.name, file);
+				formData.append('file', file);
+				formData.append('filename', file.name);
 				console.log(formData);
 
 				var requestParams = {
 					url: '../../images/album/add.ashx?id=' + data.AlbumID,
 					data: formData,
+					contentType: false,
 					success: function() {
 						console.log("Success Uploading " + file.name);
 					},
