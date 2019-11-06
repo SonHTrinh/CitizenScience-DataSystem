@@ -7,15 +7,6 @@
     cursor: default !important;
 }
 
-td.details-control {
-    background: url('../arrow-down.png') no-repeat center center;
-    cursor: pointer;
-}
-
-tr.shown td.details-control {
-    background: url('../arrow-right.png') no-repeat center center;
-}
-
 #viewAddNewImage .nav-link {
     color: #495057;
 }
