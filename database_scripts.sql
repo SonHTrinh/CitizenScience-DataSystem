@@ -488,10 +488,10 @@ AS
 
 GO
 
-CREATE PROCEDURE [dbo].[GetAlbumImage]
+CREATE PROCEDURE [dbo].[GetAlbumProfileImage]
 	@albumid int
 AS
-	SELECT * FROM [Image]
+	SELECT [ImageID], [Filename] FROM [Image]
 	WHERE [ImageId] = (SELECT [ImageID] FROM [AlbumImages] WHERE AlbumID = @albumid AND [ImageID] IN (SELECT [ProfileImageID] FROM [Location]))
 
 GO
@@ -504,6 +504,14 @@ AS
 
 GO
 
+CREATE PROCEDURE [dbo].[GetAlbumImagesDetails]
+    @albumid int
+AS
+    SELECT [ImageID], [Filename]
+    FROM [dbo].[Image]
+    WHERE [ImageID] IN (SELECT [ImageID] FROM [AlbumImages] WHERE AlbumID = @albumid)
+
+GO
 CREATE PROCEDURE [dbo].[GetImage]
 	@imageid int
 AS

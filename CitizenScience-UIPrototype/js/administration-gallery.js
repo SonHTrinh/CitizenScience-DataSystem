@@ -66,7 +66,7 @@ $(document).ready(function () {
 		$.ajax({
 			type: 'GET',
 			contentType: 'application/json; charset=utf-8',
-			url: '../../api.asmx/AllAlbumDetails',
+			url: '../../api.asmx/AllAlbum',
 			dataType: 'JSON'
 		}).done(function (responseData) {
 			console.log(responseData);
@@ -187,9 +187,20 @@ $(document).ready(function () {
 
 	}
 
+	$('#viewImageSelect').on('change',
+		function () {
+			var imageId = $('#viewImageSelect').val();
+			$('#viewSelectedImage').attr('src', '../../images/get.ashx?id=' + imageId);
+		});
+
 	function PopulateViewModal(data) {
 		$('.viewAddNewItem').hide();
 		$('.viewManageItem').show();
+		$('#viewAddNewImage a').removeClass('active');
+		$('#viewManageImages a').addClass('active');
+		$('#viewImageSelect').empty();
+		$('#viewSelectedImage').attr('src', '');
+
 
 		fileList = [];
 
@@ -207,6 +218,30 @@ $(document).ready(function () {
 
 			$('.viewAddNewItem').hide();
 			$('.viewManageItem').show();
+		});
+
+		$.get('../../api.asmx/GetAlbumProfileImage?albumid=' + data.AlbumID).done(function (responseProfileImage) {
+			var profileImage = responseProfileImage;
+
+			$.get('../../api.asmx/GetAlbumImagesDetails?albumid=' + data.AlbumID).done(function(responseAlbumImages) {
+
+				console.log(responseAlbumImages);
+				var selector = $('#viewImageSelect');
+
+				responseAlbumImages.forEach(function(image) {
+					var newElement = $(document.createElement('option'));
+					newElement.attr('value', image.ImageID);
+					newElement.text(image.Filename);
+
+					selector.append(newElement);
+				});
+
+				selector.val(profileImage.ImageID).change();
+
+			}).always(function(response) {
+				//Display the modal
+				$('#viewModal').modal('show');
+			});
 		});
 
 		$('#addNewSubmit').off().click(function () {
@@ -270,9 +305,6 @@ $(document).ready(function () {
 
 		//Put the data in the Edit Modal
 		PopulateViewModal(viewData);
-
-		//Display the modal
-		$('#viewModal').modal('show');
 
 		$('#viewSubmit').prop("onclick", null);
 

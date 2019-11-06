@@ -64,7 +64,7 @@ namespace CitizenScience_UIPrototype.images.album
                 byte[] bytes;
                 int albumId = int.Parse(context.Request["id"]);
 
-                image = ClassFunctions.GetAlbumImage(albumId);
+                image = ClassFunctions.GetAlbumProfileImage(albumId);
 
                 context.Response.ContentType = image.ContentType;
                 context.Response.BinaryWrite(image.Bytes);

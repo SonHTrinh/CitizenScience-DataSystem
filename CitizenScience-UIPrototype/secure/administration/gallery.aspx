@@ -153,10 +153,13 @@
 
                             <label for="viewImageSelect">Select Image</label>
                             <select class="form-control" id="viewImageSelect">
-                                <option>1</option>
                             </select>
                         </div>
 
+                    </div>
+                    <div class="form-row viewManageItem justify-content-center" id="viewManageRow">
+                            <!-- View selected image -->
+                        <img width="250px" height="250px" id="viewSelectedImage"/>
                     </div>
                     <div class="form-row mt-5 viewAddNewItem" id="viewAddRow">
                         <div class="form-group col-12">

@@ -132,6 +132,35 @@ namespace CitizenScience_UIPrototype
 
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void GetAlbumImagesDetails(int albumId)
+        {
+            List<Image> result = new List<Image>();
+
+            result = ClassFunctions.GetAlbumImagesDetails(albumId);
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Clear();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(result));
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void GetAlbumProfileImage(int albumId)
+        {
+            Image result = new Image();
+
+            result = ClassFunctions.GetAlbumProfileImage(albumId);
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Clear();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(result));
+        }
+
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void Admins()
         {
             DataSet adminDataSet = ClassFunctions.GetAdmins();
@@ -561,36 +590,6 @@ namespace CitizenScience_UIPrototype
         {
             List<Album> result = ClassFunctions.GetAllAlbum();
 
-
-            if (result != null)
-            {
-                BuildResponse(200, result);
-            }
-            else
-            {
-                BuildResponse(500, result);
-            }
-        }
-
-        [WebMethod]
-        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
-        public void AllAlbumDetails()
-        {
-         
-            List<Album> albumList = ClassFunctions.GetAllAlbum();
-            List<Album> result = new List<Album>();
-
-            foreach (Album album in albumList)
-            {
-                int profileImageId = ClassFunctions.GetAlbumProfileImageID(album.AlbumID);
-                Image albumProfileImage = ClassFunctions.GetImage(album.AlbumID);
-                List<Image> albumImages = ClassFunctions.GetAlbumImages(album.AlbumID);
-
-                album.ProfileImage = albumProfileImage;
-                album.ImageList = albumImages;
-
-                result.Add(album);
-            }
 
             if (result != null)
             {

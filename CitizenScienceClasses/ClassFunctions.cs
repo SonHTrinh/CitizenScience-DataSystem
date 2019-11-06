@@ -620,14 +620,14 @@ namespace CitizenScienceClasses
             return result;
         }
 
-        public static Image GetAlbumImage(int albumId)
+        public static Image GetAlbumProfileImage(int albumId)
         {
             Image result = null;
 
             DBConnect conn = new DBConnect();
             SqlCommand comm = new SqlCommand();
             comm.CommandType = CommandType.StoredProcedure;
-            comm.CommandText = "GetAlbumImage";
+            comm.CommandText = "GetAlbumProfileImage";
             comm.Parameters.AddWithValue("@albumid", albumId);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
 
@@ -638,9 +638,7 @@ namespace CitizenScienceClasses
                 result = new Image
                 {
                     ImageID = Convert.ToInt32(dataRow["ImageID"]),
-                    Bytes = dataRow["Bytes"] as byte[],
-                    Filename = Convert.ToString(dataRow["Filename"]),
-                    ContentType = Convert.ToString(dataRow["ContentType"])
+                    Filename = Convert.ToString(dataRow["Filename"])
                 };
             }
 
@@ -663,6 +661,29 @@ namespace CitizenScienceClasses
                 result.Add(Convert.ToInt32(dataRow["ImageID"]));
             }
             
+
+            return result;
+        }
+
+        public static List<Image> GetAlbumImagesDetails(int albumId)
+        {
+            List<Image> result = new List<Image>();
+
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "GetAlbumImagesDetails";
+            comm.Parameters.AddWithValue("@albumid", albumId);
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+
+            foreach (DataRow dataRow in dataSet.Tables[0].Rows)
+            { 
+                result.Add(new Image
+                {
+                    ImageID = Convert.ToInt32(dataRow["ImageID"]),
+                    Filename = Convert.ToString(dataRow["Filename"])
+                });
+            }
 
             return result;
         }
