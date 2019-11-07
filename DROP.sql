@@ -8,7 +8,10 @@ GO
 DROP TABLE IF EXISTS [Admin]
 GO
 
-DROP TABLE IF EXISTS [Image]
+DROP TABLE IF EXISTS [Temperature]
+GO
+
+DROP TABLE IF EXISTS [Location]
 GO
 
 DROP TABLE IF EXISTS [AlbumImages]
@@ -17,13 +20,7 @@ GO
 DROP TABLE IF EXISTS [Album]
 GO
 
-DROP TABLE IF EXISTS [Temperature]
-GO
-
-DROP TABLE IF EXISTS [BulkUpload]
-GO
-
-DROP TABLE IF EXISTS [Location]
+DROP TABLE IF EXISTS [Image]
 GO
 
 DROP TABLE IF EXISTS [Watershed]
@@ -160,6 +157,12 @@ DROP PROCEDURE IF EXISTS [UploadAlbumImage]
 GO
 
 DROP PROCEDURE IF EXISTS [GetAlbumImagesDetails]
+GO
+
+DROP PROCEDURE IF EXISTS [GetAlbumProfileImageDetails]
+GO
+
+DROP PROCEDURE IF EXISTS [MakePrimaryAlbumImage]
 GO
 
 -- DROP Types

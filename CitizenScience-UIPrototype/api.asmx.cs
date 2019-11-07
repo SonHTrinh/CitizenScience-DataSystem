@@ -615,6 +615,23 @@ namespace CitizenScience_UIPrototype
         }
 
         [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void MakePrimayImage(int albumId, int imageId)
+        {
+            Album result = ClassFunctions.GetAlbum(1);
+
+
+            if (result != null)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, result);
+            }
+        }
+
+        [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void GetImageIdForAlbum(int albumId)
         {

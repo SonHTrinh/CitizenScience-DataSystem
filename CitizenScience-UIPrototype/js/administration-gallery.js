@@ -187,11 +187,42 @@ $(document).ready(function () {
 
 	}
 
+	function isPrimaryImageSelected() {
+		var selectedImageName = $('#viewImageSelect option:selected').text();
+		var primaryPrefix = '(P) ';
+
+		return selectedImageName.substring(0, 4) == primaryPrefix;
+	}
+
 	$('#viewImageSelect').on('change',
 		function () {
 			var imageId = $('#viewImageSelect').val();
 			$('#viewSelectedImage').attr('src', '../../images/get.ashx?id=' + imageId);
+
+			console.log('Image "' + imageId + '" Selected');
+			
+			if (isPrimaryImageSelected()) {
+				$('#deleteSubmit').prop('disabled', true);
+				$('#makePrimarySubmit').prop('disabled', true);
+			} else {
+				$('#deleteSubmit').prop('disabled', false);
+				$('#makePrimarySubmit').prop('disabled', false);
+			}
 		});
+
+	$('#deleteSubmit').on('click',
+		function() {
+			var imageId = $('#viewImageSelect').val();
+
+			if (!isPrimaryImageSelected()) {
+				$.post('../../api.asmx/DeleteImage?imageId=' + imageId,
+					function(response) {
+						console.log('Deleted Image ' + imageId);
+					});
+			}
+		});
+
+
 
 	function PopulateViewModal(data) {
 		$('.viewAddNewItem').hide();
@@ -238,7 +269,6 @@ $(document).ready(function () {
 						newElement.text(image.Filename);
 					}
 					
-
 					selector.append(newElement);
 				});
 
@@ -249,6 +279,17 @@ $(document).ready(function () {
 				$('#viewModal').modal('show');
 			});
 		});
+
+		$('#makePrimarySubmit').off().on('click',
+			function () {
+				var imageId = $('#viewImageSelect').val();
+
+				if (!isPrimaryImageSelected()) {
+					$.post('../../api.asmx/MakePrimaryImage?albumId=' + data.AlbumID + '&imageId=' + imageId, function(response) {
+						console.log('ImageID ' + imageId + ' set to primary image of album ' + data.AlbumID);
+					});
+				}
+			});
 
 		$('#addNewSubmit').off().click(function () {
 

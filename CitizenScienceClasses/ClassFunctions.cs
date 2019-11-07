@@ -96,8 +96,6 @@ namespace CitizenScienceClasses
                     SensorName = Convert.ToString(dataRow["SensorName"]),
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),
-                    ProfileImageID = Convert.ToInt32(dataRow["ProfileImageID"]),
-                    LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
                 };
             }
 
@@ -124,9 +122,7 @@ namespace CitizenScienceClasses
                     WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
                     SensorName = Convert.ToString(dataRow["SensorName"]),
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
-                    Longitude = Convert.ToDouble(dataRow["Longitude"]),
-                    ProfileImageID = Convert.ToInt32(dataRow["ProfileImageID"]),
-                    LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
+                    Longitude = Convert.ToDouble(dataRow["Longitude"])
                 };
 
                 result.Add(location);
@@ -147,7 +143,6 @@ namespace CitizenScienceClasses
             comm.Parameters.AddWithValue("@name", name);
             comm.Parameters.AddWithValue("@latitude", latitude);
             comm.Parameters.AddWithValue("@longitude", longitude);
-            comm.Parameters.AddWithValue("@profileimageid", imageId);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
 
             if (dataSet.Tables[0].Rows.Count == 1)
@@ -160,9 +155,7 @@ namespace CitizenScienceClasses
                     WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
                     SensorName = Convert.ToString(dataRow["SensorName"]),
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
-                    Longitude = Convert.ToDouble(dataRow["Longitude"]),
-                    ProfileImageID = Convert.ToInt32(dataRow["ProfileImageID"]),
-                    LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
+                    Longitude = Convert.ToDouble(dataRow["Longitude"])
                 };
             }
 
@@ -1001,10 +994,36 @@ namespace CitizenScienceClasses
                     AlbumID = Convert.ToInt32(dataRow["AlbumID"]),
                     Name = Convert.ToString(dataRow["Name"]),
                     Description = Convert.ToString(dataRow["Description"]),
-                    LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
                 };
 
                 returnResult.Add(album);
+            }
+
+            return returnResult;
+        }
+
+        public static Album MakePrimaryAlbumImage(int albumId, int imageId)
+        {
+            Album returnResult = null;
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "MakePrimaryAlbumImage";
+            comm.Parameters.AddWithValue("@albumid", albumId);
+            comm.Parameters.AddWithValue("@imageid", imageId);
+
+            DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
+            if (dataSet.Tables[0].Rows.Count == 1)
+            {
+                DataRow dataRow = dataSet.Tables[0].Rows[0];
+
+                returnResult = new Album
+                {
+                    AlbumID = Convert.ToInt32(dataRow["AlbumID"]),
+                    Name = Convert.ToString(dataRow["Name"]),
+                    Description = Convert.ToString(dataRow["Description"]),
+                    IsLocationAlbum = Convert.ToBoolean(dataRow["IsLocationAlbum"])
+                };
             }
 
             return returnResult;

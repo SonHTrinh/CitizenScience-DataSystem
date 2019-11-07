@@ -158,7 +158,7 @@
 
                     </div>
                     <div class="form-row viewManageItem justify-content-center" id="viewManageRow">
-                            <!-- View selected image -->
+                        <!-- View selected image -->
                         <img width="250px" height="250px" id="viewSelectedImage"/>
                     </div>
 
@@ -167,7 +167,7 @@
                             <!-- Add New Image Panel -->
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="customFile" multiple>
-                                <label class="custom-file-label" for="customFile">Choose file</label>
+                                <label class="custom-file-label" for="customFile">Choose files</label>
                             </div>
                         </div>
                     </div>
