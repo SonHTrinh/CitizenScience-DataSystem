@@ -28,7 +28,7 @@ function initGraph(locationObj, temperatureScale, formattedStartDate, formattedE
 		type: 'POST',
 		contentType: 'application/json; charset=utf-8',
 		//		url: '<%= Global.Url_Prefix() %>/api.asmx/GetLocationTemperaturesByDateRange',
-		url: '../api.asmx/GetLocationTemperaturesByDateRange',
+		url: 'api.asmx/GetLocationTemperaturesByDateRange',
 		data: JSON.stringify(data),
 		success: function (responseData) {
 			var dateLabelArray = [];
@@ -136,17 +136,17 @@ function initModal(locationObj, watershedObj) {
 
 	//image
 //	var imageSrc = "<%= Global.Url_Prefix() %>/images/location/get.ashx?locationid=" + location.LocationID;
-	var imageSrc = "../images/location/get.ashx?locationid=" + locationObj.LocationID;
+	var imageSrc = "images/location/get.ashx?locationid=" + locationObj.LocationID;
 	var imageAlt = "The Picture of the " + locationObj.SensorName;
 	$(".modalImage").attr("src", imageSrc).attr("alt", imageAlt);
 
 	//more pictures link
 //	$('.modalLink').html('<a href="<%= Global.Url_Prefix() %>/gallery.aspx" class="btn btn-info btn-block">View Location Album</a>');
-	$('.modalLink').html('<a href="../gallery.aspx" class="btn btn-info btn-block">View Location Album</a>');
+	$('.modalLink').html('<a href="gallery.aspx" class="btn btn-info btn-block">View Location Album</a>');
 
 
 	//Build Chart functionality
-	$.get("../api.asmx/GetLocationLatestTemperature?locationid=" + locationObj.LocationID)
+	$.get("api.asmx/GetLocationLatestTemperature?locationid=" + locationObj.LocationID)
 		.done(function (response) {
 			if (response.length !== 0) {
 				var endDate = new Date(response.Timestamp);
@@ -190,7 +190,7 @@ function initModal(locationObj, watershedObj) {
 
 		var locationId = locationObj.LocationID;
 
-		window.location.href = '../api.asmx/LocationTemperaturesCsvStartEnd?locationId=' + locationId + '&startDate=' + formattedStartDate + '&endDate=' + formattedEndDate;
+		window.location.href = 'api.asmx/LocationTemperaturesCsvStartEnd?locationId=' + locationId + '&startDate=' + formattedStartDate + '&endDate=' + formattedEndDate;
 	});
 
 	//Close Modal
@@ -219,7 +219,7 @@ function buildMarker(googleMapObj, locationObj) {
 	// TODO: find a better way to do this than call and map all locations to their watersheds
 	$.ajax({
 //		url: "<%= Global.Url_Prefix() %>/api.asmx/Watersheds",
-		url: "../api.asmx/Watersheds",
+		url: "api.asmx/Watersheds",
 		success: function (watershedObjArray) {
 			var watershedObjMap = new Map();
 
@@ -236,7 +236,7 @@ function buildMarker(googleMapObj, locationObj) {
 					"</b></h6>"
 //					+ "<img src='<%= Global.Url_Prefix() %>/images/location/get.ashx?locationid=" + locationObj.LocationID + "' width='300' height='200' />" + "<br /><br />"
 					+
-					"<img src='../images/location/get.ashx?locationid=" + locationObj.LocationID + "' width='300' height='200' />" +
+					"<img src='images/location/get.ashx?locationid=" + locationObj.LocationID + "' width='300' height='200' />" +
 					"<br /><br />" +
 					"<h6><b>Watershed:</b> " +
 					watershedObj.WatershedName +
@@ -291,7 +291,7 @@ function populateLocations(watershedId) {
 
 	$.ajax({
 //		url: "<%= Global.Url_Prefix() %>/api.asmx/Location?watershedId=" + watershedId,
-		url: "../api.asmx/Location?watershedId=" + watershedId,
+		url: "api.asmx/Location?watershedId=" + watershedId,
 		success: function (data) {
 			console.log(data);
 			$('#locationdiv').removeClass('invisible');
@@ -354,7 +354,7 @@ function initMap() {
 
 	$.ajax({
 //		url: "<%= Global.Url_Prefix() %>/api.asmx/AllLocations",
-		url: "../api.asmx/AllLocations",
+		url: "api.asmx/AllLocations",
 		success: function (locationObjArray) {
 
 			locationObjArray.forEach(function(locationObj) {
@@ -397,7 +397,7 @@ $(function () {
 
 	$.ajax({
 		//url: "<%= Global.Url_Prefix() %>/api.asmx/Watersheds",
-		url: "../api.asmx/Watersheds",
+		url: "api.asmx/Watersheds",
 		success: populateWatersheds
 	});
 
