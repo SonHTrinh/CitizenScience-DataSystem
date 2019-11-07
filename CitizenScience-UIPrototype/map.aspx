@@ -112,7 +112,7 @@
 
 
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCp7tBTG5O-LXpXR7BL01PlEB63wBC0PSA"></script>
-    <script src="/js/map.js"></script> 
+    <script src="js/map.js"></script> 
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
     
