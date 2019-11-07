@@ -481,77 +481,24 @@
                 console.log('Is Edit Form Submission Valid?: ' + isValidRequest);
                 if (!isValidRequest) return;
 
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    url: '<%= Global.Url_Prefix() %>/api.asmx/UpdateLocation',
+                    data: JSON.stringify(requestData),
+                    dataType: 'JSON',
+                    success: function (responseData) {
+                        console.log('Edit Successful');
+                        console.log(responseData);
 
-                if (editImageIsDirty) {
-                    var fileUpload = $('#inputEditImageBrowse').get(0);
-                    var files = fileUpload.files;
-
-                    var formData = new FormData();
-
-                    for (var i = 0; i < files.length; i++) {
-                        formData.append(files[i].name, files[i]);
+                        $('#editModal').modal('hide');
+                        table.ajax.reload();
+                    },
+                    error: function (errorData) {
+                        console.log('ERROR');
+                        console.log(errorData);
                     }
-
-                    formData.append('filename', requestData.name);
-                    formData.append('file', $('#inputEditImageBrowse')[0].files[0]);
-
-                    $.ajax({
-                        type: "POST",
-                        url: "<%= Global.Url_Prefix() %>/images/location/set.ashx",
-                        contentType: false,
-                        processData: false,
-                        data: formData,
-                        success: function (dataResponse) {
-                            console.log("Image created with ID: " + dataResponse);
-
-                            // Add the image ID to the new location data
-                            Object.assign(requestData, { imageId: dataResponse });
-
-                            // Save the location data
-                            $.ajax({
-                                type: 'POST',
-                                contentType: 'application/json; charset=utf-8',
-                                url: '<%= Global.Url_Prefix() %>/api.asmx/UpdateLocation',
-                                data: JSON.stringify(requestData),
-                                dataType: 'JSON',
-                                success: function (responseData) {
-                                    console.log('Edit Successful');
-                                    console.log(responseData);
-
-                                    $('#editModal').modal('hide');
-                                    
-                                    table.ajax.reload();
-                                },
-                                error: function (errorData) {
-                                    console.log('ERROR');
-                                    console.log(errorData);
-                                }
-                            });
-                        },
-                        error: function (errorData) {
-                            console.log('Error Saving Image');
-                        }
-                    });
-                } else {
-                    $.ajax({
-                        type: 'POST',
-                        contentType: 'application/json; charset=utf-8',
-                        url: '<%= Global.Url_Prefix() %>/api.asmx/UpdateLocation',
-                        data: JSON.stringify(requestData),
-                        dataType: 'JSON',
-                        success: function (responseData) {
-                            console.log('Edit Successful');
-                            console.log(responseData);
-
-                            $('#editModal').modal('hide');
-                            table.ajax.reload();
-                        },
-                        error: function (errorData) {
-                            console.log('ERROR');
-                            console.log(errorData);
-                        }
-                    });
-                }
+                });
                 
             });
 

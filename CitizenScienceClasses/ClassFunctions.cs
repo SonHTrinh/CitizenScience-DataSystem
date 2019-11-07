@@ -67,7 +67,7 @@ namespace CitizenScienceClasses
                     SensorName = Convert.ToString(dataRow["SensorName"]),
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),
-                    ProfileImageID = Convert.ToInt32(dataRow["ProfileImageID"]),
+                    AlbumId = Convert.ToInt32(dataRow["AlbumId"]),
                     LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
                 };
             }
@@ -130,7 +130,7 @@ namespace CitizenScienceClasses
 
             return result;
         }
-        public static Location UpdateLocation(int id, int watershedId, string name, double latitude, double longitude, int imageId)
+        public static Location UpdateLocation(int id, int watershedId, string name, double latitude, double longitude)
         {
             Location result = null;
 
@@ -579,7 +579,7 @@ namespace CitizenScienceClasses
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),
                     SensorName = Convert.ToString(dataRow["SensorName"]),
-                    ProfileImageID = Convert.ToInt32(dataRow["ProfileImageID"])
+                    AlbumId = Convert.ToInt32(dataRow["AlbumId"])
                 };
             }
 
@@ -918,7 +918,7 @@ namespace CitizenScienceClasses
             {
                 DataRow dataRow = dataSet.Tables[0].Rows[0];
 
-                returnResult = Convert.ToInt32(dataRow["ProfileImageID"]);
+                returnResult = Convert.ToInt32(dataRow["AlbumId"]);
             }
 
             return returnResult;

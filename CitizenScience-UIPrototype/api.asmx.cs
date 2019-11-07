@@ -391,9 +391,9 @@ namespace CitizenScience_UIPrototype
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void UpdateLocation(int id, int watershedId, string name, double latitude, double longitude, int imageId)
+        public void UpdateLocation(int id, int watershedId, string name, double latitude, double longitude)
         {
-            Location result = ClassFunctions.UpdateLocation(id, watershedId, name, latitude, longitude, imageId);
+            Location result = ClassFunctions.UpdateLocation(id, watershedId, name, latitude, longitude);
 
             if (result != null)
             {
