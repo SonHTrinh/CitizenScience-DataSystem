@@ -215,10 +215,24 @@ $(document).ready(function () {
 			var imageId = $('#viewImageSelect').val();
 
 			if (!isPrimaryImageSelected()) {
-				$.post('../../api.asmx/DeleteImage?imageId=' + imageId,
-					function(response) {
+				var requestData = { imageId: imageId };
+
+				$.ajax({
+					type: 'POST',
+					contentType: 'application/json; charset=utf-8',
+					url: '../../api.asmx/DeleteImageById',
+					data: JSON.stringify(requestData),
+					dataType: 'JSON',
+					success: function (responseData) {
 						console.log('Deleted Image ' + imageId);
-					});
+
+						$('#viewModal').modal('hide');
+					},
+					error: function (errorData) {
+						console.log('ERROR');
+						console.log(errorData);
+					}
+				});
 			}
 		});
 
@@ -285,8 +299,25 @@ $(document).ready(function () {
 				var imageId = $('#viewImageSelect').val();
 
 				if (!isPrimaryImageSelected()) {
-					$.post('../../api.asmx/MakePrimaryImage?albumId=' + data.AlbumID + '&imageId=' + imageId, function(response) {
-						console.log('ImageID ' + imageId + ' set to primary image of album ' + data.AlbumID);
+
+					var requestData = { imageId: imageId, albumId: data.AlbumID };
+
+					$.ajax({
+						type: 'POST',
+						contentType: 'application/json; charset=utf-8',
+						url: '../../api.asmx/SetImageIDAsAlbumProfileImageID',
+						data: JSON.stringify(requestData),
+						dataType: 'JSON',
+						success: function (responseData) {
+							console.log('Edit Successful');
+							console.log(responseData);
+
+							$('#viewModal').modal('hide');
+						},
+						error: function (errorData) {
+							console.log('ERROR');
+							console.log(errorData);
+						}
 					});
 				}
 			});

@@ -502,6 +502,30 @@ namespace CitizenScienceClasses
             return result;
         }
 
+        public static bool DeleteImageById(int imageId)
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "DeleteImageByID";
+            comm.Parameters.AddWithValue("@imageid", imageId);
+            int result = conn.DoUpdateUsingCmdObj(comm);
+
+            return result >= 1;
+        }
+        public static bool SetImageIDAsAlbumProfileImageID(int imageId, int albumId)
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "SetImageIDAsAlbumProfileImageID";
+            comm.Parameters.AddWithValue("@imageid", imageId);
+            comm.Parameters.AddWithValue("@albumid", albumId);
+            int result = conn.DoUpdateUsingCmdObj(comm);
+
+            return result >= 1;
+        }
+
         public static Image GetImage(int imageId)
         {
             Image result = null;

@@ -13,6 +13,7 @@ namespace CitizenScienceClasses
         private string description;
         private bool isLocationAlbum;
         private Image profileImage;
+        private int profileImageID;
         private List<Image> imageList;
 
         private DateTime lastUpdated;
@@ -47,6 +48,12 @@ namespace CitizenScienceClasses
         {
             get { return profileImage; }
             set { profileImage = value; }
+        }
+
+        public int ProfileImageID
+        {
+            get { return profileImageID; }
+            set { profileImageID = value; }
         }
 
         public List<Image> ImageList

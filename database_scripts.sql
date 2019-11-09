@@ -533,7 +533,7 @@ CREATE PROCEDURE [dbo].[GetAlbumProfileImageDetails]
 	@albumid int
 AS
 	SELECT [ImageID], [Filename] FROM [Image]
-	WHERE [ImageId] = (SELECT [ImageID] FROM [AlbumImages] WHERE AlbumID = @albumid)
+	WHERE [ImageId] = (SELECT [ProfileImageID] FROM [Album] WHERE AlbumID = @albumid)
 
 GO
 
@@ -542,6 +542,27 @@ CREATE PROCEDURE [dbo].[GetAlbumImageIDs]
 AS
 	SELECT [ImageID] FROM [AlbumImages]
 	WHERE [AlbumID] = @albumid
+
+GO
+
+CREATE PROCEDURE [dbo].[DeleteImageByID]
+	@imageid int
+AS
+    DELETE FROM [AlbumImages]
+    WHERE ImageID = @imageid;
+
+	DELETE FROM [Image]
+    WHERE ImageID = @imageid
+
+GO
+
+CREATE PROCEDURE [dbo].[SetImageIDAsAlbumProfileImageID]
+	@albumid int,
+	@imageid int
+AS
+	UPDATE [Album]
+    SET [ProfileImageID] = @imageid
+    WHERE [AlbumID] = @albumid
 
 GO
 
