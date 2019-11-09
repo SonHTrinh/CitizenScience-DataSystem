@@ -98,7 +98,7 @@ function initModal(albumObj) {
 	$('#modalTitle').text(albumObj.Name);
 
 	$.get({
-		url: '../api.asmx/GetAlbumImageIds?albumId=' + albumObj.AlbumID
+		url: 'api.asmx/GetAlbumImageIds?albumId=' + albumObj.AlbumID
 	}).done(function(imageIdArray) {
 
 		imageIdArray.forEach(function(imageId) {
@@ -127,7 +127,7 @@ function initModal(albumObj) {
 $(function() {
 
 	$.ajax({
-		url: "../api.asmx/AllAlbum",
+		url: "api.asmx/AllAlbum",
 		success: function (responseData) {
 			var numOfAlbums = responseData.length;
 			var numOfColumnsPerRow = 3;
