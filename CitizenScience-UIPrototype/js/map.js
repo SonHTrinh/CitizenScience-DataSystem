@@ -88,7 +88,7 @@ function initGraph(locationObj, temperatureScale, formattedStartDate, formattedE
 						xAxes: [{
 							ticks: {
 								autoSkip: true,
-								maxTicksLimit: 20
+								maxTicksLimit: 15
 							},
 							scaleLabel: {
 								display: true,
@@ -148,7 +148,10 @@ function initModal(locationObj, watershedObj) {
 	//Build Chart functionality
 	$.get("api.asmx/GetLocationLatestTemperature?locationid=" + locationObj.LocationID)
 		.done(function (response) {
-			if (response.length !== 0) {
+            if (response.length !== 0) {
+                //if (window.Chart != undefined) {
+                //    w.Chart.destroy();
+                //}
 				var endDate = new Date(response.Timestamp);
 				var formattedEndDate = getFormattedDate(endDate);
 
