@@ -121,6 +121,7 @@ GO
 
 -------------------- Triggers --------------------
 
+-------------------------------- LOCATION TRIGGERS
 -- Trigger that happens when new location is added to the database
 CREATE TRIGGER [dbo].[LocationInsertUpdateDate] ON [dbo].[Location]
 AFTER INSERT AS
@@ -131,6 +132,39 @@ BEGIN
 END
 
 GO
+-- Trigger that happens when location is updated in the database
+CREATE TRIGGER [dbo].[LocationUpdateUpdateDate] ON [dbo].[Location]
+AFTER UPDATE AS
+BEGIN
+    UPDATE [dbo].[Location]
+    SET [LastUpdated] = GETDATE()
+    WHERE [LocationID] = [inserted].LocationID
+END
+
+GO
+
+-------------------------------- ALBUM TRIGGERS
+-- Trigger that happens when new album is added to the database
+CREATE TRIGGER [dbo].[AlbumInsertUpdateDate] ON [dbo].[Album]
+AFTER INSERT AS
+BEGIN
+    UPDATE [dbo].[Album]
+    SET [LastUpdated] = GETDATE()
+    WHERE [AlbumID] = [inserted].AlbumID
+END
+
+GO
+-- Trigger that happens when album is updated in the database
+CREATE TRIGGER [dbo].[AlbumUpdateUpdateDate] ON [dbo].[Album]
+AFTER INSERT AS
+BEGIN
+    UPDATE [dbo].[Album]
+    SET [LastUpdated] = GETDATE()
+    WHERE [AlbumID] = [inserted].AlbumID
+END
+
+GO
+
 
 -- Trigger that happens when a location is updated
 -- CREATE TRIGGER [dbo].[LocationAlbumUpdate] ON [dbo].[Location]
