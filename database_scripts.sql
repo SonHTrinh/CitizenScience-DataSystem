@@ -66,6 +66,9 @@ GO
 CREATE TABLE [dbo].[Admin] (
     [AdminID] INT            IDENTITY (1, 1) NOT NULL,
     [TUID]    NVARCHAR (MAX) NOT NULL,
+    [FName]   NVARCHAR (MAX) NOT NULL,
+    [LName]   NVARCHAR (MAX) NOT NULL,
+    [Email]   NVARCHAR (MAX) NOT NULL,
     [Active]  BIT            NOT NULL,
     PRIMARY KEY CLUSTERED ([AdminID] ASC)
 );
@@ -430,10 +433,13 @@ GO
 ------------------------------------------------- CRUD Admin
 CREATE PROCEDURE [dbo].[CreateAdmin]
 	@tuid nvarchar(MAX),
+	@fname nvarchar(MAX),
+	@lname nvarchar(MAX),
+	@email nvarchar(MAX),
 	@active bit
 AS
-	INSERT INTO Admin(TUID, Active)
-	VALUES(@tuid, @active)
+	INSERT INTO Admin(TUID, FName, LName, Email, Active)
+	VALUES(@tuid, @fname, @lname, @email, @active)
 	SELECT * FROM Admin WHERE AdminID = SCOPE_IDENTITY()
 
 GO
@@ -449,10 +455,13 @@ GO
 CREATE PROCEDURE [dbo].[UpdateAdmin]
 	@id int,
 	@tuid NVARCHAR(MAX),
+	@fname nvarchar(MAX),
+	@lname nvarchar(MAX),
+	@email nvarchar(MAX),
 	@active BIT
 AS
 	UPDATE Admin
-	SET TUID = @tuid, Active = @active
+	SET TUID = @tuid, Active = @active, FName = @fname, LName = @lname, Email = @email
 	WHERE AdminID = @id
 	SELECT * FROM Admin where AdminID = @id
 
