@@ -16,6 +16,8 @@
                 <h1>Image Gallery</h1>
             </div>
         </div>
+
+        <!--
         <div class="row my-4 justify-content-center">
             <div class="col-4 text-center">
                 <button class="btn btn-dark">All</button>
@@ -23,6 +25,8 @@
                 <button class="btn btn-dark">Volunteers</button>
             </div>
         </div>
+        -->
+
         <!-- Rows with Album Elements will be appended here -->
     </div>
     
