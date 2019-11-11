@@ -7,17 +7,19 @@ using CitizenScienceClasses;
 
 namespace CitizenScience_UIPrototype.images.album
 {
-    public class Set : IHttpHandler
+    public class Add : IHttpHandler
     {
         public void ProcessRequest(HttpContext context)
         {
             try
             {
+                string filename = context.Request.Form.Get("filename");
                 HttpPostedFile postedFile = context.Request.Files[0];
                 if (postedFile.ContentLength == 0)
                     throw new Exception("Empty file received");
 
                 byte[] bytes;
+                int albumId = int.Parse(context.Request["id"]);
 
                 using (Stream stream = postedFile.InputStream)
                 {
@@ -26,19 +28,18 @@ namespace CitizenScience_UIPrototype.images.album
                         bytes = binaryReader.ReadBytes((int)stream.Length);
                     }
 
-                    int albumId = int.Parse(context.Request["id"]);
                     string contentType = postedFile.ContentType;
 
-                    //Image result = ClassFunctions.SetLocationImage(albumId, bytes, contentType);
+                    Image image = ClassFunctions.UploadAlbumImage(bytes, contentType, filename, albumId);
 
-                    //context.Response.ContentType = contentType;
-                    //context.Response.Write(result.ToString());
+                    context.Response.Write(image.ImageID);
                 }
             }
             catch (Exception ex)
             {
+                context.Response.StatusCode = 500;
                 context.Response.Write("Error occurred on server " +
-                  ex.Message);
+                                       ex.Message);
             }
         }
 
@@ -63,7 +64,7 @@ namespace CitizenScience_UIPrototype.images.album
                 byte[] bytes;
                 int albumId = int.Parse(context.Request["id"]);
 
-                image = ClassFunctions.GetAlbumImage(albumId);
+                image = ClassFunctions.GetAlbumProfileImage(albumId);
 
                 context.Response.ContentType = image.ContentType;
                 context.Response.BinaryWrite(image.Bytes);
@@ -71,6 +72,7 @@ namespace CitizenScience_UIPrototype.images.album
             }
             catch (Exception ex)
             {
+                context.Response.StatusCode = 500;
                 context.Response.Write("Error occurred on server " +
                                        ex.Message);
             }

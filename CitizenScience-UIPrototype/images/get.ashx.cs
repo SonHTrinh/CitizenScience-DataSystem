@@ -24,7 +24,6 @@ namespace CitizenScience_UIPrototype.images
 
                 context.Response.ContentType = image.ContentType;
                 context.Response.BinaryWrite(image.Bytes);
-
             }
             catch (Exception ex)
             {

@@ -13,7 +13,7 @@ namespace CitizenScienceClasses
         private double latitude;
         private double longitude;
         private string sensorName;
-        private int profileImageID;
+        private int albumID;
         private DateTime lastUpdated;
 
         public Location() { }
@@ -24,7 +24,7 @@ namespace CitizenScienceClasses
             latitude = lat;
             longitude = lon;
             sensorName = name;
-            profileImageID = profile;
+            albumID = profile;
             lastUpdated = updated;
         }
 
@@ -53,10 +53,10 @@ namespace CitizenScienceClasses
             get { return sensorName; }
             set { sensorName = value; }
         }
-        public int ProfileImageID
+        public int AlbumId
         {
-            get { return profileImageID; }
-            set { profileImageID = value; }
+            get { return albumID; }
+            set { albumID = value; }
         }
         public DateTime LastUpdated
         {

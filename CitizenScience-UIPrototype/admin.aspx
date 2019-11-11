@@ -110,7 +110,7 @@
 
                                 <!--
                                 <div class="row my-3">
-                                    <span style="color:red">*</span><asp:Label AssociatedControlID="txtNewLocationDescription" CssClass="w-75" runat="server">Location Description:</asp:Label>
+                                    <span style="color:red">*</span><asp:Label AssociatedControlID="txtNewLocationDescription" CssClass="w-75" runat="server">Location Filename:</asp:Label>
                                     <asp:TextBox CssClass="form-control w-75" TextMode="MultiLine" Rows="6" ID="txtNewLocationDescription" runat="server" required="true"/>
                                 </div>  
                                 -->
@@ -363,7 +363,7 @@
                                     <thead class="thead-light">
                                         <tr>
                                             <th scope="col">Name</th>
-                                            <th scope="col">Description</th>
+                                            <th scope="col">Filename</th>
                                             <th scope="col">Category</th>
                                             <th scope="col"></th>
                                             <th scope="col"></th>
@@ -413,7 +413,7 @@
                                 <span style="color:red">*</span><asp:Label AssociatedControlID="txtAlbumName" runat="server">Album Name:</asp:Label>
                                 <asp:TextBox CssClass="form-control mb-2" ID="txtAlbumName" runat="server"/>
 
-                                <span style="color:red">*</span><asp:Label AssociatedControlID="txtAlbumDescription" runat="server">Description:</asp:Label>
+                                <span style="color:red">*</span><asp:Label AssociatedControlID="txtAlbumDescription" runat="server">Filename:</asp:Label>
                                 <asp:TextBox TextMode="MultiLine" Rows="3" CssClass="form-control" ID="txtAlbumDescription" runat="server"/>
 
                                 <span style="color:red">*</span><asp:Label AssociatedControlID="ddlNewAlbumGroup" runat="server">Album Category:</asp:Label>

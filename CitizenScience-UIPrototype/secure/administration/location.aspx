@@ -72,9 +72,13 @@
                     </div>
                   </div>
               </div>
+              <br />
               <div class="row">
                   <div class="form-group col-12">
-                      <input type="file" value="Browse" id="inputCreateImageBrowse" />
+                      <div class="custom-file">
+                          <input type="file" class="custom-file-input" id="inputCreateImageBrowse" multiple>
+                          <label class="custom-file-label" for="inputCreateImageBrowse">Choose Profile Image File</label>
+                      </div>
                   </div>
               </div>
           </div>
@@ -129,17 +133,17 @@
                     </div>
                   </div>
               </div>
-              <div class="row text-center">
-                  <div class="form-group col-12">
-                      <span id="imageEditID" class="invisible"></span>
-                      <img id="imageEdit" width="200" height="200" />
-                  </div>
-              </div>
-              <div class="row">
-                  <div class="form-group col-12">
-                      <input type="file" value="Browse" id="inputEditImageBrowse" onchange="editImageDirty()"/>
-                  </div>
-              </div>
+              <%-- <div class="row text-center"> --%>
+              <%--     <div class="form-group col-12"> --%>
+              <%--         <span id="imageEditID" class="invisible"></span> --%>
+              <%--         <img id="imageEdit" width="200" height="200" /> --%>
+              <%--     </div> --%>
+              <%-- </div> --%>
+              <%-- <div class="row"> --%>
+              <%--     <div class="form-group col-12"> --%>
+              <%--         <input type="file" value="Browse" id="inputEditImageBrowse" onchange="editImageDirty()"/> --%>
+              <%--     </div> --%>
+              <%-- </div> --%>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="editClose">Close</button>
@@ -477,77 +481,24 @@
                 console.log('Is Edit Form Submission Valid?: ' + isValidRequest);
                 if (!isValidRequest) return;
 
+                $.ajax({
+                    type: 'POST',
+                    contentType: 'application/json; charset=utf-8',
+                    url: '<%= Global.Url_Prefix() %>/api.asmx/UpdateLocation',
+                    data: JSON.stringify(requestData),
+                    dataType: 'JSON',
+                    success: function (responseData) {
+                        console.log('Edit Successful');
+                        console.log(responseData);
 
-                if (editImageIsDirty) {
-                    var fileUpload = $('#inputEditImageBrowse').get(0);
-                    var files = fileUpload.files;
-
-                    var formData = new FormData();
-
-                    for (var i = 0; i < files.length; i++) {
-                        formData.append(files[i].name, files[i]);
+                        $('#editModal').modal('hide');
+                        table.ajax.reload();
+                    },
+                    error: function (errorData) {
+                        console.log('ERROR');
+                        console.log(errorData);
                     }
-
-                    formData.append('description', requestData.name);
-                    formData.append('file', $('#inputEditImageBrowse')[0].files[0]);
-
-                    $.ajax({
-                        type: "POST",
-                        url: "<%= Global.Url_Prefix() %>/images/location/set.ashx",
-                        contentType: false,
-                        processData: false,
-                        data: formData,
-                        success: function (dataResponse) {
-                            console.log("Image created with ID: " + dataResponse);
-
-                            // Add the image ID to the new location data
-                            Object.assign(requestData, { imageId: dataResponse });
-
-                            // Save the location data
-                            $.ajax({
-                                type: 'POST',
-                                contentType: 'application/json; charset=utf-8',
-                                url: '<%= Global.Url_Prefix() %>/api.asmx/UpdateLocation',
-                                data: JSON.stringify(requestData),
-                                dataType: 'JSON',
-                                success: function (responseData) {
-                                    console.log('Edit Successful');
-                                    console.log(responseData);
-
-                                    $('#editModal').modal('hide');
-                                    
-                                    table.ajax.reload();
-                                },
-                                error: function (errorData) {
-                                    console.log('ERROR');
-                                    console.log(errorData);
-                                }
-                            });
-                        },
-                        error: function (errorData) {
-                            console.log('Error Saving Image');
-                        }
-                    });
-                } else {
-                    $.ajax({
-                        type: 'POST',
-                        contentType: 'application/json; charset=utf-8',
-                        url: '<%= Global.Url_Prefix() %>/api.asmx/UpdateLocation',
-                        data: JSON.stringify(requestData),
-                        dataType: 'JSON',
-                        success: function (responseData) {
-                            console.log('Edit Successful');
-                            console.log(responseData);
-
-                            $('#editModal').modal('hide');
-                            table.ajax.reload();
-                        },
-                        error: function (errorData) {
-                            console.log('ERROR');
-                            console.log(errorData);
-                        }
-                    });
-                }
+                });
                 
             });
 
@@ -568,7 +519,7 @@
                     formData.append(files[i].name, files[i]);
                 }
 
-                formData.append('description', requestData.name);
+                formData.append('filename', requestData.name);
                 formData.append('file', $('#inputCreateImageBrowse')[0].files[0]);
 
                 // Save the image, get the new image ID THEN save the location w/ the image ID info

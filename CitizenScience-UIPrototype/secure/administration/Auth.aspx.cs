@@ -32,17 +32,21 @@ namespace CitizenScience_UIPrototype.secure.administration
             {
                 /*The SSO Sign-on page will not appear while running locally. This is only used for development.*/
                 employeeNumber = "915261297";
+
+                Session["Authenticated"] = true;
+                Response.Redirect("about.aspx");
             }
             else
             {
                 /*Application is running on server and the user has active Shibboleth session.*/
                 employeeNumber = GetShibbolethHeaderAttributes();
+                GetUserInformation(employeeNumber);
             }
 
 
             /*Use employee number to get user information from web services and then redirect*/
 
-            GetUserInformation(employeeNumber);
+            
 
 
             //}
@@ -116,25 +120,25 @@ namespace CitizenScience_UIPrototype.secure.administration
         }
     
 
-        protected void btnShibb_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (Request.Headers["employeeNumber"] != null)
-                {
-                    GetUserInformation(Request.Headers["employeeNumber"]);
-                }
-                else
-                {
-                    //divError.Visible = true;
-                    //lblError.Text = (HttpContext.Current.Request.IsLocal.Equals(true)) ? "<strong>Error:</strong> Shibboleth cannot be used if application is running locally." : "<strong>Error:</strong> Profile could not be loaded!";
-                }
-            }
-            catch (Exception)
-            {
-                Server.Transfer("500http.aspx");
-            }
-        }
+//        protected void btnShibb_Click(object sender, EventArgs e)
+//        {
+//            try
+//            {
+//                if (Request.Headers["employeeNumber"] != null)
+//                {
+//                    GetUserInformation(Request.Headers["employeeNumber"]);
+//                }
+//                else
+//                {
+//                    //divError.Visible = true;
+//                    //lblError.Text = (HttpContext.Current.Request.IsLocal.Equals(true)) ? "<strong>Error:</strong> Shibboleth cannot be used if application is running locally." : "<strong>Error:</strong> Profile could not be loaded!";
+//                }
+//            }
+//            catch (Exception)
+//            {
+//                Server.Transfer("500http.aspx");
+//            }
+//        }
 
 
     }

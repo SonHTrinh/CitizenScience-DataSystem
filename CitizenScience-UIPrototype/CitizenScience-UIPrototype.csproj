@@ -91,6 +91,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="about.aspx" />
+    <Content Include="js\administration-gallery.js" />
+    <Content Include="style\arrow-down.png" />
     <Content Include="Default.aspx" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\Settings.settings">
@@ -104,6 +106,8 @@
     </None>
     <None Include="Web References\ldap_search.disco" />
     <Content Include="js\map.js" />
+    <Content Include="favicon.png" />
+    <Content Include="style\arrow-right.png" />
     <Content Include="secure\administration\403http.aspx" />
     <Content Include="secure\administration\Auth.aspx" />
     <Content Include="js\gallery.js" />
@@ -120,6 +124,7 @@
     <Content Include="api.asmx" />
     <Content Include="debug.aspx" />
     <Content Include="gallery.aspx" />
+    <Content Include="style\custom\administration-gallery.css" />
     <Content Include="style\custom\gallery.css" />
     <Content Include="style\custom\galleryAPI-style.css" />
     <Content Include="Global.asax" />
@@ -1854,8 +1859,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="images\album\ImageAlbumAPI.cs">
-      <DependentUpon>set.ashx</DependentUpon>
+    <Compile Include="images\album\add.ashx.cs">
+      <DependentUpon>add.ashx</DependentUpon>
     </Compile>
     <Compile Include="images\get.ashx.cs">
       <DependentUpon>get.ashx</DependentUpon>
@@ -1879,7 +1884,7 @@
     <None Include="Web References\ldap_search.wsdl" />
     <Content Include="images\location\get.ashx" />
     <Content Include="images\location\set.ashx" />
-    <Content Include="images\album\set.ashx" />
+    <Content Include="images\album\add.ashx" />
     <Content Include="images\get.ashx" />
     <Content Include="images\album\get.ashx" />
     <None Include="packages.config" />

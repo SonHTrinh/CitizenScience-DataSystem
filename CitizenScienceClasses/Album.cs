@@ -11,16 +11,14 @@ namespace CitizenScienceClasses
         private int albumID;
         private string name;
         private string description;
+        private bool isLocationAlbum;
+        private Image profileImage;
+        private int profileImageID;
+        private List<Image> imageList;
+
         private DateTime lastUpdated;
 
         public Album() { }
-        public Album(int id, string album_name, string desc, DateTime updated)
-        {
-            albumID = id;
-            name = album_name;
-            description = desc;
-            lastUpdated = updated;
-        }
 
         public int AlbumID
         {
@@ -38,6 +36,30 @@ namespace CitizenScienceClasses
         {
             get { return description; }
             set { description = value; }
+        }
+
+        public bool IsLocationAlbum
+        {
+            get { return isLocationAlbum; }
+            set { isLocationAlbum = value; }
+        }
+
+        public Image ProfileImage
+        {
+            get { return profileImage; }
+            set { profileImage = value; }
+        }
+
+        public int ProfileImageID
+        {
+            get { return profileImageID; }
+            set { profileImageID = value; }
+        }
+
+        public List<Image> ImageList
+        {
+            get { return imageList; }
+            set { imageList = value; }
         }
 
         public DateTime LastUpdated

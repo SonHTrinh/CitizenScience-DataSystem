@@ -28,18 +28,28 @@ function buildAlbumElement(albumObj, columnClass) {
 		.addClass('row')
 		.addClass('justify-content-center');
 
+	var cardElement = $(document.createElement('div'))
+		.addClass('card')
+		.addClass('h-100');
+
+	var cardBodyElement = $(document.createElement('div'))
+		.addClass('card-body')
+		.addClass('d-flex')
+		.addClass('flex-column')
+		.addClass('mt-auto');
+		
+
 	// Content
-	var title = $(document.createElement('p'))
-		.addClass('font-weight-bold')
+	var title = $(document.createElement('h5'))
+		.addClass('card-title')
 		.text(albumTitle);
 
 	var profileImage = $(document.createElement('img'))
-		.css('height', imageHeight)
-		.css('width', imageWidth)
+		.addClass('w-100')
         .attr('src', imageUrl);
 
     var desc = $(document.createElement('p'))
-        .addClass('font-weight')
+	    .addClass('card-text')
         .text(albumDesc);
 
 	var viewButton = $(document.createElement('button'))
@@ -47,23 +57,29 @@ function buildAlbumElement(albumObj, columnClass) {
 		.attr('type', 'button')
 		.addClass('btn')
         .addClass('btn-outline-dark')
-		.addClass('px-3')
-		.addClass('my-2')
+		.addClass('btn-block')
+		.addClass('mt-auto')
 		.text('View')
 		.click(function() {
 			initModal(albumObj);
 		});
-		
 
-	titleRow.append(title);
-    profileImageRow.append(profileImage);
-    descriptionRow.append(desc);
-	buttonRow.append(viewButton);
+	cardBodyElement.append(title);
+	cardBodyElement.append(desc);
+	cardBodyElement.append(viewButton);
 
-	columnElement.append(titleRow);
-	columnElement.append(profileImageRow);
-	columnElement.append(descriptionRow);
-	columnElement.append(buttonRow);
+	cardElement.append(profileImage);
+	cardElement.append(cardBodyElement);
+	columnElement.append(cardElement);
+//	titleRow.append(title);
+//    profileImageRow.append(profileImage);
+//    descriptionRow.append(desc);
+//	buttonRow.append(viewButton);
+//
+//	columnElement.append(titleRow);
+//	columnElement.append(profileImageRow);
+//	columnElement.append(descriptionRow);
+//	columnElement.append(buttonRow);
 
 	return columnElement;
 }

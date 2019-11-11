@@ -132,6 +132,48 @@ namespace CitizenScience_UIPrototype
 
         [WebMethod]
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void GetAlbumImagesDetails(int albumId)
+        {
+            List<Image> result = new List<Image>();
+
+            result = ClassFunctions.GetAlbumImagesDetails(albumId);
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Clear();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(result));
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void GetAlbumProfileImage(int albumId)
+        {
+            Image result = new Image();
+
+            result = ClassFunctions.GetAlbumProfileImage(albumId);
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Clear();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(result));
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
+        public void GetAlbumProfileImageDetails(int albumId)
+        {
+            Image result = new Image();
+
+            result = ClassFunctions.GetAlbumProfileImageDetails(albumId);
+
+            JavaScriptSerializer js = new JavaScriptSerializer();
+            Context.Response.Clear();
+            Context.Response.ContentType = "application/json";
+            Context.Response.Write(js.Serialize(result));
+        }
+
+        [WebMethod]
+        [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void Admins()
         {
             DataSet adminDataSet = ClassFunctions.GetAdmins();
@@ -349,9 +391,9 @@ namespace CitizenScience_UIPrototype
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void UpdateLocation(int id, int watershedId, string name, double latitude, double longitude, int imageId)
+        public void UpdateLocation(int id, int watershedId, string name, double latitude, double longitude)
         {
-            Location result = ClassFunctions.UpdateLocation(id, watershedId, name, latitude, longitude, imageId);
+            Location result = ClassFunctions.UpdateLocation(id, watershedId, name, latitude, longitude);
 
             if (result != null)
             {
@@ -559,28 +601,68 @@ namespace CitizenScience_UIPrototype
         [ScriptMethod(UseHttpGet = true, ResponseFormat = ResponseFormat.Json)]
         public void AllAlbum()
         {
-            DataSet albumDataSet = ClassFunctions.GetAllAlbum();
-            List<Album> albumList = new List<Album>();
+            List<Album> result = ClassFunctions.GetAllAlbum();
 
-            for (int i = 0; i < albumDataSet.Tables[0].Rows.Count; i++)
+
+            if (result != null)
             {
-                DataRow dataRow = albumDataSet.Tables[0].Rows[i];
-
-                Album album = new Album
-                {
-                    AlbumID = Convert.ToInt32(dataRow["AlbumID"]),
-                    Name = Convert.ToString(dataRow["Name"]),
-                    Description = Convert.ToString(dataRow["Description"]),
-                    LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
-                };
-
-                albumList.Add(album);
+                BuildResponse(200, result);
             }
+            else
+            {
+                BuildResponse(500, result);
+            }
+        }
 
-            JavaScriptSerializer js = new JavaScriptSerializer();
-            Context.Response.Clear();
-            Context.Response.ContentType = "application/json";
-            Context.Response.Write(js.Serialize(albumList));
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void MakePrimayImage(int albumId, int imageId)
+        {
+            Album result = ClassFunctions.GetAlbum(1);
+
+
+            if (result != null)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, result);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void SetImageIDAsAlbumProfileImageID( int imageId, int albumId)
+        {
+            bool result = ClassFunctions.SetImageIDAsAlbumProfileImageID(imageId, albumId);
+
+
+            if (result != null)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, result);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void DeleteImageById(int imageId)
+        {
+            bool result = ClassFunctions.DeleteImageById(imageId);
+
+
+            if (result)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, result);
+            }
         }
 
         [WebMethod]
@@ -598,7 +680,7 @@ namespace CitizenScience_UIPrototype
 //                {
 //                    ImageID = Convert.ToInt32(dataRow["ImageID"]),
 //                    Bytes = dataRow["Bytes"] as byte[],
-//                    Description = Convert.ToString(dataRow["Description"]),
+//                    Filename = Convert.ToString(dataRow["Filename"]),
 //                    ContentType = Convert.ToString(dataRow["ContentType"])
 //                };
 //

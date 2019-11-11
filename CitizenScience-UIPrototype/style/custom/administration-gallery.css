@@ -1,0 +1,16 @@
+﻿.no-sort::after {
+    display: none !important;
+}
+
+.no-sort {
+    pointer-events: none !important;
+    cursor: default !important;
+}
+
+#viewAddNewImage .nav-link {
+    color: #495057;
+}
+
+#viewManageImages .nav-link {
+    color: #495057;
+}

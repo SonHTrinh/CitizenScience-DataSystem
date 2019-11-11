@@ -13,7 +13,7 @@
     </div>
     <div class="row mt-2 card card-body">
         <div class="col-12">
-            <label for="divDescription" class="font-weight-bold">Citizen Science Description</label>
+            <label for="divDescription" class="font-weight-bold">Citizen Science Filename</label>
             <div id="divDescription"></div>
             <%--<input type="text" class="form-control inputaccessnet" id="inputCreateAccessnet" aria-describedby="nameCreateHelp">--%>
         </div>
@@ -68,10 +68,10 @@
           </div>
           <div class="modal-body">
                <div class="form-group">
-                <label for="inputEditDescription">Citizen Science Description</label>
+                <label for="inputEditDescription">Citizen Science Filename</label>
                 <input type="text" class="form-control inputdescription" id="inputEditDescription" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                    Description must be ...
+                    Filename must be ...
                 </div>
               </div>  
               <div class="form-group">
@@ -223,7 +223,7 @@
                 hasValidAnswer2 = regexAnswer2.test(requestData.answer2);
                 hasValidAnswer3 = regexAnswer3.test(requestData.answer3);
 
-                console.log("Valid Description: " + hasValidDescription);
+                console.log("Valid Filename: " + hasValidDescription);
                 console.log("Valid Question 1: " + hasValidQuestion1);
                 console.log("Valid Question 2: " + hasValidQuestion2);
                 console.log("Valid Question 3: " + hasValidQuestion3);
