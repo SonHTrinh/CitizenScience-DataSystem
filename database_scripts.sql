@@ -122,35 +122,15 @@ GO
 -------------------- Triggers --------------------
 
 -- Trigger that happens when new location is added to the database
--- CREATE TRIGGER [dbo].[LocationAlbumCreation] ON [dbo].[Location]
--- AFTER INSERT AS
--- BEGIN
---    DECLARE @AlbumId int;
---
---     -- Create a new album for the Location
---     INSERT INTO [dbo].[Album]
---     ([Name], [Description], [ProfileImageID], [IsLocationAlbum],[LastUpdated])
---     SELECT
---     [inserted].[SensorName], 'Album of ' + [inserted].[SensorName] + ' images', [inserted].ProfileImageID, 1, GETDATE()
---     FROM inserted;
---
---     SELECT @AlbumId = (SELECT SCOPE_IDENTITY());
---
---     -- Create a link from the Location Profile image to the Image Album
---     INSERT INTO [dbo].[AlbumImages]
---     (AlbumID, ImageID, LastUpdated)
---     SELECT
---     @AlbumId, [inserted].[ProfileImageID], GETDATE()
---     FROM inserted;
---
---    -- Add the album to the location
---     UPDATE [dbo].[Location]
---     SET [AlbumID] = @AlbumId
---     WHERE [LocationID] = [inserted].LocationID
---
--- END
---
--- GO
+CREATE TRIGGER [dbo].[LocationInsertUpdateDate] ON [dbo].[Location]
+AFTER INSERT AS
+BEGIN
+    UPDATE [dbo].[Location]
+    SET [LastUpdated] = GETDATE()
+    WHERE [LocationID] = [inserted].LocationID
+END
+
+GO
 
 -- Trigger that happens when a location is updated
 -- CREATE TRIGGER [dbo].[LocationAlbumUpdate] ON [dbo].[Location]
