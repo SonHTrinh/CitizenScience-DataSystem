@@ -156,7 +156,7 @@ END
 GO
 -- Trigger that happens when album is updated in the database
 CREATE TRIGGER [dbo].[AlbumUpdateUpdateDate] ON [dbo].[Album]
-AFTER INSERT AS
+AFTER UPDATE AS
 BEGIN
     UPDATE [dbo].[Album]
     SET [LastUpdated] = GETDATE()
@@ -165,6 +165,73 @@ END
 
 GO
 
+-------------------------------- ALBUM IMAGES TRIGGERS
+-- Trigger that happens when new album image is added to the database
+CREATE TRIGGER [dbo].[AlbumImagesInsertUpdateDate] ON [dbo].[AlbumImages]
+AFTER INSERT AS
+BEGIN
+    UPDATE [dbo].[AlbumImages]
+    SET [LastUpdated] = GETDATE()
+    WHERE [AlbumID] = [inserted].AlbumID
+	AND [ImageID] = [inserted].ImageID
+END
+
+GO
+-- Trigger that happens when album image is updated in the database
+CREATE TRIGGER [dbo].[AlbumImagesUpdateUpdateDate] ON [dbo].[AlbumImages]
+AFTER UPDATE AS
+BEGIN
+    UPDATE [dbo].[AlbumImages]
+    SET [LastUpdated] = GETDATE()
+    WHERE [AlbumID] = [inserted].AlbumID
+	AND [ImageID] = [inserted].ImageID
+END
+
+GO
+
+-------------------------------- IMAGE TRIGGERS
+-- Trigger that happens when new image is added to the database
+CREATE TRIGGER [dbo].[ImageInsertUpdateDate] ON [dbo].[Image]
+AFTER INSERT AS
+BEGIN
+    UPDATE [dbo].[Image]
+    SET [LastUpdated] = GETDATE()
+    WHERE [AlbumID] = [inserted].AlbumID
+END
+
+GO
+-- Trigger that happens when image is updated in the database
+CREATE TRIGGER [dbo].[ImageUpdateUpdateDate] ON [dbo].[Image]
+AFTER UPDATE AS
+BEGIN
+    UPDATE [dbo].[Image]
+    SET [LastUpdated] = GETDATE()
+    WHERE [AlbumID] = [inserted].AlbumID
+END
+
+GO
+
+-------------------------------- WATERSHED TRIGGERS
+-- Trigger that happens when new watershed is added to the database
+CREATE TRIGGER [dbo].[WatershedInsertUpdateDate] ON [dbo].[Watershed]
+AFTER INSERT AS
+BEGIN
+    UPDATE [dbo].[Watershed]
+    SET [LastUpdated] = GETDATE()
+    WHERE [WatershedID] = [inserted].WatershedID
+END
+
+GO
+-- Trigger that happens when watershed is updated in the database
+CREATE TRIGGER [dbo].[WatershedUpdateUpdateDate] ON [dbo].[Watershed]
+AFTER UPDATE AS
+BEGIN
+    UPDATE [dbo].[Watershed]
+    SET [LastUpdated] = GETDATE()
+    WHERE [WatershedID] = [inserted].WatershedID
+END
+
+GO
 
 -- Trigger that happens when a location is updated
 -- CREATE TRIGGER [dbo].[LocationAlbumUpdate] ON [dbo].[Location]
