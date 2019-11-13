@@ -36,14 +36,16 @@
                     url: '<%= Global.Url_Prefix() %>/api.asmx/Volunteers',
                     dataSrc: ''
                 },
+				order: [[4, "desc"]],
                 columns: [
                     // The 'Name' column of the table's data
-                    { data: 'FirstName' },
-                    { data: 'LastName' },
-                    { data: 'Email' },
-                    { data: 'Message' },
+                    { data: 'FirstName', width: '15%' },
+                    { data: 'LastName', width: '15%' },
+                    { data: 'Email', width: '20%' },
+                    { data: 'Message', width: '35%' },
                     {
                         data: 'DateSubmitted',
+                        width: '15%', 
                         //type: 'datetime',
                         //format: 'MM/DD/YYYY',
                         render: function(data) {

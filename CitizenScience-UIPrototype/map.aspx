@@ -5,26 +5,23 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
     <div class="container-fluid">
-        <div class="row my-3">
+        <%--<div class="row my-3">
             <div class="col-12 text-center">
-                <h1>Welcome to Citizen Science</h1>
+                <h1>Citizen Science Data System</h1>
             </div>
-        </div>
+        </div>--%>
         <div class="row my-4">
-            <div class="col-6">
-                <div class="dropdown float-right">
+                <div class="dropdown float-left" style="margin-left: 10%;">
                   <button class="btn btn-dark dropdown-toggle px-5 py-2" type="button" id="ddBtnWatershed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Watersheds
                   </button>
                   <div class="dropdown-menu" id="ddMenuWatershed" aria-labelledby="dropdownMenuButton"></div>
                 </div>
-            </div>
-            <div class="col-6">
+                &nbsp;
                 <div class="dropdown float-left invisible" id="locationdiv">
                   <button class="btn btn-dark dropdown-toggle px-5 py-2" type="button" id="ddBtnLocation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
                   <div class="dropdown-menu" id="ddMenuLocation" aria-labelledby="dropdownMenuButton"></div>
                 </div>
-            </div>
         </div>
 
     </div>

@@ -6,12 +6,10 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
     <!--About Citizen Science-->
-    <div class="row">     
-        <section class="jumbotron text-center w-100" >
-            <div class="container">
-                <h1 class="jumbotron-heading">About Citizen Science</h1>            
-            </div>
-        </section>        
+    <div class="row my-3">
+        <div class="col-12 text-center">
+            <h1>About Citizen Science</h1>
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
