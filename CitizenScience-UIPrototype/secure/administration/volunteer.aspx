@@ -36,6 +36,7 @@
                     url: '<%= Global.Url_Prefix() %>/api.asmx/Volunteers',
                     dataSrc: ''
                 },
+				order: [[4, "desc"]],
                 columns: [
                     // The 'Name' column of the table's data
                     { data: 'FirstName' },
