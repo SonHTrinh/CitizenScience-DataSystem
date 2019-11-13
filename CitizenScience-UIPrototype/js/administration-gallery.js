@@ -74,7 +74,7 @@ $(document).ready(function () {
 			// Build the DataTable
 			table = $('#DataTable').DataTable({
 				data: responseData,
-				order: [[1, "asc"]],
+				order: [[0, "asc"]],
 				columns: [
 					{
 						data: "Name",

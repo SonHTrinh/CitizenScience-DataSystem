@@ -73,6 +73,7 @@
                             url: '<%= Global.Url_Prefix() %>/api.asmx/ReadAllLocation',
                             dataSrc: ''
                         },
+				        order: [[1, "asc"]],
                         columns: [
                             // The 'Name' column of the table's data
                             { data: 'SensorName' },

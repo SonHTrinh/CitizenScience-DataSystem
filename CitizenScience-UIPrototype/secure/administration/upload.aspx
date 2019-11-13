@@ -23,7 +23,7 @@
     </div>
     <div class="row justify-content-center my-4">
         <div class="col-3">
-            <button ID="btnsave" runat="server" onserverclick="btnsave_Click"  class="btn btn-primary btn-block"  title="Upload CSV File" UseSubmitBehavior="false">
+            <button ID="btnsave" runat="server" onserverclick="btnsave_Click"  class="btn btn-info btn-block"  title="Upload CSV File" UseSubmitBehavior="false">
                 <i class="fa fa-file-upload"></i>&nbsp;Upload CSV File
             </button>
         </div>
