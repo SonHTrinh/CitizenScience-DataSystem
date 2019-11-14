@@ -2,15 +2,17 @@
 UI Design for Citizen Science 
 CIS 4396 - Fall 2019 - Temple University
 
+## Introduction
+Citizen Science is an application made for $DEP at Temple University to track and monitor water temperatures
 
-## Setup
-1. To run this application the Database must first be set up. Run the file titled `database_scripts.sql` in a console connected to the Database.
-2. Insert the initial Data entries in the Database Tables Run the file titles `DML.sql` in a console connected to the Database.
-3. Configure the file titled `web.config` with the following:
-//TODO: add web.config setup
-4. Start the Application
+## Prerequisites
+* Microsoft SQL Server
+* Microsoft Internet Information Service web server
 
+## Installation
+1. Run database_scripts.sql to build Database schema
+1. Run DML.sql to populate the Database with initial records
+1. Configure the `connectionStrings` field in the `Web.config` file located in the `CitizenScience-UIPrototype` directory with the credentials used to access the Database
+1. Publish the `CitizenScience-UIPrototype` project to the IIS server
 
-## Application Overview
-//TODO: Fill out high level overview of the application
-
+## How to use
