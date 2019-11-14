@@ -94,6 +94,7 @@
     <Content Include="js\administration-gallery.js" />
     <Content Include="style\arrow-down.png" />
     <Content Include="Default.aspx" />
+    <Content Include="images\set.ashx" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -1736,6 +1737,7 @@
     <Compile Include="admin.aspx.designer.cs">
       <DependentUpon>admin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="images\images.ashx.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -1861,9 +1863,6 @@
     </Compile>
     <Compile Include="images\album\add.ashx.cs">
       <DependentUpon>add.ashx</DependentUpon>
-    </Compile>
-    <Compile Include="images\get.ashx.cs">
-      <DependentUpon>get.ashx</DependentUpon>
     </Compile>
     <Compile Include="images\location\ImageLocationAPI.cs">
       <DependentUpon>get.ashx</DependentUpon>
