@@ -649,6 +649,8 @@ namespace CitizenScience_UIPrototype
             }
         }
 
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void UpdateAlbum(string Name, string Description, int AlbumID)
         {
             int result = -1;

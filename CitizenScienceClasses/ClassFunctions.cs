@@ -1048,6 +1048,7 @@ namespace CitizenScienceClasses
                     AlbumID = Convert.ToInt32(dataRow["AlbumID"]),
                     Name = Convert.ToString(dataRow["Name"]),
                     Description = Convert.ToString(dataRow["Description"]),
+                    IsLocationAlbum = Convert.ToBoolean(dataRow["IsLocationAlbum"])
                 };
 
                 returnResult.Add(album);

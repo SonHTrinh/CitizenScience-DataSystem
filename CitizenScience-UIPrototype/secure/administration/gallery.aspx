@@ -83,7 +83,7 @@
                             <div class="custom-file">
                                 <!-- Profile Picture Input Field -->
                                 <input type="file" class="custom-file-input" id="inputCreateImageBrowse" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"/>
-                                <label class="custom-file-label" for="inputCreateImageBrowse">Choose Album Profile Image file</label>
+                                <label class="custom-file-label" for="inputCreateImageBrowse" id="lblCreateImageFile">Choose Album Profile Image file</label>
                             </div>
                         </div>
                     </div>
@@ -112,7 +112,7 @@
                         <div class="form-group col-12">
                             <label for="inputEditName">Name</label>
                             <!-- Album Edit Name Input -->
-                            <input type="text" class="form-control inputname" id="inputEditName" required>
+                            <input type="text" class="form-control inputname" id="inputEditName">
                             <div class="invalid-feedback">
                                 Album Name must be ...
                             </div>
@@ -122,7 +122,7 @@
                         <div class="form-group col-12">
                             <label for="inputEditDescription">Description</label>
                             <!-- Album Edit Description Input -->
-                            <textarea class="form-control inputDescription" id="inputEditDescription" required> </textarea>
+                            <textarea class="form-control inputDescription" id="inputEditDescription"> </textarea>
                             <div class="invalid-feedback">
                                 Album Description must be ...
                             </div>
