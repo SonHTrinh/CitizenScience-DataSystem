@@ -614,7 +614,29 @@ AS
 	WHERE [AlbumID] = @albumid
 GO
 
+Create Procedure [dbo].[CreateAlbum]
+	@name varchar(max),
+	@description varchar(max),
+	@imageid int
+AS
+    DECLARE @albumid int;
 
+	INSERT INTO [dbo].[Album] (Name, Description, ProfileImageID, IsLocationAlbum) VALUES (@name, @description, @imageid, 0);
+
+    SET @albumid = SCOPE_IDENTITY();
+
+    INSERT INTO [dbo].[AlbumImages] (AlbumID, ImageID) VALUES (@albumid, @imageid);
+GO
+
+Create Procedure [dbo].[UpdateAlbum]
+	@name varchar(max),
+	@description varchar(max),
+	@albumid int
+AS
+    UPDATE [dbo].[Album]
+	SET Name = @name, Description = @description
+	WHERE AlbumID = @albumid
+GO
 
 -- TODO: Find better way to insert initial images
 -- TEST IMAGE GENERATOR

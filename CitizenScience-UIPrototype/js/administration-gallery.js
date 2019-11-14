@@ -112,7 +112,7 @@ $(document).ready(function () {
 			formData.append(files[i].name, files[i]);
 		}
 
-		formData.append('filename', requestData.name);
+		formData.append('filename', $('#inputCreateImageBrowse')[0].files[0].name);
 		formData.append('file', $('#inputCreateImageBrowse')[0].files[0]);
 
 		// Save the image, get the new image ID THEN save the location w/ the image ID info
@@ -545,65 +545,6 @@ $(document).ready(function () {
 			});
 		}
 
-	});
-
-	// This function runs when the 'Create Modal' gets submitted
-	$('#createSubmit').click(function () {
-		var requestData = BuildCreateLocation();
-		console.log(requestData);
-		var isValidRequest = ValidateLocationRequest(requestData);
-		console.log('Is Create Form Text Submission Valid?: ' + isValidRequest);
-		if (!isValidRequest) return;
-
-		var fileUpload = $('#inputCreateImageBrowse').get(0);
-		var files = fileUpload.files;
-
-		var formData = new FormData();
-
-		for (var i = 0; i < files.length; i++) {
-			formData.append(files[i].name, files[i]);
-		}
-
-		formData.append('description', requestData.name);
-		formData.append('file', $('#inputCreateImageBrowse')[0].files[0]);
-
-		// Save the image, get the new image ID THEN save the location w/ the image ID info
-		$.ajax({
-			type: "POST",
-			url: "<%= Global.Url_Prefix() %>/images/location/set.ashx",
-			contentType: false,
-			processData: false,
-			data: formData,
-			success: function (dataResponse) {
-				console.log("Image created with ID: " + dataResponse);
-
-				// Add the image ID to the new location data
-				Object.assign(requestData, { imageId: dataResponse });
-
-				// Save the location data
-				$.ajax({
-					type: 'POST',
-					contentType: 'application/json; charset=utf-8',
-					url: '<%= Global.Url_Prefix() %>/api.asmx/CreateLocation',
-					data: JSON.stringify(requestData),
-					dataType: 'JSON',
-					success: function (responseData) {
-						console.log('Location Creation Successful');
-						console.log(requestData);
-
-						$('#createModal').modal('hide');
-						table.ajax.reload();
-					},
-					error: function (errorData) {
-						console.log('Error Saving Location Data');
-						console.log(errorData);
-					}
-				});
-			},
-			error: function (errorData) {
-				console.log('Error Saving Image');
-			}
-		});
 	});
 
 });

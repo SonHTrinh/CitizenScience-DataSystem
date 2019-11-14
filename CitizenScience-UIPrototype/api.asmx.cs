@@ -633,6 +633,40 @@ namespace CitizenScience_UIPrototype
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void CreateAlbum(string Name, string Description, int ImageID)
+        {
+            int result = -1;
+
+            result = ClassFunctions.CreateAlbum(Name, Description, ImageID);
+
+            if (result > 0)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, result);
+            }
+        }
+
+        public void UpdateAlbum(string Name, string Description, int AlbumID)
+        {
+            int result = -1;
+
+            result = ClassFunctions.UpdateAlbum(AlbumID, Name, Description);
+
+            if (result > 0)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, result);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
         public void SetImageIDAsAlbumProfileImageID( int imageId, int albumId)
         {
             bool result = ClassFunctions.SetImageIDAsAlbumProfileImageID(imageId, albumId);
