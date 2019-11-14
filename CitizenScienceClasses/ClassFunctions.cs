@@ -1000,6 +1000,36 @@ namespace CitizenScienceClasses
             return returnResult;
         }
 
+        public static int CreateAlbum(string name, string description, int imageid)
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "CreateAlbum";
+            comm.Parameters.AddWithValue("@name", name);
+            comm.Parameters.AddWithValue("@description", description);
+            comm.Parameters.AddWithValue("@imageid", imageid);
+
+            int returnResult = conn.DoUpdateUsingCmdObj(comm);
+
+            return returnResult;
+        }
+
+        public static int UpdateAlbum(int albumid, string name, string description)
+        {
+            DBConnect conn = new DBConnect();
+            SqlCommand comm = new SqlCommand();
+            comm.CommandType = CommandType.StoredProcedure;
+            comm.CommandText = "UpdateAlbum";
+            comm.Parameters.AddWithValue("@name", name);
+            comm.Parameters.AddWithValue("@description", description);
+            comm.Parameters.AddWithValue("@albumid", albumid);
+
+            int returnResult = conn.DoUpdateUsingCmdObj(comm);
+
+            return returnResult;
+        }
+
         /////////////////////////////////   GALLERY FUNCTIONS
         public static List<Album> GetAllAlbum()
         {
@@ -1018,6 +1048,7 @@ namespace CitizenScienceClasses
                     AlbumID = Convert.ToInt32(dataRow["AlbumID"]),
                     Name = Convert.ToString(dataRow["Name"]),
                     Description = Convert.ToString(dataRow["Description"]),
+                    IsLocationAlbum = Convert.ToBoolean(dataRow["IsLocationAlbum"])
                 };
 
                 returnResult.Add(album);

@@ -50,7 +50,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="createModalLabel">Create Location</h5>
+                    <h5 class="modal-title" id="createModalLabel">Create Album</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -62,15 +62,29 @@
                             <!-- Album Input Name Field -->
                             <input type="text" class="form-control inputname" id="inputCreateName">
                             <div class="invalid-feedback">
-                                Location Name must be ...
+                                Album Name must be ...
                             </div>
                         </div>
                         
                     </div>
-                    <div class="row">
+                    <div class="form-row">
                         <div class="form-group col-12">
-                            <!-- Profile Picture Input Field -->
-                            <input type="file" value="Browse" id="inputCreateImageBrowse" />
+                            <label for="inputCreateDescription">Description</label>
+                            <!-- Album Input Description Field -->
+                            <textarea type="text" class="form-control inputdescription" id="inputCreateDescription"> </textarea>
+                            <div class="invalid-feedback">
+                                Album Description must be ...
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="row mt-2">
+                        <div class="form-group col-12">
+                            <div class="custom-file">
+                                <!-- Profile Picture Input Field -->
+                                <input type="file" class="custom-file-input" id="inputCreateImageBrowse" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*"/>
+                                <label class="custom-file-label" for="inputCreateImageBrowse" id="lblCreateImageFile">Choose Album Profile Image file</label>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -98,9 +112,9 @@
                         <div class="form-group col-12">
                             <label for="inputEditName">Name</label>
                             <!-- Album Edit Name Input -->
-                            <input type="text" class="form-control inputname" id="inputEditName" required>
+                            <input type="text" class="form-control inputname" id="inputEditName">
                             <div class="invalid-feedback">
-                                Location Name must be ...
+                                Album Name must be ...
                             </div>
                         </div>
                     </div>
@@ -108,9 +122,9 @@
                         <div class="form-group col-12">
                             <label for="inputEditDescription">Description</label>
                             <!-- Album Edit Description Input -->
-                            <textarea class="form-control inputname" id="inputEditName" required> </textarea>
+                            <textarea class="form-control inputDescription" id="inputEditDescription"> </textarea>
                             <div class="invalid-feedback">
-                                Description Name must be ...
+                                Album Description must be ...
                             </div>
                         </div>
                     </div>
@@ -166,7 +180,7 @@
                         <div class="form-group col-12">
                             <!-- Add New Image Panel -->
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" id="customFile" multiple>
+                                <input type="file" class="custom-file-input" id="customFile" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*" multiple>
                                 <label class="custom-file-label" for="customFile">Choose files</label>
                             </div>
                         </div>
