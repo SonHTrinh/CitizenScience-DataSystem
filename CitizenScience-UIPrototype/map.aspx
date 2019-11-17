@@ -53,6 +53,7 @@
                                 </div>
                                 <div class="row mt-4">
                                     <div class="col-12">
+                                        <p style="font-weight: bold" class="modalDescTitle"></p>
                                         <p class="modalDesc"></p>
                                     </div>
                                 </div>

@@ -130,12 +130,18 @@ function initModal(locationObj, watershedObj) {
 	var title = locationObj.SensorName;
 	$(".modal-title").text(title);
 
-	//desc
-	var description = "Description about the watershed: " + locationObj.SensorName + " - " + watershedObj.WatershedName + " (" + locationObj.Latitude + ", " + locationObj.Longitude + ")";
-	$(".modalDesc").text(description);
+    //desc
+    var descTitle = "About " + locationObj.SensorName;
+    var description = "<b> Watershed: </b>" + watershedObj.WatershedName + "<br/>" +
+        "<b> Coordinates: </b>" + " (" + locationObj.Latitude + ", " + locationObj.Longitude + ")"
+        + "<br> ...";
+    $(".modalDescTitle").text(descTitle);
+    $(".modalDesc").html(description);
+    //var description = "Description about the watershed: " + locationObj.SensorName + " - " + watershedObj.WatershedName + " (" + locationObj.Latitude + ", " + locationObj.Longitude + ")";
+	//$(".modalDesc").text(description);
 
 	//image
-//	var imageSrc = "<%= Global.Url_Prefix() %>/images/location/get.ashx?locationid=" + location.LocationID;
+    //	var imageSrc = "<%= Global.Url_Prefix() %>/images/location/get.ashx?locationid=" + location.LocationID;
 	var imageSrc = "images/location/get.ashx?locationid=" + locationObj.LocationID;
 	var imageAlt = "The Picture of the " + locationObj.SensorName;
 	$(".modalImage").attr("src", imageSrc).attr("alt", imageAlt);
