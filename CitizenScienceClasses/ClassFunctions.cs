@@ -812,7 +812,7 @@ namespace CitizenScienceClasses
             comm.CommandText = "GetAllAdmins";
             return conn.GetDataSetUsingCmdObj(comm);
         }
-        public static Admin CreateAdmin(string tuid)
+        public static Admin CreateAdmin(string tuid, string fname, string lname, string email)
         {
             Admin admin = null;
 
@@ -821,6 +821,9 @@ namespace CitizenScienceClasses
             comm.CommandType = CommandType.StoredProcedure;
             comm.CommandText = "CreateAdmin";
             comm.Parameters.AddWithValue("@tuid", tuid);
+            comm.Parameters.AddWithValue("@fname", fname);
+            comm.Parameters.AddWithValue("@lname", lname);
+            comm.Parameters.AddWithValue("@email", email);
             comm.Parameters.AddWithValue("@active", true);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
 
@@ -832,13 +835,16 @@ namespace CitizenScienceClasses
                 {
                     AdminID = Convert.ToInt32(dataRow["AdminID"]),
                     TUID = Convert.ToString(dataRow["TUID"]),
+                    FName = Convert.ToString(dataRow["FName"]),
+                    LName = Convert.ToString(dataRow["LName"]),
+                    Email = Convert.ToString(dataRow["Email"]),
                     Active = Convert.ToBoolean(dataRow["Active"])
                 };
             }
 
             return admin;
         }
-        public static Admin UpdateAdmin(int id, string tuid, bool active)
+        public static Admin UpdateAdmin(int id, string tuid, string fname, string lname,string email,  bool active)
         {
             Admin admin = null;
 
@@ -848,6 +854,9 @@ namespace CitizenScienceClasses
             comm.CommandText = "UpdateAdmin";
             comm.Parameters.AddWithValue("@id", id);
             comm.Parameters.AddWithValue("@tuid", tuid);
+            comm.Parameters.AddWithValue("@fname", fname);
+            comm.Parameters.AddWithValue("@lname", lname);
+            comm.Parameters.AddWithValue("@email", email);
             comm.Parameters.AddWithValue("@active", active);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
 
@@ -859,6 +868,9 @@ namespace CitizenScienceClasses
                 {
                     AdminID = Convert.ToInt32(dataRow["AdminID"]),
                     TUID = Convert.ToString(dataRow["TUID"]),
+                    FName = Convert.ToString(dataRow["FName"]),
+                    LName = Convert.ToString(dataRow["LName"]),
+                    Email = Convert.ToString(dataRow["Email"]),
                     Active = Convert.ToBoolean(dataRow["Active"])
                 };
             }
