@@ -33,9 +33,9 @@
                 <thead>
                     <tr>
                         <!-- Table Column Header -->
-                        <th scope="col">Name</th>
+                        <th scope="col">Album</th>
                         <th scope="col">Description</th>
-                        <th scope="col" class="no-sort"></th>
+                        <th scope="col" class="no-sort">Edit</th>
                     </tr>
                 </thead>
             </table>
