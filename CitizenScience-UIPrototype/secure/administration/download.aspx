@@ -8,7 +8,7 @@
     <div class="row mb-3">
         <div class="col-3">
             <button type="button" id="downloadCSV" class="btn btn-success float-left">
-                <i class="fa fa-file-csv">&nbsp; Download CSV File</i>
+                <i class="fa fa-file-csv">&nbsp; Download Water Temperature File</i>
             </button>
         </div>
         <div class="col-6">

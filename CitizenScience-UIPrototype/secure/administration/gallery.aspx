@@ -62,7 +62,7 @@
                             <!-- Album Input Name Field -->
                             <input type="text" class="form-control inputname" id="inputCreateName">
                             <div class="invalid-feedback">
-                                Album Name must be ...
+                                Please provide an album name
                             </div>
                         </div>
                         
@@ -73,7 +73,7 @@
                             <!-- Album Input Description Field -->
                             <textarea type="text" class="form-control inputdescription" id="inputCreateDescription"> </textarea>
                             <div class="invalid-feedback">
-                                Album Description must be ...
+                                Please provide an album description
                             </div>
                         </div>
                         
@@ -114,7 +114,7 @@
                             <!-- Album Edit Name Input -->
                             <input type="text" class="form-control inputname" id="inputEditName">
                             <div class="invalid-feedback">
-                                Album Name must be ...
+                                Please provide an album name
                             </div>
                         </div>
                     </div>
@@ -124,7 +124,7 @@
                             <!-- Album Edit Description Input -->
                             <textarea class="form-control inputDescription" id="inputEditDescription"> </textarea>
                             <div class="invalid-feedback">
-                                Album Description must be ...
+                                Please provide an album description
                             </div>
                         </div>
                     </div>

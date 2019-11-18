@@ -9,12 +9,18 @@
     <!-- Javascript -->
     <script src="js/gallery.js"></script>
     
-    <!-- Html content -->
-    <div class="container" id="album-placeholder">
+    <div class="container-fluid">
         <div class="row my-3">
-            <div class="col-12 text-center">
-                <h1>Image Gallery</h1>
-            </div>
+            <div class="col-10 offset-1">
+            <ol class="breadcrumb bg-light">
+                <li class="breadcrumb-item"><h3 class="d-inline">Citizen Science</h3></li>
+                <li class="breadcrumb-item active"><h3 class="d-inline">Field Photos</h3></li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Html content -->
+    <div class="container" id="album-placeholder">        
         </div>
 
         <!--

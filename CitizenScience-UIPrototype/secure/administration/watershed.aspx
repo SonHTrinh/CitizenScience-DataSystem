@@ -41,7 +41,7 @@
                 <label for="inputCreateName">Name</label>
                 <input type="text" class="form-control inputname" id="inputCreateName" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                    Watershed Name must be ...
+                    Please provide a watershed name
                 </div>
               </div>
           </div>
