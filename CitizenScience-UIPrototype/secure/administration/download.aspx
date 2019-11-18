@@ -34,7 +34,7 @@
             <table class="table table-striped table-hover table-bordered" style="width: 100%;" id="DataTable">
                 <thead>
                     <tr>
-                        <th scope="col">Location</th>
+                        <th scope="col">Sensor Location</th>
                         <th scope="col">Watershed</th>
                     </tr>
                 </thead>
