@@ -17,11 +17,11 @@
             <table class="table table-striped table-hover table-bordered" style="width: 100%;" id="DataTable">
                 <thead>
                     <tr>
-                        <th scope="col">Name</th>
+                        <th scope="col">Sensor Location</th>
                         <th scope="col">Watershed</th>
                         <th scope="col">Latitude</th>
                         <th scope="col">Longitude</th>
-                        <th scope="col"></th>
+                        <th scope="col">Edit</th>
                     </tr>
                 </thead>
             </table>
@@ -45,7 +45,7 @@
                         <label for="inputCreateName">Name</label>
                         <input type="text" class="form-control inputname" id="inputCreateName">
                         <div class="invalid-feedback">
-                            Location Name must be ...
+                            Please provide a location name
                         </div>
                   </div>
               </div>
@@ -61,14 +61,14 @@
                       <label for="inputCreateLatitude">Latitude</label>
                       <input type="text" class="form-control inputlatitude" id="inputCreateLatitude">
                     <div class="invalid-feedback">
-                        Latitude must be ...
+                        Please provide a location latitude
                     </div>
                   </div>
                   <div class="form-group col-6">
                       <label for="inputCreateLongitude">Longitude</label>
                       <input type="text" class="form-control inputlongitude" id="inputCreateLongitude">
                     <div class="invalid-feedback">
-                        Longitude must be ...
+                        Please provide a location longitude
                     </div>
                   </div>
               </div>
@@ -76,15 +76,15 @@
               <div class="row">
                   <div class="form-group col-12">
                       <div class="custom-file">
-                          <input type="file" class="custom-file-input" id="inputCreateImageBrowse" multiple>
-                          <label class="custom-file-label" for="inputCreateImageBrowse">Choose Profile Image File</label>
+                          <input type="file" class="custom-file-input" id="inputCreateImageBrowse" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
+                          <label class="custom-file-label" for="inputCreateImageBrowse" id="lblInputCreateImageBrowse">Choose Profile Image File</label>
                       </div>
                   </div>
               </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="createClose">Close</button>
-            <button type="button" class="btn btn-success" id="createSubmit">Create</button>
+            <button type="button" class="btn btn-info" id="createSubmit">Create</button>
           </div>
         </div>
       </div>
@@ -106,7 +106,7 @@
                         <label for="inputEditName">Name</label>
                         <input type="text" class="form-control inputname" id="inputEditName" required>
                         <div class="invalid-feedback">
-                            Location Name must be ...
+                            Please provide a location name
                         </div>
                   </div>
               </div>
@@ -122,14 +122,14 @@
                       <label for="inputEditLatitude">Latitude</label>
                       <input type="text" class="form-control inputlatitude" id="inputEditLatitude" required>
                     <div class="invalid-feedback">
-                        Latitude must be ...
+                        Please provide a location latitude
                     </div>
                   </div>
                   <div class="form-group col-6">
                       <label for="inputEditLongitude">Longitude</label>
                       <input type="text" class="form-control inputlongitude" id="inputEditLongitude" required>
                     <div class="invalid-feedback">
-                        Longitude must be ...
+                        Please provide a location longitude
                     </div>
                   </div>
               </div>
@@ -188,6 +188,7 @@
                             url: '<%= Global.Url_Prefix() %>/api.asmx/ReadAllLocation',
                             dataSrc: ''
                         },
+				        order: [[1, "asc"]],
                         columns: [
                             // The 'Name' column of the table's data
                             { data: 'SensorName' },
@@ -213,6 +214,10 @@
                 });
             }
 
+            $('#inputCreateImageBrowse').change(function () {
+                var filename = $('#inputCreateImageBrowse')[0].files[0].name;
+                $('#lblInputCreateImageBrowse').html(filename);
+            });
 
             function BuildCreateLocation() {
                 var Name = $('#inputCreateName').val();
@@ -501,6 +506,8 @@
                 });
                 
             });
+
+            
 
             // This function runs when the 'Create Modal' gets submitted
             $('#createSubmit').click(function () {

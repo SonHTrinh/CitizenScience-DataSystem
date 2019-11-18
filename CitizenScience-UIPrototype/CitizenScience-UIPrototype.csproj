@@ -94,6 +94,7 @@
     <Content Include="js\administration-gallery.js" />
     <Content Include="style\arrow-down.png" />
     <Content Include="Default.aspx" />
+    <Content Include="images\set.ashx" />
     <None Include="Properties\PublishProfiles\FolderProfile1.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -1736,6 +1737,7 @@
     <Compile Include="admin.aspx.designer.cs">
       <DependentUpon>admin.aspx</DependentUpon>
     </Compile>
+    <Compile Include="images\images.ashx.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -1862,9 +1864,6 @@
     <Compile Include="images\album\add.ashx.cs">
       <DependentUpon>add.ashx</DependentUpon>
     </Compile>
-    <Compile Include="images\get.ashx.cs">
-      <DependentUpon>get.ashx</DependentUpon>
-    </Compile>
     <Compile Include="images\location\ImageLocationAPI.cs">
       <DependentUpon>get.ashx</DependentUpon>
       <DependentUpon>set.ashx</DependentUpon>
@@ -1949,12 +1948,6 @@
     <Content Include="Web References\LDAP_Search\TempleLDAPEntry1.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CitizenScienceClasses\CitizenScienceClasses.csproj">

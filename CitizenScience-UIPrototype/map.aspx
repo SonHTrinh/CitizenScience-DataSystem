@@ -6,24 +6,24 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
     <div class="container-fluid">
         <div class="row my-3">
-            <div class="col-12 text-center">
-                <h1>Welcome to Citizen Science</h1>
+            <div class="col-10 offset-1">
+                <ol class="breadcrumb bg-light">
+                    <li class="breadcrumb-item"><h3 class="d-inline">Citizen Science</h3></li>
+                    <li class="breadcrumb-item active"><h3 class="d-inline">Watersheds of the Greater Philadelphia Area</h3></li>
+                </ol>
             </div>
         </div>
         <div class="row my-4">
-            <div class="col-6">
-                <div class="dropdown float-right">
-                  <button class="btn btn-dark dropdown-toggle px-5 py-2" type="button" id="ddBtnWatershed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Watersheds
-                  </button>
-                  <div class="dropdown-menu" id="ddMenuWatershed" aria-labelledby="dropdownMenuButton"></div>
-                </div>
+            <div class="dropdown float-left" style="margin-left: 10%;">
+                <button class="btn btn-dark dropdown-toggle px-5 py-2" type="button" id="ddBtnWatershed" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Watersheds
+                </button>
+                <div class="dropdown-menu" id="ddMenuWatershed" aria-labelledby="dropdownMenuButton"></div>
             </div>
-            <div class="col-6">
-                <div class="dropdown float-left invisible" id="locationdiv">
-                  <button class="btn btn-dark dropdown-toggle px-5 py-2" type="button" id="ddBtnLocation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
-                  <div class="dropdown-menu" id="ddMenuLocation" aria-labelledby="dropdownMenuButton"></div>
-                </div>
+            &nbsp;
+            <div class="dropdown float-left invisible" id="locationdiv">
+                <button class="btn btn-dark dropdown-toggle px-5 py-2" type="button" id="ddBtnLocation" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+                <div class="dropdown-menu" id="ddMenuLocation" aria-labelledby="dropdownMenuButton"></div>
             </div>
         </div>
 
@@ -56,6 +56,7 @@
                                 </div>
                                 <div class="row mt-4">
                                     <div class="col-12">
+                                        <p style="font-weight: bold" class="modalDescTitle"></p>
                                         <p class="modalDesc"></p>
                                     </div>
                                 </div>

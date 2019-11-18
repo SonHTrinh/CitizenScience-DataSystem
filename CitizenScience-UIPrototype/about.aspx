@@ -6,12 +6,13 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="main_content" runat="server">
     <!--About Citizen Science-->
-    <div class="row">     
-        <section class="jumbotron text-center w-100" >
-            <div class="container">
-                <h1 class="jumbotron-heading">About Citizen Science</h1>            
-            </div>
-        </section>        
+    <div class="row my-3">
+        <div class="col-10 offset-1">
+            <ol class="breadcrumb bg-light">
+                <li class="breadcrumb-item"><h3 class="d-inline">Citizen Science</h3></li>
+                <li class="breadcrumb-item active"><h3 class="d-inline">About Citizen Science</h3></li>
+            </ol>
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
@@ -126,6 +127,14 @@
     <div id="volunteer_form">
         <div class="container mt-5">
             <hr />
+            <div class="alert alert-success" id="divSuccess" runat="server" visible="false">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                <h6 class="alert-heading">Successfully submitted!</h6>
+                <p class="mb-0">
+                    Thank you for your interest in our program! One of our Citizen Science Program 
+                    representatives will contact you at <b><asp:Label ID="lblEmail" runat="server" Text=""></asp:Label></b>!
+                </p>
+            </div>
         </div>
         <h1 style="text-align: center;">Citizen Science Volunteer Form </h1>
         <h4 style="text-align: center;">Please fill out the form below if you are interested in volunteering. </h4>
@@ -156,13 +165,7 @@
                     </div>
                     <asp:Button ID="btnSubmit" runat="server" class="btn btn-info" Text="Submit" OnClick="btnSubmit_Click" OnClientClick="return HideMessage();" />
                     &nbsp;<asp:Label ID="lblDisplay" runat="server" Text="" ForeColor="#CC3300"></asp:Label>
-                    <br /><br />
-                    <div class="alert alert-success" ID="divSuccess" runat="server" visible="false">
-                        <button type="button" class="close" data-dismiss="alert">x</button>
-                        <h6 class="alert-heading">Form Submitted!</h6>
-                        <p class="mb-0">Thank you for your interest in our program! One of our Citizen Science Program
-                                        representatives will contact you at <b><asp:Label ID="lblEmail" runat="server" Text=""></asp:Label></b>!</p>
-                    </div>
+                    
                 </div>
             </div>
         </div>

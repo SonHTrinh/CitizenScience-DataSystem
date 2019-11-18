@@ -14,18 +14,32 @@
     </div>
     <div class="row justify-content-center  my-4">
         <div class="col-4">
+            <label><b>Select a Sensor Location</b></label>
             <asp:DropDownList ID="ddlLocations" runat="server" CssClass="custom-select">
             </asp:DropDownList>
         </div>
         <div class="col-4">
-            <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control" />
+            <div class="custom-file">
+                <asp:FileUpload ID="FileUpload1" runat="server" CssClass="custom-file-input" accept=".csv" />
+                <label class="custom-file-label" for="FileUpload1" id="uploadLabel">Choose CSV File</label>
+            </div>
         </div>
     </div>
     <div class="row justify-content-center my-4">
         <div class="col-3">
-            <button ID="btnsave" runat="server" onserverclick="btnsave_Click"  class="btn btn-primary btn-block"  title="Upload CSV File" UseSubmitBehavior="false">
-                <i class="fa fa-file-upload"></i>&nbsp;Upload CSV File
+            <button ID="btnsave" runat="server" onserverclick="btnsave_Click"  class="btn btn-info btn-block"  title="Upload .CSV File" UseSubmitBehavior="false">
+                <i class="fa fa-file-upload"></i>&nbsp;Upload .CSV File
             </button>
         </div>
     </div>
+    
+    <script>
+        $(function() {
+            $('#main_content_main_content_FileUpload1').change(function() {
+                var filename = $('#main_content_main_content_FileUpload1')[0].files[0].name;
+                $('#uploadLabel').html(filename); 
+            });
+        });
+    </script>
+
 </asp:Content>
