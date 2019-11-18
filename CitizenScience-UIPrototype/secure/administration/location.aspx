@@ -45,7 +45,7 @@
                         <label for="inputCreateName">Name</label>
                         <input type="text" class="form-control inputname" id="inputCreateName">
                         <div class="invalid-feedback">
-                            Location Name must be ...
+                            Please provide a location name
                         </div>
                   </div>
               </div>
@@ -61,14 +61,14 @@
                       <label for="inputCreateLatitude">Latitude</label>
                       <input type="text" class="form-control inputlatitude" id="inputCreateLatitude">
                     <div class="invalid-feedback">
-                        Latitude must be ...
+                        Please provide a location latitude
                     </div>
                   </div>
                   <div class="form-group col-6">
                       <label for="inputCreateLongitude">Longitude</label>
                       <input type="text" class="form-control inputlongitude" id="inputCreateLongitude">
                     <div class="invalid-feedback">
-                        Longitude must be ...
+                        Please provide a location longitude
                     </div>
                   </div>
               </div>
@@ -106,7 +106,7 @@
                         <label for="inputEditName">Name</label>
                         <input type="text" class="form-control inputname" id="inputEditName" required>
                         <div class="invalid-feedback">
-                            Location Name must be ...
+                            Please provide a location name
                         </div>
                   </div>
               </div>
@@ -122,14 +122,14 @@
                       <label for="inputEditLatitude">Latitude</label>
                       <input type="text" class="form-control inputlatitude" id="inputEditLatitude" required>
                     <div class="invalid-feedback">
-                        Latitude must be ...
+                        Please provide a location latitude
                     </div>
                   </div>
                   <div class="form-group col-6">
                       <label for="inputEditLongitude">Longitude</label>
                       <input type="text" class="form-control inputlongitude" id="inputEditLongitude" required>
                     <div class="invalid-feedback">
-                        Longitude must be ...
+                        Please provide a location longitude
                     </div>
                   </div>
               </div>

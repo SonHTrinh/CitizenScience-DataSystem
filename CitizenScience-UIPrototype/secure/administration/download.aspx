@@ -8,7 +8,7 @@
     <div class="row mb-3">
         <div class="col-3">
             <button type="button" id="downloadCSV" class="btn btn-success float-left">
-                <i class="fa fa-file-csv">&nbsp; Download CSV File</i>
+                <i class="fa fa-file-csv">&nbsp; Download Water Temperature File</i>
             </button>
         </div>
         <div class="col-6">
@@ -34,7 +34,7 @@
             <table class="table table-striped table-hover table-bordered" style="width: 100%;" id="DataTable">
                 <thead>
                     <tr>
-                        <th scope="col">Name</th>
+                        <th scope="col">Location</th>
                         <th scope="col">Watershed</th>
                     </tr>
                 </thead>

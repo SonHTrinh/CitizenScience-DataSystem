@@ -68,52 +68,52 @@
           </div>
           <div class="modal-body">
                <div class="form-group">
-                <label for="inputEditDescription">Citizen Science Filename</label>
+                <label for="inputEditDescription">Citizen Science Description</label>
                 <input type="text" class="form-control inputdescription" id="inputEditDescription" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                    Filename must be ...
+                    Please provide a description
                 </div>
               </div>  
               <div class="form-group">
                 <label for="inputEditQuestion1">Question 1</label>
                 <input type="text" class="form-control inputq1" id="inputEditQuestion1" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                    Question 1 must be ...
+                    Please provide a Question 1 value
                 </div>
               </div>  
               <div class="form-group">
                 <label for="inputEditAnswer1">Answer 1</label>
                 <input type="text" class="form-control inputa1" id="inputEditAnswer1" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                    Answer 1 must be ...
+                    Please provide an answer for Question 1
                 </div>
               </div>  
               <div class="form-group">
                 <label for="inputEditQuestion2">Question 2</label>
                 <input type="text" class="form-control inputq2" id="inputEditQuestion2" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                    Question 2 must be ...
+                    Please provide a Question 2 value
                 </div>
               </div>  
               <div class="form-group">
                 <label for="inputEditAnswer2">Answer 2</label>
                 <input type="text" class="form-control inputa2" id="inputEditAnswer2" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                    Answer 2 must be ...
+                    Please provide an answer for Question 2
                 </div>
               </div>  
               <div class="form-group">
                 <label for="inputEditQuestion3">Question 3</label>
                 <input type="text" class="form-control inputq3" id="inputEditQuestion3" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                    Question 3 must be ...
+                    Please provide a Question 3 value
                 </div>
               </div>  
               <div class="form-group">
                 <label for="inputEditAnswer3">Answer 3</label>
                 <input type="text" class="form-control inputa3" id="inputEditAnswer3" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                    Question 3 must be ...
+                    Please provide an answer for Question 3
                 </div>
               </div>  
           </div>

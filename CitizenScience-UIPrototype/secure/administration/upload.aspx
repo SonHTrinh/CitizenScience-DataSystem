@@ -17,8 +17,8 @@
             <asp:DropDownList ID="ddlLocations" runat="server" CssClass="custom-select">
             </asp:DropDownList>
         </div>
-        <div class="col-4">
-            <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control" />
+        <div class="col-4">            
+            <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control" accept="csv" />
         </div>
     </div>
     <div class="row justify-content-center my-4">
