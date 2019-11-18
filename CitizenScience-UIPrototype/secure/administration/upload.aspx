@@ -19,8 +19,10 @@
             </asp:DropDownList>
         </div>
         <div class="col-4">
-            <label><b>Choose a CSV file</b></label>
-            <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control" />
+            <div class="custom-file">
+                <asp:FileUpload ID="FileUpload1" runat="server" CssClass="custom-file-input" accept=".csv" />
+                <label class="custom-file-label" for="FileUpload1" id="uploadLabel">Choose CSV File</label>
+            </div>
         </div>
     </div>
     <div class="row justify-content-center my-4">
@@ -30,4 +32,14 @@
             </button>
         </div>
     </div>
+    
+    <script>
+        $(function() {
+            $('#main_content_main_content_FileUpload1').change(function() {
+                var filename = $('#main_content_main_content_FileUpload1')[0].files[0].name;
+                $('#uploadLabel').html(filename); 
+            });
+        });
+    </script>
+
 </asp:Content>
