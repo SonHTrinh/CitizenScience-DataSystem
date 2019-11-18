@@ -14,17 +14,19 @@
     </div>
     <div class="row justify-content-center  my-4">
         <div class="col-4">
+            <label><b>Select a Sensor Location</b></label>
             <asp:DropDownList ID="ddlLocations" runat="server" CssClass="custom-select">
             </asp:DropDownList>
         </div>
         <div class="col-4">
+            <label><b>Choose a file</b></label>
             <asp:FileUpload ID="FileUpload1" runat="server" CssClass="form-control" />
         </div>
     </div>
     <div class="row justify-content-center my-4">
         <div class="col-3">
-            <button ID="btnsave" runat="server" onserverclick="btnsave_Click"  class="btn btn-info btn-block"  title="Upload CSV File" UseSubmitBehavior="false">
-                <i class="fa fa-file-upload"></i>&nbsp;Upload CSV File
+            <button ID="btnsave" runat="server" onserverclick="btnsave_Click"  class="btn btn-info btn-block"  title="Upload .CSV File" UseSubmitBehavior="false">
+                <i class="fa fa-file-upload"></i>&nbsp;Upload .CSV File
             </button>
         </div>
     </div>
