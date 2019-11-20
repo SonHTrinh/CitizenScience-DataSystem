@@ -22,7 +22,7 @@
                         <th scope="col">Last Name</th>  
                         <th scope="col">Email</th>  
                         <th scope="col">Active Status</th>  
-                        <th scope="col"></th>
+                        <th scope="col">Edit</th>
                     </tr>
                 </thead>
             </table>
@@ -30,7 +30,7 @@
     </div>
 
 
-        <!-- Create Modal -->
+    <!-- Create Modal -->
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">

@@ -19,9 +19,10 @@
             </asp:DropDownList>
         </div>
         <div class="col-4">
+            <label><b>Select a File</b></label>
             <div class="custom-file">
                 <asp:FileUpload ID="FileUpload1" runat="server" CssClass="custom-file-input" accept=".csv" />
-                <label class="custom-file-label" for="FileUpload1" id="uploadLabel">Choose CSV File</label>
+                <label class="custom-file-label" for="FileUpload1" id="uploadLabel">Choose .CSV File</label>
             </div>
         </div>
     </div>

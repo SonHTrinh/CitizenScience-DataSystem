@@ -8,8 +8,12 @@
         <div class="row my-3">
             <div class="col-10 offset-1">
                 <ol class="breadcrumb bg-light">
-                    <li class="breadcrumb-item"><h3 class="d-inline">Citizen Science</h3></li>
-                    <li class="breadcrumb-item active"><h3 class="d-inline">Watersheds of the Greater Philadelphia Area</h3></li>
+                    <li class="breadcrumb-item">
+                        <h3 class="d-inline">Citizen Science</h3>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <h3 class="d-inline">Watersheds of the Greater Philadelphia Area</h3>
+                    </li>
                 </ol>
             </div>
         </div>
