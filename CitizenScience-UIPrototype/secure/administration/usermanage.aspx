@@ -42,25 +42,29 @@
           </div>
           <div class="modal-body">
               <div class="form-group">
-                <label for="inputCreateTUID">TUID</label>
+                <label for="inputCreateTUID">TUID:</label>
+                <label for="inputCreateTUID" style="color: red;">*</label>
                 <input type="text" class="form-control inputtuid" id="inputCreateTUID" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                    TUID must be ...
+                    Please enter a TUID
                 </div>
-                  <label for="inputCreateFName">First Name</label>
+                <label for="inputCreateFName">First Name:</label>
+                <label for="inputCreateFName" style="color: red;">*</label>
                 <input type="text" class="form-control inputtuid" id="inputCreateFName" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                    First Name must be ...
+                    Please enter a first name
                 </div>
-                <label for="inputCreateLName">Last Name</label>
+                <label for="inputCreateLName">Last Name:</label>
+                <label for="inputCreateLName" style="color: red;">*</label>
                 <input type="text" class="form-control inputtuid" id="inputCreateLName" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                    Last Name must be ...
+                    Please enter a last name
                 </div>
-                <label for="inputCreateEmail">Email </label>
+                <label for="inputCreateEmail">Email:</label>
+                <label for="inputCreateEmail" style="color: red;">*</label>
                 <input type="text" class="form-control inputtuid" id="inputCreateEmail" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                   Email must be ...
+                   Please enter an email
                 </div>
               </div>                    
           </div>
@@ -84,25 +88,29 @@
           </div>
           <div class="modal-body">
                <div class="form-group">
-                <label for="inputEditTUID">TUID</label>
+                <label for="inputEditTUID">TUID:</label>
+                <label for="inputEditTUID" style="color: red;">*</label>
                 <input type="text" class="form-control inputtuid" id="inputEditTUID" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                    Accessnet must be ...
+                    Please enter a TUID
                 </div>
-                                     <label for="inputCreateFName">First Name</label>
+                <label for="inputCreateFName">First Name:</label>
+                <label for="inputCreateFName" style="color: red;">*</label>
                 <input type="text" class="form-control inputtuid" id="inputEditFName" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                    First Name must be ...
+                    Please enter a first name
                 </div>
-                <label for="inputCreateLName">Last Name</label>
+                <label for="inputCreateLName">Last Name:</label>
+                <label for="inputCreateLName" style="color: red;">*</label>
                 <input type="text" class="form-control inputtuid" id="inputEditLName" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                    Last Name must be ...
+                    Please enter a last name
                 </div>
-                <label for="inputCreateEmail">Email </label>
+                <label for="inputCreateEmail">Email:</label>
+                <label for="inputCreateEmail" style="color: red;">*</label>
                 <input type="text" class="form-control inputtuid" id="inputEditEmail" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                   Email must be ...
+                   Please enter an email
                 </div>
               </div> 
               <div class="form-group">

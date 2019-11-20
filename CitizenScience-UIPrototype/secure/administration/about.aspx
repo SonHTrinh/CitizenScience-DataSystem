@@ -13,7 +13,7 @@
     </div>
     <div class="row mt-2 card card-body">
         <div class="col-12">
-            <label for="divDescription" class="font-weight-bold">Citizen Science Filename</label>
+            <label for="divDescription" class="font-weight-bold">Citizen Science Description</label>
             <div id="divDescription"></div>
             <%--<input type="text" class="form-control inputaccessnet" id="inputCreateAccessnet" aria-describedby="nameCreateHelp">--%>
         </div>
@@ -68,50 +68,63 @@
           </div>
           <div class="modal-body">
                <div class="form-group">
-                <label for="inputEditDescription">Citizen Science Description</label>
-                <input type="text" class="form-control inputdescription" id="inputEditDescription" aria-describedby="nameCreateHelp">
+                <label for="inputEditDescription">Citizen Science Description:</label>
+                <label for="inputEditDescription" style="color: red;">*</label>
+                <textarea rows="3" class="form-control inputdescription" id="inputEditDescription" aria-describedby="nameCreateHelp"></textarea>               
                 <div class="invalid-feedback">
                     Please provide a description
                 </div>
               </div>  
               <div class="form-group">
-                <label for="inputEditQuestion1">Question 1</label>
-                <input type="text" class="form-control inputq1" id="inputEditQuestion1" aria-describedby="nameCreateHelp">
+                <label for="inputEditQuestion1">Question 1:</label>
+                <label for="inputEditQuestion1" style="color: red;">*</label>
+                <textarea rows="1" class="form-control inputq1" id="inputEditQuestion1" aria-describedby="nameCreateHelp"></textarea>
+                <%--<input type="text" class="form-control inputq1" id="inputEditQuestion1" aria-describedby="nameCreateHelp">--%>
                 <div class="invalid-feedback">
                     Please provide a Question 1 value
                 </div>
               </div>  
               <div class="form-group">
-                <label for="inputEditAnswer1">Answer 1</label>
-                <input type="text" class="form-control inputa1" id="inputEditAnswer1" aria-describedby="nameCreateHelp">
+                <label for="inputEditAnswer1">Answer 1:</label>
+                <label for="inputEditAnswer1" style="color: red;">*</label>
+                <textarea rows="3" class="form-control inputa1" id="inputEditAnswer1" aria-describedby="nameCreateHelp"></textarea>
+                <%--<input type="text" class="form-control inputa1" id="inputEditAnswer1" aria-describedby="nameCreateHelp">--%>
                 <div class="invalid-feedback">
                     Please provide an answer for Question 1
                 </div>
               </div>  
               <div class="form-group">
-                <label for="inputEditQuestion2">Question 2</label>
-                <input type="text" class="form-control inputq2" id="inputEditQuestion2" aria-describedby="nameCreateHelp">
+                <label for="inputEditQuestion2">Question 2:</label>
+                <label for="inputEditQuestion2" style="color: red;">*</label>
+                <textarea rows="1" class="form-control inputq2" id="inputEditQuestion2" aria-describedby="nameCreateHelp"></textarea>
+                <%--<input type="text" class="form-control inputq2" id="inputEditQuestion2" aria-describedby="nameCreateHelp">--%>
                 <div class="invalid-feedback">
                     Please provide a Question 2 value
                 </div>
               </div>  
               <div class="form-group">
-                <label for="inputEditAnswer2">Answer 2</label>
-                <input type="text" class="form-control inputa2" id="inputEditAnswer2" aria-describedby="nameCreateHelp">
+                <label for="inputEditAnswer2">Answer 2:</label>
+                <label for="inputEditAnswer2" style="color: red;">*</label>
+                <textarea rows="3" class="form-control inputa2" id="inputEditAnswer2" aria-describedby="nameCreateHelp"></textarea>
+                <%--<input type="text" class="form-control inputa2" id="inputEditAnswer2" aria-describedby="nameCreateHelp">--%>
                 <div class="invalid-feedback">
                     Please provide an answer for Question 2
                 </div>
               </div>  
               <div class="form-group">
-                <label for="inputEditQuestion3">Question 3</label>
-                <input type="text" class="form-control inputq3" id="inputEditQuestion3" aria-describedby="nameCreateHelp">
+                <label for="inputEditQuestion3">Question 3:</label>
+                <label for="inputEditDescription" style="color: red;">*</label>
+                <textarea rows="1" class="form-control inputq3" id="inputEditQuestion3" aria-describedby="nameCreateHelp"></textarea>
+                <%--<input type="text" class="form-control inputq3" id="inputEditQuestion3" aria-describedby="nameCreateHelp">--%>
                 <div class="invalid-feedback">
                     Please provide a Question 3 value
                 </div>
               </div>  
               <div class="form-group">
-                <label for="inputEditAnswer3">Answer 3</label>
-                <input type="text" class="form-control inputa3" id="inputEditAnswer3" aria-describedby="nameCreateHelp">
+                <label for="inputEditAnswer3">Answer 3:</label>
+                <label for="inputEditDescription" style="color: red;">*</label>
+                <textarea rows="3" class="form-control inputa3" id="inputEditAnswer3" aria-describedby="nameCreateHelp"></textarea>
+                <%--<input type="text" class="form-control inputa3" id="inputEditAnswer3" aria-describedby="nameCreateHelp">--%>
                 <div class="invalid-feedback">
                     Please provide an answer for Question 3
                 </div>
