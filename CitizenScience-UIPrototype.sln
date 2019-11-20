@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.779
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CitizenScience-UIPrototype", "CitizenScience-UIPrototype\CitizenScience-UIPrototype.csproj", "{8019367A-7436-4A0C-9AE9-1EEBB3D0AABB}"
 EndProject
@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestSuite", "TestSuite\Test
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{75F8C2F6-A0EA-47E3-9C80-0CB429BB2BE9}"
 	ProjectSection(SolutionItems) = preProject
-		database_scripts.sql = database_scripts.sql
+		DDL.sql = DDL.sql
 		DML.sql = DML.sql
 		DROP.sql = DROP.sql
 	EndProjectSection
