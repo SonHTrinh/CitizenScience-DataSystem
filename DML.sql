@@ -15,19 +15,24 @@ DECLARE @WatershedId int;
 
 
 INSERT INTO [dbo].[Admin]
-([TUID], [Active])
+([TUID], [Active], [FName], [LName], [Email])
 VALUES 
-('888000089','s','review', 'sreview@temple.edu', 1); 
+('888000089', 1, 's','review', 'sreview@temple.edu')
 
 INSERT INTO [dbo].[Admin]
-([TUID], [Active])
+([TUID], [Active], [FName], [LName], [Email])
 VALUES 
-('915261297','Nadia','Said', 'tug34018@templee.edu', 1)
+('915261297', 1, 'Nadia','Said', 'tug34018@templee.edu')
 
 INSERT INTO [dbo].[Admin]
-([TUID], [Active])
+([TUID], [Active], [FName], [LName], [Email])
+VALUES
+('915149546', 1, 'Brian', 'L', 'tuf37823@temple.edu')
+
+INSERT INTO [dbo].[Admin]
+([TUID], [Active], [FName], [LName], [Email])
 VALUES 
-('915149546', 'Sarah', 'Beganskas', 'sarah.beganskas@temple.edu',1)
+('915149546', 1, 'Sarah', 'Beganskas', 'sarah.beganskas@temple.edu')
 
 ----- Create Cobbs Watershed
 INSERT INTO [dbo].[Watershed]
