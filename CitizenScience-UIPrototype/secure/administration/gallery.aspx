@@ -58,7 +58,8 @@
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="form-group col-12">
-                            <label for="inputCreateName">Name</label>
+                            <label for="inputCreateName">Name:</label>
+                            <label for="inputCreateName" style="color: red;">*</label>
                             <!-- Album Input Name Field -->
                             <input type="text" class="form-control inputname" id="inputCreateName">
                             <div class="invalid-feedback">
@@ -69,7 +70,8 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-12">
-                            <label for="inputCreateDescription">Description</label>
+                            <label for="inputCreateDescription">Description:</label>
+                            <label for="inputCreateDescription" style="color: red;">*</label>
                             <!-- Album Input Description Field -->
                             <textarea type="text" class="form-control inputdescription" id="inputCreateDescription"> </textarea>
                             <div class="invalid-feedback">
@@ -110,7 +112,8 @@
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="form-group col-12">
-                            <label for="inputEditName">Name</label>
+                            <label for="inputEditName">Name:</label>
+                            <label for="inputEditName" style="color: red;">*</label>
                             <!-- Album Edit Name Input -->
                             <input type="text" class="form-control inputname" id="inputEditName">
                             <div class="invalid-feedback">
@@ -120,7 +123,8 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-12">
-                            <label for="inputEditDescription">Description</label>
+                            <label for="inputEditDescription">Description:</label>
+                            <label for="inputEditDescription" style="color: red;">*</label>
                             <!-- Album Edit Description Input -->
                             <textarea class="form-control inputDescription" id="inputEditDescription"> </textarea>
                             <div class="invalid-feedback">

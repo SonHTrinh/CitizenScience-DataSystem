@@ -117,7 +117,7 @@
                 <label for="inputEditActive">Active Status</label>
                 <input type="checkbox" class="form-control inputactive" id="inputEditActive" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                    Active must be ...
+                    Please specify the admin's active status
                 </div>
               </div> 
           </div>

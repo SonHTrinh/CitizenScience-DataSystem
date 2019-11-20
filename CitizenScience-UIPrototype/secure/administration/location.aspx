@@ -47,7 +47,8 @@
           <div class="modal-body">
               <div class="form-row">
                   <div class="form-group col-12">
-                        <label for="inputCreateName">Name</label>
+                        <label for="inputCreateName">Name:</label>
+                        <label for="inputCreateName" style="color: red;">*</label>
                         <input type="text" class="form-control inputname" id="inputCreateName">
                         <div class="invalid-feedback">
                             Please provide a location name
@@ -56,21 +57,24 @@
               </div>
               <div class="form-row">
                   <div class="form-group col-12">
-                    <label for="selectCreateWatershed">Watershed</label>
+                    <label for="selectCreateWatershed">Watershed:</label>
+                    <label for="selectCreateWatershed" style="color: red;">*</label>
                     <select id="selectCreateWatershed" class="form-control selectwatershed">
                     </select>
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col-6">
-                      <label for="inputCreateLatitude">Latitude</label>
+                      <label for="inputCreateLatitude">Latitude:</label>
+                      <label for="inputCreateLatitude" style="color: red;">*</label>
                       <input type="text" class="form-control inputlatitude" id="inputCreateLatitude">
                     <div class="invalid-feedback">
                         Please provide a location latitude
                     </div>
                   </div>
                   <div class="form-group col-6">
-                      <label for="inputCreateLongitude">Longitude</label>
+                      <label for="inputCreateLongitude">Longitude:</label>
+                      <label for="inputCreateLongitude" style="color: red;">*</label>
                       <input type="text" class="form-control inputlongitude" id="inputCreateLongitude">
                     <div class="invalid-feedback">
                         Please provide a location longitude
@@ -108,7 +112,8 @@
           <div class="modal-body">
               <div class="form-row">
                   <div class="form-group col-12">
-                        <label for="inputEditName">Name</label>
+                        <label for="inputEditName">Name:</label>
+                        <label for="inputEditName" style="color: red;">*</label>
                         <input type="text" class="form-control inputname" id="inputEditName" required>
                         <div class="invalid-feedback">
                             Please provide a location name
@@ -117,21 +122,24 @@
               </div>
               <div class="form-row">
                   <div class="form-group col-12">
-                    <label for="selectEditWatershed">Watershed</label>
+                    <label for="selectEditWatershed">Watershed:</label>
+                    <label for="selectEditWatershed" style="color: red;">*</label>
                     <select id="selectEditWatershed" class="form-control selectwatershed" required>
                     </select>
                   </div>
               </div>
               <div class="form-row">
                   <div class="form-group col-6">
-                      <label for="inputEditLatitude">Latitude</label>
+                      <label for="inputEditLatitude">Latitude:</label>
+                      <label for="inputEditLatitude" style="color: red;">*</label>
                       <input type="text" class="form-control inputlatitude" id="inputEditLatitude" required>
                     <div class="invalid-feedback">
                         Please provide a location latitude
                     </div>
                   </div>
                   <div class="form-group col-6">
-                      <label for="inputEditLongitude">Longitude</label>
+                      <label for="inputEditLongitude">Longitude:</label>
+                      <label for="inputEditLongitude" style="color: red;">*</label>
                       <input type="text" class="form-control inputlongitude" id="inputEditLongitude" required>
                     <div class="invalid-feedback">
                         Please provide a location longitude

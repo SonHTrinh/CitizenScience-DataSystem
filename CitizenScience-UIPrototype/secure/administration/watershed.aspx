@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="row mt-2">
-        <div class="col-12">
+        <div class="col-8">
             <table class="table table-striped table-hover table-bordered" style="width: 100%;" id="DataTable">
                 <thead>
                     <tr>

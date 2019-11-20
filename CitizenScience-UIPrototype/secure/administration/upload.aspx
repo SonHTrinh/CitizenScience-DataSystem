@@ -14,7 +14,7 @@
     </div>
     <div class="row justify-content-center  my-4">
         <div class="col-4">
-            <label><b>Select a Sensor Location</b></label>
+            <label><b>Select a Sensor Location:</b></label>
             <asp:DropDownList ID="ddlLocations" runat="server" CssClass="custom-select">
             </asp:DropDownList>
         </div>
