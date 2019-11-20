@@ -16,13 +16,12 @@
             <table class="table table-striped table-hover table-bordered" style="width: 100%;" id="DataTable">
                 <thead>
                     <tr>
-                        <th scope="col">TUID</th>       
-                          
+                        <th scope="col">TUID</th> 
                         <th scope="col">First Name</th>  
                         <th scope="col">Last Name</th>  
                         <th scope="col">Email</th>  
                         <th scope="col">Active Status</th>  
-                        <th scope="col"></th>
+                        <th scope="col">Edit</th>
                     </tr>
                 </thead>
             </table>
@@ -30,7 +29,7 @@
     </div>
 
 
-        <!-- Create Modal -->
+    <!-- Create Modal -->
     <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -42,27 +41,31 @@
           </div>
           <div class="modal-body">
               <div class="form-group">
-                <label for="inputCreateTUID">TUID</label>
-                <input type="text" class="form-control inputtuid" id="inputCreateTUID" aria-describedby="nameCreateHelp">
-                <div class="invalid-feedback">
-                    TUID must be ...
-                </div>
-                  <label for="inputCreateFName">First Name</label>
-                <input type="text" class="form-control inputtuid" id="inputCreateFName" aria-describedby="nameCreateHelp">
-                <div class="invalid-feedback">
-                    First Name must be ...
-                </div>
-                <label for="inputCreateLName">Last Name</label>
-                <input type="text" class="form-control inputtuid" id="inputCreateLName" aria-describedby="nameCreateHelp">
-                <div class="invalid-feedback">
-                    Last Name must be ...
-                </div>
-                <label for="inputCreateEmail">Email </label>
-                <input type="text" class="form-control inputtuid" id="inputCreateEmail" aria-describedby="nameCreateHelp">
-                <div class="invalid-feedback">
-                   Email must be ...
-                </div>
-              </div>                    
+                  <label for="inputCreateTUID">TUID:</label>
+                  <label style="color: red;">*</label>
+                  <input type="text" class="form-control inputtuid" id="inputCreateTUID" aria-describedby="nameCreateHelp" required>
+                  <div class="invalid-feedback">
+                      Please enter TUID
+                  </div>
+                  <label for="inputCreateFName">First Name:</label>
+                  <label style="color: red;">*</label>
+                  <input type="text" class="form-control inputtuid" id="inputCreateFName" aria-describedby="nameCreateHelp" required>
+                  <div class="invalid-feedback">
+                      Please enter first name
+                  </div>
+                  <label for="inputCreateLName">Last Name:</label>
+                  <label style="color: red;">*</label>
+                  <input type="text" class="form-control inputtuid" id="inputCreateLName" aria-describedby="nameCreateHelp" required>
+                  <div class="invalid-feedback">
+                      Please enter last name
+                  </div>
+                  <label for="inputCreateEmail">Email:</label>
+                  <label style="color: red;">*</label>
+                  <input type="email" class="form-control inputtuid" id="inputCreateEmail" aria-describedby="nameCreateHelp" required>
+                  <div class="invalid-feedback">
+                      Please enter valid email address
+                  </div>
+              </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="createClose">Close</button>
@@ -82,37 +85,41 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-               <div class="form-group">
-                <label for="inputEditTUID">TUID</label>
-                <input type="text" class="form-control inputtuid" id="inputEditTUID" aria-describedby="nameCreateHelp">
-                <div class="invalid-feedback">
-                    Accessnet must be ...
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="inputEditTUID">TUID:</label>
+                    <label style="color: red;">*</label>
+                    <input type="text" class="form-control inputtuid" id="inputEditTUID" aria-describedby="nameCreateHelp" required>
+                    <div class="invalid-feedback">
+                        Please enter TUID
+                    </div>
+                    <label for="inputCreateFName">First Name:</label>
+                    <label style="color: red;">*</label>
+                    <input type="text" class="form-control inputtuid" id="inputEditFName" aria-describedby="nameCreateHelp" required>
+                    <div class="invalid-feedback">
+                        Please enter first name
+                    </div>
+                    <label for="inputCreateLName">Last Name:</label>
+                    <label style="color: red;">*</label>
+                    <input type="text" class="form-control inputtuid" id="inputEditLName" aria-describedby="nameCreateHelp" required>
+                    <div class="invalid-feedback">
+                        Please enter last name
+                    </div>
+                    <label for="inputCreateEmail">Email:</label>
+                    <label style="color: red;">*</label>
+                    <input type="text" class="form-control inputtuid" id="inputEditEmail" aria-describedby="nameCreateHelp" required>
+                    <div class="invalid-feedback">
+                        Email must be ...
+                    </div>
                 </div>
-                                     <label for="inputCreateFName">First Name</label>
-                <input type="text" class="form-control inputtuid" id="inputEditFName" aria-describedby="nameCreateHelp">
-                <div class="invalid-feedback">
-                    First Name must be ...
+                <div class="form-group">
+                    <label for="inputEditActive">Active Status</label>
+                    <input type="checkbox" class="form-control inputactive" id="inputEditActive" aria-describedby="nameCreateHelp">
+                    <div class="invalid-feedback">
+                        Please enter valid email address
+                    </div>
                 </div>
-                <label for="inputCreateLName">Last Name</label>
-                <input type="text" class="form-control inputtuid" id="inputEditLName" aria-describedby="nameCreateHelp">
-                <div class="invalid-feedback">
-                    Last Name must be ...
-                </div>
-                <label for="inputCreateEmail">Email </label>
-                <input type="text" class="form-control inputtuid" id="inputEditEmail" aria-describedby="nameCreateHelp">
-                <div class="invalid-feedback">
-                   Email must be ...
-                </div>
-              </div> 
-              <div class="form-group">
-                <label for="inputEditActive">Active Status</label>
-                <input type="checkbox" class="form-control inputactive" id="inputEditActive" aria-describedby="nameCreateHelp">
-                <div class="invalid-feedback">
-                    Active must be ...
-                </div>
-              </div> 
-          </div>
+            </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="editClose">Close</button>
             <button type="button" class="btn btn-info" id="editSubmit">Save changes</button>

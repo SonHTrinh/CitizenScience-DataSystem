@@ -15,13 +15,15 @@
     <div class="row justify-content-center  my-4">
         <div class="col-4">
             <label><b>Select a Sensor Location</b></label>
-            <asp:DropDownList ID="ddlLocations" runat="server" CssClass="custom-select">
-            </asp:DropDownList>
+            <label style="color: red;">*</label>   
+            <asp:DropDownList ID="ddlLocations" runat="server" CssClass="custom-select" required="true"></asp:DropDownList>
         </div>
         <div class="col-4">
+            <label><b>Select a File</b></label>
+            <label style="color: red;">*</label>   
             <div class="custom-file">
-                <asp:FileUpload ID="FileUpload1" runat="server" CssClass="custom-file-input" accept=".csv" />
-                <label class="custom-file-label" for="FileUpload1" id="uploadLabel">Choose CSV File</label>
+                <asp:FileUpload ID="FileUpload1" runat="server" CssClass="custom-file-input" accept=".csv" required="true"/>
+                <label class="custom-file-label" for="FileUpload1" id="uploadLabel">Choose .CSV File</label>
             </div>
         </div>
     </div>
