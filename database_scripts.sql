@@ -92,7 +92,6 @@ GO
 CREATE TABLE [dbo].[AlbumImages] (
 	[AlbumID] INT NOT NULL,
 	[ImageID] INT NOT NULL,
-	[LastUpdated] DATETIME,
 	CONSTRAINT [FK_ImageLink_ToTable] FOREIGN KEY ([ImageID]) REFERENCES [dbo].[Image] ([ImageID]),
 	CONSTRAINT [FK_AlbumLink_ToTable] FOREIGN KEY ([AlbumID]) REFERENCES [dbo].[Album] ([AlbumID])
 );
@@ -124,66 +123,49 @@ GO
 
 -------------------- Triggers --------------------
 
+-------------------------------- LOCATION TRIGGER
 -- Trigger that happens when new location is added to the database
--- CREATE TRIGGER [dbo].[LocationAlbumCreation] ON [dbo].[Location]
--- AFTER INSERT AS
--- BEGIN
---    DECLARE @AlbumId int;
---
---     -- Create a new album for the Location
---     INSERT INTO [dbo].[Album]
---     ([Name], [Description], [ProfileImageID], [IsLocationAlbum],[LastUpdated])
---     SELECT
---     [inserted].[SensorName], 'Album of ' + [inserted].[SensorName] + ' images', [inserted].ProfileImageID, 1, GETDATE()
---     FROM inserted;
---
---     SELECT @AlbumId = (SELECT SCOPE_IDENTITY());
---
---     -- Create a link from the Location Profile image to the Image Album
---     INSERT INTO [dbo].[AlbumImages]
---     (AlbumID, ImageID, LastUpdated)
---     SELECT
---     @AlbumId, [inserted].[ProfileImageID], GETDATE()
---     FROM inserted;
---
---    -- Add the album to the location
---     UPDATE [dbo].[Location]
---     SET [AlbumID] = @AlbumId
---     WHERE [LocationID] = [inserted].LocationID
---
--- END
---
--- GO
+CREATE TRIGGER [dbo].[LocationLastUpdatedTrigger] ON [dbo].[Location]
+AFTER INSERT, UPDATE AS
+BEGIN
+    UPDATE [dbo].[Location]
+    SET [LastUpdated] = GETDATE()
+    WHERE [LocationID] = (SELECT [LocationID] FROM [inserted])
+END
+GO
 
--- Trigger that happens when a location is updated
--- CREATE TRIGGER [dbo].[LocationAlbumUpdate] ON [dbo].[Location]
--- AFTER UPDATE AS
--- BEGIN
---    DECLARE @NewImageId int;
---    DECLARE @OldImageId int;
---
---    SELECT @NewImageId = (SELECT [inserted].[ProfileImageID] FROM [inserted])
---    SELECT @OldImageId = (SELECT [deleted].[ProfileImageID] FROM [deleted])
---
---    IF @NewImageId != @OldImageId
---    BEGIN
--- 	   UPDATE [dbo].[AlbumImages]
--- 	   SET
--- 	   ImageID = @NewImageId
--- 	   WHERE
--- 	   ImageID = @OldImageId
---
--- 		UPDATE [dbo].[Album]
--- 		SET
--- 		ProfileImageID = @NewImageId
--- 		WHERE
--- 		ProfileImageID = @OldImageId
---
--- 		DELETE FROM [dbo].[Image] WHERE [ImageID] = @OldImageId;
---    END
--- END
---
--- GO
+-------------------------------- ALBUM TRIGGERS
+-- Trigger that happens when new album is added to the database
+CREATE TRIGGER [dbo].[AlbumLastUpdatedTrigger] ON [dbo].[Album]
+AFTER INSERT, UPDATE AS
+BEGIN
+    UPDATE [dbo].[Album]
+    SET [LastUpdated] = GETDATE()
+    WHERE [AlbumID] = (SELECT [AlbumID] FROM [inserted])
+END
+GO
+
+-------------------------------- IMAGE TRIGGERS
+-- Trigger that happens when new image is added to the database
+CREATE TRIGGER [dbo].[ImageLastUpdatedTrigger] ON [dbo].[Image]
+AFTER INSERT, UPDATE AS
+BEGIN
+    UPDATE [dbo].[Image]
+    SET [LastUpdated] = GETDATE()
+    WHERE [ImageID] = (SELECT [ImageID] FROM [inserted])
+END
+GO
+
+-------------------------------- WATERSHED TRIGGERS
+-- Trigger that happens when new watershed is added to the database
+CREATE TRIGGER [dbo].[WatershedLastUpdatedTrigger] ON [dbo].[Watershed]
+AFTER INSERT, UPDATE AS
+BEGIN
+    UPDATE [dbo].[Watershed]
+    SET [LastUpdated] = GETDATE()
+    WHERE [WatershedID] = (SELECT [WatershedID] FROM [inserted])
+END
+GO
 
 -------------------- Stored Procedures --------------------
 
