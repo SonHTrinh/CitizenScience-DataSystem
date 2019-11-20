@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="get.ashx.cs" Class="CitizenScience_UIPrototype.images.get" %>
+﻿<%@ WebHandler Language="C#" CodeBehind="images.ashx.cs" Class="CitizenScience_UIPrototype.images.Get" %>

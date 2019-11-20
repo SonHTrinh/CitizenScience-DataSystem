@@ -187,6 +187,9 @@ namespace CitizenScience_UIPrototype
                 {
                     AdminID = Convert.ToInt32(dataRow["AdminID"]),
                     TUID = Convert.ToString(dataRow["TUID"])  ,
+                    FName = Convert.ToString(dataRow["FName"]), 
+                    LName = Convert.ToString(dataRow["LName"]),
+                    Email = Convert.ToString(dataRow["Email"]),
                     Active = Convert.ToBoolean(dataRow["Active"])
                 };
 
@@ -521,9 +524,9 @@ namespace CitizenScience_UIPrototype
 
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void CreateAdmin(string tuid)
+        public void CreateAdmin(string tuid,string fname, string lname, string email)
         {
-            Admin result = ClassFunctions.CreateAdmin(tuid);
+            Admin result = ClassFunctions.CreateAdmin(tuid, fname, lname, email);
 
             if (result != null)
             {
@@ -537,9 +540,9 @@ namespace CitizenScience_UIPrototype
         }
         [WebMethod]
         [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
-        public void UpdateAdmin(int id, string tuid, bool active)
+        public void UpdateAdmin(int id, string tuid, string fname, string lname, string email, bool active)
         {
-            Admin result = ClassFunctions.UpdateAdmin(id, tuid, active);
+            Admin result = ClassFunctions.UpdateAdmin(id, tuid,  fname,  lname,  email,active);
         }
         
         [WebMethod]
@@ -622,6 +625,42 @@ namespace CitizenScience_UIPrototype
 
 
             if (result != null)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, result);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void CreateAlbum(string Name, string Description, int ImageID)
+        {
+            int result = -1;
+
+            result = ClassFunctions.CreateAlbum(Name, Description, ImageID);
+
+            if (result > 0)
+            {
+                BuildResponse(200, result);
+            }
+            else
+            {
+                BuildResponse(500, result);
+            }
+        }
+
+        [WebMethod]
+        [ScriptMethod(ResponseFormat = ResponseFormat.Json)]
+        public void UpdateAlbum(string Name, string Description, int AlbumID)
+        {
+            int result = -1;
+
+            result = ClassFunctions.UpdateAlbum(AlbumID, Name, Description);
+
+            if (result > 0)
             {
                 BuildResponse(200, result);
             }

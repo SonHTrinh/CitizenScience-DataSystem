@@ -17,7 +17,11 @@
                 <thead>
                     <tr>
                         <th scope="col">TUID</th>       
-                        <th scope="col">Active Status</th>       
+                          
+                        <th scope="col">First Name</th>  
+                        <th scope="col">Last Name</th>  
+                        <th scope="col">Email</th>  
+                        <th scope="col">Active Status</th>  
                         <th scope="col"></th>
                     </tr>
                 </thead>
@@ -43,11 +47,26 @@
                 <div class="invalid-feedback">
                     TUID must be ...
                 </div>
-              </div>            
+                  <label for="inputCreateFName">First Name</label>
+                <input type="text" class="form-control inputtuid" id="inputCreateFName" aria-describedby="nameCreateHelp">
+                <div class="invalid-feedback">
+                    First Name must be ...
+                </div>
+                <label for="inputCreateLName">Last Name</label>
+                <input type="text" class="form-control inputtuid" id="inputCreateLName" aria-describedby="nameCreateHelp">
+                <div class="invalid-feedback">
+                    Last Name must be ...
+                </div>
+                <label for="inputCreateEmail">Email </label>
+                <input type="text" class="form-control inputtuid" id="inputCreateEmail" aria-describedby="nameCreateHelp">
+                <div class="invalid-feedback">
+                   Email must be ...
+                </div>
+              </div>                    
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="createClose">Close</button>
-            <button type="button" class="btn btn-success" id="createSubmit">Create</button>
+            <button type="button" class="btn btn-info" id="createSubmit">Create</button>
           </div>
         </div>
       </div>
@@ -69,6 +88,21 @@
                 <input type="text" class="form-control inputtuid" id="inputEditTUID" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
                     Accessnet must be ...
+                </div>
+                                     <label for="inputCreateFName">First Name</label>
+                <input type="text" class="form-control inputtuid" id="inputEditFName" aria-describedby="nameCreateHelp">
+                <div class="invalid-feedback">
+                    First Name must be ...
+                </div>
+                <label for="inputCreateLName">Last Name</label>
+                <input type="text" class="form-control inputtuid" id="inputEditLName" aria-describedby="nameCreateHelp">
+                <div class="invalid-feedback">
+                    Last Name must be ...
+                </div>
+                <label for="inputCreateEmail">Email </label>
+                <input type="text" class="form-control inputtuid" id="inputEditEmail" aria-describedby="nameCreateHelp">
+                <div class="invalid-feedback">
+                   Email must be ...
                 </div>
               </div> 
               <div class="form-group">
@@ -141,6 +175,9 @@
             // This function fills out the fields in the 'Edit Modal' before displaying it
             function PopulateEditModal(data) {
                 $('#inputEditTUID').val(data.TUID);
+                $('#inputEditFName').val(data.FName);
+                $('#inputEditLName').val(data.LName);
+                  $('#inputEditEmail').val(data.Email);
                 $('#inputEditActive').prop("checked", data.Active);
             }
 
@@ -153,7 +190,13 @@
                 },
                 columns: [
                     // The 'TUID' column of the table's data
-                    { data: 'TUID' },                 
+                    { data: 'TUID' },
+                   // The 'TUID' column of the table's data
+                    { data: 'FName' },
+                       // The 'TUID' column of the table's data
+                    { data: 'LName' },
+                       // The 'TUID' column of the table's data
+                    { data: 'Email' },
                     // The 'Active' column of the table's data
                     { data: 'Active' },                 
                     // The 'Action' column of the table
@@ -193,18 +236,30 @@
 
             function BuildCreateAdmin() {
                 var TUID = $('#inputCreateTUID').val();           
-
+                var FName = $('#inputCreateFName').val();   
+                var LName = $('#inputCreateLName').val();   
+                var Email = $('#inputCreateEmail').val();   
                 return {
-                    tuid: TUID
+                    tuid: TUID,
+                    fname: FName, 
+                    lname: LName, 
+                    email: Email
+                   
                 };
             }
 
             function BuildEditAdmin(data) {
-                var TUID = $('#inputEditTUID').val();             
+                var TUID = $('#inputEditTUID').val(); 
+                var FName = $('#inputEditFName').val();  
+                var LName = $('#inputEditLName').val(); 
+                var Email = $('#inputEditEmail').val(); 
                 var Active = $('#inputEditActive').prop("checked");             
                 return {
                     id: data.AdminID,
                     tuid: TUID,
+                    fname: FName, 
+                    lname: LName,
+                    email: Email,
                     active: Active
                 };
             }

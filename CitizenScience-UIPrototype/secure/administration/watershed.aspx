@@ -17,8 +17,8 @@
             <table class="table table-striped table-hover table-bordered" style="width: 100%;" id="DataTable">
                 <thead>
                     <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col"></th>
+                        <th scope="col">Watershed</th>
+                        <th scope="col">Edit</th>
                     </tr>
                 </thead>
             </table>
@@ -41,13 +41,13 @@
                 <label for="inputCreateName">Name</label>
                 <input type="text" class="form-control inputname" id="inputCreateName" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
-                    Watershed Name must be ...
+                    Please provide a watershed name
                 </div>
               </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="createClose">Close</button>
-            <button type="button" class="btn btn-success" id="createSubmit">Create</button>
+            <button type="button" class="btn btn-info" id="createSubmit">Create</button>
           </div>
         </div>
       </div>

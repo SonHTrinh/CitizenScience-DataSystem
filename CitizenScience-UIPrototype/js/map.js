@@ -88,7 +88,7 @@ function initGraph(locationObj, temperatureScale, formattedStartDate, formattedE
 						xAxes: [{
 							ticks: {
 								autoSkip: true,
-								maxTicksLimit: 20
+								maxTicksLimit: 15
 							},
 							scaleLabel: {
 								display: true,
@@ -130,12 +130,18 @@ function initModal(locationObj, watershedObj) {
 	var title = locationObj.SensorName;
 	$(".modal-title").text(title);
 
-	//desc
-	var description = "Description about the watershed: " + locationObj.SensorName + " - " + watershedObj.WatershedName + " (" + locationObj.Latitude + ", " + locationObj.Longitude + ")";
-	$(".modalDesc").text(description);
+    //desc
+    var descTitle = "About " + locationObj.SensorName;
+    var description = "<b> Watershed: </b>" + watershedObj.WatershedName + "<br/>" +
+        "<b> Coordinates: </b>" + " (" + locationObj.Latitude + ", " + locationObj.Longitude + ")"
+        + "<br> ...";
+    $(".modalDescTitle").text(descTitle);
+    $(".modalDesc").html(description);
+    //var description = "Description about the watershed: " + locationObj.SensorName + " - " + watershedObj.WatershedName + " (" + locationObj.Latitude + ", " + locationObj.Longitude + ")";
+	//$(".modalDesc").text(description);
 
 	//image
-//	var imageSrc = "<%= Global.Url_Prefix() %>/images/location/get.ashx?locationid=" + location.LocationID;
+    //	var imageSrc = "<%= Global.Url_Prefix() %>/images/location/get.ashx?locationid=" + location.LocationID;
 	var imageSrc = "images/location/get.ashx?locationid=" + locationObj.LocationID;
 	var imageAlt = "The Picture of the " + locationObj.SensorName;
 	$(".modalImage").attr("src", imageSrc).attr("alt", imageAlt);
@@ -148,7 +154,10 @@ function initModal(locationObj, watershedObj) {
 	//Build Chart functionality
 	$.get("api.asmx/GetLocationLatestTemperature?locationid=" + locationObj.LocationID)
 		.done(function (response) {
-			if (response.length !== 0) {
+            if (response.length !== 0) {
+                //if (window.Chart != undefined) {
+                //    w.Chart.destroy();
+                //}
 				var endDate = new Date(response.Timestamp);
 				var formattedEndDate = getFormattedDate(endDate);
 

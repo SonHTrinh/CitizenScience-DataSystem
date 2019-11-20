@@ -17,17 +17,17 @@ DECLARE @WatershedId int;
 INSERT INTO [dbo].[Admin]
 ([TUID], [Active])
 VALUES 
-('888000089', 1); 
+('888000089','s','review', 'sreview@temple.edu', 1); 
 
 INSERT INTO [dbo].[Admin]
 ([TUID], [Active])
 VALUES 
-('915261297', 1)
+('915261297','Nadia','Said', 'tug34018@templee.edu', 1)
 
 INSERT INTO [dbo].[Admin]
 ([TUID], [Active])
 VALUES 
-('915149546', 1)
+('915149546', 'Sarah', 'Beganskas', 'sarah.beganskas@temple.edu',1)
 
 ----- Create Cobbs Watershed
 INSERT INTO [dbo].[Watershed]
