@@ -17,7 +17,7 @@ DECLARE @WatershedId int;
 INSERT INTO [dbo].[Admin]
 ([TUID], [Active], [FName], [LName], [Email])
 VALUES 
-('888000089', 1, 's','review', 'sreview@temple.edu');
+('888000089', 1, 's','review', 'sreview@temple.edu')
 
 INSERT INTO [dbo].[Admin]
 ([TUID], [Active], [FName], [LName], [Email])
