@@ -39,7 +39,7 @@ VALUES
 SELECT @WatershedId = (SELECT SCOPE_IDENTITY());
 
 -- Create Watershed Locations
-EXEC [dbo].[CreateLocation]
+EXEC [dbo].[BootstrapLocation]
     @watershedid = @WatershedId,
     @name = 'GilmoreRd_Bridge',
     @longitude = '-75.3025',

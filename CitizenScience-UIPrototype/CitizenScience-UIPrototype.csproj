@@ -92,6 +92,7 @@
   <ItemGroup>
     <Content Include="about.aspx" />
     <Content Include="js\administration-gallery.js" />
+    <Content Include="js\administration-location.js" />
     <Content Include="style\arrow-down.png" />
     <Content Include="Default.aspx" />
     <Content Include="images\set.ashx" />
