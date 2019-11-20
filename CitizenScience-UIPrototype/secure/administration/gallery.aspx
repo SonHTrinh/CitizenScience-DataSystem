@@ -33,7 +33,7 @@
                 <thead>
                     <tr>
                         <!-- Table Column Header -->
-                        <th scope="col">Album</th>
+                        <th scope="col">Album Name</th>
                         <th scope="col">Description</th>
                         <th scope="col" class="no-sort">Edit</th>
                     </tr>
@@ -58,7 +58,7 @@
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="form-group col-12">
-                            <label for="inputCreateName">Name</label>
+                            <label for="inputCreateName">Album Name:</label>
                             <!-- Album Input Name Field -->
                             <input type="text" class="form-control inputname" id="inputCreateName">
                             <div class="invalid-feedback">
@@ -69,9 +69,9 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-12">
-                            <label for="inputCreateDescription">Description</label>
+                            <label for="inputCreateDescription">Description:</label>
                             <!-- Album Input Description Field -->
-                            <textarea type="text" class="form-control inputdescription" id="inputCreateDescription"> </textarea>
+                            <textarea type="text" class="form-control inputdescription" id="inputCreateDescription"></textarea>
                             <div class="invalid-feedback">
                                 Please provide an album description
                             </div>
@@ -110,7 +110,7 @@
                 <div class="modal-body">
                     <div class="form-row">
                         <div class="form-group col-12">
-                            <label for="inputEditName">Name</label>
+                            <label for="inputEditName">Album Name:</label>
                             <!-- Album Edit Name Input -->
                             <input type="text" class="form-control inputname" id="inputEditName">
                             <div class="invalid-feedback">
@@ -120,7 +120,7 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-12">
-                            <label for="inputEditDescription">Description</label>
+                            <label for="inputEditDescription">Description:</label>
                             <!-- Album Edit Description Input -->
                             <textarea class="form-control inputDescription" id="inputEditDescription"> </textarea>
                             <div class="invalid-feedback">
