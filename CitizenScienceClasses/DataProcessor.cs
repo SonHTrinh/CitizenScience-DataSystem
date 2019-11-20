@@ -7,7 +7,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
-using System.Web;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace CitizenScienceClasses
 {
@@ -70,6 +71,72 @@ namespace CitizenScienceClasses
 
             return dataSet; 
             
+        }
+
+        private const int exifOrientationID = 0x112; //274
+        // Processes image bytes before storing in the database
+        public static byte[] ProcessImage(byte[] imageBytes, string contentType)
+        {
+            byte[] returnResult = imageBytes;
+            System.Drawing.Image img = null;
+
+            using (var inStream = new MemoryStream(imageBytes))
+            {
+                img = System.Drawing.Image.FromStream(inStream);
+
+                if (!img.PropertyIdList.Contains(exifOrientationID))
+                    return returnResult;
+
+                var prop = img.GetPropertyItem(exifOrientationID);
+                int val = BitConverter.ToUInt16(prop.Value, 0);
+                var rot = RotateFlipType.RotateNoneFlipNone;
+
+                if (val == 3 || val == 4)
+                    rot = RotateFlipType.Rotate180FlipNone;
+                else if (val == 5 || val == 6)
+                    rot = RotateFlipType.Rotate90FlipNone;
+                else if (val == 7 || val == 8)
+                    rot = RotateFlipType.Rotate270FlipNone;
+
+                if (val == 2 || val == 4 || val == 5 || val == 7)
+                    rot |= RotateFlipType.RotateNoneFlipX;
+
+                if (rot != RotateFlipType.RotateNoneFlipNone) { 
+                    img.RotateFlip(rot);
+
+                    using (var outStream = new MemoryStream())
+                    {
+                        ImageFormat imageFormat = ImageFormat.MemoryBmp;
+                        contentType = contentType.ToLower();
+
+                        if (contentType.Equals("image/jpeg") || contentType.Equals("image/jpg"))
+                        {
+                            imageFormat = ImageFormat.Jpeg;
+                        }
+                        else if (contentType.Equals("image/gif"))
+                        {
+                            imageFormat = ImageFormat.Gif;
+                        } 
+                        else if (contentType.Equals("image/png"))
+                        {
+                            imageFormat = ImageFormat.Png;
+                        } 
+                        else if (contentType.Equals("image/bmp"))
+                        {
+                            imageFormat = ImageFormat.Bmp;
+                        }
+                        else if (contentType.Equals("image/tif") || contentType.Equals("image/tiff"))
+                        {
+                            imageFormat = ImageFormat.Tiff;
+                        }
+
+                        img.Save(outStream, imageFormat);
+                        returnResult =  outStream.ToArray();
+                    }
+                }
+            }
+
+            return returnResult;
         }
     }
 }

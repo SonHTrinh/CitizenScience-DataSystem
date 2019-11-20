@@ -448,7 +448,7 @@ namespace CitizenScienceClasses
             SqlCommand comm = new SqlCommand();
             comm.CommandType = CommandType.StoredProcedure;
             comm.CommandText = "UploadImage";
-            comm.Parameters.AddWithValue("@bytes", bytes);
+            comm.Parameters.AddWithValue("@bytes", DataProcessor.ExifRotate(bytes, contentType));
             comm.Parameters.AddWithValue("@contenttype", contentType);
             comm.Parameters.AddWithValue("@filename", filename);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
@@ -478,7 +478,7 @@ namespace CitizenScienceClasses
             comm.CommandType = CommandType.StoredProcedure;
             comm.CommandText = "UploadAlbumImage";
             comm.Parameters.AddWithValue("@albumid", albumId);
-            comm.Parameters.AddWithValue("@bytes", bytes);
+            comm.Parameters.AddWithValue("@bytes", DataProcessor.ExifRotate(bytes, contentType));
             comm.Parameters.AddWithValue("@contenttype", contentType);
             comm.Parameters.AddWithValue("@filename", filename);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
@@ -584,7 +584,7 @@ namespace CitizenScienceClasses
             comm.CommandType = CommandType.StoredProcedure;
             comm.CommandText = "SetLocationImage";
             comm.Parameters.AddWithValue("@locationid", locationId);
-            comm.Parameters.AddWithValue("@bytes", bytes);
+            comm.Parameters.AddWithValue("@bytes", DataProcessor.ExifRotate(bytes, contentType));
             comm.Parameters.AddWithValue("@contenttype", contentType);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
 
@@ -736,7 +736,7 @@ namespace CitizenScienceClasses
             comm.CommandType = CommandType.StoredProcedure;
             comm.CommandText = "AddImageToAlbum";
             comm.Parameters.AddWithValue("@albumid", albumId);
-            comm.Parameters.AddWithValue("@bytes", bytes);
+            comm.Parameters.AddWithValue("@bytes", DataProcessor.ExifRotate(bytes, contentType));
             comm.Parameters.AddWithValue("@contenttype", contentType);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
 
