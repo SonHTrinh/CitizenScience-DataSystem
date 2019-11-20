@@ -80,6 +80,8 @@ namespace CitizenScienceClasses
             byte[] returnResult = imageBytes;
             System.Drawing.Image img = null;
 
+            GC.Collect();
+
             using (var inStream = new MemoryStream(imageBytes))
             {
                 img = System.Drawing.Image.FromStream(inStream);
@@ -128,6 +130,10 @@ namespace CitizenScienceClasses
                         else if (contentType.Equals("image/tif") || contentType.Equals("image/tiff"))
                         {
                             imageFormat = ImageFormat.Tiff;
+                        }
+                        else
+                        {
+                            throw new Exception($"Unknown Image Format Type: {contentType}");
                         }
 
                         img.Save(outStream, imageFormat);
