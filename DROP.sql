@@ -39,6 +39,9 @@ GO
 DROP PROCEDURE IF EXISTS [CreateLocation]
 GO
 
+DROP PROCEDURE IF EXISTS [BootstrapLocation]
+GO
+
 DROP PROCEDURE IF EXISTS [CreateWatershed]
 GO
 

@@ -342,7 +342,7 @@ AS
 GO
 
 ------------------------------------------------- CRUD Location
-CREATE PROCEDURE [dbo].[CreateLocation]
+CREATE PROCEDURE [dbo].[BootstrapLocation]
 	@watershedid int,
     @name varchar(255),
     @latitude float,
@@ -367,6 +367,30 @@ AS
 
     INSERT INTO [dbo].[AlbumImages] (AlbumID, ImageID)
     VALUES (@newalbumid, @newimageid);
+
+    INSERT INTO Location (WatershedID, SensorName, Latitude, Longitude, AlbumID)
+    VALUES (@watershedid, @name, @latitude, @longitude, @newalbumid);
+
+    SELECT * FROM Location WHERE locationID = SCOPE_IDENTITY();
+
+GO
+
+CREATE PROCEDURE [dbo].[CreateLocation]
+	@watershedid int,
+    @name varchar(255),
+    @latitude float,
+    @longitude float,
+	@imageid int
+AS
+    DECLARE @newalbumid int;
+
+    INSERT INTO [dbo].[Album] ([Name], [Description], [ProfileImageID], [IsLocationAlbum])
+    VALUES (@name, 'Album of ' + @name + ' images', @imageid, 1);
+
+    SET @newalbumid = SCOPE_IDENTITY();
+
+    INSERT INTO [dbo].[AlbumImages] (AlbumID, ImageID)
+    VALUES (@newalbumid, @imageid);
 
     INSERT INTO Location (WatershedID, SensorName, Latitude, Longitude, AlbumID)
     VALUES (@watershedid, @name, @latitude, @longitude, @newalbumid);

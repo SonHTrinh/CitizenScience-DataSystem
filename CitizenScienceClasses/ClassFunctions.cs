@@ -53,7 +53,7 @@ namespace CitizenScienceClasses
             comm.Parameters.AddWithValue("@name", name);
             comm.Parameters.AddWithValue("@latitude", latitude);
             comm.Parameters.AddWithValue("@longitude", longitude);
-            comm.Parameters.AddWithValue("@profileimageid", imageid);
+            comm.Parameters.AddWithValue("@imageid", imageid);
             DataSet dataSet = conn.GetDataSetUsingCmdObj(comm);
 
             if (dataSet.Tables[0].Rows.Count == 1)
@@ -67,8 +67,7 @@ namespace CitizenScienceClasses
                     SensorName = Convert.ToString(dataRow["SensorName"]),
                     Latitude = Convert.ToDouble(dataRow["Latitude"]),
                     Longitude = Convert.ToDouble(dataRow["Longitude"]),
-                    AlbumId = Convert.ToInt32(dataRow["AlbumId"]),
-                    LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
+                    AlbumId = Convert.ToInt32(dataRow["AlbumId"])
                 };
             }
 
@@ -369,8 +368,7 @@ namespace CitizenScienceClasses
                 watershed = new Watershed
                 {
                     WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
-                    WatershedName = Convert.ToString(dataRow["WatershedName"]),
-                    LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
+                    WatershedName = Convert.ToString(dataRow["WatershedName"])
                 };
             }
 
@@ -394,8 +392,7 @@ namespace CitizenScienceClasses
                 watershed = new Watershed
                 {
                     WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
-                    WatershedName = Convert.ToString(dataRow["WatershedName"]),
-                    LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
+                    WatershedName = Convert.ToString(dataRow["WatershedName"])
                 };
             }
             
@@ -420,8 +417,7 @@ namespace CitizenScienceClasses
                 watershed = new Watershed
                 {
                     WatershedID = Convert.ToInt32(dataRow["WatershedID"]),
-                    WatershedName = Convert.ToString(dataRow["WatershedName"]),
-                    LastUpdated = Convert.ToDateTime(dataRow["LastUpdated"])
+                    WatershedName = Convert.ToString(dataRow["WatershedName"])
                 };
             }
 
