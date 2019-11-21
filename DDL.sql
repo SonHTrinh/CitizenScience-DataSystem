@@ -55,8 +55,8 @@ CREATE TABLE [dbo].[Temperature](
 	[TempID] INT IDENTITY(1,1) NOT NULL,
 	[LocationID] INT NOT NULL,
 	[Timestamp] DateTime  NOT NULL,
-	[TempC] FLOAT(53) NOT NULL,
-	[TempF] FLOAT(53) NOT NULL,
+	[TempC] DOUBLE PRECISION,
+	[TempF] DOUBLE PRECISION,
 	PRIMARY KEY CLUSTERED ([TempID] ASC) ,
 	CONSTRAINT [FK_Temperature_ToTable] FOREIGN KEY ([LocationID]) REFERENCES [dbo].[Location] ([LocationID])
 );
@@ -115,8 +115,8 @@ GO
 CREATE TYPE [dbo].[TEMPERATUREDATA] AS TABLE(
 	[LocationID] INT NOT NULL,
 	[TimeStamp] DateTime  NOT NULL,
-	[TempC] FLOAT(53) NOT NULL,
-	[TempF] FLOAT(53) NOT NULL
+	[TempC] DOUBLE PRECISION,
+	[TempF] DOUBLE PRECISION
 );
 
 GO
@@ -189,6 +189,9 @@ GO
 CREATE PROCEDURE [dbo].[GetAllTemperatures]
 AS
 	SELECT * FROM Temperature
+    LEFT JOIN [dbo].[Location]
+    ON Temperature.LocationID = Location.LocationID
+    ORDER BY Temperature.LocationID, Temperature.Timestamp ASC
 
 GO
 
@@ -202,51 +205,25 @@ CREATE PROCEDURE [dbo].[GetAllTemperaturesByLocationId]
 	@locationID int
 AS
 	SELECT * FROM Temperature
-    WHERE LocationID = @locationID
+	LEFT JOIN [dbo].[Location]
+    ON Temperature.LocationID = Location.LocationID
+    WHERE Temperature.LocationID = @locationID
+    ORDER BY Temperature.LocationID, Temperature.Timestamp ASC
 
 GO
 
 CREATE PROCEDURE [dbo].[GetAllTemperaturesByMultipleLocationIds]
 	@listOflocationID varchar(max)
 AS
+
 	SELECT * FROM Temperature
-    JOIN STRING_SPLIT(@listOflocationID, ',')
-    ON value = LocationID
+    LEFT JOIN [dbo].[Location]
+    ON Temperature.LocationID = Location.LocationID
+    WHERE Temperature.LocationID IN (SELECT value FROM STRING_SPLIT(@listOflocationID, ','))
+    ORDER BY Temperature.LocationID, Temperature.Timestamp ASC;
 
 GO
 
------------------------------	MAP PAGE DOWNLOAD PROCEDURES
-CREATE PROCEDURE [dbo].[GetTemperaturesByLocationIdStartEnd]
-	@locationID int,
-	@startDate date,
-	@endDate date
-AS
-	SELECT * FROM Temperature JOIN Location ON Temperature.LocationID = Location.LocationID
-	WHERE Temperature.Timestamp >= @startDate
-	AND Temperature.Timestamp <= @endDate
-	AND Temperature.LocationID = @locationID
-
-GO
-
-CREATE PROCEDURE [dbo].[GetTemperaturesByLocationIdNoStartEnd]
-	@locationID int,
-	@endDate date
-AS
-	SELECT * FROM Temperature JOIN Location ON Temperature.LocationID = Location.LocationID
-	WHERE Temperature.Timestamp <= @endDate
-	AND Temperature.LocationID = @locationID
-
-GO
-
-CREATE PROCEDURE [dbo].[GetTemperaturesByLocationIdStartNoEnd]
-	@locationID int,
-	@startDate date
-AS
-	SELECT * FROM Temperature JOIN Location ON Temperature.LocationID = Location.LocationID
-	WHERE Temperature.Timestamp >= @startDate
-	AND Temperature.LocationID = @locationID
-
-GO
 -------------------------------------------------------------
 
 CREATE PROCEDURE [dbo].[GetAllVolunteers]
@@ -273,6 +250,17 @@ GO
 ------------------------------------------------------------------
 
 ------------------------------------------------- CRUD Temperature
+CREATE PROCEDURE [dbo].[GetTemperaturesByLocationIdStartEnd]
+	@locationID int,
+	@startDate date,
+	@endDate date
+AS
+	SELECT * FROM Temperature JOIN Location ON Temperature.LocationID = Location.LocationID
+	WHERE Temperature.Timestamp >= @startDate
+	AND Temperature.Timestamp <= @endDate
+	AND Temperature.LocationID = @locationID
+
+GO
 
 CREATE PROCEDURE [dbo].[GetLocationTemperaturesByDateRange]
 	@locationid int,
@@ -307,9 +295,8 @@ CREATE PROCEDURE [dbo].[GetLatestLocationTemperature]
 AS
 	SELECT TOP 1 *
 	FROM [Temperature]
-	WHERE [Timestamp]
-	IN
-		(SELECT MAX([Timestamp]) FROM [Temperature] WHERE [LocationID] = @locationid)
+    WHERE LocationID = @locationid
+    ORDER BY Timestamp DESC
 
 GO
 

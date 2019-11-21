@@ -440,13 +440,24 @@ namespace CitizenScience_UIPrototype
                 DataRow dataRow = temperatureDataset.Tables[0].Rows[i];
 
                 Temperature t = new Temperature();
-                t.Timestamp = Convert.ToDateTime(dataRow["Timestamp"].ToString());
-                t.Celsius = Convert.ToDouble(dataRow["TempC"]);
-                t.Fahrenheit = Convert.ToDouble(dataRow["TempF"]);
+                t.Id = Convert.ToInt32(dataRow["TempID"]);
+                t.Timestamp = Convert.ToDateTime(dataRow["Timestamp"]);
+                t.Celsius = Convert.IsDBNull(dataRow["TempC"]) ? double.NaN : Convert.ToDouble(dataRow["TempC"]);
+                t.Fahrenheit = Convert.IsDBNull(dataRow["TempC"]) ? double.NaN : Convert.ToDouble(dataRow["TempF"]);
+                t.Location = Convert.ToString(dataRow["SensorName"]);
                 temperatureList.Add(t);
             }
 
-            byte[] allTempDataBytes = DataProcessor.CreateCsvAsBytes(temperatureList);
+            byte[] allTempDataBytes;
+            if (locationId.Length > 1)
+            {
+                allTempDataBytes = DataProcessor.CreateCsvAsBytes(temperatureList);
+            } 
+            else
+            {
+                allTempDataBytes = DataProcessor.CreateCsvAsBytesNoLocation(temperatureList);
+            }
+            
 
             Context.Response.Clear();
             Context.Response.ContentType = "application/force-download";
@@ -469,9 +480,11 @@ namespace CitizenScience_UIPrototype
                 DataRow dataRow = temperatureDataset.Tables[0].Rows[i];
 
                 Temperature t = new Temperature();
-                t.Timestamp = Convert.ToDateTime(dataRow["Timestamp"].ToString());
-                t.Celsius = Convert.ToDouble(dataRow["TempC"]);
-                t.Fahrenheit = Convert.ToDouble(dataRow["TempF"]);
+                t.Id = Convert.ToInt32(dataRow["TempID"]);
+                t.Timestamp = Convert.ToDateTime(dataRow["Timestamp"]);
+                t.Celsius = Convert.IsDBNull(dataRow["TempC"]) ? double.NaN : Convert.ToDouble(dataRow["TempC"]);
+                t.Fahrenheit = Convert.IsDBNull(dataRow["TempC"]) ? double.NaN : Convert.ToDouble(dataRow["TempF"]);
+                t.Location = Convert.ToString(dataRow["SensorName"]);
                 temperatureList.Add(t);
             }
 
@@ -504,13 +517,14 @@ namespace CitizenScience_UIPrototype
                 DataRow dataRow = temperatureDataset.Tables[0].Rows[i];
 
                 Temperature t = new Temperature();
-                t.Timestamp = Convert.ToDateTime(dataRow["Timestamp"].ToString());
-                t.Celsius = Convert.ToDouble(dataRow["TempC"]);
-                t.Fahrenheit = Convert.ToDouble(dataRow["TempF"]);
+                t.Timestamp = Convert.ToDateTime(dataRow["Timestamp"]);
+                t.Celsius = Convert.IsDBNull(dataRow["TempC"]) ? double.NaN : Convert.ToDouble(dataRow["TempC"]);
+                t.Fahrenheit = Convert.IsDBNull(dataRow["TempC"]) ? double.NaN : Convert.ToDouble(dataRow["TempF"]);
+
                 temperatureList.Add(t);
             }
 
-            byte[] allTempDataBytes = DataProcessor.CreateCsvAsBytes(temperatureList);
+            byte[] allTempDataBytes = DataProcessor.CreateCsvAsBytesNoLocation(temperatureList);
 
             Context.Response.Clear();
             Context.Response.ContentType = "application/force-download";

@@ -266,10 +266,10 @@ namespace CitizenScienceClasses
 
             DataTable dataTable = new DataTable();
 
-            dataTable.Columns.Add(new DataColumn("LocationID", typeof(string)));
+            dataTable.Columns.Add(new DataColumn("LocationID", typeof(int)));
             dataTable.Columns.Add(new DataColumn("Timestamp", typeof(DateTime)));
-            dataTable.Columns.Add(new DataColumn("TempC", typeof(double)));
-            dataTable.Columns.Add(new DataColumn("TempF", typeof(double)));
+            dataTable.Columns.Add(new DataColumn("TempC", typeof(Double)));
+            dataTable.Columns.Add(new DataColumn("TempF", typeof(Double)));
 
             foreach(Temperature temperature in temperatureList)
             {
@@ -303,13 +303,13 @@ namespace CitizenScienceClasses
 
             foreach(DataRow dataRow in dataSet.Tables[0].Rows)
             {
-                result.Add(new Temperature
-                {
-                    Id = Convert.ToInt32(dataRow["TempID"]),
-                    Timestamp = Convert.ToDateTime(dataRow["Timestamp"]),
-                    Celsius = Convert.ToDouble(dataRow["TempC"]),
-                    Fahrenheit = Convert.ToDouble(dataRow["TempF"])
-                });
+                Temperature temp = new Temperature();
+                temp.Id = Convert.ToInt32(dataRow["TempID"]);
+                temp.Timestamp = Convert.ToDateTime(dataRow["Timestamp"]);
+                temp.Celsius = Convert.IsDBNull(dataRow["TempC"]) ? double.NaN : Convert.ToDouble(dataRow["TempC"]);
+                temp.Fahrenheit = Convert.IsDBNull(dataRow["TempC"]) ? double.NaN : Convert.ToDouble(dataRow["TempF"]);
+
+                result.Add(temp);
             }
 
             return result;
@@ -328,13 +328,13 @@ namespace CitizenScienceClasses
 
             foreach (DataRow dataRow in dataSet.Tables[0].Rows)
             {
-                result = new Temperature
-                {
-                    Id = Convert.ToInt32(dataRow["TempID"]),
-                    Timestamp = Convert.ToDateTime(dataRow["Timestamp"]),
-                    Celsius = Convert.ToDouble(dataRow["TempC"]),
-                    Fahrenheit = Convert.ToDouble(dataRow["TempF"])
-                };
+                Temperature temp = new Temperature();
+                temp.Id = Convert.ToInt32(dataRow["TempID"]);
+                temp.Timestamp = Convert.ToDateTime(dataRow["Timestamp"]);
+                temp.Celsius = Convert.IsDBNull(dataRow["TempC"]) ? double.NaN : Convert.ToDouble(dataRow["TempC"]);
+                temp.Fahrenheit = Convert.IsDBNull(dataRow["TempC"]) ? double.NaN : Convert.ToDouble(dataRow["TempF"]);
+
+                result = temp;
             }
 
             return result;
