@@ -59,6 +59,7 @@
                     <div class="form-row">
                         <div class="form-group col-12">
                             <label for="inputCreateName">Album Name:</label>
+                            <label for="inputCreateName" style="color: red;">*</label>
                             <!-- Album Input Name Field -->
                             <input type="text" class="form-control inputname" id="inputCreateName">
                             <div class="invalid-feedback">
@@ -70,6 +71,7 @@
                     <div class="form-row">
                         <div class="form-group col-12">
                             <label for="inputCreateDescription">Description:</label>
+                            <label for="inputCreateDescription" style="color: red;">*</label>
                             <!-- Album Input Description Field -->
                             <textarea type="text" class="form-control inputdescription" id="inputCreateDescription"></textarea>
                             <div class="invalid-feedback">

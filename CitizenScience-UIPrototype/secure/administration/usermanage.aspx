@@ -45,25 +45,25 @@
                   <label style="color: red;">*</label>
                   <input type="text" class="form-control inputtuid" id="inputCreateTUID" aria-describedby="nameCreateHelp" required>
                   <div class="invalid-feedback">
-                      Please enter TUID
+                      Please enter a TUID
                   </div>
                   <label for="inputCreateFName">First Name:</label>
                   <label style="color: red;">*</label>
                   <input type="text" class="form-control inputtuid" id="inputCreateFName" aria-describedby="nameCreateHelp" required>
                   <div class="invalid-feedback">
-                      Please enter first name
+                      Please enter a first name
                   </div>
                   <label for="inputCreateLName">Last Name:</label>
                   <label style="color: red;">*</label>
                   <input type="text" class="form-control inputtuid" id="inputCreateLName" aria-describedby="nameCreateHelp" required>
                   <div class="invalid-feedback">
-                      Please enter last name
+                      Please enter a last name
                   </div>
                   <label for="inputCreateEmail">Email:</label>
                   <label style="color: red;">*</label>
                   <input type="email" class="form-control inputtuid" id="inputCreateEmail" aria-describedby="nameCreateHelp" required>
                   <div class="invalid-feedback">
-                      Please enter valid email address
+                      Please enter a valid email address
                   </div>
               </div>
           </div>
@@ -91,32 +91,32 @@
                     <label style="color: red;">*</label>
                     <input type="text" class="form-control inputtuid" id="inputEditTUID" aria-describedby="nameCreateHelp" required>
                     <div class="invalid-feedback">
-                        Please enter TUID
+                        Please enter a TUID
                     </div>
                     <label for="inputCreateFName">First Name:</label>
                     <label style="color: red;">*</label>
                     <input type="text" class="form-control inputtuid" id="inputEditFName" aria-describedby="nameCreateHelp" required>
                     <div class="invalid-feedback">
-                        Please enter first name
+                        Please enter a first name
                     </div>
                     <label for="inputCreateLName">Last Name:</label>
                     <label style="color: red;">*</label>
                     <input type="text" class="form-control inputtuid" id="inputEditLName" aria-describedby="nameCreateHelp" required>
                     <div class="invalid-feedback">
-                        Please enter last name
+                        Please enter a last name
                     </div>
                     <label for="inputCreateEmail">Email:</label>
                     <label style="color: red;">*</label>
                     <input type="text" class="form-control inputtuid" id="inputEditEmail" aria-describedby="nameCreateHelp" required>
                     <div class="invalid-feedback">
-                        Email must be ...
+                        Please enter a valid email
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputEditActive">Active Status</label>
                     <input type="checkbox" class="form-control inputactive" id="inputEditActive" aria-describedby="nameCreateHelp">
                     <div class="invalid-feedback">
-                        Please enter valid email address
+                        Please specify the admin's active status
                     </div>
                 </div>
             </div>

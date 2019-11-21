@@ -87,8 +87,7 @@
                         <div class="form-group col-12">
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input" id="inputCreateImageBrowse" accept=".jpg, .png, .jpeg, .gif, .bmp, .tif, .tiff|image/*">
-                                <label class="custom-file-label" for="inputCreateImageBrowse" id="lblInputCreateImageBrowse">Choose Profile Image File
-                                    <label style="color: red;">*</label></label>
+                                <label class="custom-file-label" for="inputCreateImageBrowse" id="lblInputCreateImageBrowse">Choose Profile Image File <label style="color: red;">*</label></label>
                             </div>
                         </div>
                     </div>
