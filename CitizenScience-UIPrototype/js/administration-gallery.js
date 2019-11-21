@@ -93,59 +93,64 @@ $(document).ready(function () {
 		$('#createModal').modal('show');
 	});
 
-	$('#createSubmit').click(function() {
-		var fileUpload = $('#inputCreateImageBrowse').get(0);
-		var files = fileUpload.files;
+	$('#createSubmit').click(function () {		
+		if ($("#inputCreateName").val() != "" &&
+			$("#inputCreateDescription").val() != "" &&
+			$("#inputCreateImageBrowse").val() != "")
+		{
+			var fileUpload = $('#inputCreateImageBrowse').get(0);
+			var files = fileUpload.files;
 
-		var formData = new FormData();
+			var formData = new FormData();
 
-		for (var i = 0; i < files.length; i++) {
-			formData.append(files[i].name, files[i]);
-		}
-
-		formData.append('filename', $('#inputCreateImageBrowse')[0].files[0].name);
-		formData.append('file', $('#inputCreateImageBrowse')[0].files[0]);
-
-		// Save the image, get the new image ID THEN save the location w/ the image ID info
-		$.ajax({
-			type: "POST",
-			url: "../../images/set.ashx",
-			contentType: false,
-			processData: false,
-			data: formData,
-			success: function (dataResponse) {
-				console.log("Image created with ID: " + dataResponse);
-
-				var requestData = {
-					Name: $('#inputCreateName').val(),
-					Description: $('#inputCreateDescription').val(),
-					ImageID: dataResponse
-				};
-
-				// Save the location data
-				$.ajax({
-					type: 'POST',
-					contentType: 'application/json; charset=utf-8',
-					url: '../../api.asmx/CreateAlbum',
-					data: JSON.stringify(requestData),
-					dataType: 'JSON',
-					success: function (responseData) {
-						console.log('Album Creation Successful');
-						console.log(requestData);
-
-						$('#createModal').modal('hide');
-						table.ajax.reload();
-					},
-					error: function (errorData) {
-						console.log('Error Saving Album Data');
-						console.log(errorData);
-					}
-				});
-			},
-			error: function (errorData) {
-				console.log('Error Saving Image');
+			for (var i = 0; i < files.length; i++) {
+				formData.append(files[i].name, files[i]);
 			}
-		});
+
+			formData.append('filename', $('#inputCreateImageBrowse')[0].files[0].name);
+			formData.append('file', $('#inputCreateImageBrowse')[0].files[0]);
+
+			// Save the image, get the new image ID THEN save the location w/ the image ID info
+			$.ajax({
+				type: "POST",
+				url: "../../images/set.ashx",
+				contentType: false,
+				processData: false,
+				data: formData,
+				success: function (dataResponse) {
+					console.log("Image created with ID: " + dataResponse);
+
+					var requestData = {
+						Name: $('#inputCreateName').val(),
+						Description: $('#inputCreateDescription').val(),
+						ImageID: dataResponse
+					};
+
+					// Save the location data
+					$.ajax({
+						type: 'POST',
+						contentType: 'application/json; charset=utf-8',
+						url: '../../api.asmx/CreateAlbum',
+						data: JSON.stringify(requestData),
+						dataType: 'JSON',
+						success: function (responseData) {
+							console.log('Album Creation Successful');
+							console.log(requestData);
+
+							$('#createModal').modal('hide');
+							table.ajax.reload();
+						},
+						error: function (errorData) {
+							console.log('Error Saving Album Data');
+							console.log(errorData);
+						}
+					});
+				},
+				error: function (errorData) {
+					console.log('Error Saving Image');
+				}
+			});
+		}
 	});
 
 	$('#createModal').on('hidden.bs.modal', function (e) {
@@ -246,31 +251,34 @@ $(document).ready(function () {
 		$('#editSubmit').off().click(function () {
 
 			//TODO: validation check of EDIT modal fields
+			if ($("#inputEditName").val() != "" &&
+				$("#inputEditDescription").val() != "")
+			{
+				var requestData = {
+					AlbumID: data.AlbumID,
+					Name: $('#inputEditName').val(),
+					Description: $('#inputEditDescription').val()
+				};
 
-			var requestData = {
-				AlbumID: data.AlbumID,
-				Name: $('#inputEditName').val(),
-				Description: $('#inputEditDescription').val()
-			};
+				$.ajax({
+					type: 'POST',
+					contentType: 'application/json; charset=utf-8',
+					url: '../../api.asmx/UpdateAlbum',
+					data: JSON.stringify(requestData),
+					dataType: 'JSON',
+					success: function (responseData) {
+						console.log('Edit Successful');
+						console.log(responseData);
 
-			$.ajax({
-				type: 'POST',
-				contentType: 'application/json; charset=utf-8',
-				url: '../../api.asmx/UpdateAlbum',
-				data: JSON.stringify(requestData),
-				dataType: 'JSON',
-				success: function (responseData) {
-					console.log('Edit Successful');
-					console.log(responseData);
-
-					table.ajax.reload();
-					$('#editModal').modal('hide');
-				},
-				error: function (errorData) {
-					console.log('ERROR');
-					console.log(errorData);
-				}
-			});
+						table.ajax.reload();
+						$('#editModal').modal('hide');
+					},
+					error: function (errorData) {
+						console.log('ERROR');
+						console.log(errorData);
+					}
+				});
+			}
 		});
 	}
 
