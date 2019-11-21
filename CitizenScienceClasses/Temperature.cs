@@ -1,5 +1,6 @@
 ﻿using CsvHelper.Configuration.Attributes;
 using System;
+using CsvHelper.Configuration;
 
 namespace CitizenScienceClasses
 {
@@ -8,15 +9,18 @@ namespace CitizenScienceClasses
         [Ignore]
         public int Id { get; set; }
 
-        [Name("Date")]
+//        [Name("Date")]
         [Format("M/d/yyyy H:mm")]
         public DateTime Timestamp { get; set; }
 
-        [Name("Temperature_C")]
-        public double Celsius { get; set; }
+//        [Name("Temperature_C")]
+        public double? Celsius { get; set; }
 
-        [Name("Temperature_F")]
-        public double Fahrenheit { get; set; }
+//        [Name("Temperature_F")]
+        public double? Fahrenheit { get; set; }
+
+//        [Ignore]
+        public string Location { get; set; }
 
         /*
              WARNING: Do not make a constructor for this class, it will break CSV mapping,
@@ -39,5 +43,26 @@ namespace CitizenScienceClasses
               temp.Fahrenheit = 2.22;
 
         */
+    }
+
+    public class TemperatureMap : ClassMap<Temperature>
+    {
+        public TemperatureMap()
+        {
+            Map(m => m.Location).Name("Sensor Name");
+            Map(m => m.Timestamp).Name("Date Time");
+            Map(m => m.Celsius).Name("Temperature_C");
+            Map(m => m.Fahrenheit).Name("Temperature_F");
+        }
+    }
+
+    public class TemperatureMapNoLocation : ClassMap<Temperature>
+    {
+        public TemperatureMapNoLocation()
+        {
+            Map(m => m.Timestamp).Name("Date Time");
+            Map(m => m.Celsius).Name("Temperature_C");
+            Map(m => m.Fahrenheit).Name("Temperature_F");
+        }
     }
 }

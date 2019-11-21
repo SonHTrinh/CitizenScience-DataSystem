@@ -29,6 +29,7 @@ namespace CitizenScienceClasses
 //                    temperature.Fahrenheit = double.Parse(csvReader.GetField(2));
 //                    result.Add(temperature);
 //                }
+                csvReader.Configuration.RegisterClassMap<TemperatureMapNoLocation>();
                 var records = csvReader.GetRecords<Temperature>();
                 result = records.ToList();
             }
@@ -45,6 +46,29 @@ namespace CitizenScienceClasses
                 using (StreamWriter streamWriter = new StreamWriter(memoryStream))
                 using (CsvWriter csvWriter = new CsvWriter(streamWriter))
                 {
+                    csvWriter.Configuration.RegisterClassMap<TemperatureMap>();
+                    csvWriter.WriteRecords(temperatureList);
+                }
+
+                result = memoryStream.ToArray();
+            }
+
+            //todo: make more descriptive exception
+            if (result.Length.Equals(0)) throw new Exception("Error Creating CSV File");
+
+            return result;
+        }
+
+        public static byte[] CreateCsvAsBytesNoLocation(List<Temperature> temperatureList)
+        {
+            byte[] result = new byte[0];
+
+            using (MemoryStream memoryStream = new MemoryStream())
+            {
+                using (StreamWriter streamWriter = new StreamWriter(memoryStream))
+                using (CsvWriter csvWriter = new CsvWriter(streamWriter))
+                {
+                    csvWriter.Configuration.RegisterClassMap<TemperatureMapNoLocation>();
                     csvWriter.WriteRecords(temperatureList);
                 }
 

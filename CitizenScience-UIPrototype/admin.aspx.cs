@@ -206,6 +206,7 @@ namespace CitizenScience_UIPrototype
                     t.Timestamp = Convert.ToDateTime(selectedTempDataSet.Tables[0].Rows[i]["DateRecorded"].ToString());
                     t.Celsius = Convert.ToDouble(selectedTempDataSet.Tables[0].Rows[i]["TempC"]);
                     t.Fahrenheit = Convert.ToDouble(selectedTempDataSet.Tables[0].Rows[i]["TempF"]);
+                    t.Location = Convert.ToString(selectedTempDataSet.Tables[0].Rows[i]["SensorName"]);
                     tempList.Add(t);
                 }
 
@@ -232,6 +233,7 @@ namespace CitizenScience_UIPrototype
                 t.Timestamp = Convert.ToDateTime(allTempDataSet.Tables[0].Rows[i]["DateRecorded"]);
                 t.Celsius = Convert.ToDouble(allTempDataSet.Tables[0].Rows[i]["TempC"]);
                 t.Fahrenheit = Convert.ToDouble(allTempDataSet.Tables[0].Rows[i]["TempF"]);
+                t.Location = Convert.ToString(allTempDataSet.Tables[0].Rows[i]["SensorName"]);
                 tempList.Add(t);
             }
             byte[] allTempDataBytes = DataProcessor.CreateCsvAsBytes(tempList);
