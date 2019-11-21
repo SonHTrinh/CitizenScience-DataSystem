@@ -38,8 +38,8 @@
           </div>
           <div class="modal-body">
               <div class="form-group">
-                <label for="inputCreateName">Name</label>
-                <label for="inputCreateName" style="color: red;">*</label>
+                <label for="inputCreateName">Name:</label>
+                <label style="color: red;">*</label>   
                 <input type="text" class="form-control inputname" id="inputCreateName" aria-describedby="nameCreateHelp">
                 <div class="invalid-feedback">
                     Please provide a watershed name
@@ -66,8 +66,8 @@
           </div>
           <div class="modal-body">
               <div class="form-group">
-                <label for="inputName">Name</label>
-                <label for="inputName" style="color: red;">*</label>
+                <label for="inputName">Name:</label>
+                <label style="color: red;">*</label>   
                 <input type="text" class="form-control inputname" id="inputEditName" aria-describedby="nameEditHelp">
                 <div class="invalid-feedback">
                     Please provide a watershed name

@@ -31,7 +31,8 @@ namespace CitizenScience_UIPrototype
                 volunteer.Email = email;
                 volunteer.Message = message;
 
-                lblDisplay.Text = "";
+                //lblDisplay.Text = "";
+                divFail.Visible = false;
 
                 try
                 {
@@ -49,7 +50,8 @@ namespace CitizenScience_UIPrototype
             else
             {
                 divSuccess.Visible = false;
-                lblDisplay.Text = "Please fill in all required field!";
+                divFail.Visible = true;
+                //lblDisplay.Text = "Please fill in all required field!";
             }
 
         }

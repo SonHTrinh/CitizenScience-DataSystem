@@ -8,20 +8,23 @@
     <link rel="stylesheet" href="/style/custom/gallery.css" />
     <!-- Javascript -->
     <script src="js/gallery.js"></script>
-    
+
     <div class="container-fluid">
         <div class="row my-3">
-            <div class="col-10 offset-1">
-            <ol class="breadcrumb bg-light">
-                <li class="breadcrumb-item"><h3 class="d-inline">Citizen Science</h3></li>
-                <li class="breadcrumb-item active"><h3 class="d-inline">Field Photos</h3></li>
-            </ol>
+            <div class="container pl-1">
+                <ol class="breadcrumb bg-light">
+                    <li class="breadcrumb-item">
+                        <h3 class="d-inline">Citizen Science</h3>
+                    </li>
+                    <li class="breadcrumb-item active">
+                        <h3 class="d-inline">Field Photos</h3>
+                    </li>
+                </ol>
+            </div>
         </div>
-    </div>
 
-    <!-- Html content -->
-    <div class="container" id="album-placeholder">        
-        </div>
+        <!-- Html content -->
+        <div class="container" id="album-placeholder"></div>
 
         <!--
         <div class="row my-4 justify-content-center">
