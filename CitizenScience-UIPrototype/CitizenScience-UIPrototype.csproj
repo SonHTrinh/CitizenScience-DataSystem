@@ -114,7 +114,6 @@
     <Content Include="secure\administration\Auth.aspx" />
     <Content Include="js\gallery.js" />
     <Content Include="style\custom\admin-style.css" />
-    <Content Include="admin.aspx" />
     <Content Include="secure\administration\about.aspx" />
     <Content Include="secure\administration\download.aspx" />
     <Content Include="secure\administration\gallery.aspx" />
@@ -1730,13 +1729,6 @@
     </Compile>
     <Compile Include="about.aspx.designer.cs">
       <DependentUpon>about.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="admin.aspx.cs">
-      <DependentUpon>admin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin.aspx.designer.cs">
-      <DependentUpon>admin.aspx</DependentUpon>
     </Compile>
     <Compile Include="images\images.ashx.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
