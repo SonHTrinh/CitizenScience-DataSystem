@@ -32,7 +32,7 @@ VALUES
 INSERT INTO [dbo].[Admin]
 ([TUID], [Active], [FName], [LName], [Email])
 VALUES 
-('915149546', 1, 'Sarah', 'Beganskas', 'sarah.beganskas@temple.edu')
+('915725809', 1, 'Sarah', 'Beganskas', 'sarah.beganskas@temple.edu')
 
 ----- Create Cobbs Watershed
 INSERT INTO [dbo].[Watershed]
