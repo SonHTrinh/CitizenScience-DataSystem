@@ -93,6 +93,7 @@
     <Content Include="about.aspx" />
     <Content Include="js\administration-gallery.js" />
     <Content Include="js\administration-location.js" />
+    <Content Include="js\third-party\datatables.js" />
     <Content Include="style\arrow-down.png" />
     <Content Include="Default.aspx" />
     <Content Include="images\set.ashx" />
@@ -114,7 +115,6 @@
     <Content Include="secure\administration\Auth.aspx" />
     <Content Include="js\gallery.js" />
     <Content Include="style\custom\admin-style.css" />
-    <Content Include="admin.aspx" />
     <Content Include="secure\administration\about.aspx" />
     <Content Include="secure\administration\download.aspx" />
     <Content Include="secure\administration\gallery.aspx" />
@@ -124,7 +124,6 @@
     <Content Include="secure\administration\volunteer.aspx" />
     <Content Include="secure\administration\watershed.aspx" />
     <Content Include="api.asmx" />
-    <Content Include="debug.aspx" />
     <Content Include="gallery.aspx" />
     <Content Include="style\custom\administration-gallery.css" />
     <Content Include="style\custom\gallery.css" />
@@ -136,6 +135,7 @@
     <Content Include="style\custom\sidenav.css" />
     <Content Include="style\custom\topnav.css" />
     <Content Include="style\custom\template-style.css" />
+    <Content Include="style\datatables.css" />
     <Content Include="style\fontawesome\css\all.css" />
     <Content Include="style\fontawesome\css\all.min.css" />
     <Content Include="style\fontawesome\css\brands.css" />
@@ -1731,13 +1731,6 @@
     <Compile Include="about.aspx.designer.cs">
       <DependentUpon>about.aspx</DependentUpon>
     </Compile>
-    <Compile Include="admin.aspx.cs">
-      <DependentUpon>admin.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="admin.aspx.designer.cs">
-      <DependentUpon>admin.aspx</DependentUpon>
-    </Compile>
     <Compile Include="images\images.ashx.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1837,13 +1830,6 @@
     <Compile Include="api.asmx.cs">
       <DependentUpon>api.asmx</DependentUpon>
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="debug.aspx.cs">
-      <DependentUpon>debug.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="debug.aspx.designer.cs">
-      <DependentUpon>debug.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
